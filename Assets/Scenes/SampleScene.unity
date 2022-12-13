@@ -731,11 +731,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bdb031d915b1984c9fd44c25ebe6192, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _walkSpeed: 100
-  _crouchSpeedMultipier: 0.5
-  _runSpeedMultiplier: 2
-  _creepSpeedMultipier: 0.75
-  _jumpForce: 15000
+  _baseMovementSpeed: 1
+  _crouchMultipier: 0.5
+  _runMultiplier: 2
+  _creepMultipier: 0.75
+  _jumpForce: 1.5
 --- !u!50 &1569330420
 Rigidbody2D:
   serializedVersion: 4

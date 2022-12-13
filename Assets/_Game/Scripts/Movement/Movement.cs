@@ -1,11 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using TMPro;
-using Unity.VisualScripting;
-using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -29,11 +23,22 @@ public class Movement : MonoBehaviour
     private bool _onGround = true;
 
     [Header("Movement")]
-    [SerializeField] private float _walkSpeed;
-    [SerializeField] private float _crouchSpeedMultipier;
-    [SerializeField] private float _runSpeedMultiplier;
-    [SerializeField] private float _creepSpeedMultipier;
+    [Range(0f, 10f)]
+    [SerializeField] private float _baseMovementSpeed;
+    private const float MOVEMENTSPEED_SCALE = 100f;
+
+    [Range(0f, 10f)]
+    [SerializeField] private float _crouchMultipier;
+
+    [Range(0f, 10f)]
+    [SerializeField] private float _runMultiplier;
+
+    [Range(0f, 10f)]
+    [SerializeField] private float _creepMultipier;
+
+    [Range(0f, 10f)]
     [SerializeField] private float _jumpForce;
+    private const float JUMPFORCE_SCALE = 10000f;
 
     private void Awake()
     {
@@ -62,7 +67,7 @@ public class Movement : MonoBehaviour
     {
         //Calculate movement speed
         //Left - Right movment, read every frame
-        float moveRaw = _playerInput.InGame.Walk.ReadValue<float>() * _walkSpeed;
+        float moveRaw = _playerInput.InGame.Walk.ReadValue<float>() * _baseMovementSpeed * MOVEMENTSPEED_SCALE;
 
         List<MovementState> currentStates = GetMovementStates();
 
@@ -78,7 +83,7 @@ public class Movement : MonoBehaviour
                 _playerInput.InGame.Creep.Reset();
                 _playerInput.InGame.Crouch.Reset();
 
-                moveRaw *= _runSpeedMultiplier;
+                moveRaw *= _runMultiplier;
             }
             else if (currentStates.Contains(MovementState.Creeping))
             {
@@ -89,7 +94,7 @@ public class Movement : MonoBehaviour
                 _playerInput.InGame.Run.Reset();
                 _playerInput.InGame.Crouch.Reset();
 
-                moveRaw *= _creepSpeedMultipier;
+                moveRaw *= _creepMultipier;
             }
             else if (currentStates.Contains(MovementState.Crouching))
             {
@@ -100,7 +105,7 @@ public class Movement : MonoBehaviour
                 _playerInput.InGame.Creep.Reset();
                 _playerInput.InGame.Run.Reset();
 
-                moveRaw *= _crouchSpeedMultipier;
+                moveRaw *= _crouchMultipier;
             }
         }
 
@@ -154,7 +159,7 @@ public class Movement : MonoBehaviour
     {
         if (!_onGround) return;
 
-        _rigidbody.AddForce(Vector2.up * _jumpForce * Time.fixedDeltaTime, ForceMode2D.Impulse);
+        _rigidbody.AddForce(Vector2.up * _jumpForce * Time.fixedDeltaTime * JUMPFORCE_SCALE, ForceMode2D.Impulse);
     }
 
     private void OnCrouchPerformed(InputAction.CallbackContext context)
