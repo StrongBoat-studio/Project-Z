@@ -87,6 +87,25 @@ public class Inventory
                 return true;
             }
         }
+
+        /// <summary>
+        /// Checks if slot is empty (has an Item with empty ItemScriptableObject field)
+        /// </summary>
+        /// <returns>True if empty, false when valid Item exists inside slot</returns>
+        public bool IsEmpty()
+        {
+            return _item.GetItemScriptableObject() == null && _quantity <= 0;
+        }
+
+        /// <summary>
+        /// Checks if slot is empty (has an Item with empty ItemScriptableObject field)
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns>True if slot has an Item of this ItemScriptableObject, false when ItemScriptableObject is different</returns>
+        public bool HasItem(Item item)
+        {
+            return _item.GetItemScriptableObject() == item.GetItemScriptableObject();
+        }
     }
 
     private List<InventorySlot> _inventorySlots = new List<InventorySlot>();
@@ -110,13 +129,17 @@ public class Inventory
     public void AddItem(Item item, int quantity)
     {
         //Inventory is full 
-        if (GetEmptyInventorySlot() == null) return;
+        if (GetEmptyInventorySlot() == null)
+        {
+            Debug.Log("Inventory is full!");
+            return;
+        }
 
         InventorySlot slot = GetSlotWithItem(item);
 
         if (slot == null)
         {
-            //Item is not in the inventory
+            //Item is not in the inventory, add new
             var returnedItem = GetEmptyInventorySlot().AddItem(item, quantity);
             if (returnedItem.item != null)
             {
@@ -155,7 +178,7 @@ public class Inventory
 
         foreach (InventorySlot s in _inventorySlots)
         {
-            if (s.GetData().item == item) slot = s;
+            if (s.HasItem(item)) slot = s;
         }
 
         return slot;
@@ -169,7 +192,7 @@ public class Inventory
     {
         foreach (InventorySlot s in _inventorySlots)
         {
-            if (s.GetData().item == null) return s;
+            if (s.IsEmpty()) return s;
         }
 
         return null;

@@ -6,10 +6,19 @@ using UnityEngine;
 public class Item
 {
     [SerializeField] private ItemScriptableObject _itemData;
-    [Min(1f)][SerializeField] private int _quantity;
+
+    public Item(ItemScriptableObject itemData)
+    {
+        this._itemData = itemData;
+    }
 
     public Sprite GetItemSprite()
     {
         return _itemData.itemSprite;
+    }
+
+    public ItemScriptableObject GetItemScriptableObject()
+    {
+        return _itemData;
     }
 }
