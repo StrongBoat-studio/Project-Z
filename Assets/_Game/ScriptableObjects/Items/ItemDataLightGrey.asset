@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f885a6338d76c34f9b88db74b94639e, type: 3}
-  m_Name: Item Data
+  m_Name: ItemDataLightGrey
   m_EditorClassIdentifier: 
-  itemName: Test Item
-  itemSprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  itemName: Light Grey Item
+  itemSprite: {fileID: 21300000, guid: de8cc317373c81b46a92ce7147e9ed21, type: 3}

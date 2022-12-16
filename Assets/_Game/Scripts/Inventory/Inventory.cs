@@ -10,13 +10,15 @@ public class Inventory
     [System.Serializable]
     public class InventorySlot
     {
+        private int _index;
         private Item _item;
         private int _quantity;
 
-        public InventorySlot(Item item, int quantity)
+        public InventorySlot(int index)
         {
-            this._item = item;
-            this._quantity = quantity;
+            this._index = index;
+            _item = ItemRegister.Instance.CreateItem(ItemRegister.Instance.emptyItem);
+            _quantity = 0;
         }
 
         /// <summary>
@@ -48,7 +50,7 @@ public class Inventory
         /// <returns>Item from the slot and its quantity</returns>
         private void RemoveItem()
         {
-            _item = null;
+            _item = ItemRegister.Instance.CreateItem(ItemRegister.Instance.emptyItem);
             _quantity = 0;
         }
 
@@ -89,22 +91,25 @@ public class Inventory
         }
 
         /// <summary>
-        /// Checks if slot is empty (has an Item with empty ItemScriptableObject field)
+        /// Checks if the slot is empty
         /// </summary>
-        /// <returns>True if empty, false when valid Item exists inside slot</returns>
+        /// <returns>True if empty</returns>
         public bool IsEmpty()
         {
-            return _item.GetItemScriptableObject() == null && _quantity <= 0;
+            return _item.IsEmpty();
         }
 
         /// <summary>
-        /// Checks if slot is empty (has an Item with empty ItemScriptableObject field)
+        /// Checks if slot is has a specific item
         /// </summary>
         /// <param name="item"></param>
-        /// <returns>True if slot has an Item of this ItemScriptableObject, false when ItemScriptableObject is different</returns>
+        /// <returns>True if slot contains given item</returns>
         public bool HasItem(Item item)
         {
-            return _item.GetItemScriptableObject() == item.GetItemScriptableObject();
+            if (_item.IsEmpty() == true) return false;
+            if (_item.CompareItems(item) == true) return true;
+
+            return false;
         }
     }
 
@@ -118,7 +123,7 @@ public class Inventory
         //Populate inventory
         for (int i = 0; i < _inventorySize; i++)
         {
-            _inventorySlots.Add(new InventorySlot(null, 0));
+            _inventorySlots.Add(new InventorySlot(i));
         }
     }
 
@@ -128,28 +133,29 @@ public class Inventory
     /// <param name="item"></param>
     public void AddItem(Item item, int quantity)
     {
+        InventorySlot emptySlot = GetEmptyInventorySlot();
+        InventorySlot itemInSlot = GetSlotWithItem(item);
+
         //Inventory is full 
-        if (GetEmptyInventorySlot() == null)
+        if (emptySlot == null && itemInSlot == null)
         {
             Debug.Log("Inventory is full!");
             return;
         }
 
-        InventorySlot slot = GetSlotWithItem(item);
-
-        if (slot == null)
+        if (itemInSlot == null)
         {
             //Item is not in the inventory, add new
-            var returnedItem = GetEmptyInventorySlot().AddItem(item, quantity);
-            if (returnedItem.item != null)
+            var returnedItem = emptySlot.AddItem(item, quantity);
+            if (returnedItem.item.IsEmpty() != true)
             {
-                Debug.Log("Function 'GetEmptyInventorySlot().AddItem()' from Inventory.AddItem() returned an item!");
+                Debug.Log("Function 'GetEmptyInventorySlot().AddItem()' from Inventory.AddItem() returned an item but it shouldn't!");
             }
         }
         else
         {
             //Item is already in the inventory, increase quantity
-            slot.AddQuantity(quantity);
+            itemInSlot.AddQuantity(quantity);
         }
     }
 
@@ -174,14 +180,7 @@ public class Inventory
     /// <returns>InventorySlot</returns>
     private InventorySlot GetSlotWithItem(Item item)
     {
-        InventorySlot slot = null;
-
-        foreach (InventorySlot s in _inventorySlots)
-        {
-            if (s.HasItem(item)) slot = s;
-        }
-
-        return slot;
+        return _inventorySlots.Find(s => s.HasItem(item));
     }
 
     /// <summary>
@@ -190,11 +189,6 @@ public class Inventory
     /// <returns>InventorySlot</returns>
     private InventorySlot GetEmptyInventorySlot()
     {
-        foreach (InventorySlot s in _inventorySlots)
-        {
-            if (s.IsEmpty()) return s;
-        }
-
-        return null;
+        return _inventorySlots.Find(s => s.IsEmpty() == true);
     }
 }

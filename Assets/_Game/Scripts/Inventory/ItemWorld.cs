@@ -7,7 +7,7 @@ using UnityEditor.EditorTools;
 public class ItemWorld : MonoBehaviour
 {
     [SerializeField] private Item _item;
-    [Min(1f)] [SerializeField] private int _quantity;
+    [Min(1f)][SerializeField] private int _quantity = 1;
 
     private void Awake()
     {

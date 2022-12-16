@@ -5,11 +5,17 @@ using UnityEngine;
 [System.Serializable]
 public class Item
 {
-    [SerializeField] private ItemScriptableObject _itemData;
+    //Default to an empty item 
+    [SerializeField] private ItemScriptableObject _itemData = ItemRegister.Instance.emptyItem;
 
     public Item(ItemScriptableObject itemData)
     {
         this._itemData = itemData;
+    }
+
+    private ItemScriptableObject GetItemScriptableObject()
+    {
+        return _itemData;
     }
 
     public Sprite GetItemSprite()
@@ -17,8 +23,13 @@ public class Item
         return _itemData.itemSprite;
     }
 
-    public ItemScriptableObject GetItemScriptableObject()
+    public bool CompareItems(Item item)
     {
-        return _itemData;
+        return item.GetItemScriptableObject() == _itemData;
+    }
+
+    public bool IsEmpty()
+    {
+        return _itemData == ItemRegister.Instance.emptyItem;
     }
 }

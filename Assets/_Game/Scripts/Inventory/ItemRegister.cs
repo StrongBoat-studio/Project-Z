@@ -20,7 +20,11 @@ public class ItemRegister : MonoBehaviour
         }
     }
 
-    public ItemScriptableObject testItem;
+    public ItemScriptableObject emptyItem;
+    public ItemScriptableObject testItemWhite;
+    public ItemScriptableObject testItemLightGrey;
+    public ItemScriptableObject testItemGrey;
+    public ItemScriptableObject testItemBack;
 
     /// <summary>
     /// Create Item from itemData

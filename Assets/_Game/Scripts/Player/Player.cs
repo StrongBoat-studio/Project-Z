@@ -13,13 +13,6 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            _inventory.AddItem(ItemRegister.Instance.CreateItem(ItemRegister.Instance.testItem), 1);
-        }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            _inventory.RemoveItem(ItemRegister.Instance.CreateItem(ItemRegister.Instance.testItem), 1);
-        }
+
     }
 }
