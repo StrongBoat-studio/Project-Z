@@ -23,6 +23,11 @@ public class Item
         return _itemData.itemSprite;
     }
 
+    public string GetName() 
+    {
+        return _itemData.itemName;
+    }
+
     public bool CompareItems(Item item)
     {
         return item.GetItemScriptableObject() == _itemData;

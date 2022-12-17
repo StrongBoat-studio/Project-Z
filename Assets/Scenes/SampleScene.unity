@@ -799,6 +799,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd52df143bb2a0441b1236b09caf2221, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  worldItemPrefab: {fileID: 1314060320801354031, guid: db497f29ee1a1254c987d9ed1d8bd933, type: 3}
   emptyItem: {fileID: 11400000, guid: cd27579306566fb47ad9b0846ccf0bd5, type: 2}
   testItemWhite: {fileID: 11400000, guid: da06545f9cab62141a1ef749f8c6aebf, type: 2}
   testItemLightGrey: {fileID: 11400000, guid: be1bf862168177e4ead4acabee7c0be9, type: 2}

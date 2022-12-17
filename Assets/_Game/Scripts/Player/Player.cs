@@ -13,6 +13,12 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-
+        if (Input.GetMouseButtonDown(1))
+        {
+            ItemRegister.Instance.CreateWorldItem(
+                ItemRegister.Instance.CreateItem(ItemRegister.Instance.testItemBack),
+                Camera.main.ScreenToWorldPoint(Input.mousePosition)
+            );
+        }
     }
 }
