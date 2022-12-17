@@ -21,4 +21,14 @@ public class Player : MonoBehaviour
             );
         }
     }
+
+    ///<summary>
+    ///Adda a given amout of given item to the inventory
+    ///</summary>
+    ///<param name="item"></param>
+    ///<param name="quantity"></param>
+    public void AddItem(Item item, int quantity)
+    {
+        _inventory.AddItem(item, quantity);
+    }
 }
