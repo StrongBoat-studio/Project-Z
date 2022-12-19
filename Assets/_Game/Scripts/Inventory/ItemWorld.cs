@@ -36,7 +36,7 @@ public class ItemWorld : MonoBehaviour, IInteractable
     public void OnClicked()
     {
         Debug.Log("Cliced " + _item.GetName());
-        if(GameManager.Instance.player != null)
+        if (GameManager.Instance.player != null)
         {
             GameManager.Instance.player.GetComponent<Player>().AddItem(_item, _quantity);
             Destroy(gameObject);
@@ -45,5 +45,17 @@ public class ItemWorld : MonoBehaviour, IInteractable
         {
             Debug.LogError("Player is not set in the GameManager singleton!");
         }
+    }
+
+    public void OnMouseEnter()
+    {
+        Color c  = GetComponent<SpriteRenderer>().color;
+        GetComponent<SpriteRenderer>().color = new Color(c.r, c.g, c.b, 0.5f);
+    }
+
+    public void OnMouseExit()
+    {
+        Color c  = GetComponent<SpriteRenderer>().color;
+        GetComponent<SpriteRenderer>().color = new Color(c.r, c.g, c.b, 1f);
     }
 }

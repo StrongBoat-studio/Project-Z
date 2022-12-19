@@ -9,6 +9,8 @@ public class InteractionManager : MonoBehaviour
     [SerializeField] private Camera _cam;
     private PlayerInput _playerInput;
 
+    private Transform _lastOver = null;
+
     private void Awake()
     {
         _playerInput = new PlayerInput();
@@ -22,13 +24,45 @@ public class InteractionManager : MonoBehaviour
     ///</summary>
     private void OnClick(InputAction.CallbackContext context)
     {
+        if(_lastOver == null) return;
+        _lastOver.GetComponent<IInteractable>()?.OnClicked();
+    }
+
+    private void Update()
+    {
         Vector2 mousePos = _playerInput.Interactions.MousePosition.ReadValue<Vector2>();
         RaycastHit2D hit = Physics2D.Raycast(_cam.ScreenToWorldPoint(mousePos), Vector2.zero);
 
-        if(hit == false) return;
-        
-        Debug.Log("Clicked something");
-        IInteractable interactable = hit.collider.GetComponent<IInteractable>();
-        interactable?.OnClicked();
+        if (hit == true)
+        {
+            //1. Mouse enters new interactable
+            //2. Mouse enters new interactable without leaving the previus one
+            IInteractable interactable = hit.collider.GetComponent<IInteractable>();
+            if (_lastOver == null && interactable != null) MouseEnter(hit.transform);
+            else if (_lastOver != null && interactable != null && _lastOver != hit.transform)
+            {
+                MouseExit();
+                MouseEnter(hit.transform);
+            }
+        }
+        else
+        {
+            //1. Mouse exits interactable
+            if (_lastOver != null) MouseExit();
+        }
+    }
+
+    private void MouseEnter(Transform over)
+    {
+        //Debug.Log("Mouse entered " + over.gameObject.name);
+        _lastOver = over;
+        _lastOver.GetComponent<IInteractable>()?.OnMouseEnter();
+    }
+
+    private void MouseExit()
+    {
+        //Debug.Log("Mouse left " + _lastOver.gameObject.name);
+        _lastOver.GetComponent<IInteractable>()?.OnMouseExit();
+        _lastOver = null;
     }
 }
