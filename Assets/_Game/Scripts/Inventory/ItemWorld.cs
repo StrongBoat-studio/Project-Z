@@ -49,13 +49,11 @@ public class ItemWorld : MonoBehaviour, IInteractable
 
     public void OnMouseEnter()
     {
-        Color c  = GetComponent<SpriteRenderer>().color;
-        GetComponent<SpriteRenderer>().color = new Color(c.r, c.g, c.b, 0.5f);
+        
     }
 
     public void OnMouseExit()
     {
-        Color c  = GetComponent<SpriteRenderer>().color;
-        GetComponent<SpriteRenderer>().color = new Color(c.r, c.g, c.b, 1f);
+        
     }
 }
