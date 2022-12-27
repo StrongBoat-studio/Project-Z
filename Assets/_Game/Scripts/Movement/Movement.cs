@@ -56,6 +56,22 @@ public class Movement : MonoBehaviour
         _playerInput.InGame.Jump.performed += OnJump;
         _playerInput.InGame.Crouch.performed += OnCrouchPerformed;
         _playerInput.InGame.Crouch.canceled += OnCrouchCanceled;
+
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+        _playerInput.InGame.Walk.performed -= OnWalkPerformed;
+        _playerInput.InGame.Walk.canceled -= OnWalkCanceled;
+        _playerInput.InGame.Run.performed -= OnRunPerformed;
+        _playerInput.InGame.Run.canceled -= OnRunCanceled;
+        _playerInput.InGame.Creep.performed -= OnCreepPerformed;
+        _playerInput.InGame.Creep.canceled -= OnCreepCanceled;
+        _playerInput.InGame.Jump.performed -= OnJump;
+        _playerInput.InGame.Crouch.performed -= OnCrouchPerformed;
+        _playerInput.InGame.Crouch.canceled -= OnCrouchCanceled;
     }
 
     private void Start()
@@ -215,5 +231,10 @@ public class Movement : MonoBehaviour
         }
 
         return states;
+    }
+
+    private void OnGameStateChanged(GameStateManager.GameState newGameState)
+    {
+        enabled = newGameState == GameStateManager.GameState.Gameplay;
     }
 }

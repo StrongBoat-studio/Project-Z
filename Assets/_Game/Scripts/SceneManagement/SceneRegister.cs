@@ -9,7 +9,8 @@ public class SceneRegister : MonoBehaviour
         MainMenu = 0,
         OptionsMenu = 1,
         CreditsMenu = 2,
-        SampleScene = 3
+        GameManagers = 3,
+        SampleScene = 4,
     }
 
     public static SceneRegister Instance { get; private set; }

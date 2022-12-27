@@ -8,8 +8,6 @@ public class OptionsLoadStartUp
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSplashScreen)]
     public static void LoadGraphicalSettings()
     {
-        Debug.Log("Hello");
-
         string destination = Application.persistentDataPath + "/options.dat";
         FileStream file;
         BinaryFormatter bf = new BinaryFormatter();

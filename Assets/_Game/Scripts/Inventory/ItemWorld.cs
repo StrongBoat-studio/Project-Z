@@ -42,7 +42,7 @@ public class ItemWorld : MonoBehaviour, IInteractable
         }
         else
         {
-            Debug.LogError("Player is not set in the GameManager singleton!");
+            Debug.LogError("Player is not set in the GameManager singleton or is not set!");
         }
     }
 

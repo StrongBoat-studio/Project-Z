@@ -12,13 +12,18 @@ public class MainMenu : MonoBehaviour
 
     public void BtnStart()
     {
+        Destroy(GameObject.Find("EventSystem"));
+
         SceneManager.LoadSceneAsync(
-            (int)SceneRegister.Scenes.SampleScene,
+            (int)SceneRegister.Scenes.GameManagers,
             LoadSceneMode.Additive
         ).completed += delegate {
-            SceneManager.UnloadSceneAsync(
-                (int)SceneRegister.Scenes.MainMenu
-            );
+            SceneManager.LoadSceneAsync(
+                (int)SceneRegister.Scenes.SampleScene,
+                LoadSceneMode.Additive
+            ).completed += delegate {
+                SceneManager.UnloadSceneAsync((int)SceneRegister.Scenes.MainMenu);
+            };
         };
     }   
 
