@@ -14,13 +14,40 @@ public class OptionsLoadStartUp
 
         if (File.Exists(destination))
         {
+            OptionsMenuSave data;
             file = File.OpenRead(destination);
-            OptionsMenuSave data = (OptionsMenuSave)bf.Deserialize(file);
+
+            try
+            {
+                //Check if deserialization didn't encouter any excpetions
+                data = (OptionsMenuSave)bf.Deserialize(file);
+            }
+            catch
+            {
+                //Deseriazlization ended with and expetion (file could have been modified)
+                //Open settings file to write
+                file.Close();
+                file = File.OpenWrite(destination);
+
+                //Create a new settings data with current screen settings
+                data = new OptionsMenuSave(
+                    Screen.currentResolution.width,
+                    Screen.currentResolution.height,
+                    Screen.currentResolution.refreshRate,
+                    QualitySettings.GetQualityLevel(),
+                    Screen.fullScreen
+                );
+                bf.Serialize(file, data);
+            
+                file.Close();
+            }
+            file.Close();
+
+            Debug.Log(data.resWidth + " " + data.resHeight + " " + data.resRefreshRate + " " + data.qualLevel + " " + data.isFullscreen);
 
             Screen.SetResolution(data.resWidth, data.resHeight, data.isFullscreen, data.resRefreshRate);
             QualitySettings.SetQualityLevel(data.qualLevel);
-
-            file.Close();
+            
         }
         else
         {

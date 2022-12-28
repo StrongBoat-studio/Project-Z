@@ -22,21 +22,6 @@ public class OptionsMenu : MonoBehaviour
 
     private void Start()
     {
-        //Get save data
-        string destination = Application.persistentDataPath + "/options.dat";
-        FileStream file;
-
-        if (File.Exists(destination)) file = File.OpenRead(destination);
-        else
-        {
-            Debug.Log("Couldn't find save file!");
-            return;
-        }
-
-        BinaryFormatter bf = new BinaryFormatter();
-        OptionsMenuSave data = (OptionsMenuSave)bf.Deserialize(file);
-        file.Close();
-
         //Set resolurion dropdown
         _resolutions = new List<Resolution>();
         _resolutions.AddRange(Screen.resolutions);
@@ -45,28 +30,100 @@ public class OptionsMenu : MonoBehaviour
             new Converter<Resolution, string>(delegate (Resolution res) { return res.ToString(); })
         );
 
+        //Add resolution options to dropdown
         _resolutionsDropdown.ClearOptions();
         _resolutionsDropdown.AddOptions(_resolutionsText);
-        _resolutionsDropdown.value = _resolutions.FindIndex(x => 
-            x.width == data.resWidth && 
-            x.height == data.resHeight &&
-            x.refreshRate == data.resRefreshRate
-        );
-        _resolutionsDropdown.RefreshShownValue();
 
-        //Set fullscreen toggle
-        _fullscreenToggle.isOn = data.isFullscreen;
+        //Get save data
+        string destination = Application.persistentDataPath + "/options.dat";
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file;
 
-        //Set quality dropdown
-        _qualityDropdown.value = data.qualLevel;
-        _qualityDropdown.RefreshShownValue();
+        if (File.Exists(destination))
+        {
+            //Open setting file
+            OptionsMenuSave data;
+            file = File.OpenRead(destination);
+
+            try
+            {
+                //Check if deserialization didn't encouter any excpetions
+                data = (OptionsMenuSave)bf.Deserialize(file);
+            }
+            catch
+            {
+                //Deseriazlization ended with and expetion (file could have been modified)
+                //Open settings file to write
+                file.Close();
+                file = File.OpenWrite(destination);
+
+                //Create a new settings data with current screen settings
+                data = new OptionsMenuSave(
+                    Screen.currentResolution.width,
+                    Screen.currentResolution.height,
+                    Screen.currentResolution.refreshRate,
+                    QualitySettings.GetQualityLevel(),
+                    Screen.fullScreen
+                );
+                bf.Serialize(file, data);
+            
+                file.Close();
+            }
+            file.Close();
+
+            //Find resolution based on settings
+            _resolutionsDropdown.value = _resolutions.FindIndex(x =>
+                x.width == data.resWidth &&
+                x.height == data.resHeight &&
+                x.refreshRate == data.resRefreshRate
+            );
+            _resolutionsDropdown.RefreshShownValue();
+
+            //Set fullscreen toggle
+            _fullscreenToggle.isOn = data.isFullscreen;
+
+            //Set quality dropdown
+            _qualityDropdown.value = data.qualLevel;
+            _qualityDropdown.RefreshShownValue();
+        }
+        else
+        {
+            //If file does not exist (or was deleted during gameplay), create it and save current screen data as options data
+            file = File.Create(destination);
+
+            var defualtData = new OptionsMenuSave(
+                Screen.currentResolution.width,
+                Screen.currentResolution.height,
+                Screen.currentResolution.refreshRate,
+                QualitySettings.GetQualityLevel(),
+                Screen.fullScreen
+            );
+            bf.Serialize(file, defualtData);
+
+            file.Close();
+
+            //Find resolution based on settings
+            _resolutionsDropdown.value = _resolutions.FindIndex(x =>
+                x.width == defualtData.resWidth &&
+                x.height == defualtData.resHeight &&
+                x.refreshRate == defualtData.resRefreshRate
+            );
+            _resolutionsDropdown.RefreshShownValue();
+
+            //Set fullscreen toggle
+            _fullscreenToggle.isOn = defualtData.isFullscreen;
+
+            //Set quality dropdown
+            _qualityDropdown.value = defualtData.qualLevel;
+            _qualityDropdown.RefreshShownValue();
+        }
     }
 
     public void SetResolution()
     {
         Screen.SetResolution(
-            _resolutions[_resolutionsDropdown.value].width, 
-            _resolutions[_resolutionsDropdown.value].height, 
+            _resolutions[_resolutionsDropdown.value].width,
+            _resolutions[_resolutionsDropdown.value].height,
             Screen.fullScreen,
             _resolutions[_resolutionsDropdown.value].refreshRate
         );
@@ -113,34 +170,5 @@ public class OptionsMenu : MonoBehaviour
             "Save: " + data.resWidth + ", " + data.resHeight + ", " + data.qualLevel + ", " + data.isFullscreen
         );
     }
-
-    // private void LoadOptions()
-    // {
-    //     string destination = Application.persistentDataPath + "/options.dat";
-    //     FileStream file;
-
-    //     if (File.Exists(destination)) file = File.OpenRead(destination);
-    //     else
-    //     {
-    //         Debug.LogError("Options save file not found");
-    //         return;
-    //     }
-
-    //     BinaryFormatter bf = new BinaryFormatter();
-    //     OptionsMenuSave data = (OptionsMenuSave)bf.Deserialize(file);
-    //     file.Close();
-
-    //     _resolutionsDropdown.value = _resolutions.FindIndex(x => x.width == data.resWidth && x.height == data.resHeight);
-    //     _qualityDropdown.value = data.qualLevel;
-    //     _fullscreenToggle.isOn = data.isFullscreen;
-
-    //     SetResolution();
-    //     SetQuality();
-    //     SetFullscreen();
-
-    //     //Debug.Log(_resolutionsDropdown.value);
-    //     //Debug.Log(_qualityDropdown.value);
-    //     //Debug.Log(_fullscreenToggle.isOn);
-    // }
 }
 
