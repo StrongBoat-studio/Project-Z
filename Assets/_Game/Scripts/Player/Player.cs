@@ -6,6 +6,11 @@ public class Player : MonoBehaviour
 {
     private Inventory _inventory;
 
+    private void Awake()
+    {
+        GameManager.Instance.player = transform;
+    }
+
     private void Start()
     {
         _inventory = new Inventory();

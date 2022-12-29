@@ -16,6 +16,14 @@ public class InteractionManager : MonoBehaviour
         _playerInput = new PlayerInput();
         _playerInput.Interactions.Enable();
         _playerInput.Interactions.Interact.performed += OnClick;
+
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+        _playerInput.Interactions.Interact.performed -= OnClick;
     }
 
     ///<summary>
@@ -24,11 +32,29 @@ public class InteractionManager : MonoBehaviour
     ///</summary>
     private void OnClick(InputAction.CallbackContext context)
     {
-        if(_lastOver == null) return;
+        if (_lastOver == null) return;
         _lastOver.GetComponent<IInteractable>()?.OnClicked();
     }
 
+    private void OnGameStateChanged(GameStateManager.GameState newGameState)
+    {
+        enabled = newGameState == GameStateManager.GameState.Gameplay;
+    }
+
     private void Update()
+    {
+        //Try to get camera reference if it's not already set
+        if (_cam == null)
+        {
+            _cam = GameObject.FindObjectOfType<Camera>();
+        }
+        else
+        {
+            ProcessInteraction();
+        }
+    }
+
+    private void ProcessInteraction()
     {
         Vector2 mousePos = _playerInput.Interactions.MousePosition.ReadValue<Vector2>();
         RaycastHit2D hit = Physics2D.Raycast(_cam.ScreenToWorldPoint(mousePos), Vector2.zero);
