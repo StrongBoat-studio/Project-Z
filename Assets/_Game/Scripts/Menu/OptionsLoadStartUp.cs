@@ -35,7 +35,7 @@ public class OptionsLoadStartUp
                     Screen.currentResolution.height,
                     Screen.currentResolution.refreshRate,
                     QualitySettings.GetQualityLevel(),
-                    Screen.fullScreen
+                    true
                 );
                 bf.Serialize(file, data);
             
@@ -59,7 +59,7 @@ public class OptionsLoadStartUp
                 Screen.currentResolution.height,
                 Screen.currentResolution.refreshRate,
                 QualitySettings.GetQualityLevel(),
-                Screen.fullScreen
+                true
             );
             bf.Serialize(file, defualtData);
             
