@@ -257,10 +257,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   worldItemPrefab: {fileID: 1314060320801354031, guid: db497f29ee1a1254c987d9ed1d8bd933, type: 3}
   emptyItem: {fileID: 11400000, guid: cd27579306566fb47ad9b0846ccf0bd5, type: 2}
-  testItemWhite: {fileID: 11400000, guid: da06545f9cab62141a1ef749f8c6aebf, type: 2}
-  testItemLightGrey: {fileID: 11400000, guid: be1bf862168177e4ead4acabee7c0be9, type: 2}
-  testItemGrey: {fileID: 11400000, guid: eb1a5b8058b99754180ebf83111dc116, type: 2}
-  testItemBack: {fileID: 11400000, guid: f950ae711055c5c49abe2e9ea39789c1, type: 2}
+  testItemWhite: {fileID: 11400000, guid: b85aa096940541a4992f2c1c49fa991e, type: 2}
+  testItemLightGrey: {fileID: 11400000, guid: fb8d8e055e6dc0c45bcaefc767992135, type: 2}
+  testItemGrey: {fileID: 11400000, guid: e5c3b6a1ff6930b47a265047fe83a61a, type: 2}
+  testItemBack: {fileID: 11400000, guid: be1bf862168177e4ead4acabee7c0be9, type: 2}
 --- !u!4 &1421069937
 Transform:
   m_ObjectHideFlags: 0

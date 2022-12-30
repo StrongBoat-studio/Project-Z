@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(SpriteRenderer), typeof(BoxCollider2D))]
@@ -9,12 +10,14 @@ public class ItemWorld : MonoBehaviour, IInteractable
     [SerializeField] private Item _item;
     [Min(1f)][SerializeField] private int _quantity = 1;
 
+    private LocalKeyword _OUTLINE_ON;
+
     private void Awake()
     {
+        _OUTLINE_ON = new LocalKeyword(GetComponent<SpriteRenderer>().material.shader, "_OUTLINE_ON");
         if (_item.IsEmpty() == true) return;
 
         GetComponent<SpriteRenderer>().sprite = _item.GetItemSprite();
-        GetComponent<BoxCollider2D>().size = _item.GetItemSprite().bounds.size;
     }
 
     ///<summary>
@@ -48,11 +51,11 @@ public class ItemWorld : MonoBehaviour, IInteractable
 
     public void OnMouseEnter()
     {
-        
+        GetComponent<SpriteRenderer>().material.SetKeyword(_OUTLINE_ON, true);
     }
 
     public void OnMouseExit()
     {
-        
+        GetComponent<SpriteRenderer>().material.SetKeyword(_OUTLINE_ON, false);
     }
 }

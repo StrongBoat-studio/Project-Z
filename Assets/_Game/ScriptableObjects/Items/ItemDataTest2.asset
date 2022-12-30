@@ -10,7 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f885a6338d76c34f9b88db74b94639e, type: 3}
-  m_Name: ItemDataBlack
+  m_Name: ItemDataTest2
   m_EditorClassIdentifier: 
-  itemName: Black Item
-  itemSprite: {fileID: 21300000, guid: 1e48b8c8182e82442afb93d5e249f794, type: 3}
+  itemName: Bullet
+  itemSprite: {fileID: 21300000, guid: c8767600da5625f4399e6f247cead624, type: 3}
+  itemSizePx: {x: 24, y: 24}

@@ -9,7 +9,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Outline
   m_Shader: {fileID: -6465566751694194690, guid: c152317cad41986458c607e0feaae7a1, type: 3}
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - _OUTLINE_CORNERS_ON
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -53,7 +54,10 @@ Material:
     - _BUILTIN_QueueControl: -1
     - _BUILTIN_QueueOffset: 0
     - _EnableExternalAlpha: 0
+    - _OUTLINE: 0
+    - _OUTLINE_CORNERS: 1
     - _OutlineThickness: 1
+    - _Thickness: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
