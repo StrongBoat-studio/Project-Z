@@ -18,13 +18,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(1))
-        {
-            ItemRegister.Instance.CreateWorldItem(
-                ItemRegister.Instance.CreateItem(ItemRegister.Instance.testItemBack),
-                Camera.main.ScreenToWorldPoint(Input.mousePosition)
-            );
-        }
+        
     }
 
     ///<summary>
@@ -35,5 +29,10 @@ public class Player : MonoBehaviour
     public void AddItem(Item item, int quantity)
     {
         _inventory.AddItem(item, quantity);
+    }
+
+    public Inventory GetInventory()
+    {
+        return _inventory;
     }
 }

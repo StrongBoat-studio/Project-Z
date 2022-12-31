@@ -21,21 +21,15 @@ public class ItemRegister : MonoBehaviour
     }
 
     public GameObject worldItemPrefab;
-    public ItemScriptableObject emptyItem;
-    public ItemScriptableObject testItemWhite;
-    public ItemScriptableObject testItemLightGrey;
-    public ItemScriptableObject testItemGrey;
-    public ItemScriptableObject testItemBack;
-
-    /// <summary>
-    /// Create Item from itemData
-    /// </summary>
-    /// <param name="itemData"></param>
-    /// <returns>Item</returns>
-    public Item CreateItem(ItemScriptableObject itemData)
-    {
-        return new Item(itemData);
-    }
+    public Item emptyItem;
+    public Item testItemWhite;
+    public Item testItemLightGrey;
+    public Item testItemGrey;
+    public Item testItemBack;
+    public Item card;
+    public Item ammunition;
+    public Item medicaments;
+    public Item flashlight;
 
     /// <summary>
     /// Create item gameobejct and place it on given position

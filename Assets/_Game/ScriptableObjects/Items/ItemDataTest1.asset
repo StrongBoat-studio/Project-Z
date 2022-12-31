@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f885a6338d76c34f9b88db74b94639e, type: 3}
   m_Name: ItemDataTest1
   m_EditorClassIdentifier: 
-  itemName: Bullet
+  itemName: Card
   itemSprite: {fileID: 21300000, guid: b9ca30650c317ec439b267c249231f95, type: 3}
-  itemSizePx: {x: 24, y: 24}

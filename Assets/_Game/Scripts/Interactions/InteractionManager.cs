@@ -78,10 +78,6 @@ public class InteractionManager : MonoBehaviour
                 _lastOver = hit.transform;
                 _lastOver.GetComponent<IInteractable>()?.CursorEnter();
             }
-            else
-            {
-                Debug.Log("Unpredicted state!");
-            }
         }
         else
         {

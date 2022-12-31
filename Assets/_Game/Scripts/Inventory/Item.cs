@@ -6,7 +6,7 @@ using UnityEngine;
 public class Item
 {
     //Default to an empty item 
-    [SerializeField] private ItemScriptableObject _itemData = ItemRegister.Instance.emptyItem;
+    [SerializeField] private ItemScriptableObject _itemData;// = ItemRegister.Instance.emptyItem;
 
     public Item(ItemScriptableObject itemData)
     {
@@ -33,8 +33,8 @@ public class Item
         return item.GetItemScriptableObject() == _itemData;
     }
 
-    public bool IsEmpty()
+    public bool HasValidData()
     {
-        return _itemData == ItemRegister.Instance.emptyItem;
+        return !ReferenceEquals(_itemData, null);
     }
 }

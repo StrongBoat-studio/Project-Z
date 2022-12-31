@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f885a6338d76c34f9b88db74b94639e, type: 3}
   m_Name: ItemDataTest3
   m_EditorClassIdentifier: 
-  itemName: Bullet
+  itemName: Medicamant
   itemSprite: {fileID: 21300000, guid: 269ce706e5e846b43a684e2840cfe76d, type: 3}
-  itemSizePx: {x: 24, y: 24}

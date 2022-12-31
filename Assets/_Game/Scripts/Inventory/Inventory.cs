@@ -17,7 +17,7 @@ public class Inventory
         public InventorySlot(int index)
         {
             this._index = index;
-            _item = ItemRegister.Instance.CreateItem(ItemRegister.Instance.emptyItem);
+            _item = new Item(null);
             _quantity = 0;
         }
 
@@ -50,7 +50,7 @@ public class Inventory
         /// <returns>Item from the slot and its quantity</returns>
         private void RemoveItem()
         {
-            _item = ItemRegister.Instance.CreateItem(ItemRegister.Instance.emptyItem);
+            _item = new Item(null);
             _quantity = 0;
         }
 
@@ -96,7 +96,8 @@ public class Inventory
         /// <returns>True if empty</returns>
         public bool IsEmpty()
         {
-            return _item.IsEmpty();
+            //return _item.IsEmpty();
+            return !_item.HasValidData();
         }
 
         /// <summary>
@@ -106,7 +107,7 @@ public class Inventory
         /// <returns>True if slot contains given item</returns>
         public bool HasItem(Item item)
         {
-            if (_item.IsEmpty() == true) return false;
+            if (!_item.HasValidData()) return false;
             if (_item.CompareItems(item) == true) return true;
 
             return false;
@@ -115,6 +116,9 @@ public class Inventory
 
     private List<InventorySlot> _inventorySlots = new List<InventorySlot>();
     private int _inventorySize = 10;
+
+    public delegate void OnInventoryChangedHandler();
+    public event OnInventoryChangedHandler OnInventoryChanged;
 
     public Inventory(int size = 10)
     {
@@ -147,7 +151,8 @@ public class Inventory
         {
             //Item is not in the inventory, add new
             var returnedItem = emptySlot.AddItem(item, quantity);
-            if (returnedItem.item.IsEmpty() != true)
+            OnInventoryChanged?.Invoke();
+            if(returnedItem.item.HasValidData())
             {
                 Debug.Log("Function 'GetEmptyInventorySlot().AddItem()' from Inventory.AddItem() returned an item but it shouldn't!");
             }
@@ -170,7 +175,17 @@ public class Inventory
             return false;
         }
 
+        OnInventoryChanged?.Invoke();
         return slot.RemoveQuantity(quantity);
+    }
+
+    /// <summary>
+    /// Gets referece to inventory slots
+    /// </summary>
+    /// <returns>List of inventory slots</returns>
+    public List<InventorySlot> GetInventorySlots()
+    {
+        return _inventorySlots;
     }
 
     /// <summary>

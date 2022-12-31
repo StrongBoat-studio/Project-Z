@@ -15,7 +15,7 @@ public class ItemWorld : MonoBehaviour, IInteractable
     private void Awake()
     {
         _OUTLINE_ON = new LocalKeyword(GetComponent<SpriteRenderer>().material.shader, "_OUTLINE_ON");
-        if (_item.IsEmpty() == true) return;
+        if (!_item.HasValidData()) return;
 
         GetComponent<SpriteRenderer>().sprite = _item.GetItemSprite();
     }
