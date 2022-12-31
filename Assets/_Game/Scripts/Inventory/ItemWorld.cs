@@ -35,9 +35,9 @@ public class ItemWorld : MonoBehaviour, IInteractable
         GetComponent<BoxCollider2D>().size = _item.GetItemSprite().bounds.size;
     }
 
-    public void OnClicked()
+    public void CursorClick()
     {
-        Debug.Log("Cliced " + _item.GetName());
+        Debug.Log("Clicked " + _item.GetName());
         if (GameManager.Instance.player != null)
         {
             GameManager.Instance.player.GetComponent<Player>().AddItem(_item, _quantity);
@@ -49,12 +49,12 @@ public class ItemWorld : MonoBehaviour, IInteractable
         }
     }
 
-    public void OnMouseEnter()
+    public void CursorEnter()
     {
         GetComponent<SpriteRenderer>().material.SetKeyword(_OUTLINE_ON, true);
     }
 
-    public void OnMouseExit()
+    public void CursorExit()
     {
         GetComponent<SpriteRenderer>().material.SetKeyword(_OUTLINE_ON, false);
     }
