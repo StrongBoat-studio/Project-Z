@@ -6,6 +6,11 @@ public class Player : MonoBehaviour
 {
     private Inventory _inventory;
 
+    private void Awake()
+    {
+        GameManager.Instance.player = transform;
+    }
+
     private void Start()
     {
         _inventory = new Inventory();
@@ -20,5 +25,15 @@ public class Player : MonoBehaviour
                 Camera.main.ScreenToWorldPoint(Input.mousePosition)
             );
         }
+    }
+
+    ///<summary>
+    ///Adda a given amout of given item to the inventory
+    ///</summary>
+    ///<param name="item"></param>
+    ///<param name="quantity"></param>
+    public void AddItem(Item item, int quantity)
+    {
+        _inventory.AddItem(item, quantity);
     }
 }
