@@ -10,7 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f885a6338d76c34f9b88db74b94639e, type: 3}
-  m_Name: ItemDataLightGrey
+  m_Name: ItemDataAmmo
   m_EditorClassIdentifier: 
-  itemName: Light Grey Item
-  itemSprite: {fileID: 21300000, guid: de8cc317373c81b46a92ce7147e9ed21, type: 3}
+  id: 1
+  name: Ammunition
+  sprite: {fileID: 21300000, guid: b9ca30650c317ec439b267c249231f95, type: 3}
+  isStackable: 1
+  type: 0

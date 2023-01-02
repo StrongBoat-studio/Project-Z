@@ -44,31 +44,30 @@ public class UI_Inventory : MonoBehaviour
 
     private void OnInventoryChanged()
     {
-        foreach(var slot in _inventory.GetInventorySlots())
-        {
-            if(slot.HasItem(ItemRegister.Instance.card))
-            {
-                _cardSlot.GetComponentInChildren<Image>().sprite = slot.GetData().item.GetItemSprite();
-            }
+        // foreach(var slot in _inventory.GetInventorySlots())
+        // {
+        //     if(slot.HasItem(ItemRegister.Instance.card))
+        //     {
+        //         _cardSlot.GetComponentInChildren<Image>().sprite = slot.GetData().item.GetItemSprite();
+        //     }
 
-            if(slot.HasItem(ItemRegister.Instance.ammunition))
-            {
-                _ammoSlot.GetComponentInChildren<Image>().sprite = slot.GetData().item.GetItemSprite();
-                _ammoSlot.GetComponentInChildren<TextMeshProUGUI>().text = slot.GetData().quantity.ToString();
-            }
+        //     if(slot.HasItem(ItemRegister.Instance.ammunition))
+        //     {
+        //         _ammoSlot.GetComponentInChildren<Image>().sprite = slot.GetData().item.GetItemSprite();
+        //         _ammoSlot.GetComponentInChildren<TextMeshProUGUI>().text = slot.GetData().quantity.ToString();
+        //     }
 
-            if(slot.HasItem(ItemRegister.Instance.medicaments))
-            {
-                _medsSlot.GetComponentInChildren<Image>().sprite = slot.GetData().item.GetItemSprite();
-                _medsSlot.GetComponentInChildren<TextMeshProUGUI>().text = slot.GetData().quantity.ToString();
-            }
+        //     if(slot.HasItem(ItemRegister.Instance.medicaments))
+        //     {
+        //         _medsSlot.GetComponentInChildren<Image>().sprite = slot.GetData().item.GetItemSprite();
+        //         _medsSlot.GetComponentInChildren<TextMeshProUGUI>().text = slot.GetData().quantity.ToString();
+        //     }
 
-            if(slot.HasItem(ItemRegister.Instance.flashlight))
-            {
-                _flashlightSlot.GetComponentInChildren<Image>().sprite = slot.GetData().item.GetItemSprite();
-                _flashlightSlot.GetComponentInChildren<TextMeshProUGUI>().text = slot.GetData().quantity.ToString();
-            }
-        }
-        
+        //     if(slot.HasItem(ItemRegister.Instance.flashlight))
+        //     {
+        //         _flashlightSlot.GetComponentInChildren<Image>().sprite = slot.GetData().item.GetItemSprite();
+        //         _flashlightSlot.GetComponentInChildren<TextMeshProUGUI>().text = slot.GetData().quantity.ToString();
+        //     }
+        // }  
     }
 }

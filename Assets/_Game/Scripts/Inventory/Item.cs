@@ -1,40 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [System.Serializable]
 public class Item
 {
-    //Default to an empty item 
-    [SerializeField] private ItemScriptableObject _itemData;// = ItemRegister.Instance.emptyItem;
-
-    public Item(ItemScriptableObject itemData)
+    public enum ItemType
     {
-        this._itemData = itemData;
+        Item1,
+        Item2,
+        Item3,
+        Item4
     }
 
-    private ItemScriptableObject GetItemScriptableObject()
-    {
-        return _itemData;
-    }
-
-    public Sprite GetItemSprite()
-    {
-        return _itemData.itemSprite;
-    }
-
-    public string GetName() 
-    {
-        return _itemData.itemName;
-    }
-
-    public bool CompareItems(Item item)
-    {
-        return item.GetItemScriptableObject() == _itemData;
-    }
-
-    public bool HasValidData()
-    {
-        return !ReferenceEquals(_itemData, null);
-    }
+    public ItemType itemType;
+    public int amount;
+    public bool stackable;
+    public Action<int> Use;
 }
