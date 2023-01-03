@@ -28,32 +28,44 @@ public class ItemRegister : MonoBehaviour
     }
 
     public GameObject worldItemPrefab;
-    public List<ItemSpritePair> itemSprites = new List<ItemSpritePair>();
+    [SerializeField] private List<ItemSpritePair> _itemSprites = new List<ItemSpritePair>();
     private List<Item> _items = new List<Item>()
     {
         new Item {
             itemType = Item.ItemType.Item1,
             amount = 1,
             stackable = true,
-            Use = delegate(int i){ Debug.Log("Item 1 action"); }
+            Use = delegate(int i){ GameManager.Instance.player.GetComponent<Player>().GetInventory().RemoveItem(
+                Item.ItemType.Item1,
+                i
+            ); }
         },
         new Item {
             itemType = Item.ItemType.Item2,
             amount = 1,
             stackable = true,
-            Use = delegate(int i){ Debug.Log("Item 2 action"); }
+            Use = delegate(int i){ GameManager.Instance.player.GetComponent<Player>().GetInventory().RemoveItem(
+                Item.ItemType.Item1,
+                i
+            ); }
         },
         new Item {
             itemType = Item.ItemType.Item3,
             amount = 1,
             stackable = true,
-            Use = delegate(int i){ Debug.Log("Item 3 action"); }
+            Use = delegate(int i){ GameManager.Instance.player.GetComponent<Player>().GetInventory().RemoveItem(
+                Item.ItemType.Item1,
+                i
+            ); }
         },
         new Item {
             itemType = Item.ItemType.Item4,
             amount = 1,
             stackable = false,
-            Use = delegate(int i){ Debug.Log("Item 4 action"); }
+            Use = delegate(int i){ GameManager.Instance.player.GetComponent<Player>().GetInventory().RemoveItem(
+                Item.ItemType.Item1,
+                i
+            ); }
         }
     };
 
@@ -67,6 +79,11 @@ public class ItemRegister : MonoBehaviour
             Use = item.Use
         };
         return copy;
+    }
+
+    public Sprite GetItemSprite(Item.ItemType type)
+    {
+        return _itemSprites.Find(x => x.type == type).sprite;
     }
 
     /// <summary>

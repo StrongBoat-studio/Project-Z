@@ -34,10 +34,12 @@ public class Inventory
         if (_items.Find(x => x.itemType == item.itemType) == null || item.stackable == false)
         {
             _items.Add(item);
+            OnInventoryChanged?.Invoke();
         }
         else
         {
             _items.Find(x => x.itemType == item.itemType).amount += item.amount;
+            OnInventoryChanged?.Invoke();
         }
     }
 
@@ -45,9 +47,9 @@ public class Inventory
     ///Removes give item from inventory
     ///</summary>
     ///<param name="item"></param>
-    public void RemoveItem(Item item)
+    public void RemoveItem(Item.ItemType itemType, int amount)
     {
-        Item itemRemove = _items.Find(x => x.itemType == item.itemType);
+        Item itemRemove = _items.Find(x => x.itemType == itemType);
 
         if (itemRemove == null)
         {
@@ -55,19 +57,21 @@ public class Inventory
             return;
         }
 
-        if (itemRemove.amount < item.amount)
+        if (itemRemove.amount < amount)
         {
             Debug.LogWarning("Cannot remove item. Not enought of it in the inventory");
             return;
         }
         else
         {
-            itemRemove.amount -= item.amount;
+            itemRemove.amount -= amount;
 
             if(itemRemove.amount <= 0)
             {
                 _items.Remove(itemRemove);
             }
+
+            OnInventoryChanged?.Invoke();
         }
     }
 
@@ -78,5 +82,10 @@ public class Inventory
     public List<Item> GetInventoryItems()
     {
         return _items;
+    }
+
+    public int GetSize()
+    {
+        return _inventorySize;
     }
 }

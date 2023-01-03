@@ -16,7 +16,7 @@ public class ItemWorld : MonoBehaviour, IInteractable
     {
         _OUTLINE_ON = new LocalKeyword(GetComponent<SpriteRenderer>().material.shader, "_OUTLINE_ON");
 
-        GetComponent<SpriteRenderer>().sprite = ItemRegister.Instance.itemSprites.Find(x => x.type == _itemType).sprite;
+        GetComponent<SpriteRenderer>().sprite = ItemRegister.Instance.GetItemSprite(_itemType);
     }
 
     ///<summary>
@@ -29,7 +29,7 @@ public class ItemWorld : MonoBehaviour, IInteractable
     {
         _itemType = itemType;
         _amount = amount;
-        GetComponent<SpriteRenderer>().sprite = ItemRegister.Instance.itemSprites.Find(x => x.type == itemType).sprite;
+        GetComponent<SpriteRenderer>().sprite = ItemRegister.Instance.GetItemSprite(itemType);
     }
 
     ///<summary>

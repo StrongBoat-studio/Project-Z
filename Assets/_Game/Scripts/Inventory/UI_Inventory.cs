@@ -8,11 +8,15 @@ using TMPro;
 public class UI_Inventory : MonoBehaviour
 {
     private Inventory _inventory;
+    private Transform _player;
 
-    [SerializeField] private RectTransform _cardSlot;
-    [SerializeField] private RectTransform _ammoSlot;
-    [SerializeField] private RectTransform _medsSlot;
-    [SerializeField] private RectTransform _flashlightSlot;
+    [Header("Hotbar")]
+    [SerializeField] private RectTransform _hotbar;
+
+    [Header("Panel")]
+    [SerializeField] private RectTransform _inventorySlotPrefab;
+    [SerializeField] private RectTransform _panel;
+    [SerializeField] private RectTransform _panelSlotContainer;
 
     private void Start()
     {
@@ -27,12 +31,7 @@ public class UI_Inventory : MonoBehaviour
 
     private void Update()
     {
-        if(_inventory == null)
-        {
-            if(GameManager.Instance.player == null) return;
 
-            SetInventory(GameManager.Instance.player.GetComponent<Player>().GetInventory());
-        }
     }
 
     public void SetInventory(Inventory inventory)
@@ -42,32 +41,38 @@ public class UI_Inventory : MonoBehaviour
         OnInventoryChanged();
     }
 
+    public void SetPlayer(Transform player)
+    {
+        _player = player;
+    }
+
     private void OnInventoryChanged()
     {
-        // foreach(var slot in _inventory.GetInventorySlots())
-        // {
-        //     if(slot.HasItem(ItemRegister.Instance.card))
-        //     {
-        //         _cardSlot.GetComponentInChildren<Image>().sprite = slot.GetData().item.GetItemSprite();
-        //     }
+        UpdatePanel();
+        UpdateHotbar();
+    }
 
-        //     if(slot.HasItem(ItemRegister.Instance.ammunition))
-        //     {
-        //         _ammoSlot.GetComponentInChildren<Image>().sprite = slot.GetData().item.GetItemSprite();
-        //         _ammoSlot.GetComponentInChildren<TextMeshProUGUI>().text = slot.GetData().quantity.ToString();
-        //     }
+    private void UpdatePanel()
+    {
+        for(int i = 0; i < _panelSlotContainer.childCount; i++)
+        {
+            Destroy(_panelSlotContainer.GetChild(i).gameObject);
+        }
 
-        //     if(slot.HasItem(ItemRegister.Instance.medicaments))
-        //     {
-        //         _medsSlot.GetComponentInChildren<Image>().sprite = slot.GetData().item.GetItemSprite();
-        //         _medsSlot.GetComponentInChildren<TextMeshProUGUI>().text = slot.GetData().quantity.ToString();
-        //     }
+        foreach(var item in _inventory.GetInventoryItems())
+        {
+            RectTransform slot = Instantiate(_inventorySlotPrefab, Vector3.zero, Quaternion.identity, _panelSlotContainer);
+            slot.GetComponent<UI_InventorySlot>().SetItem(item);
+        }
+    }
 
-        //     if(slot.HasItem(ItemRegister.Instance.flashlight))
-        //     {
-        //         _flashlightSlot.GetComponentInChildren<Image>().sprite = slot.GetData().item.GetItemSprite();
-        //         _flashlightSlot.GetComponentInChildren<TextMeshProUGUI>().text = slot.GetData().quantity.ToString();
-        //     }
-        // }  
+    private void UpdateHotbar()
+    {
+        
+    }
+
+    public void ToggleInventoryPanel()
+    {
+        _panel.gameObject.SetActive(!_panel.gameObject.activeSelf);
     }
 }
