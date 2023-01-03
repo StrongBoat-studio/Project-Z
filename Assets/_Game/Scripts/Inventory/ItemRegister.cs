@@ -45,7 +45,7 @@ public class ItemRegister : MonoBehaviour
             amount = 1,
             stackable = true,
             Use = delegate(int i){ GameManager.Instance.player.GetComponent<Player>().GetInventory().RemoveItem(
-                Item.ItemType.Item1,
+                Item.ItemType.Item2,
                 i
             ); }
         },
@@ -54,7 +54,7 @@ public class ItemRegister : MonoBehaviour
             amount = 1,
             stackable = true,
             Use = delegate(int i){ GameManager.Instance.player.GetComponent<Player>().GetInventory().RemoveItem(
-                Item.ItemType.Item1,
+                Item.ItemType.Item3,
                 i
             ); }
         },
@@ -63,7 +63,7 @@ public class ItemRegister : MonoBehaviour
             amount = 1,
             stackable = false,
             Use = delegate(int i){ GameManager.Instance.player.GetComponent<Player>().GetInventory().RemoveItem(
-                Item.ItemType.Item1,
+                Item.ItemType.Item4,
                 i
             ); }
         }
