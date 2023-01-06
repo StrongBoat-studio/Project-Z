@@ -237,6 +237,7 @@ GameObject:
   - component: {fileID: 1421069937}
   - component: {fileID: 1421069936}
   - component: {fileID: 1421069938}
+  - component: {fileID: 1421069939}
   m_Layer: 0
   m_Name: ItemRegister
   m_TagString: Untagged
@@ -399,6 +400,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 727714ab6751d114e873e34bb8858b78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1421069939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421069935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c24053ca4142a641bea1de2ae7a7b38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recipes:
+  - itemBase: 0
+    itemDrop: 3
+    itemResult: 4
+  - itemBase: 2
+    itemDrop: 1
+    itemResult: 5
 --- !u!1 &1618618425
 GameObject:
   m_ObjectHideFlags: 0

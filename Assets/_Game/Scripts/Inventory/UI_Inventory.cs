@@ -10,22 +10,29 @@ public class UI_Inventory : MonoBehaviour
     private Inventory _inventory;
     private Transform _player;
 
-    [Header("Hotbar")]
-    [SerializeField] private RectTransform _hotbar;
-
     [Header("Panel")]
     [SerializeField] private RectTransform _inventorySlotPrefab;
     [SerializeField] private RectTransform _panel;
     [SerializeField] private RectTransform _panelSlotContainer;
 
+    [Header("Panel grid")]
+    [SerializeField] private Vector2 _offset;
+    [SerializeField] private float _paddingLeft;
+    [SerializeField] private float _paddingTop;
+    [SerializeField] private int _maxColumns;
+    [SerializeField] private float _cellWidth;
+    [SerializeField] private float _cellHeight;
+    [SerializeField] private float _cellPaddingRight;
+    [SerializeField] private float _cellPaddingBottom;
+
     private void Start()
     {
-        
+
     }
 
     private void Destroy()
     {
-        if(_inventory == null) return;
+        if (_inventory == null) return;
         _inventory.OnInventoryChanged -= OnInventoryChanged;
     }
 
@@ -49,26 +56,36 @@ public class UI_Inventory : MonoBehaviour
     private void OnInventoryChanged()
     {
         UpdatePanel();
-        UpdateHotbar();
     }
 
     private void UpdatePanel()
     {
-        for(int i = 0; i < _panelSlotContainer.childCount; i++)
+        Debug.Log("UpdatePanel!");
+        for (int i = 0; i < _panelSlotContainer.childCount; i++)
         {
             Destroy(_panelSlotContainer.GetChild(i).gameObject);
         }
 
-        foreach(var item in _inventory.GetInventoryItems())
+        // foreach(var item in _inventory.GetInventoryItems())
+        // {
+        //     RectTransform slot = Instantiate(_inventorySlotPrefab, Vector3.zero, Quaternion.identity, _panelSlotContainer);
+        //     slot.GetComponent<UI_InventorySlot>().SetItem(item);
+        // }
+        for (int x = 0; x < _maxColumns; x++)
         {
-            RectTransform slot = Instantiate(_inventorySlotPrefab, Vector3.zero, Quaternion.identity, _panelSlotContainer);
-            slot.GetComponent<UI_InventorySlot>().SetItem(item);
+            for (int y = 0; y < Mathf.Ceil(_inventory.GetSize() / _maxColumns); y++)
+            {
+                if (y * 5 + x < _inventory.GetInventoryItems().Count)
+                {
+                    RectTransform slot = Instantiate(_inventorySlotPrefab, Vector3.zero, Quaternion.identity, _panelSlotContainer);
+                    slot.GetComponent<UI_InventorySlot>().SetItem(_inventory.GetInventoryItems()[y * 5 + x]);
+                    slot.anchoredPosition = new Vector3(
+                        _offset.x + _paddingLeft + _cellWidth / 2 + x * (_cellWidth + _cellPaddingRight),
+                        _offset.y + (-_paddingTop) - _cellHeight / 2 - y * (_cellHeight + _cellPaddingBottom)
+                    );
+                }
+            }
         }
-    }
-
-    private void UpdateHotbar()
-    {
-        
     }
 
     public void ToggleInventoryPanel()

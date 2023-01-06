@@ -13,7 +13,7 @@ public class PauseMenu : MonoBehaviour
     private void Awake()
     {
         GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
-
+    
         _playerInput = new PlayerInput();
         _playerInput.PauseMenu.Enable();
         _playerInput.PauseMenu.Pause.performed += OnPauseMenuToggle;
@@ -21,7 +21,7 @@ public class PauseMenu : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
         _playerInput.PauseMenu.Pause.performed -= OnPauseMenuToggle;
     }
 
