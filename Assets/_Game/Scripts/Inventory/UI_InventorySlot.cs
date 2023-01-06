@@ -4,21 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class UI_InventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
 {
     private Item _item;
-    private bool _dragging = false;
     private Vector2 _dragStartPos;
 
     [SerializeField] private RectTransform _itemSprite;
-    [SerializeField] private RectTransform _itemAmount;
-    private Transform _parent;
-
-    private void Awake()
-    {
-        _parent = transform.parent;
-    }
 
     ///<summary>
     ///Set item's  sprite and amount
@@ -38,15 +31,26 @@ public class UI_InventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDragH
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if(_dragging) return;
+        if(eventData.dragging) return;
             _item.Use?.Invoke(_item, 1);
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        //Move to top to render above all items
         transform.SetAsLastSibling();
-        _dragging = true;
+
+        //Save start drag pos to snap back when ending the drag
         _dragStartPos = _itemSprite.anchoredPosition;
+
+        //Center the dragged object to center of mouse
+        Vector2 delta;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            _itemSprite, eventData.position, null, out delta
+        );
+        _itemSprite.anchoredPosition += delta;
+
+        //Disable raycast blocking and set visualas
         _itemSprite.GetComponent<CanvasGroup>().blocksRaycasts = false;
         _itemSprite.GetComponent<CanvasGroup>().alpha = 0.75f;
     }
@@ -58,7 +62,7 @@ public class UI_InventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDragH
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        _dragging = false;
+        //Reset pos, enable raycast blocking and set visuals
         _itemSprite.anchoredPosition = _dragStartPos;
         _itemSprite.GetComponent<CanvasGroup>().blocksRaycasts = true;
         _itemSprite.GetComponent<CanvasGroup>().alpha = 1f;

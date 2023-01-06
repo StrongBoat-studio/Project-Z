@@ -25,20 +25,10 @@ public class UI_Inventory : MonoBehaviour
     [SerializeField] private float _cellPaddingRight;
     [SerializeField] private float _cellPaddingBottom;
 
-    private void Start()
-    {
-
-    }
-
     private void Destroy()
     {
         if (_inventory == null) return;
         _inventory.OnInventoryChanged -= OnInventoryChanged;
-    }
-
-    private void Update()
-    {
-
     }
 
     public void SetInventory(Inventory inventory)
@@ -66,11 +56,6 @@ public class UI_Inventory : MonoBehaviour
             Destroy(_panelSlotContainer.GetChild(i).gameObject);
         }
 
-        // foreach(var item in _inventory.GetInventoryItems())
-        // {
-        //     RectTransform slot = Instantiate(_inventorySlotPrefab, Vector3.zero, Quaternion.identity, _panelSlotContainer);
-        //     slot.GetComponent<UI_InventorySlot>().SetItem(item);
-        // }
         for (int x = 0; x < _maxColumns; x++)
         {
             for (int y = 0; y < Mathf.Ceil(_inventory.GetSize() / _maxColumns); y++)
