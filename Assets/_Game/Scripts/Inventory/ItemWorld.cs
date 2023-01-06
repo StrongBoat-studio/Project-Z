@@ -16,7 +16,7 @@ public class ItemWorld : MonoBehaviour, IInteractable
     {
         _OUTLINE_ON = new LocalKeyword(GetComponent<SpriteRenderer>().material.shader, "_OUTLINE_ON");
 
-        GetComponent<SpriteRenderer>().sprite = ItemRegister.Instance.GetItemSprite(_itemType);
+        GetComponent<SpriteRenderer>().sprite = ItemRegister.Instance.items.Find(x => x.itemType == _itemType).sprite;
     }
 
     ///<summary>
@@ -29,7 +29,7 @@ public class ItemWorld : MonoBehaviour, IInteractable
     {
         _itemType = itemType;
         _amount = amount;
-        GetComponent<SpriteRenderer>().sprite = ItemRegister.Instance.GetItemSprite(itemType);
+        GetComponent<SpriteRenderer>().sprite = ItemRegister.Instance.items.Find(x => x.itemType == _itemType).sprite;
     }
 
     ///<summary>
@@ -44,7 +44,6 @@ public class ItemWorld : MonoBehaviour, IInteractable
 
     public void CursorClick()
     {
-        Debug.Log("Clicked " + _itemType);
         if (GameManager.Instance.player != null)
         {
             GameManager.Instance.player.GetComponent<Player>().GetInventory().AddItem(GetItem());

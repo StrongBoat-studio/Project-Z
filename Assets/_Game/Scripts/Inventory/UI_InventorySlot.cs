@@ -9,10 +9,13 @@ public class UI_InventorySlot : MonoBehaviour, IPointerClickHandler
 {
     private Item _item;
 
+    ///<summary>
+    ///Set item's  sprite and amount
+    ///</summary>
     public void SetItem(Item item)
     {
         _item = item;
-        transform.Find("Item").GetComponent<Image>().sprite = ItemRegister.Instance.GetItemSprite(item.itemType);
+        transform.Find("Item").GetComponent<Image>().sprite = item.sprite;
         transform.Find("Amount").GetComponent<TextMeshProUGUI>().text = item.amount.ToString();
     }
 
@@ -23,6 +26,6 @@ public class UI_InventorySlot : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        _item.Use(1);
+        _item.Use?.Invoke(_item, 1);
     }
 }

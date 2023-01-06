@@ -2,20 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.Events;
 
 [System.Serializable]
 public class Item
 {
     public enum ItemType
     {
-        Item1,
-        Item2,
-        Item3,
-        Item4
+        CD,
+        Gun,
+        Key,
+        Letter,
+        PC,
+        Potion
     }
 
     public ItemType itemType;
-    public int amount;
+    [HideInInspector] public int amount = 1;
+    public Sprite sprite;
     public bool stackable;
-    public Action<int> Use;
+    public UnityEvent<Item, int> Use;
 }
