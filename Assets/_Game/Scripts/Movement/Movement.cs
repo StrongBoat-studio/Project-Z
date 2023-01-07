@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D))]
@@ -27,22 +28,24 @@ public class Movement : MonoBehaviour
     [SerializeField] private float _baseMovementSpeed;
     private const float MOVEMENTSPEED_SCALE = 100f;
 
-    [Range(0f, 10f)]
-    [SerializeField] private float _crouchMultipier;
-
-    [Range(0f, 10f)]
-    [SerializeField] private float _runMultiplier;
-
-    [Range(0f, 10f)]
-    [SerializeField] private float _creepMultipier;
-
-    [Range(0f, 10f)]
-    [SerializeField] private float _jumpForce;
+    [Range(0f, 10f)][SerializeField] private float _crouchMultipier;
+    [Range(0f, 10f)][SerializeField] private float _runMultiplier;
+    [Range(0f, 10f)][SerializeField] private float _creepMultipier;
+    [Range(0f, 10f)][SerializeField] private float _jumpForce;
     private const float JUMPFORCE_SCALE = 10000f;
+    [SerializeField] private Slider _uiStaminaBar;
+    [Range(0f, 10f)][SerializeField] private float _staminaMax;
+    [Range(0f, 10f)][SerializeField] private float _staminaDrainSpeed;
+    [Range(0f, 10f)][SerializeField] private float _staminaRecoveryDelay;
+    [Range(0f, 10f)][SerializeField] private float _staminaRecoverySpeed;
+    private float _staminaCurrent;
+    private float _staminaRecoveryCurrentTime;
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+        _staminaCurrent = _staminaMax;
+        _staminaRecoveryCurrentTime = _staminaRecoveryDelay;
 
         //Init player input
         _playerInput = new PlayerInput();
@@ -74,11 +77,6 @@ public class Movement : MonoBehaviour
         _playerInput.InGame.Crouch.canceled -= OnCrouchCanceled;
     }
 
-    private void Start()
-    {
-        
-    }
-
     private void Update()
     {
         //Calculate movement speed
@@ -92,14 +90,28 @@ public class Movement : MonoBehaviour
         {
             if (currentStates.Contains(MovementState.Running))
             {
-                //Run => unmset creeping and crouching
-                _movementState &= ~((int)MovementState.Creeping | (int)MovementState.Crouching);
+                //Only run when stamina is > 0
+                if (_staminaCurrent > 0f)
+                {
+                    //Run => unset creeping and crouching
+                    _movementState &= ~((int)MovementState.Creeping | (int)MovementState.Crouching);
 
-                //Force relese keys
-                _playerInput.InGame.Creep.Reset();
-                _playerInput.InGame.Crouch.Reset();
+                    //Force relese keys
+                    _playerInput.InGame.Creep.Reset();
+                    _playerInput.InGame.Crouch.Reset();
 
-                moveRaw *= _runMultiplier;
+                    moveRaw *= _runMultiplier;
+
+                    //Consume stamina if walking and running
+                    if(currentStates.Contains(MovementState.Walking))
+                        _staminaCurrent -= Time.deltaTime * _staminaDrainSpeed;
+                }
+                else
+                {
+                    _movementState &= ~(int)MovementState.Running;
+                    _playerInput.InGame.Run.Reset();
+                    _staminaRecoveryCurrentTime = 0f;
+                }
             }
             else if (currentStates.Contains(MovementState.Creeping))
             {
@@ -124,6 +136,21 @@ public class Movement : MonoBehaviour
                 moveRaw *= _crouchMultipier;
             }
         }
+
+        if(_staminaCurrent <= 0f && _staminaRecoveryCurrentTime < _staminaRecoveryDelay)
+        {
+            _staminaRecoveryCurrentTime += Time.deltaTime;
+            _staminaCurrent = 0f;
+        }
+        else if(_staminaRecoveryCurrentTime >= _staminaRecoveryDelay && !currentStates.Contains(MovementState.Running))
+        {
+            _staminaCurrent += Time.deltaTime * _staminaRecoverySpeed;
+            if(_staminaCurrent >= _staminaMax)
+                _staminaCurrent = _staminaMax;
+        }
+
+        //Debug.Log(_uiStaminaBar.rect.size);
+        _uiStaminaBar.value = Mathf.Clamp(_staminaCurrent / _staminaMax, 0f, 1f);
 
         //Apply movement speed
         _rigidbody.velocity = new Vector2(moveRaw * Time.fixedDeltaTime, _rigidbody.velocity.y);
@@ -195,7 +222,7 @@ public class Movement : MonoBehaviour
     {
         if (!collision.gameObject.CompareTag("Ground")) return;
         if (!GetMovementStates().Contains(MovementState.Jumping)) return;
-        
+
         //Set jumping state
         _movementState &= ~(int)MovementState.Jumping;
         _onGround = true;
@@ -220,7 +247,7 @@ public class Movement : MonoBehaviour
         List<MovementState> states = new List<MovementState>();
 
         //Loop throgh all MovementStates
-        for(int i = 1; i < (int)Mathf.Pow(2, Enum.GetNames(typeof(MovementState)).Length); i <<= 1)
+        for (int i = 1; i < (int)Mathf.Pow(2, Enum.GetNames(typeof(MovementState)).Length); i <<= 1)
         {
             //If MovementState flag is set, add it to list
             if ((_movementState & i) == i) states.Add((MovementState)i);
