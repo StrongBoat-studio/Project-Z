@@ -26,7 +26,7 @@ public class Movement : MonoBehaviour
     [Header("Movement")]
     [Range(0f, 10f)]
     [SerializeField] private float _baseMovementSpeed;
-    private const float MOVEMENTSPEED_SCALE = 100f;
+    private const float MOVEMENTSPEED_SCALE = 1f;
 
     [Range(0f, 10f)][SerializeField] private float _crouchMultipier;
     [Range(0f, 10f)][SerializeField] private float _runMultiplier;
@@ -50,13 +50,18 @@ public class Movement : MonoBehaviour
         //Init player input
         _playerInput = new PlayerInput();
         _playerInput.InGame.Enable();
+
         _playerInput.InGame.Walk.performed += OnWalkPerformed;
         _playerInput.InGame.Walk.canceled += OnWalkCanceled;
-        _playerInput.InGame.Run.performed += OnRunPerformed;
+
+        _playerInput.InGame.Run.started += OnRunPerformed;
         _playerInput.InGame.Run.canceled += OnRunCanceled;
+
         _playerInput.InGame.Creep.performed += OnCreepPerformed;
         _playerInput.InGame.Creep.canceled += OnCreepCanceled;
+
         _playerInput.InGame.Jump.performed += OnJump;
+
         _playerInput.InGame.Crouch.performed += OnCrouchPerformed;
         _playerInput.InGame.Crouch.canceled += OnCrouchCanceled;
 
@@ -66,18 +71,23 @@ public class Movement : MonoBehaviour
     private void OnDestroy()
     {
         GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+
         _playerInput.InGame.Walk.performed -= OnWalkPerformed;
         _playerInput.InGame.Walk.canceled -= OnWalkCanceled;
+
         _playerInput.InGame.Run.performed -= OnRunPerformed;
         _playerInput.InGame.Run.canceled -= OnRunCanceled;
+
         _playerInput.InGame.Creep.performed -= OnCreepPerformed;
         _playerInput.InGame.Creep.canceled -= OnCreepCanceled;
+
         _playerInput.InGame.Jump.performed -= OnJump;
+
         _playerInput.InGame.Crouch.performed -= OnCrouchPerformed;
         _playerInput.InGame.Crouch.canceled -= OnCrouchCanceled;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         //Calculate movement speed
         //Left - Right movment, read every frame
@@ -142,7 +152,11 @@ public class Movement : MonoBehaviour
             _staminaRecoveryCurrentTime += Time.deltaTime;
             _staminaCurrent = 0f;
         }
-        else if(_staminaRecoveryCurrentTime >= _staminaRecoveryDelay && !currentStates.Contains(MovementState.Running))
+        else if(
+            _staminaRecoveryCurrentTime >= _staminaRecoveryDelay && 
+            !currentStates.Contains(MovementState.Jumping) &&
+            (!currentStates.Contains(MovementState.Running) || !currentStates.Contains(MovementState.Walking))
+        )
         {
             _staminaCurrent += Time.deltaTime * _staminaRecoverySpeed;
             if(_staminaCurrent >= _staminaMax)
@@ -153,7 +167,7 @@ public class Movement : MonoBehaviour
         _uiStaminaBar.value = Mathf.Clamp(_staminaCurrent / _staminaMax, 0f, 1f);
 
         //Apply movement speed
-        _rigidbody.velocity = new Vector2(moveRaw * Time.fixedDeltaTime, _rigidbody.velocity.y);
+        _rigidbody.velocity = new Vector2(moveRaw, _rigidbody.velocity.y);
     }
 
     private void OnWalkPerformed(InputAction.CallbackContext context)
