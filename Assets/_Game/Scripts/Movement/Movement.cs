@@ -19,15 +19,16 @@ public class Movement : MonoBehaviour
     }
 
     private PlayerInput _playerInput;
-    private int _movementState = (int)MovementState.Standing; //State of the player, represented ad bits 
     private Rigidbody2D _rigidbody;
-    private bool _onGround = true;
+    private BoxCollider2D _boxCollider;
 
+    private int _movementState = (int)MovementState.Standing; //State of the player, represented ad bits 
+    private float _movementSpeedCalculated = 0f;
+
+    #region Movement variables
     [Header("Movement")]
-    [Range(0f, 10f)]
-    [SerializeField] private float _baseMovementSpeed;
-    private const float MOVEMENTSPEED_SCALE = 1f;
-
+    [SerializeField] private LayerMask _groundLayer;
+    [Range(0f, 10f)][SerializeField] private float _movementSpeed;
     [Range(0f, 10f)][SerializeField] private float _crouchMultipier;
     [Range(0f, 10f)][SerializeField] private float _runMultiplier;
     [Range(0f, 10f)][SerializeField] private float _creepMultipier;
@@ -38,12 +39,17 @@ public class Movement : MonoBehaviour
     [Range(0f, 10f)][SerializeField] private float _staminaDrainSpeed;
     [Range(0f, 10f)][SerializeField] private float _staminaRecoveryDelay;
     [Range(0f, 10f)][SerializeField] private float _staminaRecoverySpeed;
+    [Range(0f, 10f)][SerializeField] private float _staminaDrainJump;
     private float _staminaCurrent;
     private float _staminaRecoveryCurrentTime;
+    #endregion
+
+    public MovementState[] ms;
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+        _boxCollider = GetComponent<BoxCollider2D>();
         _staminaCurrent = _staminaMax;
         _staminaRecoveryCurrentTime = _staminaRecoveryDelay;
 
@@ -51,19 +57,27 @@ public class Movement : MonoBehaviour
         _playerInput = new PlayerInput();
         _playerInput.InGame.Enable();
 
-        _playerInput.InGame.Walk.performed += OnWalkPerformed;
-        _playerInput.InGame.Walk.canceled += OnWalkCanceled;
+        _playerInput.InGame.Walk.performed +=
+            ctx => AlterMovementState(MovementState.Walking, 0);
+        _playerInput.InGame.Walk.canceled +=
+            ctx => AlterMovementState(0, MovementState.Walking);
 
-        _playerInput.InGame.Run.started += OnRunPerformed;
-        _playerInput.InGame.Run.canceled += OnRunCanceled;
+        _playerInput.InGame.Run.started +=
+            ctx => AlterMovementState(MovementState.Running, 0);
+        _playerInput.InGame.Run.canceled +=
+            ctx => AlterMovementState(0, MovementState.Running);
 
-        _playerInput.InGame.Creep.performed += OnCreepPerformed;
-        _playerInput.InGame.Creep.canceled += OnCreepCanceled;
+        _playerInput.InGame.Creep.performed +=
+            ctx => AlterMovementState(MovementState.Creeping, 0);
+        _playerInput.InGame.Creep.canceled +=
+            ctx => AlterMovementState(0, MovementState.Creeping);
 
         _playerInput.InGame.Jump.performed += OnJump;
 
-        _playerInput.InGame.Crouch.performed += OnCrouchPerformed;
-        _playerInput.InGame.Crouch.canceled += OnCrouchCanceled;
+        _playerInput.InGame.Crouch.performed +=
+            ctx => AlterMovementState(MovementState.Crouching, 0);
+        _playerInput.InGame.Crouch.canceled +=
+            ctx => AlterMovementState(0, MovementState.Crouching);
 
         GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
     }
@@ -71,185 +85,127 @@ public class Movement : MonoBehaviour
     private void OnDestroy()
     {
         GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
-
-        _playerInput.InGame.Walk.performed -= OnWalkPerformed;
-        _playerInput.InGame.Walk.canceled -= OnWalkCanceled;
-
-        _playerInput.InGame.Run.performed -= OnRunPerformed;
-        _playerInput.InGame.Run.canceled -= OnRunCanceled;
-
-        _playerInput.InGame.Creep.performed -= OnCreepPerformed;
-        _playerInput.InGame.Creep.canceled -= OnCreepCanceled;
-
         _playerInput.InGame.Jump.performed -= OnJump;
+    }
 
-        _playerInput.InGame.Crouch.performed -= OnCrouchPerformed;
-        _playerInput.InGame.Crouch.canceled -= OnCrouchCanceled;
+    private void Update()
+    {
+        CalculateStaminaChange();
     }
 
     private void FixedUpdate()
     {
-        //Calculate movement speed
-        //Left - Right movment, read every frame
-        float moveRaw = _playerInput.InGame.Walk.ReadValue<float>() * _baseMovementSpeed * MOVEMENTSPEED_SCALE;
-
         List<MovementState> currentStates = GetMovementStates();
+        ms = currentStates.ToArray();
 
-        //Modify movement speed only when player is on the ground
-        if (_onGround)
+        //Check Jump
+        if (currentStates.Contains(MovementState.Jumping))
         {
-            if (currentStates.Contains(MovementState.Running))
-            {
-                //Only run when stamina is > 0
-                if (_staminaCurrent > 0f)
-                {
-                    //Run => unset creeping and crouching
-                    _movementState &= ~((int)MovementState.Creeping | (int)MovementState.Crouching);
-
-                    //Force relese keys
-                    _playerInput.InGame.Creep.Reset();
-                    _playerInput.InGame.Crouch.Reset();
-
-                    moveRaw *= _runMultiplier;
-
-                    //Consume stamina if walking and running
-                    if(currentStates.Contains(MovementState.Walking))
-                        _staminaCurrent -= Time.deltaTime * _staminaDrainSpeed;
-                }
-                else
-                {
-                    _movementState &= ~(int)MovementState.Running;
-                    _playerInput.InGame.Run.Reset();
-                    _staminaRecoveryCurrentTime = 0f;
-                }
-            }
-            else if (currentStates.Contains(MovementState.Creeping))
-            {
-                //Creep => unset crouching and running
-                _movementState &= ~((int)MovementState.Crouching | (int)MovementState.Running);
-
-                //Force relese keys
-                _playerInput.InGame.Run.Reset();
-                _playerInput.InGame.Crouch.Reset();
-
-                moveRaw *= _creepMultipier;
-            }
-            else if (currentStates.Contains(MovementState.Crouching))
-            {
-                //Crouching => unsert creeping and running
-                _movementState &= ~((int)MovementState.Creeping | (int)MovementState.Running);
-
-                //Force relese keys
-                _playerInput.InGame.Creep.Reset();
-                _playerInput.InGame.Run.Reset();
-
-                moveRaw *= _crouchMultipier;
-            }
+            if (IsGrounded()) AlterMovementState(0, MovementState.Jumping);
         }
 
-        if(_staminaCurrent <= 0f && _staminaRecoveryCurrentTime < _staminaRecoveryDelay)
+        CalculateMovementSpeed();
+        _rigidbody.velocity = new Vector2(_movementSpeedCalculated, _rigidbody.velocity.y);
+    }
+
+    private void CalculateMovementSpeed()
+    {
+        //Modify movement speed only when player is on the ground
+        if (!IsGrounded()) return;
+
+        //Left - Right
+        float moveRaw = _playerInput.InGame.Walk.ReadValue<float>() * _movementSpeed;
+
+        List<MovementState> states = GetMovementStates();
+        if (states.Contains(MovementState.Running))
+        {
+            //Only sprint when stamina is > 0
+            if (_staminaCurrent > 0f)
+            {
+                //Force relese keys, reset states
+                _playerInput.InGame.Creep.Reset();
+                _playerInput.InGame.Crouch.Reset();
+
+                moveRaw *= _runMultiplier;
+
+                //Consume stamina if sprinting
+                if (states.Contains(MovementState.Walking))
+                    _staminaCurrent -= Time.deltaTime * _staminaDrainSpeed;
+            }
+            else
+            {
+                AlterMovementState(0, MovementState.Running);
+                _playerInput.InGame.Run.Reset();
+                _staminaRecoveryCurrentTime = 0f;
+            }
+        }
+        else if (states.Contains(MovementState.Creeping))
+        {
+            //Force relese keys, reset states
+            _playerInput.InGame.Run.Reset();
+            _playerInput.InGame.Crouch.Reset();
+
+            moveRaw *= _creepMultipier;
+        }
+        else if (states.Contains(MovementState.Crouching))
+        {
+            //Force relese keys, reset states
+            _playerInput.InGame.Creep.Reset();
+            _playerInput.InGame.Run.Reset();
+
+            moveRaw *= _crouchMultipier;
+        }
+
+        //Save movement speed value
+        _movementSpeedCalculated = moveRaw;
+    }
+
+    private void CalculateStaminaChange()
+    {
+        List<MovementState> states = GetMovementStates();
+
+        if (_staminaCurrent <= 0f && _staminaRecoveryCurrentTime < _staminaRecoveryDelay)
         {
             _staminaRecoveryCurrentTime += Time.deltaTime;
             _staminaCurrent = 0f;
         }
-        else if(
-            _staminaRecoveryCurrentTime >= _staminaRecoveryDelay && 
-            !currentStates.Contains(MovementState.Jumping) &&
-            (!currentStates.Contains(MovementState.Running) || !currentStates.Contains(MovementState.Walking))
+        else if (
+            _staminaRecoveryCurrentTime >= _staminaRecoveryDelay &&
+            !states.Contains(MovementState.Jumping) &&
+            (!states.Contains(MovementState.Walking) || !states.Contains(MovementState.Running))
         )
         {
             _staminaCurrent += Time.deltaTime * _staminaRecoverySpeed;
-            if(_staminaCurrent >= _staminaMax)
+            if (_staminaCurrent >= _staminaMax)
                 _staminaCurrent = _staminaMax;
         }
 
-        //Debug.Log(_uiStaminaBar.rect.size);
         _uiStaminaBar.value = Mathf.Clamp(_staminaCurrent / _staminaMax, 0f, 1f);
-
-        //Apply movement speed
-        _rigidbody.velocity = new Vector2(moveRaw, _rigidbody.velocity.y);
     }
 
-    private void OnWalkPerformed(InputAction.CallbackContext context)
+    private bool IsGrounded()
     {
-        //Set walking state
-        _movementState |= (int)MovementState.Walking;
-    }
-
-    private void OnWalkCanceled(InputAction.CallbackContext context)
-    {
-        //Remove walking state
-        _movementState &= ~(int)MovementState.Walking;
-    }
-
-    private void OnRunPerformed(InputAction.CallbackContext context)
-    {
-        //Set running state
-        _movementState |= (int)MovementState.Running;
-
-        //Remove creeping state
-        _movementState &= ~(int)MovementState.Creeping;
-    }
-
-    private void OnRunCanceled(InputAction.CallbackContext context)
-    {
-        //Remove running state
-        _movementState &= ~(int)MovementState.Running;
-    }
-
-    private void OnCreepPerformed(InputAction.CallbackContext context)
-    {
-        //Set creeping state
-        _movementState |= (int)MovementState.Creeping;
-
-        //Remove running state
-        _movementState &= ~(int)MovementState.Running;
-    }
-
-    private void OnCreepCanceled(InputAction.CallbackContext context)
-    {
-        //Remove creeping state
-        _movementState &= ~(int)MovementState.Creeping;
+        return Physics2D.BoxCast(_boxCollider.bounds.center, _boxCollider.bounds.size, 0f, Vector2.down, 1 / 32f, _groundLayer);
     }
 
     private void OnJump(InputAction.CallbackContext context)
     {
-        if (!_onGround) return;
+        if (!IsGrounded()) return;
+        if (_staminaCurrent < _staminaDrainJump) return;
 
+        _staminaCurrent -= _staminaDrainJump;
         _rigidbody.AddForce(Vector2.up * _jumpForce * Time.fixedDeltaTime * JUMPFORCE_SCALE, ForceMode2D.Impulse);
     }
 
-    private void OnCrouchPerformed(InputAction.CallbackContext context)
+    ///<summary>
+    ///Adds and removes given movement states
+    ///</summary>
+    ///<param name="add">States to add</param>
+    ///<param name="remove">States to remove</param>
+    private void AlterMovementState(MovementState add, MovementState remove)
     {
-        //Set crouching state
-        _movementState |= (int)MovementState.Crouching;
-    }
-
-    private void OnCrouchCanceled(InputAction.CallbackContext context)
-    {
-        //Remove crouching state
-        _movementState &= ~(int)MovementState.Crouching;
-    }
-
-    //Collisions with ground objects to reset jump ability
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (!collision.gameObject.CompareTag("Ground")) return;
-        if (!GetMovementStates().Contains(MovementState.Jumping)) return;
-
-        //Set jumping state
-        _movementState &= ~(int)MovementState.Jumping;
-        _onGround = true;
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (!collision.gameObject.CompareTag("Ground")) return;
-        if (GetMovementStates().Contains(MovementState.Jumping)) return;
-
-        //Remove jumping state
-        _movementState |= (int)MovementState.Jumping;
-        _onGround = false;
+        _movementState |= (int)add;
+        _movementState &= ~(int)remove;
     }
 
     /// <summary>
