@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -10,29 +11,54 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public class OptionsMenu : MonoBehaviour
 {
+    private OptionsMenuSave _defaultSettings;
+    private OptionsMenuSave _currentSettings;
+
     //Resolution
-    [SerializeField] private TMP_Dropdown _resolutionsDropdown;
-    private List<Resolution> _resolutions;
+    private readonly (int width, int height) _baseResolution = (640, 360);
+    [SerializeField] private TMP_Dropdown _resScaleDropdown;
+    private List<(int width, int height)> _resolutions;
 
     //Fullscreen
-    [SerializeField] private Toggle _fullscreenToggle;
+    [SerializeField] private TMP_Dropdown _fullscreenModeDropdown;
+    private readonly List<FullScreenMode> _fullScreenModes = new List<FullScreenMode> {
+        FullScreenMode.ExclusiveFullScreen, //0
+        FullScreenMode.FullScreenWindow,    //1
+        FullScreenMode.Windowed             //2
+    };
 
     //Quality
     [SerializeField] private TMP_Dropdown _qualityDropdown;
 
     private void Start()
     {
+        _defaultSettings = new OptionsMenuSave(
+            1,
+            Screen.currentResolution.refreshRate,
+            QualitySettings.GetQualityLevel(),
+            (int)FullScreenMode.ExclusiveFullScreen
+        );
+
+        # region Dropdowns update
         //Set resolurion dropdown
-        _resolutions = new List<Resolution>();
-        _resolutions.AddRange(Screen.resolutions);
+        _resolutions = new List<(int w, int h)>();
+        for (int i = 0; i < Mathf.FloorToInt(Screen.resolutions[Screen.resolutions.Length - 1].width / _baseResolution.width); i++)
+        {
+            _resolutions.Add((_baseResolution.width * (i + 1), _baseResolution.height * (i + 1)));
+        }
 
         List<string> _resolutionsText = _resolutions.ConvertAll(
-            new Converter<Resolution, string>(delegate (Resolution res) { return res.ToString(); })
+            new Converter<(int width, int height), string>(delegate ((int width, int height) res)
+            {
+                //WIDTHxHEIGHT (SCALEx)
+                return res.width.ToString() + "x" + res.height.ToString() + " (" + (res.width / _baseResolution.width).ToString() + "x)";
+            })
         );
 
         //Add resolution options to dropdown
-        _resolutionsDropdown.ClearOptions();
-        _resolutionsDropdown.AddOptions(_resolutionsText);
+        _resScaleDropdown.ClearOptions();
+        _resScaleDropdown.AddOptions(_resolutionsText);
+        #endregion
 
         //Get save data
         string destination = Application.persistentDataPath + "/options.dat";
@@ -42,103 +68,55 @@ public class OptionsMenu : MonoBehaviour
         if (File.Exists(destination))
         {
             //Open setting file
-            OptionsMenuSave data;
             file = File.OpenRead(destination);
 
+            //Check for deserialization errors
             try
             {
-                //Check if deserialization didn't encouter any excpetions
-                data = (OptionsMenuSave)bf.Deserialize(file);
+                _currentSettings = (OptionsMenuSave)bf.Deserialize(file);
             }
             catch
             {
                 //Deseriazlization ended with and expetion (file could have been modified)
-                //Open settings file to write
+                //Override settings file with default 
                 file.Close();
                 file = File.OpenWrite(destination);
-
-                //Create a new settings data with current screen settings
-                data = new OptionsMenuSave(
-                    Screen.currentResolution.width,
-                    Screen.currentResolution.height,
-                    Screen.currentResolution.refreshRate,
-                    QualitySettings.GetQualityLevel(),
-                    true
-                );
-                bf.Serialize(file, data);
-            
+                bf.Serialize(file, _defaultSettings);
+                _currentSettings = _defaultSettings;
                 file.Close();
             }
             file.Close();
-
-            //Find resolution based on settings
-            _resolutionsDropdown.value = _resolutions.FindIndex(x =>
-                x.width == data.resWidth &&
-                x.height == data.resHeight &&
-                x.refreshRate == data.resRefreshRate
-            );
-            _resolutionsDropdown.RefreshShownValue();
-
-            //Set fullscreen toggle
-            _fullscreenToggle.isOn = data.isFullscreen;
-
-            //Set quality dropdown
-            _qualityDropdown.value = data.qualLevel;
-            _qualityDropdown.RefreshShownValue();
         }
         else
         {
-            //If file does not exist (or was deleted during gameplay), create it and save current screen data as options data
+            //If file does not exist (or was deleted during gameplay), create new file with default settings
             file = File.Create(destination);
-
-            var defualtData = new OptionsMenuSave(
-                Screen.currentResolution.width,
-                Screen.currentResolution.height,
-                Screen.currentResolution.refreshRate,
-                QualitySettings.GetQualityLevel(),
-                true
-            );
-            bf.Serialize(file, defualtData);
-
+            bf.Serialize(file, _defaultSettings);
+            _currentSettings = _defaultSettings;
             file.Close();
-
-            //Find resolution based on settings
-            _resolutionsDropdown.value = _resolutions.FindIndex(x =>
-                x.width == defualtData.resWidth &&
-                x.height == defualtData.resHeight &&
-                x.refreshRate == defualtData.resRefreshRate
-            );
-            _resolutionsDropdown.RefreshShownValue();
-
-            //Set fullscreen toggle
-            _fullscreenToggle.isOn = defualtData.isFullscreen;
-
-            //Set quality dropdown
-            _qualityDropdown.value = defualtData.qualLevel;
-            _qualityDropdown.RefreshShownValue();
         }
+
+        ApplySettings();
     }
 
     public void SetResolution()
     {
-        Screen.SetResolution(
-            _resolutions[_resolutionsDropdown.value].width,
-            _resolutions[_resolutionsDropdown.value].height,
-            Screen.fullScreen,
-            _resolutions[_resolutionsDropdown.value].refreshRate
-        );
+        _currentSettings.resScale = _resScaleDropdown.value;
+        ApplySettings();
         SaveOptions();
     }
 
-    public void SetFullscreen()
+    public void SetFullscrenMode()
     {
-        Screen.fullScreen = _fullscreenToggle.isOn;
+        _currentSettings.fullscreenMode = _fullscreenModeDropdown.value;
+        ApplySettings();
         SaveOptions();
     }
 
     public void SetQuality()
     {
-        QualitySettings.SetQualityLevel(_qualityDropdown.value);
+        _currentSettings.qualLevel = _qualityDropdown.value;
+        ApplySettings();
         SaveOptions();
     }
 
@@ -155,20 +133,60 @@ public class OptionsMenu : MonoBehaviour
         if (File.Exists(destination)) file = File.OpenWrite(destination);
         else file = File.Create(destination);
 
-        OptionsMenuSave data = new OptionsMenuSave(
-            _resolutions[_resolutionsDropdown.value].width,
-            _resolutions[_resolutionsDropdown.value].height,
-            _resolutions[_resolutionsDropdown.value].refreshRate,
-            _qualityDropdown.value,
-            _fullscreenToggle.isOn
-        );
+        
         BinaryFormatter bf = new BinaryFormatter();
-        bf.Serialize(file, data);
+        bf.Serialize(file, _currentSettings);
         file.Close();
 
         Debug.Log(
-            "Save: " + data.resWidth + ", " + data.resHeight + ", " + data.qualLevel + ", " + data.isFullscreen
+            "Save: " + _currentSettings.resScale + "x, " + _currentSettings.resRefreshRate + "Hz, Quality: " + _currentSettings.qualLevel + ", Fullscren" + _fullScreenModes[_currentSettings.fullscreenMode].ToString()
         );
+    }
+
+    private void ApplySettings()
+    {
+        if(_fullScreenModes[_currentSettings.fullscreenMode] == FullScreenMode.ExclusiveFullScreen ||
+        _fullScreenModes[_currentSettings.fullscreenMode] == FullScreenMode.FullScreenWindow)
+        {
+            Screen.SetResolution(
+                Screen.currentResolution.width,
+                Screen.currentResolution.height,
+                _fullScreenModes[_currentSettings.fullscreenMode],
+                Screen.currentResolution.refreshRate
+            );
+
+            //Scale is irrelevant when game is in fullscreen, disable it
+            _resScaleDropdown.value = _resolutions.Count() - 1;
+            _resScaleDropdown.enabled = false;
+        }
+        else
+        {
+            _resScaleDropdown.enabled = true;
+
+            Screen.SetResolution(
+                _baseResolution.width * (_currentSettings.resScale + 1),
+                _baseResolution.height * (_currentSettings.resScale + 1),
+                _fullScreenModes[_currentSettings.fullscreenMode],
+                Screen.currentResolution.refreshRate
+            );
+
+            //Find resolution based on settings
+            _resScaleDropdown.value = _resolutions.FindIndex(x =>
+                x.width == _baseResolution.width * (_currentSettings.resScale + 1) &&
+                x.height == _baseResolution.height * (_currentSettings.resScale + 1)
+            );
+        }
+
+        //Set resoultion dropdown
+        _resScaleDropdown.RefreshShownValue();
+
+        //Set fullscreen dropdown
+        _fullscreenModeDropdown.value = _currentSettings.fullscreenMode;
+        _fullscreenModeDropdown.RefreshShownValue();
+
+        //Set quality dropdown
+        _qualityDropdown.value = _currentSettings.qualLevel;
+        _qualityDropdown.RefreshShownValue();
     }
 }
 

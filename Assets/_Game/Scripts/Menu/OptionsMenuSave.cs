@@ -1,18 +1,16 @@
 [System.Serializable]
 public class OptionsMenuSave
 {
-    public int resWidth;
-    public int resHeight;
+    public int resScale;
     public int resRefreshRate;
     public int qualLevel;
-    public bool isFullscreen;
+    public int fullscreenMode;
 
-    public OptionsMenuSave(int resWidth, int resHeight, int resRefreshRate, int qualLevel, bool isFullscreen)
+    public OptionsMenuSave(int resScale, int resRefreshRate, int qualLevel, int fullscreenMode)
     {
-        this.resWidth = resWidth;
-        this.resHeight = resHeight;
+        this.resScale = 1;
         this.resRefreshRate = resRefreshRate;
         this.qualLevel = qualLevel;
-        this.isFullscreen = isFullscreen;
+        this.fullscreenMode = fullscreenMode;
     }
 }

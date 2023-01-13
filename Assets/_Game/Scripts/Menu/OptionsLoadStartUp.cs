@@ -1,69 +1,88 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
 public class OptionsLoadStartUp
 {
+    private static readonly (int width, int height) _baseResolution = (640, 360);
+    private static readonly OptionsMenuSave _defaultSettings = new OptionsMenuSave(
+        1,
+        Screen.currentResolution.refreshRate,
+        QualitySettings.GetQualityLevel(),
+        (int)FullScreenMode.ExclusiveFullScreen
+    );
+    private static OptionsMenuSave _currentSettings;
+
+    private static readonly List<FullScreenMode> _fullScreenModes = new List<FullScreenMode> {
+        FullScreenMode.ExclusiveFullScreen, //0
+        FullScreenMode.FullScreenWindow,    //1
+        FullScreenMode.Windowed             //2
+    };
+
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSplashScreen)]
     public static void LoadGraphicalSettings()
     {
+        //Get save data
         string destination = Application.persistentDataPath + "/options.dat";
-        FileStream file;
         BinaryFormatter bf = new BinaryFormatter();
+        FileStream file;
 
         if (File.Exists(destination))
         {
-            OptionsMenuSave data;
+            //Open setting file
             file = File.OpenRead(destination);
 
+            //Check for deserialization errors
             try
             {
-                //Check if deserialization didn't encouter any excpetions
-                data = (OptionsMenuSave)bf.Deserialize(file);
+                _currentSettings = (OptionsMenuSave)bf.Deserialize(file);
             }
             catch
             {
                 //Deseriazlization ended with and expetion (file could have been modified)
-                //Open settings file to write
+                //Override settings file with default 
                 file.Close();
                 file = File.OpenWrite(destination);
-
-                //Create a new settings data with current screen settings
-                data = new OptionsMenuSave(
-                    Screen.currentResolution.width,
-                    Screen.currentResolution.height,
-                    Screen.currentResolution.refreshRate,
-                    QualitySettings.GetQualityLevel(),
-                    true
-                );
-                bf.Serialize(file, data);
-            
+                bf.Serialize(file, _defaultSettings);
+                _currentSettings = _defaultSettings;
                 file.Close();
             }
             file.Close();
-
-            Debug.Log(data.resWidth + " " + data.resHeight + " " + data.resRefreshRate + " " + data.qualLevel + " " + data.isFullscreen);
-
-            Screen.SetResolution(data.resWidth, data.resHeight, data.isFullscreen, data.resRefreshRate);
-            QualitySettings.SetQualityLevel(data.qualLevel);
-            
         }
         else
         {
-            //If file does not exist, create it and save current screen data as options data
+            //If file does not exist (or was deleted during gameplay), create new file with default settings
             file = File.Create(destination);
+            bf.Serialize(file, _defaultSettings);
+            _currentSettings = _defaultSettings;
+            file.Close();
+        }
 
-            var defualtData = new OptionsMenuSave(
+        ApplySettings();
+    }
+
+    private static void ApplySettings()
+    {
+        if(_fullScreenModes[_currentSettings.fullscreenMode] == FullScreenMode.ExclusiveFullScreen ||
+        _fullScreenModes[_currentSettings.fullscreenMode] == FullScreenMode.FullScreenWindow)
+        {
+            Screen.SetResolution(
                 Screen.currentResolution.width,
                 Screen.currentResolution.height,
-                Screen.currentResolution.refreshRate,
-                QualitySettings.GetQualityLevel(),
-                true
+                _fullScreenModes[_currentSettings.fullscreenMode],
+                Screen.currentResolution.refreshRate
             );
-            bf.Serialize(file, defualtData);
-            
-            file.Close();
-        } 
+        }
+        else
+        {
+            Screen.SetResolution(
+                _baseResolution.width * _currentSettings.resScale,
+                _baseResolution.height * _currentSettings.resScale,
+                _fullScreenModes[_currentSettings.fullscreenMode],
+                Screen.currentResolution.refreshRate
+            );
+        }
     }
 }
