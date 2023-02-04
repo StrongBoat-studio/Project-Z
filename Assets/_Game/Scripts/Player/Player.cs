@@ -6,9 +6,12 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private PlayerInput _playerInput;
+    private int _hp = 100;
 
     private Inventory _inventory;
     [SerializeField] private RectTransform _uiInventory;
+
+    [SerializeField] DialogueController _lowHP;
 
     private void Awake()
     {
@@ -28,7 +31,10 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-
+        if(Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            TakeDamage(20);
+        }
     }
 
     private void OnInventoryOpen(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -36,9 +42,18 @@ public class Player : MonoBehaviour
         _uiInventory.GetComponent<UI_Inventory>().ToggleInventoryPanel();
     }
 
-    public void Heal(float healValue)
+    private void TakeDamage(int dmg)
     {
-        Debug.Log("Healed " + healValue + " HP");
+        _hp -= dmg;
+
+        if(_hp <= 20)
+        {
+            _lowHP.Play();
+        }
+        else if(_hp <= 0)
+        {
+            Debug.Log("Dead");
+        }
     }
 
     public Inventory GetInventory()

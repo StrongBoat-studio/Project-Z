@@ -38,7 +38,11 @@ public class InteractionManager : MonoBehaviour
 
     private void OnGameStateChanged(GameStateManager.GameState newGameState)
     {
-        enabled = newGameState == GameStateManager.GameState.Gameplay;
+        if(newGameState == GameStateManager.GameState.Gameplay) 
+        {
+            _playerInput.Interactions.Enable();
+        }
+        else _playerInput.Interactions.Disable();
     }
 
     private void Update()

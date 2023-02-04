@@ -6,7 +6,7 @@ using UnityEngine.Rendering;
 public class DialogueHolder : MonoBehaviour, IInteractable
 {
     private LocalKeyword _OUTLINE_ON;
-    [SerializeField] private TextAsset _dialogueTextAsset;
+    [SerializeField] private DialogueController _dialogue;
 
     void Awake()
     {
@@ -15,7 +15,7 @@ public class DialogueHolder : MonoBehaviour, IInteractable
 
     public void CursorClick()
     {
-        DialogueManager.Instance.StartStory(_dialogueTextAsset);
+        _dialogue.Play();
     }
 
     public void CursorEnter()

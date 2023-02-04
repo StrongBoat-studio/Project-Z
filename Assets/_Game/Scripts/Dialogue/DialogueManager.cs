@@ -26,12 +26,20 @@ public class DialogueManager : MonoBehaviour
             Instance = this;
         }
 
+        _storyQueue = new Queue<Story>();
         _playerInput = new PlayerInput();
         _playerInput.Dialogue.Continue.performed += OnDialogueContinue;
         GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
     }
 
+    private void OnDestroy()
+    {
+        _playerInput.Dialogue.Continue.performed -= OnDialogueContinue;
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+    }
+
     private GameStateManager.GameState _prevGameState;
+    private Queue<Story> _storyQueue;
     private Story _currentStory;
     [SerializeField][Tooltip("Characters per second")][Min(1f)] private float _typeSpeed;
     [SerializeField][Tooltip("Characters per second")][Min(1f)] private float _typeSpeedSkip;
@@ -56,17 +64,24 @@ public class DialogueManager : MonoBehaviour
     }
 
     ///<summary>
-    ///Starts dialogue, enables dialogue UI and changes game state
+    ///Starts dialogue if any other dialogue isn't playing, enables dialogue UI and changes game state
+    ///If there is a dialogue playing, it adds it to queue
     ///</summary>
     ///<param name="storyTextAsset">Ink's story text asset</param>
-    public void StartStory(TextAsset storyTextAsset)
+    public void EnqueueStory(TextAsset storyTextAsset)
     {
-        _prevGameState = GameStateManager.Instance.GetState();
-        GameStateManager.Instance.SetState(GameStateManager.GameState.Dialogue);
-        _canvas.gameObject.SetActive(true);
-        _currentTypeSpeed = _typeSpeed;
-        _currentStory = new Story(storyTextAsset.text);
-        ContinueStory();
+        if (_storyQueue.Count <= 0 && _currentStory == null)
+        {
+            EnterDialogueMode();
+            _currentStory = new Story(storyTextAsset.text);
+            ContinueStory();
+            Debug.Log("Playing story!");
+        }
+        else
+        {
+            _storyQueue.Enqueue(new Story(storyTextAsset.text));
+            Debug.Log("Enqueued story!");
+        }
     }
 
 
@@ -96,9 +111,37 @@ public class DialogueManager : MonoBehaviour
     }
 
     ///<summary>
-    ///Ends dialogue, disables UI and reverts game state
+    ///Ends story
+    ///if there are any dialogues enqueued, starts a new dialogue, 
+    ///if not, exits dialogue mode
     ///</summary>
     private void EndStory()
+    {
+        if (_storyQueue.Count > 0)
+        {
+            _currentStory = _storyQueue.Dequeue();
+            ContinueStory();
+        }
+        else
+        {
+            ExitDialogueMode();
+        }
+    }
+
+    ///<summary>
+    ///Sets game state to Dialogue and enables dialogue UI
+    ///</summary>
+    private void EnterDialogueMode()
+    {
+        _prevGameState = GameStateManager.Instance.GetState();
+        GameStateManager.Instance.SetState(GameStateManager.GameState.Dialogue);
+        _canvas.gameObject.SetActive(true);
+    }
+
+    ///<summary>
+    ///Sets back recent gamestate and disables dialogue UI
+    ///</summary>
+    private void ExitDialogueMode()
     {
         GameStateManager.Instance.SetState(_prevGameState);
         _currentStory = null;

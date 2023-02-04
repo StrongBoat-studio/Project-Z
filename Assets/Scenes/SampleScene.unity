@@ -614,6 +614,10 @@ PrefabInstance:
       propertyPath: _itemSlot._item._itemData
       value: 
       objectReference: {fileID: 11400000, guid: be1bf862168177e4ead4acabee7c0be9, type: 2}
+    - target: {fileID: 6008527306713472095, guid: db497f29ee1a1254c987d9ed1d8bd933, type: 3}
+      propertyPath: _dialogue._dialogueTextAsset
+      value: 
+      objectReference: {fileID: 4900000, guid: 836094dd9eb5d52499d720c02a86dc79, type: 3}
     - target: {fileID: 8469237843872316204, guid: db497f29ee1a1254c987d9ed1d8bd933, type: 3}
       propertyPath: m_Size.x
       value: 0.75
@@ -846,6 +850,10 @@ PrefabInstance:
       propertyPath: _itemSlot._item._itemData
       value: 
       objectReference: {fileID: 11400000, guid: fb8d8e055e6dc0c45bcaefc767992135, type: 2}
+    - target: {fileID: 6008527306713472095, guid: db497f29ee1a1254c987d9ed1d8bd933, type: 3}
+      propertyPath: _dialogue._dialogueTextAsset
+      value: 
+      objectReference: {fileID: 4900000, guid: 836094dd9eb5d52499d720c02a86dc79, type: 3}
     - target: {fileID: 8469237843872316204, guid: db497f29ee1a1254c987d9ed1d8bd933, type: 3}
       propertyPath: m_Size.x
       value: 0.75
@@ -928,7 +936,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5ca78f5cae3b1d4d9c9ac015b4058c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dialogueTextAsset: {fileID: 4900000, guid: ce5a41ec6c988414f9470739db7e535c, type: 3}
+  _dialogue:
+    _dialogueTextAsset: {fileID: 4900000, guid: ce5a41ec6c988414f9470739db7e535c, type: 3}
 --- !u!212 &282358544
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1068,6 +1077,10 @@ PrefabInstance:
       propertyPath: _itemSlot._item._itemData
       value: 
       objectReference: {fileID: 11400000, guid: be1bf862168177e4ead4acabee7c0be9, type: 2}
+    - target: {fileID: 6008527306713472095, guid: db497f29ee1a1254c987d9ed1d8bd933, type: 3}
+      propertyPath: _dialogue._dialogueTextAsset
+      value: 
+      objectReference: {fileID: 4900000, guid: 836094dd9eb5d52499d720c02a86dc79, type: 3}
     - target: {fileID: 8469237843872316204, guid: db497f29ee1a1254c987d9ed1d8bd933, type: 3}
       propertyPath: m_Size.x
       value: 0.75
@@ -1165,6 +1178,10 @@ PrefabInstance:
       propertyPath: _itemSlot._item._itemData
       value: 
       objectReference: {fileID: 11400000, guid: be1bf862168177e4ead4acabee7c0be9, type: 2}
+    - target: {fileID: 6008527306713472095, guid: db497f29ee1a1254c987d9ed1d8bd933, type: 3}
+      propertyPath: _dialogue._dialogueTextAsset
+      value: 
+      objectReference: {fileID: 4900000, guid: 836094dd9eb5d52499d720c02a86dc79, type: 3}
     - target: {fileID: 8469237843872316204, guid: db497f29ee1a1254c987d9ed1d8bd933, type: 3}
       propertyPath: m_Size.x
       value: 0.75
@@ -1696,6 +1713,10 @@ PrefabInstance:
       propertyPath: _itemSlot._item._itemData
       value: 
       objectReference: {fileID: 11400000, guid: b85aa096940541a4992f2c1c49fa991e, type: 2}
+    - target: {fileID: 6008527306713472095, guid: db497f29ee1a1254c987d9ed1d8bd933, type: 3}
+      propertyPath: _dialogue._dialogueTextAsset
+      value: 
+      objectReference: {fileID: 4900000, guid: 836094dd9eb5d52499d720c02a86dc79, type: 3}
     - target: {fileID: 8469237843872316204, guid: db497f29ee1a1254c987d9ed1d8bd933, type: 3}
       propertyPath: m_Size.x
       value: 0.75
@@ -1793,6 +1814,10 @@ PrefabInstance:
       propertyPath: _itemSlot._item._itemData
       value: 
       objectReference: {fileID: 11400000, guid: e5c3b6a1ff6930b47a265047fe83a61a, type: 2}
+    - target: {fileID: 6008527306713472095, guid: db497f29ee1a1254c987d9ed1d8bd933, type: 3}
+      propertyPath: _dialogue._dialogueTextAsset
+      value: 
+      objectReference: {fileID: 4900000, guid: 836094dd9eb5d52499d720c02a86dc79, type: 3}
     - target: {fileID: 8469237843872316204, guid: db497f29ee1a1254c987d9ed1d8bd933, type: 3}
       propertyPath: m_Size.x
       value: 0.75
@@ -2000,6 +2025,10 @@ PrefabInstance:
       propertyPath: _itemSlot._item._itemData
       value: 
       objectReference: {fileID: 11400000, guid: b85aa096940541a4992f2c1c49fa991e, type: 2}
+    - target: {fileID: 6008527306713472095, guid: db497f29ee1a1254c987d9ed1d8bd933, type: 3}
+      propertyPath: _dialogue._dialogueTextAsset
+      value: 
+      objectReference: {fileID: 4900000, guid: 836094dd9eb5d52499d720c02a86dc79, type: 3}
     - target: {fileID: 8469237843872316204, guid: db497f29ee1a1254c987d9ed1d8bd933, type: 3}
       propertyPath: m_Size.x
       value: 0.75
@@ -2837,6 +2866,10 @@ PrefabInstance:
       propertyPath: _itemSlot._item._itemData
       value: 
       objectReference: {fileID: 11400000, guid: be1bf862168177e4ead4acabee7c0be9, type: 2}
+    - target: {fileID: 6008527306713472095, guid: db497f29ee1a1254c987d9ed1d8bd933, type: 3}
+      propertyPath: _dialogue._dialogueTextAsset
+      value: 
+      objectReference: {fileID: 4900000, guid: 836094dd9eb5d52499d720c02a86dc79, type: 3}
     - target: {fileID: 8469237843872316204, guid: db497f29ee1a1254c987d9ed1d8bd933, type: 3}
       propertyPath: m_Size.x
       value: 0.75
@@ -3546,6 +3579,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ItemPrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 6008527306713472095, guid: db497f29ee1a1254c987d9ed1d8bd933, type: 3}
+      propertyPath: _dialogue._dialogueTextAsset
+      value: 
+      objectReference: {fileID: 4900000, guid: 836094dd9eb5d52499d720c02a86dc79, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db497f29ee1a1254c987d9ed1d8bd933, type: 3}
 --- !u!1 &1371597905
@@ -3906,6 +3943,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _uiInventory: {fileID: 905114351}
+  _lowHP:
+    _dialogueTextAsset: {fileID: 4900000, guid: f04859bb80020c14a9ef5e9c919803c0, type: 3}
 --- !u!1 &1676156180
 GameObject:
   m_ObjectHideFlags: 0
@@ -4061,6 +4100,10 @@ PrefabInstance:
       propertyPath: _itemSlot._item._itemData
       value: 
       objectReference: {fileID: 11400000, guid: b85aa096940541a4992f2c1c49fa991e, type: 2}
+    - target: {fileID: 6008527306713472095, guid: db497f29ee1a1254c987d9ed1d8bd933, type: 3}
+      propertyPath: _dialogue._dialogueTextAsset
+      value: 
+      objectReference: {fileID: 4900000, guid: 836094dd9eb5d52499d720c02a86dc79, type: 3}
     - target: {fileID: 8469237843872316204, guid: db497f29ee1a1254c987d9ed1d8bd933, type: 3}
       propertyPath: m_Size.x
       value: 0.75
@@ -4234,6 +4277,10 @@ PrefabInstance:
       propertyPath: _itemSlot._item._itemData
       value: 
       objectReference: {fileID: 11400000, guid: be1bf862168177e4ead4acabee7c0be9, type: 2}
+    - target: {fileID: 6008527306713472095, guid: db497f29ee1a1254c987d9ed1d8bd933, type: 3}
+      propertyPath: _dialogue._dialogueTextAsset
+      value: 
+      objectReference: {fileID: 4900000, guid: 836094dd9eb5d52499d720c02a86dc79, type: 3}
     - target: {fileID: 8469237843872316204, guid: db497f29ee1a1254c987d9ed1d8bd933, type: 3}
       propertyPath: m_Size.x
       value: 0.75
@@ -4666,6 +4713,10 @@ PrefabInstance:
       propertyPath: _itemSlot._item._itemData
       value: 
       objectReference: {fileID: 11400000, guid: b85aa096940541a4992f2c1c49fa991e, type: 2}
+    - target: {fileID: 6008527306713472095, guid: db497f29ee1a1254c987d9ed1d8bd933, type: 3}
+      propertyPath: _dialogue._dialogueTextAsset
+      value: 
+      objectReference: {fileID: 4900000, guid: 836094dd9eb5d52499d720c02a86dc79, type: 3}
     - target: {fileID: 8469237843872316204, guid: db497f29ee1a1254c987d9ed1d8bd933, type: 3}
       propertyPath: m_Size.x
       value: 0.75
