@@ -33,7 +33,7 @@ public class InteractionManager : MonoBehaviour
     private void OnClick(InputAction.CallbackContext context)
     {
         if (_lastOver == null) return;
-        _lastOver.GetComponent<IInteractable>()?.OnClicked();
+        _lastOver.GetComponent<IInteractable>()?.CursorClick();
     }
 
     private void OnGameStateChanged(GameStateManager.GameState newGameState)
@@ -64,31 +64,29 @@ public class InteractionManager : MonoBehaviour
             //1. Mouse enters new interactable
             //2. Mouse enters new interactable without leaving the previus one
             IInteractable interactable = hit.collider.GetComponent<IInteractable>();
-            if (_lastOver == null && interactable != null) MouseEnter(hit.transform);
+
+            if (_lastOver == null && interactable != null)
+            {
+                _lastOver = hit.transform;
+                _lastOver.GetComponent<IInteractable>()?.CursorEnter();
+            }
             else if (_lastOver != null && interactable != null && _lastOver != hit.transform)
             {
-                MouseExit();
-                MouseEnter(hit.transform);
+                _lastOver.GetComponent<IInteractable>()?.CursorExit();
+                _lastOver = null;
+
+                _lastOver = hit.transform;
+                _lastOver.GetComponent<IInteractable>()?.CursorEnter();
             }
         }
         else
         {
             //1. Mouse exits interactable
-            if (_lastOver != null) MouseExit();
+            if (_lastOver != null)
+            {
+                _lastOver.GetComponent<IInteractable>()?.CursorExit();
+                _lastOver = null;
+            }
         }
-    }
-
-    private void MouseEnter(Transform over)
-    {
-        //Debug.Log("Mouse entered " + over.gameObject.name);
-        _lastOver = over;
-        _lastOver.GetComponent<IInteractable>()?.OnMouseEnter();
-    }
-
-    private void MouseExit()
-    {
-        //Debug.Log("Mouse left " + _lastOver.gameObject.name);
-        _lastOver.GetComponent<IInteractable>()?.OnMouseExit();
-        _lastOver = null;
     }
 }

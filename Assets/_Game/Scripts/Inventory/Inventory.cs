@@ -7,188 +7,85 @@ using UnityEngine.Rendering.UI;
 [System.Serializable]
 public class Inventory
 {
-    [System.Serializable]
-    public class InventorySlot
-    {
-        private int _index;
-        private Item _item;
-        private int _quantity;
+    private List<Item> _items;
+    [SerializeField] private int _inventorySize = 10;
 
-        public InventorySlot(int index)
-        {
-            this._index = index;
-            _item = ItemRegister.Instance.CreateItem(ItemRegister.Instance.emptyItem);
-            _quantity = 0;
-        }
-
-        /// <summary>
-        /// Get item and it's count
-        /// </summary>
-        /// <returns>Tuple of Item and Int</returns>
-        public (Item item, int quantity) GetData()
-        {
-            return (_item, _quantity);
-        }
-
-        /// <summary>
-        /// Adds Item to the slot
-        /// </summary>
-        /// <param name="item"></param>
-        /// <param name="quantity"></param>
-        /// <returns>Previus Item and its quantity</returns>
-        public (Item item, int quantity) AddItem(Item item, int quantity)
-        {
-            var toRemove = GetData();
-            _item = item;
-            _quantity = quantity;
-            return toRemove;
-        }
-
-        /// <summary>
-        /// Removes an Item from slot
-        /// </summary>
-        /// <returns>Item from the slot and its quantity</returns>
-        private void RemoveItem()
-        {
-            _item = ItemRegister.Instance.CreateItem(ItemRegister.Instance.emptyItem);
-            _quantity = 0;
-        }
-
-        /// <summary>
-        /// Adds to the item quantity
-        /// </summary>
-        /// <param name="quantity"></param>
-        public bool AddQuantity(int quantity)
-        {
-            _quantity += quantity;
-            return true;
-        }
-
-        /// <summary>
-        /// Subtracts from item quantity is given quantity can be subtracted
-        /// </summary>
-        /// <param name="quantity"></param>
-        public bool RemoveQuantity(int quantity)
-        {
-            if (_quantity < quantity)
-            {
-                //Don't remove, too little qunatity is in the inventory
-                Debug.Log("Canno remove given quantity(" + quantity + ") of this Item! Only " + _quantity + " in the inventory slot!");
-                return false;
-            }
-            else if (_quantity == quantity)
-            {
-                //Remove whole item ftom this slot, quantoty to remove equals the quantity in the inventory
-                RemoveItem();
-                return true;
-            }
-            else
-            {
-                //Subtract the given quantity from inventory slot
-                _quantity -= quantity;
-                return true;
-            }
-        }
-
-        /// <summary>
-        /// Checks if the slot is empty
-        /// </summary>
-        /// <returns>True if empty</returns>
-        public bool IsEmpty()
-        {
-            return _item.IsEmpty();
-        }
-
-        /// <summary>
-        /// Checks if slot is has a specific item
-        /// </summary>
-        /// <param name="item"></param>
-        /// <returns>True if slot contains given item</returns>
-        public bool HasItem(Item item)
-        {
-            if (_item.IsEmpty() == true) return false;
-            if (_item.CompareItems(item) == true) return true;
-
-            return false;
-        }
-    }
-
-    private List<InventorySlot> _inventorySlots = new List<InventorySlot>();
-    private int _inventorySize = 10;
+    public delegate void OnInventoryChangedHandler();
+    public event OnInventoryChangedHandler OnInventoryChanged;
 
     public Inventory(int size = 10)
     {
         this._inventorySize = size;
-
-        //Populate inventory
-        for (int i = 0; i < _inventorySize; i++)
-        {
-            _inventorySlots.Add(new InventorySlot(i));
-        }
+        _items = new List<Item>();
     }
 
     /// <summary>
     /// Adds given Item to the inventory if there is available space
     /// </summary>
     /// <param name="item"></param>
-    public void AddItem(Item item, int quantity)
+    public void AddItem(Item item)
     {
-        InventorySlot emptySlot = GetEmptyInventorySlot();
-        InventorySlot itemInSlot = GetSlotWithItem(item);
-
-        //Inventory is full 
-        if (emptySlot == null && itemInSlot == null)
+        if (_items.Count >= _inventorySize)
         {
-            Debug.Log("Inventory is full!");
+            Debug.LogWarning("Inventory is full.");
             return;
         }
 
-        if (itemInSlot == null)
+        if (_items.Find(x => x.itemType == item.itemType) == null || item.stackable == false)
         {
-            //Item is not in the inventory, add new
-            var returnedItem = emptySlot.AddItem(item, quantity);
-            if (returnedItem.item.IsEmpty() != true)
-            {
-                Debug.Log("Function 'GetEmptyInventorySlot().AddItem()' from Inventory.AddItem() returned an item but it shouldn't!");
-            }
+            _items.Add(item);
+            OnInventoryChanged?.Invoke();
         }
         else
         {
-            //Item is already in the inventory, increase quantity
-            itemInSlot.AddQuantity(quantity);
+            _items.Find(x => x.itemType == item.itemType).amount += item.amount;
+            OnInventoryChanged?.Invoke();
         }
     }
 
-    public bool RemoveItem(Item item, int quantity)
+    ///<summary>
+    ///Removes give item from inventory
+    ///</summary>
+    ///<param name="item"></param>
+    public void RemoveItem(Item.ItemType itemType, int amount)
     {
-        InventorySlot slot = GetSlotWithItem(item);
+        Item itemRemove = _items.Find(x => x.itemType == itemType);
 
-        //Item is not in the inventory
-        if (slot == null)
+        if (itemRemove == null)
         {
-            Debug.Log("Couldn't find a slot with this item!");
-            return false;
+            Debug.LogWarning("Cannot remove item from inventory. Item is not in the inventory.");
+            return;
         }
 
-        return slot.RemoveQuantity(quantity);
+        if (itemRemove.amount < amount)
+        {
+            Debug.LogWarning("Cannot remove item. Not enought of it in the inventory");
+            return;
+        }
+        else
+        {
+            itemRemove.amount -= amount;
+
+            if(itemRemove.amount <= 0)
+            {
+                _items.Remove(itemRemove);
+            }
+
+            OnInventoryChanged?.Invoke();
+        }
     }
 
     /// <summary>
-    /// Gets referece to slot if given item already exists in inventory
+    /// Gets referece to inventory slots
     /// </summary>
-    /// <param name="item"></param>
-    /// <returns>InventorySlot</returns>
-    private InventorySlot GetSlotWithItem(Item item)
+    /// <returns>List of inventory slots</returns>
+    public List<Item> GetInventoryItems()
     {
-        return _inventorySlots.Find(s => s.HasItem(item));
+        return _items;
     }
 
-    /// <summary>
-    /// Gets first empty inventory slot
-    /// </summary>
-    /// <returns>InventorySlot</returns>
-    private InventorySlot GetEmptyInventorySlot()
+    public int GetSize()
     {
-        return _inventorySlots.Find(s => s.IsEmpty() == true);
+        return _inventorySize;
     }
 }

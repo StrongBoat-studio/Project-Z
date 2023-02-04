@@ -1,39 +1,48 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    private PlayerInput _playerInput;
+
     private Inventory _inventory;
+    [SerializeField] private RectTransform _uiInventory;
 
     private void Awake()
     {
         GameManager.Instance.player = transform;
+
+        _playerInput = new PlayerInput();
+        _playerInput.Inventory.Enable();
+        _playerInput.Inventory.Open.performed += OnInventoryOpen;
     }
 
     private void Start()
     {
         _inventory = new Inventory();
+        _uiInventory.GetComponent<UI_Inventory>().SetInventory(_inventory);
+        _uiInventory.GetComponent<UI_Inventory>().SetPlayer(transform);
     }
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(1))
-        {
-            ItemRegister.Instance.CreateWorldItem(
-                ItemRegister.Instance.CreateItem(ItemRegister.Instance.testItemBack),
-                Camera.main.ScreenToWorldPoint(Input.mousePosition)
-            );
-        }
+
     }
 
-    ///<summary>
-    ///Adda a given amout of given item to the inventory
-    ///</summary>
-    ///<param name="item"></param>
-    ///<param name="quantity"></param>
-    public void AddItem(Item item, int quantity)
+    private void OnInventoryOpen(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
-        _inventory.AddItem(item, quantity);
+        _uiInventory.GetComponent<UI_Inventory>().ToggleInventoryPanel();
+    }
+
+    public void Heal(float healValue)
+    {
+        Debug.Log("Healed " + healValue + " HP");
+    }
+
+    public Inventory GetInventory()
+    {
+        return _inventory;
     }
 }

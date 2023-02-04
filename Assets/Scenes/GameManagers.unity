@@ -236,6 +236,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1421069937}
   - component: {fileID: 1421069936}
+  - component: {fileID: 1421069938}
+  - component: {fileID: 1421069939}
   m_Layer: 0
   m_Name: ItemRegister
   m_TagString: Untagged
@@ -256,11 +258,121 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   worldItemPrefab: {fileID: 1314060320801354031, guid: db497f29ee1a1254c987d9ed1d8bd933, type: 3}
-  emptyItem: {fileID: 11400000, guid: cd27579306566fb47ad9b0846ccf0bd5, type: 2}
-  testItemWhite: {fileID: 11400000, guid: da06545f9cab62141a1ef749f8c6aebf, type: 2}
-  testItemLightGrey: {fileID: 11400000, guid: be1bf862168177e4ead4acabee7c0be9, type: 2}
-  testItemGrey: {fileID: 11400000, guid: eb1a5b8058b99754180ebf83111dc116, type: 2}
-  testItemBack: {fileID: 11400000, guid: f950ae711055c5c49abe2e9ea39789c1, type: 2}
+  items:
+  - itemType: 0
+    amount: 0
+    sprite: {fileID: 21300000, guid: 32329332070adcc4897c0597f3e2a39a, type: 3}
+    stackable: 1
+    Use:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1421069938}
+          m_TargetAssemblyTypeName: ItemUse, Assembly-CSharp
+          m_MethodName: ConsumeItem
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - itemType: 1
+    amount: 0
+    sprite: {fileID: 21300000, guid: 6ff84b40bd206824ba9c3fd6e67ff090, type: 3}
+    stackable: 0
+    Use:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1421069938}
+          m_TargetAssemblyTypeName: ItemUse, Assembly-CSharp
+          m_MethodName: ConsumeItem
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - itemType: 2
+    amount: 0
+    sprite: {fileID: 21300000, guid: 5cdd3dfdfdee97d43b64f608df5c7c90, type: 3}
+    stackable: 0
+    Use:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1421069938}
+          m_TargetAssemblyTypeName: ItemUse, Assembly-CSharp
+          m_MethodName: ConsumeItem
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - itemType: 3
+    amount: 0
+    sprite: {fileID: 21300000, guid: 142ace99b94a0b541a73d36e712fb517, type: 3}
+    stackable: 0
+    Use:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1421069938}
+          m_TargetAssemblyTypeName: ItemUse, Assembly-CSharp
+          m_MethodName: ConsumeItem
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - itemType: 4
+    amount: 0
+    sprite: {fileID: 21300000, guid: 9ebf048c144f56548b10501644668829, type: 3}
+    stackable: 0
+    Use:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1421069938}
+          m_TargetAssemblyTypeName: ItemUse, Assembly-CSharp
+          m_MethodName: ConsumeItem
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - itemType: 5
+    amount: 0
+    sprite: {fileID: 21300000, guid: 6d6d180aa82c26743bfe2a69af70ddbf, type: 3}
+    stackable: 1
+    Use:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1421069938}
+          m_TargetAssemblyTypeName: ItemUse, Assembly-CSharp
+          m_MethodName: ConsumeItem
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!4 &1421069937
 Transform:
   m_ObjectHideFlags: 0
@@ -276,6 +388,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1421069938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421069935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 727714ab6751d114e873e34bb8858b78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1421069939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421069935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c24053ca4142a641bea1de2ae7a7b38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recipes:
+  - itemBase: 0
+    itemDrop: 3
+    itemResult: 4
+  - itemBase: 2
+    itemDrop: 1
+    itemResult: 5
 --- !u!1 &1618618425
 GameObject:
   m_ObjectHideFlags: 0

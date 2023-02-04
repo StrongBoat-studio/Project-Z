@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IInteractable
 {
-    public void OnClicked();
-    public void OnMouseEnter();
-    public void OnMouseExit();
+    public void CursorClick();
+    public void CursorEnter();
+    public void CursorExit();
 }
