@@ -1,40 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using UnityEngine.Events;
 
 [System.Serializable]
 public class Item
 {
-    //Default to an empty item 
-    [SerializeField] private ItemScriptableObject _itemData = ItemRegister.Instance.emptyItem;
-
-    public Item(ItemScriptableObject itemData)
+    public enum ItemType
     {
-        this._itemData = itemData;
+        CD,
+        Gun,
+        Key,
+        Letter,
+        PC,
+        Potion
     }
 
-    private ItemScriptableObject GetItemScriptableObject()
-    {
-        return _itemData;
-    }
-
-    public Sprite GetItemSprite()
-    {
-        return _itemData.itemSprite;
-    }
-
-    public string GetName() 
-    {
-        return _itemData.itemName;
-    }
-
-    public bool CompareItems(Item item)
-    {
-        return item.GetItemScriptableObject() == _itemData;
-    }
-
-    public bool IsEmpty()
-    {
-        return _itemData == ItemRegister.Instance.emptyItem;
-    }
+    public ItemType itemType;
+    [HideInInspector] public int amount = 1;
+    public Sprite sprite;
+    public bool stackable;
+    public UnityEvent<Item, int> Use;
 }

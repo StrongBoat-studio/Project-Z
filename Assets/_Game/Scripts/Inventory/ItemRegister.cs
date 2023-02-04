@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class ItemRegister : MonoBehaviour
 {
@@ -9,7 +10,6 @@ public class ItemRegister : MonoBehaviour
     private void Awake()
     {
         // If there is an instance, and it's not me, delete myself.
-
         if (Instance != null && Instance != this)
         {
             Destroy(this);
@@ -21,20 +21,19 @@ public class ItemRegister : MonoBehaviour
     }
 
     public GameObject worldItemPrefab;
-    public ItemScriptableObject emptyItem;
-    public ItemScriptableObject testItemWhite;
-    public ItemScriptableObject testItemLightGrey;
-    public ItemScriptableObject testItemGrey;
-    public ItemScriptableObject testItemBack;
+    public List<Item> items = new List<Item>();
 
-    /// <summary>
-    /// Create Item from itemData
-    /// </summary>
-    /// <param name="itemData"></param>
-    /// <returns>Item</returns>
-    public Item CreateItem(ItemScriptableObject itemData)
+    public Item GetNewItem(Item.ItemType itemType)
     {
-        return new Item(itemData);
+        Item item = items.Find(x => x.itemType == itemType);
+        Item copy = new Item {
+            itemType = item.itemType,
+            amount = item.amount,
+            sprite = item.sprite,
+            stackable = item.stackable,
+            Use = item.Use
+        };
+        return copy;
     }
 
     /// <summary>
@@ -42,10 +41,9 @@ public class ItemRegister : MonoBehaviour
     /// </summary>
     /// <param name="item">Item to create</param>
     /// <param name="position">Position on which the item will be created</param>
-    /// <param name="quantity">Amount of item i stack</param>
-    public void CreateWorldItem(Item item, Vector2 position, int quantity = 1)
+    public void CreateWorldItem(Item.ItemType itemType, int amount, Vector2 position)
     {
         Transform worldItem = Instantiate(worldItemPrefab, position, Quaternion.identity).transform;
-        worldItem.GetComponent<ItemWorld>().SetItem(item, quantity);
+        worldItem.GetComponent<ItemWorld>().SetItem(itemType, amount);
     }
 }

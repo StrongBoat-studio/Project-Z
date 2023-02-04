@@ -1,43 +1,52 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(SpriteRenderer), typeof(BoxCollider2D))]
 public class ItemWorld : MonoBehaviour, IInteractable
 {
-    [SerializeField] private Item _item;
-    [Min(1f)][SerializeField] private int _quantity = 1;
+    [SerializeField] private Item.ItemType _itemType;
+    [SerializeField] private int _amount;
+
+    private LocalKeyword _OUTLINE_ON;
 
     private void Awake()
     {
-        if (_item.IsEmpty() == true) return;
+        _OUTLINE_ON = new LocalKeyword(GetComponent<SpriteRenderer>().material.shader, "_OUTLINE_ON");
 
-        GetComponent<SpriteRenderer>().sprite = _item.GetItemSprite();
-        GetComponent<BoxCollider2D>().size = _item.GetItemSprite().bounds.size;
+        GetComponent<SpriteRenderer>().sprite = ItemRegister.Instance.items.Find(x => x.itemType == _itemType).sprite;
     }
 
     ///<summary>
-    ///Sets an item and its quantity. (quantity >= 1)
+    ///Sets an item type and its amount.
     ///Sets correct sprite
-    ///Adjusts BoxCollider2D's bounds to match sprite
     ///</summary>
-    ///<param name="item"></param>
-    ///<param name="quantity"></param>
-    public void SetItem(Item item, int quantity = 1)
+    ///<param name="itemType"></param>
+    ///<param name="amount"></param>
+    public void SetItem(Item.ItemType itemType, int amount)
     {
-        _item = item;
-        _quantity = (quantity <= 0) ? 1 : quantity; //Make sure to set quantity >= 1
-        GetComponent<SpriteRenderer>().sprite = _item.GetItemSprite();
-        GetComponent<BoxCollider2D>().size = _item.GetItemSprite().bounds.size;
+        _itemType = itemType;
+        _amount = amount;
+        GetComponent<SpriteRenderer>().sprite = ItemRegister.Instance.items.Find(x => x.itemType == _itemType).sprite;
     }
 
-    public void OnClicked()
+    ///<summary>
+    ///Returns an Item from world item
+    ///</summary>
+    public Item GetItem()
     {
-        Debug.Log("Cliced " + _item.GetName());
+        Item item = ItemRegister.Instance.GetNewItem(_itemType);
+        item.amount = _amount;
+        return item;
+    }
+
+    public void CursorClick()
+    {
         if (GameManager.Instance.player != null)
         {
-            GameManager.Instance.player.GetComponent<Player>().AddItem(_item, _quantity);
+            GameManager.Instance.player.GetComponent<Player>().GetInventory().AddItem(GetItem());
             Destroy(gameObject);
         }
         else
@@ -46,13 +55,13 @@ public class ItemWorld : MonoBehaviour, IInteractable
         }
     }
 
-    public void OnMouseEnter()
+    public void CursorEnter()
     {
-        
+        GetComponent<SpriteRenderer>().material.SetKeyword(_OUTLINE_ON, true);
     }
 
-    public void OnMouseExit()
+    public void CursorExit()
     {
-        
+        GetComponent<SpriteRenderer>().material.SetKeyword(_OUTLINE_ON, false);
     }
 }
