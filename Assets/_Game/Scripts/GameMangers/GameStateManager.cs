@@ -7,7 +7,8 @@ public class GameStateManager : MonoBehaviour
     public enum GameState
     {
         Gameplay,
-        Paused
+        Paused,
+        Dialogue
     }
 
     public static GameStateManager Instance { get; private set; }
