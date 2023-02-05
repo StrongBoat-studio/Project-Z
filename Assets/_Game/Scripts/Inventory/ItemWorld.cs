@@ -9,7 +9,6 @@ public class ItemWorld : MonoBehaviour, IInteractable
 {
     [SerializeField] private Item.ItemType _itemType;
     [SerializeField] private int _amount;
-    [SerializeField] private DialogueController _dialogue;
     private LocalKeyword _OUTLINE_ON;
 
     private void Awake()
@@ -46,9 +45,8 @@ public class ItemWorld : MonoBehaviour, IInteractable
     {
         if (GameManager.Instance.player != null)
         {
-            _dialogue.Play();
-            GameManager.Instance.player.GetComponent<Player>().GetInventory().AddItem(GetItem());
-            Destroy(gameObject);
+            if(GameManager.Instance.player.GetComponent<Player>().GetInventory().AddItem(GetItem()))
+                Destroy(gameObject);
         }
         else
         {

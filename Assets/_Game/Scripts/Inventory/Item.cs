@@ -9,12 +9,12 @@ public class Item
 {
     public enum ItemType
     {
-        CD,
-        Gun,
-        Key,
-        Letter,
-        PC,
-        Potion
+        CD = 1,
+        Gun = 2,
+        Key = 3,
+        Letter = 4,
+        PC = 5,
+        Potion = 6
     }
 
     public ItemType itemType;
@@ -22,4 +22,5 @@ public class Item
     public Sprite sprite;
     public bool stackable;
     public UnityEvent<Item, int> Use;
+    public TextAsset collectDialogue;
 }

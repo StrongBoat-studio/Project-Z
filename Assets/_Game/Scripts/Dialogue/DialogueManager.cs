@@ -161,6 +161,46 @@ public class DialogueManager : MonoBehaviour
                 case "name":
                     _nameText.text = t.Split(':')[1];
                     break;
+                case "item":
+                    if (GameManager.Instance.player == null)
+                    {
+                        Debug.Log("Player not set in GameManager singleton.");
+                        break;
+                    }
+
+                    string itemTypeString = t.Split(':')[1].Split(',')[0];
+                    int itemAmount = int.Parse(t.Split(':')[1].Split(',')[1]);
+                    foreach (Item.ItemType type in System.Enum.GetValues(typeof(Item.ItemType)))
+                    {
+                        if (type.ToString() != itemTypeString) continue;
+                        Player player = GameManager.Instance.player.GetComponent<Player>();
+                        
+                        if(ItemRegister.Instance.items.Find(x => x.itemType == type).stackable)
+                        {
+                            Item item = ItemRegister.Instance.GetNewItem(type);
+                            item.amount = itemAmount;
+                            if(!player.GetInventory().AddItem(item))
+                            {
+                                Debug.Log("Dialoge gave no items! Inventory is full!");
+                            }
+                        }
+                        else
+                        {
+                            for(int i = 0; i < itemAmount; i++)
+                            {
+                                Item item = ItemRegister.Instance.GetNewItem(type);
+                                item.amount = 1;
+                                if(!player.GetInventory().AddItem(item))
+                                {
+                                    Debug.Log($"Dialogue gave {i+1} items out of {itemAmount}. Inventory is full");
+                                }
+                            }
+                        }
+                    }
+                    break;
+                default:
+                    Debug.Log("Unrecognized event: " + t);
+                    break;
             }
         }
     }

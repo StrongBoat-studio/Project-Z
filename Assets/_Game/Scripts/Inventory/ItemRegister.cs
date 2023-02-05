@@ -31,7 +31,8 @@ public class ItemRegister : MonoBehaviour
             amount = item.amount,
             sprite = item.sprite,
             stackable = item.stackable,
-            Use = item.Use
+            Use = item.Use,
+            collectDialogue = item.collectDialogue
         };
         return copy;
     }

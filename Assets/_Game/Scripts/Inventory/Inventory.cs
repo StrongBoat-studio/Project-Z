@@ -23,16 +23,22 @@ public class Inventory
     /// Adds given Item to the inventory if there is available space
     /// </summary>
     /// <param name="item"></param>
-    public void AddItem(Item item)
+    public bool AddItem(Item item)
     {
         if (_items.Count >= _inventorySize)
         {
             Debug.LogWarning("Inventory is full.");
-            return;
+            return false;
         }
 
         if (_items.Find(x => x.itemType == item.itemType) == null || item.stackable == false)
         {
+            //Item dialogue note on add only for new items
+            if (DialogueManager.Instance != null && _items.Find(x => x.itemType == item.itemType) == null)
+            {
+                DialogueManager.Instance.EnqueueStory(item.collectDialogue);
+            }
+
             _items.Add(item);
             OnInventoryChanged?.Invoke();
         }
@@ -41,6 +47,7 @@ public class Inventory
             _items.Find(x => x.itemType == item.itemType).amount += item.amount;
             OnInventoryChanged?.Invoke();
         }
+        return true;
     }
 
     ///<summary>
@@ -66,7 +73,7 @@ public class Inventory
         {
             itemRemove.amount -= amount;
 
-            if(itemRemove.amount <= 0)
+            if (itemRemove.amount <= 0)
             {
                 _items.Remove(itemRemove);
             }
