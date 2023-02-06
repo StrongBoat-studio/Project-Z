@@ -50,6 +50,8 @@ public class Player : MonoBehaviour
     private void OnGameStateChanged(GameStateManager.GameState newGameState)
     {
         _uiInventory.GetComponent<UI_Inventory>().ToggleInventoryPanel(newGameState == GameStateManager.GameState.Inventory);
+        if(newGameState == GameStateManager.GameState.Paused) _playerInput.Inventory.Disable();
+        else _playerInput.Inventory.Enable();
     }
 
     private void OnInventoryOpen(InputAction.CallbackContext context)
