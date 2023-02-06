@@ -121,7 +121,7 @@
                 {
                     "name": "",
                     "id": "19b5ea93-9d00-4f06-a28d-a7fc80925f3e",
-                    "path": "<Keyboard>/leftShift",
+                    "path": "<Keyboard>/leftCtrl",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -132,7 +132,7 @@
                 {
                     "name": "",
                     "id": "94138441-26ec-49ea-90a1-5d975aa36daf",
-                    "path": "<Keyboard>/leftCtrl",
+                    "path": "<Keyboard>/shift",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -230,6 +230,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "CloseExclusive",
+                    "type": "Button",
+                    "id": "1e2336c3-4770-4d2d-a474-5ab1a12b1760",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -243,6 +252,28 @@
                     "action": "Open",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a28b26eb-14b5-40be-ba36-7f7cf77f3c12",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Open",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d30d63f7-069e-4858-9339-82e5c2d9253f",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CloseExclusive",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -251,9 +282,18 @@
             "id": "acdfb363-9535-495b-b0cc-61f0a011592c",
             "actions": [
                 {
-                    "name": "Continue",
+                    "name": "ContinueKbd",
                     "type": "Button",
                     "id": "808b3ade-514b-4c55-829e-5e7e59d69d41",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ContinueMouse",
+                    "type": "Button",
+                    "id": "7afc502b-e9f1-49c3-b332-4a940b0216c2",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -268,7 +308,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Continue",
+                    "action": "ContinueKbd",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f0780044-3410-4f85-b531-83f1480158c1",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ContinueMouse",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class Player : MonoBehaviour
         _playerInput = new PlayerInput();
         _playerInput.Inventory.Enable();
         _playerInput.Inventory.Open.performed += OnInventoryOpen;
+        _playerInput.Inventory.CloseExclusive.performed += OnInventoryCloseExclusive;
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
     }
 
     private void Start()
@@ -37,9 +40,27 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnInventoryOpen(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    private void Destroy()
     {
-        _uiInventory.GetComponent<UI_Inventory>().ToggleInventoryPanel();
+        _playerInput.Inventory.Open.performed -= OnInventoryOpen;
+        _playerInput.Inventory.CloseExclusive.performed -= OnInventoryCloseExclusive;
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+    }
+
+    private void OnGameStateChanged(GameStateManager.GameState newGameState)
+    {
+        _uiInventory.GetComponent<UI_Inventory>().ToggleInventoryPanel(newGameState == GameStateManager.GameState.Inventory);
+    }
+
+    private void OnInventoryOpen(InputAction.CallbackContext context)
+    {
+        if(_uiInventory.GetComponent<UI_Inventory>().IsOpen()) GameStateManager.Instance.ResetLastState();
+        else GameStateManager.Instance.SetState(GameStateManager.GameState.Inventory);
+    }
+
+    private void OnInventoryCloseExclusive(InputAction.CallbackContext context)
+    {
+        if(_uiInventory.GetComponent<UI_Inventory>().IsOpen()) GameStateManager.Instance.ResetLastState();
     }
 
     private void TakeDamage(int dmg)

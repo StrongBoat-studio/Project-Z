@@ -25,7 +25,13 @@ public class Inventory
     /// <param name="item"></param>
     public bool AddItem(Item item)
     {
-        if (_items.Count >= _inventorySize)
+        if (
+            _items.Count >= _inventorySize &&
+            (
+                _items.Find(x => x.itemType == item.itemType) == null ||
+                (_items.Find(x => x.itemType == item.itemType) != null && !item.stackable)
+            )
+        )
         {
             Debug.LogWarning("Inventory is full.");
             return false;

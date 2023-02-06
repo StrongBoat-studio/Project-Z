@@ -25,7 +25,7 @@ public class UI_Inventory : MonoBehaviour
     [SerializeField] private float _cellPaddingRight;
     [SerializeField] private float _cellPaddingBottom;
 
-    private void Destroy()
+    private void Destroy()  
     {
         if (_inventory == null) return;
         _inventory.OnInventoryChanged -= OnInventoryChanged;
@@ -73,8 +73,13 @@ public class UI_Inventory : MonoBehaviour
         }
     }
 
-    public void ToggleInventoryPanel()
+    public void ToggleInventoryPanel(bool state)
     {
-        _panel.gameObject.SetActive(!_panel.gameObject.activeSelf);
+        _panel.gameObject.SetActive(state);
+    }
+
+    public bool IsOpen()
+    {
+        return _panel.gameObject.activeSelf;
     }
 }

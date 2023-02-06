@@ -10,6 +10,7 @@ public class DialogueManager : MonoBehaviour
     public static DialogueManager Instance { get; private set; }
     private PlayerInput _playerInput;
     [SerializeField] private Canvas _canvas;
+    [SerializeField] private RectTransform _container;
     [SerializeField] private TextMeshProUGUI _nameText;
     [SerializeField] private TextMeshProUGUI _messageText;
 
@@ -28,17 +29,18 @@ public class DialogueManager : MonoBehaviour
 
         _storyQueue = new Queue<Story>();
         _playerInput = new PlayerInput();
-        _playerInput.Dialogue.Continue.performed += OnDialogueContinue;
+        _playerInput.Dialogue.ContinueKbd.performed += OnDialogueContinueKeyboard;
+        _playerInput.Dialogue.ContinueMouse.performed += OnDialogueContinueMouse;
         GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
     }
 
     private void OnDestroy()
     {
-        _playerInput.Dialogue.Continue.performed -= OnDialogueContinue;
+        _playerInput.Dialogue.ContinueKbd.performed -= OnDialogueContinueKeyboard;
+        _playerInput.Dialogue.ContinueMouse.performed -= OnDialogueContinueMouse;
         GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
     }
 
-    private GameStateManager.GameState _prevGameState;
     private Queue<Story> _storyQueue;
     private Story _currentStory;
     [SerializeField][Tooltip("Characters per second")][Min(1f)] private float _typeSpeed;
@@ -46,21 +48,23 @@ public class DialogueManager : MonoBehaviour
     private float _currentTypeSpeed;
     private bool _isTyping = false;
 
-    private void OnDialogueContinue(InputAction.CallbackContext context)
+    private void OnDialogueContinueKeyboard(InputAction.CallbackContext context)
     {
         ContinueStory();
     }
 
+    private void OnDialogueContinueMouse(InputAction.CallbackContext context)
+    {
+        if (RectTransformUtility.RectangleContainsScreenPoint(_container, Mouse.current.position.ReadValue()))
+        {
+            ContinueStory();
+        }
+    }
+
     private void OnGameStateChanged(GameStateManager.GameState newGameState)
     {
-        if (newGameState != GameStateManager.GameState.Dialogue)
-        {
-            _playerInput.Dialogue.Disable();
-        }
-        else
-        {
-            _playerInput.Dialogue.Enable();
-        }
+        if (newGameState != GameStateManager.GameState.Dialogue) _playerInput.Dialogue.Disable();
+        else _playerInput.Dialogue.Enable();
     }
 
     ///<summary>
@@ -75,12 +79,10 @@ public class DialogueManager : MonoBehaviour
             EnterDialogueMode();
             _currentStory = new Story(storyTextAsset.text);
             ContinueStory();
-            Debug.Log("Playing story!");
         }
         else
         {
             _storyQueue.Enqueue(new Story(storyTextAsset.text));
-            Debug.Log("Enqueued story!");
         }
     }
 
@@ -133,7 +135,6 @@ public class DialogueManager : MonoBehaviour
     ///</summary>
     private void EnterDialogueMode()
     {
-        _prevGameState = GameStateManager.Instance.GetState();
         GameStateManager.Instance.SetState(GameStateManager.GameState.Dialogue);
         _canvas.gameObject.SetActive(true);
     }
@@ -143,7 +144,7 @@ public class DialogueManager : MonoBehaviour
     ///</summary>
     private void ExitDialogueMode()
     {
-        GameStateManager.Instance.SetState(_prevGameState);
+        GameStateManager.Instance.ResetLastState();
         _currentStory = null;
         _canvas.gameObject.SetActive(false);
     }
@@ -174,25 +175,25 @@ public class DialogueManager : MonoBehaviour
                     {
                         if (type.ToString() != itemTypeString) continue;
                         Player player = GameManager.Instance.player.GetComponent<Player>();
-                        
-                        if(ItemRegister.Instance.items.Find(x => x.itemType == type).stackable)
+
+                        if (ItemRegister.Instance.items.Find(x => x.itemType == type).stackable)
                         {
                             Item item = ItemRegister.Instance.GetNewItem(type);
                             item.amount = itemAmount;
-                            if(!player.GetInventory().AddItem(item))
+                            if (!player.GetInventory().AddItem(item))
                             {
                                 Debug.Log("Dialoge gave no items! Inventory is full!");
                             }
                         }
                         else
                         {
-                            for(int i = 0; i < itemAmount; i++)
+                            for (int i = 0; i < itemAmount; i++)
                             {
                                 Item item = ItemRegister.Instance.GetNewItem(type);
                                 item.amount = 1;
-                                if(!player.GetInventory().AddItem(item))
+                                if (!player.GetInventory().AddItem(item))
                                 {
-                                    Debug.Log($"Dialogue gave {i+1} items out of {itemAmount}. Inventory is full");
+                                    Debug.Log($"Dialogue gave {i + 1} items out of {itemAmount}. Inventory is full");
                                 }
                             }
                         }

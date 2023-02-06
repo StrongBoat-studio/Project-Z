@@ -1099,6 +1099,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvas: {fileID: 2058005320}
+  _container: {fileID: 1085088686}
   _nameText: {fileID: 582282977}
   _messageText: {fileID: 127382851}
   _typeSpeed: 100
