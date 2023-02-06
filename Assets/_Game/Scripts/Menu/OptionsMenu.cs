@@ -157,11 +157,11 @@ public class OptionsMenu : MonoBehaviour
 
             //Scale is irrelevant when game is in fullscreen, disable it
             _resScaleDropdown.value = _resolutions.Count() - 1;
-            _resScaleDropdown.enabled = false;
+            _resScaleDropdown.interactable = false;
         }
         else
         {
-            _resScaleDropdown.enabled = true;
+            _resScaleDropdown.interactable = true;
 
             Screen.SetResolution(
                 _baseResolution.width * (_currentSettings.resScale + 1),
