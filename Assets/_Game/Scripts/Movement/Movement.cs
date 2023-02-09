@@ -166,16 +166,16 @@ public class Movement : MonoBehaviour
     {
         //Set crouching state
         _movementState |= (int)MovementState.Crouching;
-        transform.GetChild(0).transform.localScale = new Vector3(1, 1, 1);
-        GetComponent<BoxCollider2D>().size = new Vector2(1, 1);
+        //transform.GetChild(0).transform.localScale = new Vector3(1, 1, 1);
+        //GetComponent<BoxCollider2D>().size = new Vector2(1, 1);
     }
 
     private void OnCrouchCanceled(InputAction.CallbackContext context)
     {
         //Remove crouching state
         _movementState &= ~(int)MovementState.Crouching;
-        transform.GetChild(0).transform.localScale = new Vector3(1, 2, 1);
-        GetComponent<BoxCollider2D>().size = new Vector2(1, 2);
+        //transform.GetChild(0).transform.localScale = new Vector3(1, 2, 1);
+        //GetComponent<BoxCollider2D>().size = new Vector2(1, 2);
     }
 
     //Collisions with ground objects to reset jump ability
