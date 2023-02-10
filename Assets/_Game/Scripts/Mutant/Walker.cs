@@ -9,8 +9,7 @@ using UnityEngine.SceneManagement;
 
 public class Walker : MonoBehaviour
 {
-    [SerializeField] private Transform _pos1, _pos2;
-    [SerializeField] private Transform _startPos;
+    [SerializeField] private Vector3 _pos1, _pos2, _startPos;
     [SerializeField] private GameObject _mutant, _player;
     [SerializeField] private Transform _walker, _player2;
     [SerializeField] private Movement _movement;
@@ -45,7 +44,7 @@ public class Walker : MonoBehaviour
 
     private void Start()
     {
-        nextPos = _startPos.position;
+        nextPos = _startPos;
         _secondsElapsed = _secondOfSleepFront;
         _secondsSightElapsed = _secondSightNormally; 
     }
@@ -105,21 +104,21 @@ public class Walker : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawLine(_pos1.position, _pos2.position);
+        Gizmos.DrawLine(_pos1, _pos2);
     }
 
     private void Moving()
     {
-        if (transform.position == _pos1.position)
+        if (transform.position == _pos1)
         {
-            nextPos = _pos2.position;
+            nextPos = _pos2;
             _checkVector = new Vector2(1f, 0f);
             _mutant.transform.localScale = new Vector3(-3, 3, 0);
         }
 
-        if (transform.position == _pos2.position)
+        if (transform.position == _pos2)
         {
-            nextPos = _pos1.position;
+            nextPos = _pos1;
             _checkVector = new Vector2(-1f, 0f);
             _mutant.transform.localScale = new Vector3(3, 3, 0);
         }
