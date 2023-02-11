@@ -69,6 +69,9 @@ public class Inventory
             Debug.LogWarning("Cannot remove item from inventory. Item is not in the inventory.");
             return;
         }
+        else
+        {
+            itemRemove.amount -= amount;
 
         if (itemRemove.amount < amount)
         {
