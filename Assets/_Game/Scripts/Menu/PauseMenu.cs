@@ -25,28 +25,23 @@ public class PauseMenu : MonoBehaviour
         _playerInput.PauseMenu.Pause.performed -= OnPauseMenuToggle;
     }
 
-    private void Update()
-    {
-
-    }
-
     private void OnGameStateChanged(GameStateManager.GameState newGameState)
     {
         _pauseMenu.gameObject.SetActive(newGameState == GameStateManager.GameState.Paused);
+
+        if(newGameState == GameStateManager.GameState.Inventory) _playerInput.PauseMenu.Disable();
+        else _playerInput.PauseMenu.Enable();
     }
 
     private void OnPauseMenuToggle(InputAction.CallbackContext context)
     {
-        GameStateManager.GameState newGameState = GameStateManager.Instance.GetState() == GameStateManager.GameState.Gameplay
-            ? GameStateManager.GameState.Paused
-            : GameStateManager.GameState.Gameplay;
-
-        GameStateManager.Instance.SetState(newGameState);
+        if(_pauseMenu.gameObject.activeSelf) GameStateManager.Instance.ResetLastState();
+        else GameStateManager.Instance.SetState(GameStateManager.GameState.Paused);
     }
 
     public void Resume()
     {
-        GameStateManager.Instance.SetState(GameStateManager.GameState.Gameplay);
+        GameStateManager.Instance.ResetLastState();
     }
 
     public void Options()

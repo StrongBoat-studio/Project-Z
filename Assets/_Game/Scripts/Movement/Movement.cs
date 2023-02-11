@@ -228,6 +228,10 @@ public class Movement : MonoBehaviour
 
     private void OnGameStateChanged(GameStateManager.GameState newGameState)
     {
-        enabled = newGameState == GameStateManager.GameState.Gameplay;
+        if(
+            newGameState == GameStateManager.GameState.Paused ||
+            newGameState == GameStateManager.GameState.Dialogue
+        ) _playerInput.InGame.Disable();
+        else if(newGameState == GameStateManager.GameState.Gameplay) _playerInput.InGame.Enable();
     }
 }

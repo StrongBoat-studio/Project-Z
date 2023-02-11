@@ -7,12 +7,15 @@ public class GameStateManager : MonoBehaviour
     public enum GameState
     {
         Gameplay,
-        Paused
+        Paused,
+        Dialogue,
+        Inventory
     }
 
     public static GameStateManager Instance { get; private set; }
 
     private GameState _currentGameState;
+    private Stack<GameState> _stateHistory = new Stack<GameState>();
 
     public delegate void GameStateChangeHandler(GameState newGameState);
     public event GameStateChangeHandler OnGameStateChanged;
@@ -35,12 +38,19 @@ public class GameStateManager : MonoBehaviour
     {
         if (newGameState == _currentGameState)
             return;
- 
+
+        _stateHistory.Push(_currentGameState);
         _currentGameState = newGameState;
         OnGameStateChanged?.Invoke(newGameState);
     }
 
-    public GameState GetState()
+    public void ResetLastState()
+    {
+        _currentGameState = _stateHistory.Pop();
+        OnGameStateChanged?.Invoke(_currentGameState);
+    }
+
+    public GameState GetCurrentState()
     {
         return _currentGameState;
     }

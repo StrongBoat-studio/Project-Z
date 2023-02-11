@@ -143,7 +143,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""19b5ea93-9d00-4f06-a28d-a7fc80925f3e"",
-                    ""path"": ""<Keyboard>/leftShift"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -154,7 +154,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""94138441-26ec-49ea-90a1-5d975aa36daf"",
-                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""path"": ""<Keyboard>/shift"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -252,6 +252,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CloseExclusive"",
+                    ""type"": ""Button"",
+                    ""id"": ""1e2336c3-4770-4d2d-a474-5ab1a12b1760"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -263,6 +272,76 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Open"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a28b26eb-14b5-40be-ba36-7f7cf77f3c12"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Open"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d30d63f7-069e-4858-9339-82e5c2d9253f"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CloseExclusive"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Dialogue"",
+            ""id"": ""acdfb363-9535-495b-b0cc-61f0a011592c"",
+            ""actions"": [
+                {
+                    ""name"": ""ContinueKbd"",
+                    ""type"": ""Button"",
+                    ""id"": ""808b3ade-514b-4c55-829e-5e7e59d69d41"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ContinueMouse"",
+                    ""type"": ""Button"",
+                    ""id"": ""7afc502b-e9f1-49c3-b332-4a940b0216c2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""c1fb8ac9-11c1-435c-9e87-0c9f16c408da"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ContinueKbd"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f0780044-3410-4f85-b531-83f1480158c1"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ContinueMouse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -288,6 +367,11 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         // Inventory
         m_Inventory = asset.FindActionMap("Inventory", throwIfNotFound: true);
         m_Inventory_Open = m_Inventory.FindAction("Open", throwIfNotFound: true);
+        m_Inventory_CloseExclusive = m_Inventory.FindAction("CloseExclusive", throwIfNotFound: true);
+        // Dialogue
+        m_Dialogue = asset.FindActionMap("Dialogue", throwIfNotFound: true);
+        m_Dialogue_ContinueKbd = m_Dialogue.FindAction("ContinueKbd", throwIfNotFound: true);
+        m_Dialogue_ContinueMouse = m_Dialogue.FindAction("ContinueMouse", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -487,11 +571,13 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Inventory;
     private IInventoryActions m_InventoryActionsCallbackInterface;
     private readonly InputAction m_Inventory_Open;
+    private readonly InputAction m_Inventory_CloseExclusive;
     public struct InventoryActions
     {
         private @PlayerInput m_Wrapper;
         public InventoryActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Open => m_Wrapper.m_Inventory_Open;
+        public InputAction @CloseExclusive => m_Wrapper.m_Inventory_CloseExclusive;
         public InputActionMap Get() { return m_Wrapper.m_Inventory; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -504,6 +590,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Open.started -= m_Wrapper.m_InventoryActionsCallbackInterface.OnOpen;
                 @Open.performed -= m_Wrapper.m_InventoryActionsCallbackInterface.OnOpen;
                 @Open.canceled -= m_Wrapper.m_InventoryActionsCallbackInterface.OnOpen;
+                @CloseExclusive.started -= m_Wrapper.m_InventoryActionsCallbackInterface.OnCloseExclusive;
+                @CloseExclusive.performed -= m_Wrapper.m_InventoryActionsCallbackInterface.OnCloseExclusive;
+                @CloseExclusive.canceled -= m_Wrapper.m_InventoryActionsCallbackInterface.OnCloseExclusive;
             }
             m_Wrapper.m_InventoryActionsCallbackInterface = instance;
             if (instance != null)
@@ -511,10 +600,54 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Open.started += instance.OnOpen;
                 @Open.performed += instance.OnOpen;
                 @Open.canceled += instance.OnOpen;
+                @CloseExclusive.started += instance.OnCloseExclusive;
+                @CloseExclusive.performed += instance.OnCloseExclusive;
+                @CloseExclusive.canceled += instance.OnCloseExclusive;
             }
         }
     }
     public InventoryActions @Inventory => new InventoryActions(this);
+
+    // Dialogue
+    private readonly InputActionMap m_Dialogue;
+    private IDialogueActions m_DialogueActionsCallbackInterface;
+    private readonly InputAction m_Dialogue_ContinueKbd;
+    private readonly InputAction m_Dialogue_ContinueMouse;
+    public struct DialogueActions
+    {
+        private @PlayerInput m_Wrapper;
+        public DialogueActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @ContinueKbd => m_Wrapper.m_Dialogue_ContinueKbd;
+        public InputAction @ContinueMouse => m_Wrapper.m_Dialogue_ContinueMouse;
+        public InputActionMap Get() { return m_Wrapper.m_Dialogue; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(DialogueActions set) { return set.Get(); }
+        public void SetCallbacks(IDialogueActions instance)
+        {
+            if (m_Wrapper.m_DialogueActionsCallbackInterface != null)
+            {
+                @ContinueKbd.started -= m_Wrapper.m_DialogueActionsCallbackInterface.OnContinueKbd;
+                @ContinueKbd.performed -= m_Wrapper.m_DialogueActionsCallbackInterface.OnContinueKbd;
+                @ContinueKbd.canceled -= m_Wrapper.m_DialogueActionsCallbackInterface.OnContinueKbd;
+                @ContinueMouse.started -= m_Wrapper.m_DialogueActionsCallbackInterface.OnContinueMouse;
+                @ContinueMouse.performed -= m_Wrapper.m_DialogueActionsCallbackInterface.OnContinueMouse;
+                @ContinueMouse.canceled -= m_Wrapper.m_DialogueActionsCallbackInterface.OnContinueMouse;
+            }
+            m_Wrapper.m_DialogueActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @ContinueKbd.started += instance.OnContinueKbd;
+                @ContinueKbd.performed += instance.OnContinueKbd;
+                @ContinueKbd.canceled += instance.OnContinueKbd;
+                @ContinueMouse.started += instance.OnContinueMouse;
+                @ContinueMouse.performed += instance.OnContinueMouse;
+                @ContinueMouse.canceled += instance.OnContinueMouse;
+            }
+        }
+    }
+    public DialogueActions @Dialogue => new DialogueActions(this);
     public interface IInGameActions
     {
         void OnWalk(InputAction.CallbackContext context);
@@ -535,5 +668,11 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     public interface IInventoryActions
     {
         void OnOpen(InputAction.CallbackContext context);
+        void OnCloseExclusive(InputAction.CallbackContext context);
+    }
+    public interface IDialogueActions
+    {
+        void OnContinueKbd(InputAction.CallbackContext context);
+        void OnContinueMouse(InputAction.CallbackContext context);
     }
 }

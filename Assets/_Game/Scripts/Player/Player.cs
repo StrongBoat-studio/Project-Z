@@ -2,13 +2,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
     private PlayerInput _playerInput;
+    private int _hp = 100;
 
     private Inventory _inventory;
     [SerializeField] private RectTransform _uiInventory;
+
+    [SerializeField] DialogueController _lowHP;
 
     private void Awake()
     {
@@ -17,6 +21,8 @@ public class Player : MonoBehaviour
         _playerInput = new PlayerInput();
         _playerInput.Inventory.Enable();
         _playerInput.Inventory.Open.performed += OnInventoryOpen;
+        _playerInput.Inventory.CloseExclusive.performed += OnInventoryCloseExclusive;
+        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
     }
 
     private void Start()
@@ -28,17 +34,49 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-
+        if(Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            TakeDamage(20);
+        }
     }
 
-    private void OnInventoryOpen(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    private void Destroy()
     {
-        _uiInventory.GetComponent<UI_Inventory>().ToggleInventoryPanel();
+        _playerInput.Inventory.Open.performed -= OnInventoryOpen;
+        _playerInput.Inventory.CloseExclusive.performed -= OnInventoryCloseExclusive;
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
     }
 
-    public void Heal(float healValue)
+    private void OnGameStateChanged(GameStateManager.GameState newGameState)
     {
-        Debug.Log("Healed " + healValue + " HP");
+        _uiInventory.GetComponent<UI_Inventory>().ToggleInventoryPanel(newGameState == GameStateManager.GameState.Inventory);
+        if(newGameState == GameStateManager.GameState.Paused) _playerInput.Inventory.Disable();
+        else _playerInput.Inventory.Enable();
+    }
+
+    private void OnInventoryOpen(InputAction.CallbackContext context)
+    {
+        if(_uiInventory.GetComponent<UI_Inventory>().IsOpen()) GameStateManager.Instance.ResetLastState();
+        else GameStateManager.Instance.SetState(GameStateManager.GameState.Inventory);
+    }
+
+    private void OnInventoryCloseExclusive(InputAction.CallbackContext context)
+    {
+        if(_uiInventory.GetComponent<UI_Inventory>().IsOpen()) GameStateManager.Instance.ResetLastState();
+    }
+
+    private void TakeDamage(int dmg)
+    {
+        _hp -= dmg;
+
+        if(_hp <= 20)
+        {
+            _lowHP.Play();
+        }
+        else if(_hp <= 0)
+        {
+            Debug.Log("Dead");
+        }
     }
 
     public Inventory GetInventory()
