@@ -121,7 +121,7 @@
                 {
                     "name": "",
                     "id": "19b5ea93-9d00-4f06-a28d-a7fc80925f3e",
-                    "path": "<Keyboard>/leftShift",
+                    "path": "<Keyboard>/leftCtrl",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -132,11 +132,194 @@
                 {
                     "name": "",
                     "id": "94138441-26ec-49ea-90a1-5d975aa36daf",
-                    "path": "<Keyboard>/leftCtrl",
+                    "path": "<Keyboard>/shift",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Run",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Interactions",
+            "id": "51e9adb4-47f1-464b-960b-502cc799d701",
+            "actions": [
+                {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "1eabe7d7-e7a6-4f13-99ea-1ca0e680fc6b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MousePosition",
+                    "type": "Value",
+                    "id": "e0c804e9-09d7-4ae1-ab8a-056e039b0d7a",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "c8257cba-df67-46d1-82fc-861f613dbd1f",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "55e8e8ba-445a-449c-a252-8c45d9ba8969",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MousePosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "PauseMenu",
+            "id": "efa23bdc-3541-411e-be5d-43620f9c5bde",
+            "actions": [
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "74383e13-52dc-4d3b-af28-58db6f144829",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "14173298-1095-4e75-a669-10ec5e3390fb",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Inventory",
+            "id": "cbf08f4a-7c3f-4c53-9c9c-185ac38a3bc4",
+            "actions": [
+                {
+                    "name": "Open",
+                    "type": "Button",
+                    "id": "7cbd082f-e173-44f1-8e54-acbfa66a7c70",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CloseExclusive",
+                    "type": "Button",
+                    "id": "1e2336c3-4770-4d2d-a474-5ab1a12b1760",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "11751eea-ae4d-4d70-a637-0b380333dacb",
+                    "path": "<Keyboard>/i",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Open",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a28b26eb-14b5-40be-ba36-7f7cf77f3c12",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Open",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d30d63f7-069e-4858-9339-82e5c2d9253f",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CloseExclusive",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Dialogue",
+            "id": "acdfb363-9535-495b-b0cc-61f0a011592c",
+            "actions": [
+                {
+                    "name": "ContinueKbd",
+                    "type": "Button",
+                    "id": "808b3ade-514b-4c55-829e-5e7e59d69d41",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ContinueMouse",
+                    "type": "Button",
+                    "id": "7afc502b-e9f1-49c3-b332-4a940b0216c2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "c1fb8ac9-11c1-435c-9e87-0c9f16c408da",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ContinueKbd",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f0780044-3410-4f85-b531-83f1480158c1",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ContinueMouse",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
