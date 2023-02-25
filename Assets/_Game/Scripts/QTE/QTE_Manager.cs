@@ -28,33 +28,38 @@ public class QTE_Manager : MonoBehaviour
     private GameObject[] _array;
     private int _lottery=0;
     public System.Random generator = new System.Random();
-    private string _letter;
     private int _howManyLettersV=0;
 
-    // Start is called before the first frame update
+    //Action
+    private Action _action=null;
+
+
     void Start()
     {
         _array = new GameObject[] { j, k, l, m, o, p, t, u};
     }
 
-
-
-    // Update is called once per frame
-    void Update()
+    public void QteManager()
     {
-       if(_howManyLettersV<_howManyLetters)
-        {
-            if(_eventSuccess)
-            {
-                _eventSuccess = false;
-                _lottery = generator.Next(8);
-                _array[_lottery].SetActive(true);
-            }
-            else
-            {
-                QTE();
-            }
-        }
+        if (_howManyLettersV<_howManyLetters)
+                {
+                    PrepareAction(EventSuccess, QTE);
+                    _action?.Invoke();
+                }
+    }
+
+    public void ResetVariables()
+    {
+        _fillAmount = 0;
+        _timeThresholdV = 0;
+        _howManyLettersV = 0;
+    }
+
+    private void EventSuccess()
+    {
+        _eventSuccess = false;
+        _lottery = generator.Next(8);
+        _array[_lottery].SetActive(true);
     }
 
     private void QTE()
@@ -74,7 +79,7 @@ public class QTE_Manager : MonoBehaviour
             _fillAmount = 0;
         }
 
-        if (_fillAmount >= 1)
+        if (_fillAmount >= 1 && _eventSuccess==false)
         {
             _eventSuccess = true;
             _array[_lottery].SetActive(false);
@@ -83,6 +88,19 @@ public class QTE_Manager : MonoBehaviour
         }
 
         _array[_lottery].transform.GetChild(0).gameObject.GetComponent<Image>().fillAmount = _fillAmount;
+    }
+
+    private void PrepareAction(Action eventSuccess, Action qte)
+    {
+        if (_eventSuccess)
+        {
+            _action = eventSuccess;
+
+        }
+        else
+        {
+            _action = qte;
+        }
     }
 
     private void SwitchLetter()
