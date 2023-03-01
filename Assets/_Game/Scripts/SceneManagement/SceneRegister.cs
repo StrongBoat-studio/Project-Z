@@ -11,6 +11,8 @@ public class SceneRegister : MonoBehaviour
         CreditsMenu = 2,
         GameManagers = 3,
         SampleScene = 4,
+        SampleSceneTestTP = 5,
+        Player = 6,
     }
 
     public static SceneRegister Instance { get; private set; }
@@ -28,4 +30,6 @@ public class SceneRegister : MonoBehaviour
             Instance = this;
         }
     }
+
+    public List<Scenes> perserverLevelSwap;
 }
