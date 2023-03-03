@@ -39,13 +39,14 @@ public class QTEManager : MonoBehaviour
     public System.Random generator = new System.Random();
     [SerializeField] private int _howManyLettersV = 0;
     [SerializeField] private float _timeForQTECompleted;
+    public int _isSuccess=0;
 
     //Action
     private Action _action = null;
 
     //Events
     public event Action<int> _qte;
-    public event Action<Caller, bool> _qteResult = null;
+    public event Action<Caller> _qteResult = null;
     public event Action<float> _countingDown = null;
 
     private void Awake()
@@ -71,14 +72,13 @@ public class QTEManager : MonoBehaviour
 
 
     //Update QTE state by calling QteManager(int howManyLetters)
-    public Caller QTEAction(Caller caller, int howManyLetters, bool isSuccess )
+    public Caller QTEAction(Caller caller, int howManyLetters)
     {
         _qte?.Invoke(howManyLetters);
 
         _countingDown?.Invoke(_timeForQTECompleted);
 
-        _qteResult?.Invoke(caller, isSuccess);
-
+        _qteResult?.Invoke(caller);
 
         return caller;
     }
@@ -250,26 +250,26 @@ public class QTEManager : MonoBehaviour
         }
     }
 
-    private void QTEFail(Caller caller, bool isSuccess)
+    private void QTEFail(Caller caller)
     {
         _qte -= QteManager;
         _qteResult -= QTEFail;
         _countingDown -= CountingDown;
-        isSuccess = false;
+        _isSuccess = -1;
 
         _array[_lottery].SetActive(false);
-        Debug.Log("fail");
+        //Debug.Log("fail");
     }
 
-    private void QTESuccess(Caller caller, bool isSuccess)
+    private void QTESuccess(Caller caller)
     {
         _qte -= QteManager;
         _qteResult -= QTESuccess;
         _countingDown -= CountingDown;
-        isSuccess = true;
+        _isSuccess = 1;
 
         _array[_lottery].SetActive(false);
-       Debug.Log("win");
+        //Debug.Log("win");
     }
 
 

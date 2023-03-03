@@ -11,9 +11,6 @@ public class Call_Event : MonoBehaviour
     //Check Variables
     private QTEManager.Caller _caller;
     private bool _oneCall = false;
-    private bool _isSuccess;
-
-    
 
 
     // Update is called once per frame
@@ -37,17 +34,25 @@ public class Call_Event : MonoBehaviour
 
         if (_square.active == true)
         {
-            _caller=QTEManager.Instance.QTEAction(QTEManager.Caller.Crafting, 1, _isSuccess);
+            _caller=QTEManager.Instance.QTEAction(QTEManager.Caller.Crafting, 1);
         }
 
+        Result();
 
     }
 
-    void Result()
+    private void Result()
     {
-        if (_caller==QTEManager.Caller.Crafting && _isSuccess)
+        if (_caller == QTEManager.Caller.Crafting && QTEManager.Instance._isSuccess == 1)
         {
+            QTEManager.Instance._isSuccess = 0;
             Debug.Log("win");
+        }
+
+        if (_caller == QTEManager.Caller.Crafting && QTEManager.Instance._isSuccess == -1)
+        {
+            QTEManager.Instance._isSuccess = 0;
+            Debug.Log("fail");
         }
     }
 
