@@ -18,11 +18,11 @@ public class Call_Event : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Z))
         {
-            if(_square.active==false)
+            if(_square.activeSelf == false)
             {
 
                 _square.SetActive(true);
-                QTEManager.Instance.QTEStart(QTEManager.Caller.Crafting, 3);
+                QTEManager.Instance.QTEStart(QTEManager.Caller.Crafting, 5);
 
             }
             else
@@ -32,7 +32,7 @@ public class Call_Event : MonoBehaviour
             }
         }
 
-        if (_square.active == true)
+        if (_square.activeSelf == true)
         {
             _caller=QTEManager.Instance.QTEAction(QTEManager.Caller.Crafting, 1);
         }

@@ -67,4 +67,9 @@ public class GameStateManager : MonoBehaviour
     {
         return _currentGameState;
     }
+
+    public bool HasStateInHistory(GameState state)
+    {
+        return _stateHistory.Contains(state);
+    }
 }
