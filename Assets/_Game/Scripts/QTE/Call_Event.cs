@@ -2,34 +2,60 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using System;
 
 public class Call_Event : MonoBehaviour
 {
     [SerializeField] GameObject _square;
-    [SerializeField] private UnityEvent _qte;
-    [SerializeField] private UnityEvent _resetVariables;
+
+    //Check Variables
+    private QTEManager.Caller _caller;
+    private bool _oneCall = false;
+
 
     // Update is called once per frame
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Z))
         {
-            if(_square.activeSelf == false)
+            if(_square.active==false)
             {
-                _resetVariables?.Invoke();
+
                 _square.SetActive(true);
+                QTEManager.Instance.QTEStart(QTEManager.Caller.Crafting, 3);
+
             }
             else
             {
                 _square.SetActive(false);
+
             }
         }
 
-        if(_square.activeSelf == true)
+        if (_square.active == true)
         {
-            _qte?.Invoke();
+            _caller=QTEManager.Instance.QTEAction(QTEManager.Caller.Crafting, 1);
+        }
+
+        Result();
+
+    }
+
+    private void Result()
+    {
+        if (_caller == QTEManager.Caller.Crafting && QTEManager.Instance._isSuccess == 1)
+        {
+            QTEManager.Instance._isSuccess = 0;
+            Debug.Log("win");
+        }
+
+        if (_caller == QTEManager.Caller.Crafting && QTEManager.Instance._isSuccess == -1)
+        {
+            QTEManager.Instance._isSuccess = 0;
+            Debug.Log("fail");
         }
     }
+
 
 
 }
