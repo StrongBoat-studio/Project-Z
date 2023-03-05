@@ -9,13 +9,18 @@ public class GameStateManager : MonoBehaviour
         Gameplay,
         Paused,
         Dialogue,
-        Inventory
+        Inventory,
+        Crafting
     }
 
     public static GameStateManager Instance { get; private set; }
 
     private GameState _currentGameState;
     private Stack<GameState> _stateHistory = new Stack<GameState>();
+
+    #region Debug
+    [SerializeField] List<GameState> _stateHistoryDisplay;
+    #endregion
 
     public delegate void GameStateChangeHandler(GameState newGameState);
     public event GameStateChangeHandler OnGameStateChanged;
@@ -32,6 +37,14 @@ public class GameStateManager : MonoBehaviour
         {
             Instance = this;
         }
+    }
+
+    private void FixedUpdate()
+    {
+        #region Debug
+        _stateHistoryDisplay.Clear();
+        _stateHistoryDisplay.AddRange(_stateHistory);
+        #endregion
     }
 
     public void SetState(GameState newGameState)

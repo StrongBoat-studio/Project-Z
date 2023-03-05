@@ -14,7 +14,7 @@ public class Call_Event : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Z))
         {
-            if(_square.active==false)
+            if(_square.activeSelf == false)
             {
                 _resetVariables?.Invoke();
                 _square.SetActive(true);
@@ -25,7 +25,7 @@ public class Call_Event : MonoBehaviour
             }
         }
 
-        if(_square.active==true)
+        if(_square.activeSelf == true)
         {
             _qte?.Invoke();
         }

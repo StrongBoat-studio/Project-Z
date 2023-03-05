@@ -24,28 +24,28 @@ public class QTE_Manager : MonoBehaviour
     //QTE Variables
     private float _fillAmount = 0;
     private float _timeThresholdV = 0;
-    private bool _eventSuccess=true;
+    private bool _eventSuccess = true;
     private GameObject[] _array;
-    private int _lottery=0;
+    private int _lottery = 0;
     public System.Random generator = new System.Random();
-    private int _howManyLettersV=0;
+    private int _howManyLettersV = 0;
 
     //Action
-    private Action _action=null;
+    private Action _action = null;
 
 
     void Start()
     {
-        _array = new GameObject[] { j, k, l, m, o, p, t, u};
+        _array = new GameObject[] { j, k, l, m, o, p, t, u };
     }
 
     public void QteManager()
     {
-        if (_howManyLettersV<_howManyLetters)
-                {
-                    PrepareAction(EventSuccess, QTE);
-                    _action?.Invoke();
-                }
+        if (_howManyLettersV < _howManyLetters)
+        {
+            PrepareAction(EventSuccess, QTE);
+            _action?.Invoke();
+        }
     }
 
     public void ResetVariables()
@@ -79,7 +79,7 @@ public class QTE_Manager : MonoBehaviour
             _fillAmount = 0;
         }
 
-        if (_fillAmount >= 1 && _eventSuccess==false)
+        if (_fillAmount >= 1 && _eventSuccess == false)
         {
             _eventSuccess = true;
             _array[_lottery].SetActive(false);
@@ -105,7 +105,7 @@ public class QTE_Manager : MonoBehaviour
 
     private void SwitchLetter()
     {
-        switch(_lottery)
+        switch (_lottery)
         {
             case 0:
                 {
@@ -171,7 +171,7 @@ public class QTE_Manager : MonoBehaviour
                     }
                     break;
                 }
-            default: 
+            default:
                 {
                     break;
                 }

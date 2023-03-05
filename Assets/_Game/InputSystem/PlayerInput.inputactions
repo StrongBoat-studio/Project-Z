@@ -324,6 +324,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Crafting",
+            "id": "85dcd156-03e1-4ce7-ab3b-88bad42b3819",
+            "actions": [
+                {
+                    "name": "CloseExclusive",
+                    "type": "Button",
+                    "id": "57826911-c6d6-45ba-84f3-546430d6aa7b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "4fc252c5-1949-43d5-b2a8-276e59e5cd4b",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CloseExclusive",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
