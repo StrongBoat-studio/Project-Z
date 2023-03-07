@@ -857,6 +857,7 @@ GameObject:
   - component: {fileID: 155883244}
   - component: {fileID: 155883246}
   - component: {fileID: 155883245}
+  - component: {fileID: 155883247}
   m_Layer: 5
   m_Name: ItemImg
   m_TagString: Untagged
@@ -922,6 +923,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 155883243}
   m_CullTransparentMesh: 1
+--- !u!225 &155883247
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 155883243}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &167353388
 GameObject:
   m_ObjectHideFlags: 0
@@ -2183,6 +2196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f06785ae8d9e094e983e51ea10f40ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _crafting: {fileID: 535119225}
   _uiItemSlots:
   - {fileID: 521595998}
   - {fileID: 1633503414}
@@ -2190,7 +2204,7 @@ MonoBehaviour:
   - {fileID: 1169179765}
   - {fileID: 1867807812}
   _craftingProgress: {fileID: 130872363}
-  _crafting: {fileID: 535119225}
+  _fillStepTime: 0.2
 --- !u!224 &455644903
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2412,7 +2426,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6008527306713472095, guid: db497f29ee1a1254c987d9ed1d8bd933, type: 3}
       propertyPath: _itemType
-      value: 1
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6008527306713472095, guid: db497f29ee1a1254c987d9ed1d8bd933, type: 3}
       propertyPath: _item.amount
@@ -2743,10 +2757,10 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
+    x: 0.4166667
+    y: 0.03333333
+    width: 0.16666667
+    height: 0.16666666
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 37
@@ -2849,7 +2863,6 @@ GameObject:
   m_Component:
   - component: {fileID: 521595997}
   - component: {fileID: 521595998}
-  - component: {fileID: 521595999}
   m_Layer: 5
   m_Name: Slot 1
   m_TagString: Untagged
@@ -2893,19 +2906,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemType: 4
   _itemImage: {fileID: 1129811577}
+  _slideUp: 40
+  _slideUpTime: 0.2
+  _shakeDuration: 0.4
+  _shakeDirection: {x: 8, y: 0}
+  _qteDuration: 5
   _crafting: {fileID: 535119225}
---- !u!225 &521595999
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 521595996}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
 --- !u!1001 &531201976
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2967,7 +2973,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6008527306713472095, guid: db497f29ee1a1254c987d9ed1d8bd933, type: 3}
       propertyPath: _itemType
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6008527306713472095, guid: db497f29ee1a1254c987d9ed1d8bd933, type: 3}
       propertyPath: _item.amount
@@ -3035,6 +3041,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _uiCrafting: {fileID: 455644902}
   _craftingSprite: {fileID: 1397345202}
+  _recipe: 0400000001000000030000000500000006000000
+  _recipeOutput: 2
 --- !u!4 &535119227
 Transform:
   m_ObjectHideFlags: 0
@@ -3043,7 +3051,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 535119224}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1, y: -4, z: 0}
+  m_LocalPosition: {x: -1, y: -4.125, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3075,7 +3083,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.75, y: 0.75}
   m_EdgeRadius: 0
 --- !u!1 &611086802
 GameObject:
@@ -3088,6 +3096,7 @@ GameObject:
   - component: {fileID: 611086803}
   - component: {fileID: 611086805}
   - component: {fileID: 611086804}
+  - component: {fileID: 611086806}
   m_Layer: 5
   m_Name: ItemImg
   m_TagString: Untagged
@@ -3153,6 +3162,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 611086802}
   m_CullTransparentMesh: 1
+--- !u!225 &611086806
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 611086802}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -3275,6 +3296,7 @@ GameObject:
   - component: {fileID: 705267065}
   - component: {fileID: 705267067}
   - component: {fileID: 705267066}
+  - component: {fileID: 705267068}
   m_Layer: 5
   m_Name: ItemImg
   m_TagString: Untagged
@@ -3340,6 +3362,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705267064}
   m_CullTransparentMesh: 1
+--- !u!225 &705267068
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 705267064}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &735034972
 GameObject:
   m_ObjectHideFlags: 0
@@ -3390,7 +3424,7 @@ GameObject:
   m_Component:
   - component: {fileID: 745843630}
   m_Layer: 5
-  m_Name: OutputSlot
+  m_Name: Progressbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3922,6 +3956,7 @@ GameObject:
   - component: {fileID: 833853633}
   - component: {fileID: 833853635}
   - component: {fileID: 833853634}
+  - component: {fileID: 833853636}
   m_Layer: 5
   m_Name: ItemImg
   m_TagString: Untagged
@@ -3987,6 +4022,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 833853632}
   m_CullTransparentMesh: 1
+--- !u!225 &833853636
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833853632}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &905114350
 GameObject:
   m_ObjectHideFlags: 0
@@ -4549,6 +4596,7 @@ GameObject:
   - component: {fileID: 1129811576}
   - component: {fileID: 1129811578}
   - component: {fileID: 1129811577}
+  - component: {fileID: 1129811579}
   m_Layer: 5
   m_Name: ItemImg
   m_TagString: Untagged
@@ -4614,6 +4662,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1129811575}
   m_CullTransparentMesh: 1
+--- !u!225 &1129811579
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1129811575}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1134081707
 GameObject:
   m_ObjectHideFlags: 0
@@ -4761,7 +4821,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1169179764}
   - component: {fileID: 1169179765}
-  - component: {fileID: 1169179766}
   m_Layer: 5
   m_Name: Slot 4
   m_TagString: Untagged
@@ -4805,19 +4864,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemType: 5
   _itemImage: {fileID: 705267066}
+  _slideUp: 40
+  _slideUpTime: 0.2
+  _shakeDuration: 0.4
+  _shakeDirection: {x: 8, y: 0}
+  _qteDuration: 5
   _crafting: {fileID: 535119225}
---- !u!225 &1169179766
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1169179763}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
 --- !u!1 &1178829027
 GameObject:
   m_ObjectHideFlags: 0
@@ -5528,7 +5580,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1397345201}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.125, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5901,7 +5953,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1633503413}
   - component: {fileID: 1633503414}
-  - component: {fileID: 1633503415}
   m_Layer: 5
   m_Name: Slot 2
   m_TagString: Untagged
@@ -5945,19 +5996,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemType: 1
   _itemImage: {fileID: 611086804}
+  _slideUp: 40
+  _slideUpTime: 0.2
+  _shakeDuration: 0.4
+  _shakeDirection: {x: 8, y: 0}
+  _qteDuration: 5
   _crafting: {fileID: 535119225}
---- !u!225 &1633503415
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1633503412}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
 --- !u!1 &1664623130
 GameObject:
   m_ObjectHideFlags: 0
@@ -5968,7 +6012,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1664623131}
   - component: {fileID: 1664623132}
-  - component: {fileID: 1664623133}
   m_Layer: 5
   m_Name: Slot 3
   m_TagString: Untagged
@@ -6012,19 +6055,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemType: 3
   _itemImage: {fileID: 155883245}
+  _slideUp: 40
+  _slideUpTime: 0.2
+  _shakeDuration: 0.4
+  _shakeDirection: {x: 8, y: 0}
+  _qteDuration: 5
   _crafting: {fileID: 535119225}
---- !u!225 &1664623133
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1664623130}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
 --- !u!1 &1676156180
 GameObject:
   m_ObjectHideFlags: 0
@@ -6621,7 +6657,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1867807811}
   - component: {fileID: 1867807812}
-  - component: {fileID: 1867807813}
   m_Layer: 5
   m_Name: Slot 5
   m_TagString: Untagged
@@ -6665,19 +6700,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemType: 6
   _itemImage: {fileID: 833853634}
+  _slideUp: 40
+  _slideUpTime: 0.2
+  _shakeDuration: 0.4
+  _shakeDirection: {x: 8, y: 0}
+  _qteDuration: 5
   _crafting: {fileID: 535119225}
---- !u!225 &1867807813
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1867807810}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
 --- !u!1 &1871638783
 GameObject:
   m_ObjectHideFlags: 0

@@ -2232,7 +2232,7 @@ MonoBehaviour:
   p: {fileID: 1081654926}
   t: {fileID: 1648997516}
   u: {fileID: 1273709690}
-  _frameChange: 0.05
+  _frameChange: 0.15
   _timeThreshold: 0.05
   _howManyLettersV: 1
   _timeForQTECompleted: 0

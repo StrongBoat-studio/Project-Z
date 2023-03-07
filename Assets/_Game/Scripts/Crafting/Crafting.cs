@@ -6,19 +6,24 @@ using UnityEngine.Rendering;
 
 public class Crafting : MonoBehaviour, IInteractable
 {
-    [SerializeField] private UI_Crafting _uiCrafting;
+    [Tooltip("UI for this crafting table")]
+    [SerializeField] public UI_Crafting _uiCrafting;
+
+    [Tooltip("Sprite of this crafing table")]
     [SerializeField] private Transform _craftingSprite;
 
-    //Hard coded recipe for the ONE and ONLY crafting in the game!
-    //Will be used it in this crafting table only! YAAAAAAAAAAAAAAAY!!
-    private List<Item.ItemType> _recipe = new List<Item.ItemType>(){
+    [Tooltip("Recipe available for this crafing")]
+    [SerializeField] private List<Item.ItemType> _recipe = new List<Item.ItemType>(){
         Item.ItemType.Letter,
         Item.ItemType.CD,
         Item.ItemType.Key,
         Item.ItemType.PC,
         Item.ItemType.Potion
     };
-    private Item.ItemType _recipeOutput = Item.ItemType.Gun;
+    
+    [Tooltip("Item to be crafted")]
+    [SerializeField] private Item.ItemType _recipeOutput = Item.ItemType.Gun;
+    
     private List<Item.ItemType> _recipeProgress;
     private PlayerInput _playerInput;
     private LocalKeyword _OUTLINE_ON;
@@ -71,10 +76,52 @@ public class Crafting : MonoBehaviour, IInteractable
 
         if (GameManager.Instance != null && GameManager.Instance.player != null)
         {
+            Inventory pInv = GameManager.Instance.player.GetComponent<Player>().GetInventory();
+
             Item item = ItemRegister.Instance.GetNewItem(_recipeOutput);
             item.amount = 1;
-            GameManager.Instance.player.GetComponent<Player>().GetInventory().AddItem(item);
+            pInv.AddItem(item);
+            
+            foreach(var recipeItem in _recipeProgress)
+            {
+                if(pInv.GetInventoryItems().Find(x => x.itemType == recipeItem) != null)
+                {
+                    pInv.RemoveItem(recipeItem, 1);
+                }
+            }
         }
+    }
+
+    private void RefreshCraftingItems()
+    {
+        Player player = null;
+        if(GameManager.Instance != null && GameManager.Instance.player != null)
+        {
+            player = GameManager.Instance.player.GetComponent<Player>();
+        }
+
+        foreach(var slot in _uiCrafting.UIItemSlots)
+        {
+            slot.Reset();
+        }
+
+        List<Item> invItems = player.GetInventory().GetInventoryItems();
+        foreach(var item in _recipe)
+        {
+            if(
+                invItems.Find(x => x.itemType == item) != null &&
+                _uiCrafting.EmptySlot != null
+            )
+            {
+                _uiCrafting.EmptySlot.SetItem(item);
+            }
+        }
+    }
+
+    private void ResetCrafting()
+    {
+        _uiCrafting.Reset();
+        _recipeProgress.Clear();
     }
 
     public Item.ItemType GetNextCraftingStep()
@@ -99,6 +146,7 @@ public class Crafting : MonoBehaviour, IInteractable
         if (GameStateManager.Instance.GetCurrentState() == GameStateManager.GameState.Crafting)
         {
             GameStateManager.Instance.ResetLastState();
+            ResetCrafting();
         }
     }
 
@@ -132,6 +180,7 @@ public class Crafting : MonoBehaviour, IInteractable
         {
             GameStateManager.Instance.SetState(GameStateManager.GameState.Crafting);
             _uiCrafting.gameObject.SetActive(true);
+            RefreshCraftingItems();
         }
     }
 
