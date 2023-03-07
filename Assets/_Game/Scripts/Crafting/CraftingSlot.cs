@@ -40,7 +40,6 @@ public class CraftingSlot : MonoBehaviour, IPointerClickHandler
     private CanvasGroup _canvasGroup;
     private bool _interactable = true;
 
-    // Start is called before the first frame update
     void Awake()
     {
         DOTween.Init(true, true, LogBehaviour.Verbose).SetCapacity(200, 10);
@@ -49,7 +48,6 @@ public class CraftingSlot : MonoBehaviour, IPointerClickHandler
         SetItem(_itemType);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (_craftActive == false) return;
@@ -90,7 +88,8 @@ public class CraftingSlot : MonoBehaviour, IPointerClickHandler
         if (_selected == false)
         {
             Select();
-            QTEManager.Instance.QTEStart(QTEManager.Caller.Crafting, _qteDuration);
+            if(QTEManager.Instance != null) 
+                QTEManager.Instance.QTEStart(QTEManager.Caller.Crafting, _qteDuration);
             _craftActive = true;
         }
     }
@@ -111,14 +110,14 @@ public class CraftingSlot : MonoBehaviour, IPointerClickHandler
 
     public void Reset()
     {
+        if(_selected == true) Deselect(quick: true);
+        if(QTEManager.Instance != null) QTEManager.Instance.QTEStop();
+
         _itemType = Item.ItemType.None;
         _itemImage.sprite = null;
         _canvasGroup.alpha = 1f;
         _interactable = true;
-        _selected = false;
         _craftActive = false;
-
-        //QTE reset action needed for unplanned end of QTE
     }
 
     private void Select()
@@ -128,9 +127,18 @@ public class CraftingSlot : MonoBehaviour, IPointerClickHandler
         _interactable = false;
     }
 
-    private void Deselect()
+    private void Deselect(bool quick = false)
     {
+        if(quick == true)
+        {
+            Debug.Log("Quick deselect");
+            transform.localPosition = transform.localPosition - new Vector3(0f, _slideUp, 0f);
+            _selected = false;
+            return;
+        }
+
         transform.DOLocalMoveY(transform.localPosition.y - _slideUp, _slideUpTime);
         _selected = false;
+
     }
 }

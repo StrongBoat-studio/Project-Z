@@ -145,8 +145,8 @@ public class Crafting : MonoBehaviour, IInteractable
     {
         if (GameStateManager.Instance.GetCurrentState() == GameStateManager.GameState.Crafting)
         {
-            GameStateManager.Instance.ResetLastState();
             ResetCrafting();
+            GameStateManager.Instance.ResetLastState();
         }
     }
 
