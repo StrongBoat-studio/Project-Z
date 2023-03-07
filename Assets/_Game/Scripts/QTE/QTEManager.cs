@@ -113,6 +113,17 @@ public class QTEManager : MonoBehaviour
         _countingDown += CountingDown;
     }
 
+    //Stops QTE
+    public void QTEStop()
+    {
+        _qte -= QteManager;
+        _qteResult -= null;
+        _countingDown -= CountingDown;
+        _isSuccess = 0;
+
+        _array[_lottery].SetActive(false);
+    }
+
     private void EventSuccess()
     {
         _eventSuccess = false;

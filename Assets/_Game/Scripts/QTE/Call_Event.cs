@@ -28,6 +28,7 @@ public class Call_Event : MonoBehaviour
             else
             {
                 _square.SetActive(false);
+                QTEManager.Instance.QTEStop();
 
             }
         }
