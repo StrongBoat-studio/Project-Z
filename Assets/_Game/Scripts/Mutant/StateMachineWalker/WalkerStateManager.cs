@@ -82,6 +82,7 @@ public class WalkerStateManager : MonoBehaviour
     public int MLife { get { return _mLife; } set { _mLife = value; } }
     public float DistanceAttack { get { return _distanceAttack; } set { _distanceAttack = value;} }
     public GameObject M { get { return _m; } }
+    public Animator Animator { get { return _animator; } }
 
 
     //Ui 
@@ -96,6 +97,7 @@ public class WalkerStateManager : MonoBehaviour
 
     //Animations
     [SerializeField] private GameObject _alert;
+    [SerializeField] private Animator _animator;
 
 
     // Start is called before the first frame update

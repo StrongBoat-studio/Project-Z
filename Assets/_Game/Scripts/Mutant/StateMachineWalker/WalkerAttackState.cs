@@ -36,6 +36,7 @@ public class WalkerAttackState : WalkerBaseState
         _time -= Time.deltaTime;
         if (_time <= 0)
         {
+            Context.Animator.SetBool("IsAttack1", true);
             Context.PLife -= 10;
             _time = 1f;
         }

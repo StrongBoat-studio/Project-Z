@@ -35,14 +35,14 @@ public class WalkerPoToPoState : WalkerBaseState
         {
             Context.NextPos = Context.Pos2;
             Context.CheckVector = new Vector2(1f, 0f);
-            Context.Mutant.transform.localScale = new Vector3(-3, 3, 0);
+            Context.Mutant.transform.localScale = new Vector3(-1, 1, 0);
         }
 
         if (Context.transform.position == Context.Pos2)
         {
             Context.NextPos = Context.Pos1;
             Context.CheckVector = new Vector2(-1f, 0f);
-            Context.Mutant.transform.localScale = new Vector3(3, 3, 0);
+            Context.Mutant.transform.localScale = new Vector3(1, 1, 0);
         }
 
         Context.transform.position = Vector3.MoveTowards(Context.transform.position, Context.NextPos, Context.Speed * Time.deltaTime);
