@@ -9,12 +9,13 @@ public class GameStateManager : MonoBehaviour
         Gameplay,
         Paused,
         Dialogue,
-        Inventory
+        Inventory,
+        MainMenu
     }
 
     public static GameStateManager Instance { get; private set; }
 
-    private GameState _currentGameState;
+    private GameState _currentGameState = GameState.MainMenu;
     private Stack<GameState> _stateHistory = new Stack<GameState>();
 
     public delegate void GameStateChangeHandler(GameState newGameState);
@@ -53,5 +54,10 @@ public class GameStateManager : MonoBehaviour
     public GameState GetCurrentState()
     {
         return _currentGameState;
+    }
+
+    public void ResetGameStateStack()
+    {
+        _stateHistory.Clear();
     }
 }

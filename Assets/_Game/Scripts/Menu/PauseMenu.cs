@@ -51,6 +51,8 @@ public class PauseMenu : MonoBehaviour
 
     public void MainMenu()
     {
-        SceneManager.LoadSceneAsync((int)SceneRegister.Scenes.MainMenu);
+        SceneManager.LoadSceneAsync((int)SceneRegister.Scenes.MainMenu, LoadSceneMode.Additive);
+        SceneManager.UnloadSceneAsync((int)SceneRegister.Scenes.SampleScene);
+        AudioManager.Instance.CleanUp();
     }
 }
