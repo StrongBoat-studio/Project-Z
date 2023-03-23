@@ -19,6 +19,7 @@ public class WalkerAttackState : WalkerBaseState
         {
             walker.SwitchState(walker.PoToPoState);
             Context.M.SetActive(false);
+            Context.Animator.SetBool("IsAttack1", false);
         }
 
     }

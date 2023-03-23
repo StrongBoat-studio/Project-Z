@@ -18,10 +18,12 @@ public class WalkerStateManager : MonoBehaviour
 
     //Movement variables
     [SerializeField] private Vector3 _pos1, _pos2, _startPos;
-    [SerializeField] private GameObject _mutant, _player;
-    [SerializeField] private Transform _walker, _player2;
+    [SerializeField] private GameObject _mutant;
+    private GameObject _player;
+    [SerializeField] private Transform _walker;
+    private Transform _player2;
     private Vector3 nextPos;
-    [SerializeField] private Movement _movement; 
+    private Movement _movement; 
 
     //Stealth Settings for Designers
     [Header("Stealth Settings")]
@@ -103,6 +105,10 @@ public class WalkerStateManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _player = GameObject.FindGameObjectWithTag("Player");
+        _player2=GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        _movement= GameObject.FindGameObjectWithTag("Player").GetComponent<Movement>();
+
         currentState = PoToPoState;
         currentState.Context = this;
         currentState.EnterState(this);
