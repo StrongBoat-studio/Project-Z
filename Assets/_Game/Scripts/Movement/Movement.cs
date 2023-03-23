@@ -21,6 +21,7 @@ public class Movement : MonoBehaviour
     private PlayerInput _playerInput;
     private Rigidbody2D _rigidbody;
     private BoxCollider2D _boxCollider;
+    private Transform _transform;
 
     private int _movementState = (int)MovementState.Standing; //State of the player, represented ad bits 
     private float _movementSpeedCalculated = 0f;
@@ -50,6 +51,7 @@ public class Movement : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _boxCollider = GetComponent<BoxCollider2D>();
+        _transform = GetComponent<Transform>();
         _staminaCurrent = _staminaMax;
         _staminaRecoveryCurrentTime = _staminaRecoveryDelay;
 
@@ -91,6 +93,8 @@ public class Movement : MonoBehaviour
     private void Update()
     {
         CalculateStaminaChange();
+
+        ChangeSide();
     }
 
     private void FixedUpdate()
@@ -233,5 +237,18 @@ public class Movement : MonoBehaviour
             newGameState == GameStateManager.GameState.Dialogue
         ) _playerInput.InGame.Disable();
         else if(newGameState == GameStateManager.GameState.Gameplay) _playerInput.InGame.Enable();
+    }
+
+
+    void ChangeSide()
+    {
+        if (_playerInput.InGame.Walk.ReadValue<float>() < 0)
+        {
+            _transform.localScale = new Vector3(1, _transform.localScale.y, _transform.localScale.z);
+        }
+        else if (_playerInput.InGame.Walk.ReadValue<float>() > 0)
+        {
+            _transform.localScale = new Vector3(-1, _transform.localScale.y, _transform.localScale.z);
+        }
     }
 }
