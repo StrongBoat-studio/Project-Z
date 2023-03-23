@@ -29,6 +29,7 @@ public class MainMenu : MonoBehaviour
 
     public void BtnStart()
     {
+        // AUDIO
         Debug.Log("start");
         Destroy(GameObject.Find("EventSystem"));
 
@@ -42,6 +43,9 @@ public class MainMenu : MonoBehaviour
             SceneManager.UnloadSceneAsync((int)SceneRegister.Scenes.MainMenu);
             AudioManager.Instance.InitializeMainTheme(FMODEvents.Instance.MainTheme);
         };
+
+        //LEVEL LOADEr
+        StartCoroutine("StartGame");
     }
 
     public void BtnOptions()
@@ -71,5 +75,35 @@ public class MainMenu : MonoBehaviour
         {
             AudioManager.Instance.PlayOneShot(FMODEvents.Instance.UIButtonHover, transform.position);
         }
+    }
+    
+    private IEnumerator StartGame()
+    {
+        Queue<(SceneRegister.Scenes scene, bool load)> ops = new Queue<(SceneRegister.Scenes scene, bool load)>();
+        ops.Enqueue((SceneRegister.Scenes.GameManagers, true));
+        ops.Enqueue((SceneRegister.Scenes.Player, true));
+        ops.Enqueue((SceneRegister.Scenes.SampleScene, true));
+        ops.Enqueue((SceneRegister.Scenes.MainMenu, false));
+
+        Destroy(GameObject.Find("EventSystem"));
+
+        while (ops.Count > 0)
+        {
+            AsyncOperation aop;
+            var op = ops.Dequeue();
+            if(op.load == true)
+            {
+                aop = SceneManager.LoadSceneAsync((int)op.scene, LoadSceneMode.Additive);
+            }
+            else
+            {
+                aop = SceneManager.UnloadSceneAsync((int)op.scene);
+            }
+
+            yield return new WaitUntil(() => aop.isDone == true);
+        }
+
+        Debug.Log("Game done loading");
+        yield return null;
     }
 }
