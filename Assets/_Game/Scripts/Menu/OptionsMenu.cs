@@ -10,15 +10,21 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public class OptionsMenu : MonoBehaviour
 {
-    //Resolution
+    // Resolution
     [SerializeField] private TMP_Dropdown _resolutionsDropdown;
     private List<Resolution> _resolutions;
 
-    //Fullscreen
+    // Fullscreen
     [SerializeField] private Toggle _fullscreenToggle;
 
-    //Quality
+    // Quality
     [SerializeField] private TMP_Dropdown _qualityDropdown;
+
+    // Audio
+    [SerializeField] private Slider _masterVolumeSlider;
+    [SerializeField] private Slider _sfxVolumeSlider;
+    [SerializeField] private Slider _musicVolumeSlider;
+    [SerializeField] private Slider _ambienceVolumeSlider;
 
     private void Start()
     {
@@ -63,7 +69,8 @@ public class OptionsMenu : MonoBehaviour
                     Screen.currentResolution.height,
                     Screen.currentResolution.refreshRate,
                     QualitySettings.GetQualityLevel(),
-                    true
+                    true,
+                    1f,1f,1f,1f
                 );
                 bf.Serialize(file, data);
             
@@ -85,6 +92,20 @@ public class OptionsMenu : MonoBehaviour
             //Set quality dropdown
             _qualityDropdown.value = data.qualLevel;
             _qualityDropdown.RefreshShownValue();
+
+            //Set audio volume
+            if(AudioManager.Instance != null)
+            {
+                AudioManager.Instance.masterVolume = data.masterVolume;
+                AudioManager.Instance.sfxVolume = data.sfxVolume;
+                AudioManager.Instance.musicVolume = data.musicVolume;
+                AudioManager.Instance.ambienceVolume = data.ambienceVolume;
+
+                _masterVolumeSlider.value = data.masterVolume;
+                _sfxVolumeSlider.value = data.sfxVolume;
+                _musicVolumeSlider.value = data.musicVolume;
+                _ambienceVolumeSlider.value = data.ambienceVolume;
+            }
         }
         else
         {
@@ -96,7 +117,8 @@ public class OptionsMenu : MonoBehaviour
                 Screen.currentResolution.height,
                 Screen.currentResolution.refreshRate,
                 QualitySettings.GetQualityLevel(),
-                true
+                true,
+                1f,1f,1f,1f
             );
             bf.Serialize(file, defualtData);
 
@@ -116,6 +138,20 @@ public class OptionsMenu : MonoBehaviour
             //Set quality dropdown
             _qualityDropdown.value = defualtData.qualLevel;
             _qualityDropdown.RefreshShownValue();
+
+            //Set audio volume
+            if(AudioManager.Instance != null)
+            {
+                AudioManager.Instance.masterVolume = defualtData.masterVolume;
+                AudioManager.Instance.sfxVolume = defualtData.sfxVolume;
+                AudioManager.Instance.musicVolume = defualtData.musicVolume;
+                AudioManager.Instance.ambienceVolume = defualtData.ambienceVolume;
+
+                _masterVolumeSlider.value = defualtData.masterVolume;
+                _sfxVolumeSlider.value = defualtData.sfxVolume;
+                _musicVolumeSlider.value = defualtData.musicVolume;
+                _ambienceVolumeSlider.value = defualtData.ambienceVolume;
+            }
         }
     }
 
@@ -147,6 +183,42 @@ public class OptionsMenu : MonoBehaviour
         SceneManager.UnloadSceneAsync((int)SceneRegister.Scenes.OptionsMenu);
     }
 
+    public void SetMasterVolume()
+    {
+        if(AudioManager.Instance != null)
+        {
+            AudioManager.Instance.masterVolume = _masterVolumeSlider.value;
+            SaveOptions();
+        }
+    }
+
+    public void SetSFXVolume()
+    {
+        if(AudioManager.Instance != null)
+        {
+            AudioManager.Instance.sfxVolume = _sfxVolumeSlider.value;
+            SaveOptions();
+        }
+    }
+
+    public void SetMusicVolume()
+    {
+        if(AudioManager.Instance != null)
+        {
+            AudioManager.Instance.musicVolume = _musicVolumeSlider.value;
+            SaveOptions();
+        }
+    }
+
+    public void SetAmbienceVolume()
+    {
+        if(AudioManager.Instance != null)
+        {
+            AudioManager.Instance.ambienceVolume = _ambienceVolumeSlider.value;
+            SaveOptions();
+        }
+    }
+
     private void SaveOptions()
     {
         string destination = Application.persistentDataPath + "/options.dat";
@@ -160,14 +232,18 @@ public class OptionsMenu : MonoBehaviour
             _resolutions[_resolutionsDropdown.value].height,
             _resolutions[_resolutionsDropdown.value].refreshRate,
             _qualityDropdown.value,
-            _fullscreenToggle.isOn
+            _fullscreenToggle.isOn,
+            (AudioManager.Instance != null) ? AudioManager.Instance.masterVolume : 1f,
+            (AudioManager.Instance != null) ? AudioManager.Instance.sfxVolume : 1f,
+            (AudioManager.Instance != null) ? AudioManager.Instance.musicVolume : 1f,
+            (AudioManager.Instance != null) ? AudioManager.Instance.ambienceVolume : 1f
         );
         BinaryFormatter bf = new BinaryFormatter();
         bf.Serialize(file, data);
         file.Close();
 
         Debug.Log(
-            "Save: " + data.resWidth + ", " + data.resHeight + ", " + data.qualLevel + ", " + data.isFullscreen
+            $"Save: Res {data.resWidth}x{data.resHeight}, FS {data.isFullscreen}, Qual {data.qualLevel}, Vols ma{data.masterVolume}/mu{data.musicVolume}/sfx{data.sfxVolume}/am{data.ambienceVolume}"
         );
     }
 }

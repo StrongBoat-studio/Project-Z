@@ -221,4 +221,17 @@ public class DialogueManager : MonoBehaviour
         }
         _isTyping = false;
     }
+
+    ///<summary>
+    ///Resets manager values
+    ///</summary>
+    public void Reset()
+    {
+        _storyQueue.Clear();
+        if(_currentStory != null)
+        {
+            _currentStory = null;
+            _canvas.gameObject.SetActive(false);
+        }
+    }
 }

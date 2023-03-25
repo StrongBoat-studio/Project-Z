@@ -29,22 +29,6 @@ public class MainMenu : MonoBehaviour
 
     public void BtnStart()
     {
-        // AUDIO
-        Debug.Log("start");
-        Destroy(GameObject.Find("EventSystem"));
-
-        SceneManager.LoadSceneAsync(
-            (int)SceneRegister.Scenes.SampleScene,
-            LoadSceneMode.Additive
-        ).completed += delegate
-        {
-            GameStateManager.Instance.ResetGameStateStack();
-            GameStateManager.Instance.SetState(GameStateManager.GameState.Gameplay);
-            SceneManager.UnloadSceneAsync((int)SceneRegister.Scenes.MainMenu);
-            AudioManager.Instance.InitializeMainTheme(FMODEvents.Instance.MainTheme);
-        };
-
-        //LEVEL LOADEr
         StartCoroutine("StartGame");
     }
 
@@ -79,13 +63,11 @@ public class MainMenu : MonoBehaviour
     
     private IEnumerator StartGame()
     {
+        // Load/Unload scenes
         Queue<(SceneRegister.Scenes scene, bool load)> ops = new Queue<(SceneRegister.Scenes scene, bool load)>();
-        ops.Enqueue((SceneRegister.Scenes.GameManagers, true));
         ops.Enqueue((SceneRegister.Scenes.Player, true));
         ops.Enqueue((SceneRegister.Scenes.SampleScene, true));
         ops.Enqueue((SceneRegister.Scenes.MainMenu, false));
-
-        Destroy(GameObject.Find("EventSystem"));
 
         while (ops.Count > 0)
         {
@@ -102,6 +84,14 @@ public class MainMenu : MonoBehaviour
 
             yield return new WaitUntil(() => aop.isDone == true);
         }
+
+        // Init managers 
+        GameManager.Instance.Reset();
+        DialogueManager.Instance.Reset();
+
+        GameStateManager.Instance.ResetGameStateStack();
+        GameStateManager.Instance.SetState(GameStateManager.GameState.Gameplay);
+        AudioManager.Instance.InitializeMainTheme(FMODEvents.Instance.MainTheme);
 
         Debug.Log("Game done loading");
         yield return null;

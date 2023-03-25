@@ -37,7 +37,7 @@ public class AudioManager : MonoBehaviour
     [Range(0, 1)]
     public float ambienceVolume = 1;
     [Range(0, 1)]
-    public float SFXVolume = 1;
+    public float sfxVolume = 1;
 
     private Bus _masterBus;
     private Bus _musicBus;
@@ -46,6 +46,14 @@ public class AudioManager : MonoBehaviour
 
     private List<EventInstance> eventInstances;
     private EventInstance _mainThemeEventInstance;
+
+    private void Update()
+    {
+        _masterBus.setVolume(masterVolume);
+        _sfxBus.setVolume(sfxVolume);
+        _musicBus.setVolume(musicVolume);
+        _ambienceBus.setVolume(ambienceVolume);
+    }
 
     public void PlayOneShot(EventReference eventRef, Vector3 position)
     {

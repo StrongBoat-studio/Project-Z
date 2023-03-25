@@ -21,4 +21,9 @@ public class GameManager : MonoBehaviour
     }
     
     public Transform player;
+
+    public void Reset()
+    {
+        player = null;
+    }
 } 

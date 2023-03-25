@@ -35,7 +35,8 @@ public class OptionsLoadStartUp
                     Screen.currentResolution.height,
                     Screen.currentResolution.refreshRate,
                     QualitySettings.GetQualityLevel(),
-                    true
+                    true,
+                    1f,1f,1f,1f
                 );
                 bf.Serialize(file, data);
             
@@ -48,6 +49,13 @@ public class OptionsLoadStartUp
             Screen.SetResolution(data.resWidth, data.resHeight, data.isFullscreen, data.resRefreshRate);
             QualitySettings.SetQualityLevel(data.qualLevel);
             
+            if(AudioManager.Instance != null)
+            {
+                AudioManager.Instance.masterVolume = data.masterVolume;
+                AudioManager.Instance.sfxVolume = data.sfxVolume;
+                AudioManager.Instance.musicVolume = data.musicVolume;
+                AudioManager.Instance.ambienceVolume = data.ambienceVolume;
+            }
         }
         else
         {
@@ -59,9 +67,18 @@ public class OptionsLoadStartUp
                 Screen.currentResolution.height,
                 Screen.currentResolution.refreshRate,
                 QualitySettings.GetQualityLevel(),
-                true
+                true,
+                1f,1f,1f,1f
             );
             bf.Serialize(file, defualtData);
+
+            if(AudioManager.Instance != null)
+            {
+                AudioManager.Instance.masterVolume = 1f;
+                AudioManager.Instance.sfxVolume = 1f;
+                AudioManager.Instance.musicVolume = 1f;
+                AudioManager.Instance.ambienceVolume = 1f;
+            }
             
             file.Close();
         } 
