@@ -7,6 +7,7 @@ public class BulletController : MonoBehaviour
     private float _speed = 20f;
     private Rigidbody2D _rigidbody2D;
     private WalkerStateManager _walkerStateManager;
+    private Transform _player;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +18,8 @@ public class BulletController : MonoBehaviour
 
     private void Update()
     {
-        if(transform.position.x>6f || transform.position.x < -6f)
+        _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        if(transform.position.x>_player.position.x+6f || transform.position.x < _player.position.x - 6f)
             Destroy(gameObject);
     }
 

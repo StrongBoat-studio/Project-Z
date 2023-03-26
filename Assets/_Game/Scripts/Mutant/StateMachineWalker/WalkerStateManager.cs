@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using TMPro;
-using UnityEngine.SceneManagement;
 
 public class WalkerStateManager : MonoBehaviour
 {
@@ -130,16 +129,6 @@ public class WalkerStateManager : MonoBehaviour
         _lifeP.text="Player life: "+Mathf.Clamp(_pLife, 0, int.MaxValue).ToString();
         _lifeM.text = "Mutant life: " + Mathf.Clamp(_mLife, 0, int.MaxValue).ToString();
 
-        if (_pLife == 0)
-        {
-            SceneManager.LoadScene(1);
-        }
-
-        if (_mLife == 0)
-        {
-            SwitchState(DeathState);
-            SceneManager.LoadScene(2);
-        }
     }
 
     public void SwitchState (WalkerBaseState state)
@@ -155,6 +144,7 @@ public class WalkerStateManager : MonoBehaviour
         if(_mLife<=0)
         {
             _mutant.SetActive(false);
+            _alert.SetActive(false);
             _lifeM.text = "Mutant life: 0";
         }
     }
