@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Net.NetworkInformation;
 using TMPro;
 using UnityEngine;
-using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
 
 public class HeavyStateManager : MonoBehaviour

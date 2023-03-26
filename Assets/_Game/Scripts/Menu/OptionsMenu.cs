@@ -5,23 +5,33 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 using System;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 
 public class OptionsMenu : MonoBehaviour
 {
-    //Resolution
+    // Resolution
     [SerializeField] private TMP_Dropdown _resolutionsDropdown;
     private List<Resolution> _resolutions;
 
-    //Fullscreen
+    // Fullscreen
     [SerializeField] private Toggle _fullscreenToggle;
 
-    //Quality
+    // Quality
     [SerializeField] private TMP_Dropdown _qualityDropdown;
+
+    // Audio
+    [SerializeField] private Slider _masterVolumeSlider;
+    [SerializeField] private Slider _sfxVolumeSlider;
+    [SerializeField] private Slider _musicVolumeSlider;
+    [SerializeField] private Slider _ambienceVolumeSlider;
 
     private void Start()
     {
+        if(SettingsManager.Instance == null)
+        {
+            Debug.LogError("SettingsManager is null!");
+            return;
+        }
+
         //Set resolurion dropdown
         _resolutions = new List<Resolution>();
         _resolutions.AddRange(Screen.resolutions);
@@ -34,89 +44,31 @@ public class OptionsMenu : MonoBehaviour
         _resolutionsDropdown.ClearOptions();
         _resolutionsDropdown.AddOptions(_resolutionsText);
 
-        //Get save data
-        string destination = Application.persistentDataPath + "/options.dat";
-        BinaryFormatter bf = new BinaryFormatter();
-        FileStream file;
+        //Find resolution based on settings
+        _resolutionsDropdown.value = _resolutions.FindIndex(x =>
+            x.width == SettingsManager.Instance.settingsData.resWidth &&
+            x.height == SettingsManager.Instance.settingsData.resHeight &&
+            x.refreshRate == SettingsManager.Instance.settingsData.resRefreshRate
+        );
+        _resolutionsDropdown.RefreshShownValue();
+        Debug.Log($"SM {SettingsManager.Instance.settingsData.isFullscreen}, {SettingsManager.Instance.settingsData.qualLevel}");
 
-        if (File.Exists(destination))
+        //Set fullscreen toggle
+        _fullscreenToggle.isOn = SettingsManager.Instance.settingsData.isFullscreen;
+
+        //Set quality dropdown
+        _qualityDropdown.value = SettingsManager.Instance.settingsData.qualLevel;
+        _qualityDropdown.RefreshShownValue();
+
+        //Set audio volume
+        if (AudioManager.Instance != null)
         {
-            //Open setting file
-            OptionsMenuSave data;
-            file = File.OpenRead(destination);
-
-            try
-            {
-                //Check if deserialization didn't encouter any excpetions
-                data = (OptionsMenuSave)bf.Deserialize(file);
-            }
-            catch
-            {
-                //Deseriazlization ended with and expetion (file could have been modified)
-                //Open settings file to write
-                file.Close();
-                file = File.OpenWrite(destination);
-
-                //Create a new settings data with current screen settings
-                data = new OptionsMenuSave(
-                    Screen.currentResolution.width,
-                    Screen.currentResolution.height,
-                    Screen.currentResolution.refreshRate,
-                    QualitySettings.GetQualityLevel(),
-                    true
-                );
-                bf.Serialize(file, data);
-            
-                file.Close();
-            }
-            file.Close();
-
-            //Find resolution based on settings
-            _resolutionsDropdown.value = _resolutions.FindIndex(x =>
-                x.width == data.resWidth &&
-                x.height == data.resHeight &&
-                x.refreshRate == data.resRefreshRate
-            );
-            _resolutionsDropdown.RefreshShownValue();
-
-            //Set fullscreen toggle
-            _fullscreenToggle.isOn = data.isFullscreen;
-
-            //Set quality dropdown
-            _qualityDropdown.value = data.qualLevel;
-            _qualityDropdown.RefreshShownValue();
+            _masterVolumeSlider.value = SettingsManager.Instance.settingsData.masterVolume;
+            _sfxVolumeSlider.value = SettingsManager.Instance.settingsData.sfxVolume;
+            _musicVolumeSlider.value = SettingsManager.Instance.settingsData.musicVolume;
+            _ambienceVolumeSlider.value = SettingsManager.Instance.settingsData.ambienceVolume;   
         }
-        else
-        {
-            //If file does not exist (or was deleted during gameplay), create it and save current screen data as options data
-            file = File.Create(destination);
-
-            var defualtData = new OptionsMenuSave(
-                Screen.currentResolution.width,
-                Screen.currentResolution.height,
-                Screen.currentResolution.refreshRate,
-                QualitySettings.GetQualityLevel(),
-                true
-            );
-            bf.Serialize(file, defualtData);
-
-            file.Close();
-
-            //Find resolution based on settings
-            _resolutionsDropdown.value = _resolutions.FindIndex(x =>
-                x.width == defualtData.resWidth &&
-                x.height == defualtData.resHeight &&
-                x.refreshRate == defualtData.resRefreshRate
-            );
-            _resolutionsDropdown.RefreshShownValue();
-
-            //Set fullscreen toggle
-            _fullscreenToggle.isOn = defualtData.isFullscreen;
-
-            //Set quality dropdown
-            _qualityDropdown.value = defualtData.qualLevel;
-            _qualityDropdown.RefreshShownValue();
-        }
+        else Debug.LogError("AudioMananger is null!");
     }
 
     public void SetResolution()
@@ -127,48 +79,73 @@ public class OptionsMenu : MonoBehaviour
             Screen.fullScreen,
             _resolutions[_resolutionsDropdown.value].refreshRate
         );
-        SaveOptions();
     }
 
     public void SetFullscreen()
     {
         Screen.fullScreen = _fullscreenToggle.isOn;
-        SaveOptions();
     }
 
     public void SetQuality()
     {
         QualitySettings.SetQualityLevel(_qualityDropdown.value);
-        SaveOptions();
+    }
+
+    public void SetAudio(string bus)
+    {
+        if(AudioManager.Instance == null)
+        {
+            Debug.LogError("AudioManager in null");
+            return;
+        }
+
+        switch(bus)
+        {
+            case "Master":
+                AudioManager.Instance.UpdateVolume(AudioManager.VolumeBus.Master, _masterVolumeSlider.value);
+                break;
+            case "Music":
+                AudioManager.Instance.UpdateVolume(AudioManager.VolumeBus.Music, _musicVolumeSlider.value);
+                break;
+            case "SFX":
+                AudioManager.Instance.UpdateVolume(AudioManager.VolumeBus.SFX, _sfxVolumeSlider.value);
+                break;
+            case "Ambience":
+                AudioManager.Instance.UpdateVolume(AudioManager.VolumeBus.Ambience, _ambienceVolumeSlider.value);
+                break;
+        }
     }
 
     public void MenuButton()
     {
+        SettingsManager.Instance.LoadSettings();
         SceneManager.UnloadSceneAsync((int)SceneRegister.Scenes.OptionsMenu);
     }
 
-    private void SaveOptions()
+    public void SaveOptions()
     {
-        string destination = Application.persistentDataPath + "/options.dat";
-        FileStream file;
+        if (SettingsManager.Instance == null) 
+        {
+            Debug.LogError("No SettingsManager in scene!");
+            return;
+        }
 
-        if (File.Exists(destination)) file = File.OpenWrite(destination);
-        else file = File.Create(destination);
+        SettingsManager.Instance.settingsData.resWidth = _resolutions[_resolutionsDropdown.value].width;
+        SettingsManager.Instance.settingsData.resHeight = _resolutions[_resolutionsDropdown.value].height;
+        SettingsManager.Instance.settingsData.resRefreshRate = _resolutions[_resolutionsDropdown.value].refreshRate;
+        SettingsManager.Instance.settingsData.isFullscreen = _fullscreenToggle.isOn;
+        SettingsManager.Instance.settingsData.qualLevel = _qualityDropdown.value;
 
-        OptionsMenuSave data = new OptionsMenuSave(
-            _resolutions[_resolutionsDropdown.value].width,
-            _resolutions[_resolutionsDropdown.value].height,
-            _resolutions[_resolutionsDropdown.value].refreshRate,
-            _qualityDropdown.value,
-            _fullscreenToggle.isOn
-        );
-        BinaryFormatter bf = new BinaryFormatter();
-        bf.Serialize(file, data);
-        file.Close();
+        if (AudioManager.Instance != null)
+        {
+            SettingsManager.Instance.settingsData.masterVolume = _masterVolumeSlider.value;
+            SettingsManager.Instance.settingsData.sfxVolume = _sfxVolumeSlider.value;
+            SettingsManager.Instance.settingsData.musicVolume = _musicVolumeSlider.value;
+            SettingsManager.Instance.settingsData.ambienceVolume = _ambienceVolumeSlider.value;
+        }
+        else Debug.LogError("No AudioManager in scene!");
 
-        Debug.Log(
-            "Save: " + data.resWidth + ", " + data.resHeight + ", " + data.qualLevel + ", " + data.isFullscreen
-        );
+        SettingsManager.Instance.SaveSettings();
     }
 }
 

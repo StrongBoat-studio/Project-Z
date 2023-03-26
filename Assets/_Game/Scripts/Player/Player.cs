@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     private int _hp = 100;
 
     private Inventory _inventory;
-    [SerializeField] private RectTransform _uiInventory;
+    private RectTransform _uiInventory;
 
     [SerializeField] DialogueController _lowHP;
 
@@ -27,7 +27,10 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log("Player Start");
         _inventory = new Inventory();
+
+        _uiInventory = FindObjectOfType<UI_Inventory>().GetComponent<RectTransform>();
         _uiInventory.GetComponent<UI_Inventory>().SetInventory(_inventory);
         _uiInventory.GetComponent<UI_Inventory>().SetPlayer(transform);
     }
@@ -40,16 +43,19 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void Destroy()
+    private void OnDestroy()
     {
+        if(GameManager.Instance != null) GameManager.Instance.player = null;
         _playerInput.Inventory.Open.performed -= OnInventoryOpen;
         _playerInput.Inventory.CloseExclusive.performed -= OnInventoryCloseExclusive;
         GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+        Debug.Log("Player Destroy");
     }
 
     private void OnGameStateChanged(GameStateManager.GameState newGameState)
     {
         _uiInventory.GetComponent<UI_Inventory>().ToggleInventoryPanel(newGameState == GameStateManager.GameState.Inventory);
+        
         if(newGameState == GameStateManager.GameState.Paused) _playerInput.Inventory.Disable();
         else _playerInput.Inventory.Enable();
     }

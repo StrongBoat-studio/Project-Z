@@ -346,6 +346,34 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Crafting"",
+            ""id"": ""85dcd156-03e1-4ce7-ab3b-88bad42b3819"",
+            ""actions"": [
+                {
+                    ""name"": ""CloseExclusive"",
+                    ""type"": ""Button"",
+                    ""id"": ""57826911-c6d6-45ba-84f3-546430d6aa7b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""4fc252c5-1949-43d5-b2a8-276e59e5cd4b"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CloseExclusive"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -372,6 +400,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_Dialogue = asset.FindActionMap("Dialogue", throwIfNotFound: true);
         m_Dialogue_ContinueKbd = m_Dialogue.FindAction("ContinueKbd", throwIfNotFound: true);
         m_Dialogue_ContinueMouse = m_Dialogue.FindAction("ContinueMouse", throwIfNotFound: true);
+        // Crafting
+        m_Crafting = asset.FindActionMap("Crafting", throwIfNotFound: true);
+        m_Crafting_CloseExclusive = m_Crafting.FindAction("CloseExclusive", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -648,6 +679,39 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         }
     }
     public DialogueActions @Dialogue => new DialogueActions(this);
+
+    // Crafting
+    private readonly InputActionMap m_Crafting;
+    private ICraftingActions m_CraftingActionsCallbackInterface;
+    private readonly InputAction m_Crafting_CloseExclusive;
+    public struct CraftingActions
+    {
+        private @PlayerInput m_Wrapper;
+        public CraftingActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @CloseExclusive => m_Wrapper.m_Crafting_CloseExclusive;
+        public InputActionMap Get() { return m_Wrapper.m_Crafting; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CraftingActions set) { return set.Get(); }
+        public void SetCallbacks(ICraftingActions instance)
+        {
+            if (m_Wrapper.m_CraftingActionsCallbackInterface != null)
+            {
+                @CloseExclusive.started -= m_Wrapper.m_CraftingActionsCallbackInterface.OnCloseExclusive;
+                @CloseExclusive.performed -= m_Wrapper.m_CraftingActionsCallbackInterface.OnCloseExclusive;
+                @CloseExclusive.canceled -= m_Wrapper.m_CraftingActionsCallbackInterface.OnCloseExclusive;
+            }
+            m_Wrapper.m_CraftingActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @CloseExclusive.started += instance.OnCloseExclusive;
+                @CloseExclusive.performed += instance.OnCloseExclusive;
+                @CloseExclusive.canceled += instance.OnCloseExclusive;
+            }
+        }
+    }
+    public CraftingActions @Crafting => new CraftingActions(this);
     public interface IInGameActions
     {
         void OnWalk(InputAction.CallbackContext context);
@@ -674,5 +738,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     {
         void OnContinueKbd(InputAction.CallbackContext context);
         void OnContinueMouse(InputAction.CallbackContext context);
+    }
+    public interface ICraftingActions
+    {
+        void OnCloseExclusive(InputAction.CallbackContext context);
     }
 }
