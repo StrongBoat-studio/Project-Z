@@ -2450,12 +2450,12 @@ MonoBehaviour:
   _mutant: {fileID: 1118930161}
   _walker: {fileID: 1118930163}
   _speed: 2
-  _distanceChaseFront: 6
-  _distanceChaseBack: 3
-  _distanceAttack: 1.5
+  _distanceChaseFront: 4
+  _distanceChaseBack: 2
+  _distanceAttack: 1
   _secondOfSleepFront: 6
   _secondOfSleepBack: 2
-  _distanceLineOfHearing: 8
+  _distanceLineOfHearing: 6
   _secondHearingNormally: 3
   _secondHearingCrounching: 10
   _secondsElapsed: 0
