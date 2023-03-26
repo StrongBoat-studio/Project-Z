@@ -10,12 +10,13 @@ public class GameStateManager : MonoBehaviour
         Paused,
         Dialogue,
         Inventory,
-        Crafting
+        Crafting,
+        MainMenu
     }
 
     public static GameStateManager Instance { get; private set; }
 
-    private GameState _currentGameState;
+    private GameState _currentGameState = GameState.MainMenu;
     private Stack<GameState> _stateHistory = new Stack<GameState>();
 
     #region Debug
@@ -71,5 +72,10 @@ public class GameStateManager : MonoBehaviour
     public bool HasStateInHistory(GameState state)
     {
         return _stateHistory.Contains(state);
+    }
+    
+    public void ResetGameStateStack()
+    {
+        _stateHistory.Clear();
     }
 }
