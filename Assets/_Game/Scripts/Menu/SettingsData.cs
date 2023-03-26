@@ -1,5 +1,5 @@
 [System.Serializable]
-public class OptionsMenuSave
+public class SettingsData
 {
     public int resWidth;
     public int resHeight;
@@ -11,7 +11,7 @@ public class OptionsMenuSave
     public float musicVolume;
     public float ambienceVolume;
 
-    public OptionsMenuSave(
+    public SettingsData(
         int resWidth, int resHeight, int resRefreshRate, int qualLevel, bool isFullscreen,
         float masterVolume, float sfxVolume, float musicVolume, float ambienceVolume)
     {

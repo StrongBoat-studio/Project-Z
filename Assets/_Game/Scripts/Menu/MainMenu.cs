@@ -14,17 +14,21 @@ public class MainMenu : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("Main menu awake");
         // Load GameManagers scene at startup (when menu is loaded)
         // Don't load if GameManagers scene is already present
         // Clear game state stack and set MainMenu gamestate
+        bool gameManagerPresent = false;
         for (int i = 0; i < SceneManager.sceneCount; i++)
-            if (SceneManager.GetSceneAt(i).buildIndex == (int)SceneRegister.Scenes.GameManagers) return;
+        {
+            if (SceneManager.GetSceneAt(i).buildIndex == (int)SceneRegister.Scenes.GameManagers) 
+            {
+                gameManagerPresent = true;
+                break;
+            }
+        }
 
-        SceneManager.LoadSceneAsync((int)SceneRegister.Scenes.GameManagers, LoadSceneMode.Additive);
-
-        GameStateManager.Instance.ResetGameStateStack();
-        GameStateManager.Instance.SetState(GameStateManager.GameState.MainMenu);
+        if(gameManagerPresent == false)
+            SceneManager.LoadSceneAsync((int)SceneRegister.Scenes.GameManagers, LoadSceneMode.Additive);
     }
 
     public void BtnStart()
@@ -63,11 +67,24 @@ public class MainMenu : MonoBehaviour
     
     private IEnumerator StartGame()
     {
+        yield return new WaitUntil( () => 
+            GameManager.Instance != null &&
+            DialogueManager.Instance != null &&
+            GameStateManager.Instance != null &&
+            AudioManager.Instance != null
+        );
+        // Init managers 
+        GameManager.Instance.Reset();
+        DialogueManager.Instance.Reset();
+
+        GameStateManager.Instance.ResetGameStateStack();
+        GameStateManager.Instance.SetState(GameStateManager.GameState.Gameplay);
+        AudioManager.Instance.InitializeMainTheme(FMODEvents.Instance.MainTheme);
+
         // Load/Unload scenes
         Queue<(SceneRegister.Scenes scene, bool load)> ops = new Queue<(SceneRegister.Scenes scene, bool load)>();
-        ops.Enqueue((SceneRegister.Scenes.Player, true));
         ops.Enqueue((SceneRegister.Scenes.SampleScene, true));
-        ops.Enqueue((SceneRegister.Scenes.MainMenu, false));
+        ops.Enqueue((SceneRegister.Scenes.Player, true));
 
         while (ops.Count > 0)
         {
@@ -85,15 +102,8 @@ public class MainMenu : MonoBehaviour
             yield return new WaitUntil(() => aop.isDone == true);
         }
 
-        // Init managers 
-        GameManager.Instance.Reset();
-        DialogueManager.Instance.Reset();
-
-        GameStateManager.Instance.ResetGameStateStack();
-        GameStateManager.Instance.SetState(GameStateManager.GameState.Gameplay);
-        AudioManager.Instance.InitializeMainTheme(FMODEvents.Instance.MainTheme);
-
         Debug.Log("Game done loading");
+        SceneManager.UnloadSceneAsync((int)SceneRegister.Scenes.MainMenu);
         yield return null;
     }
 }
