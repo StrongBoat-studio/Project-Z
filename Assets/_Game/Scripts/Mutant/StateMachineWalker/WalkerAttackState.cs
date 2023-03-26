@@ -7,7 +7,6 @@ public class WalkerAttackState : WalkerBaseState
     public override void EnterState(WalkerStateManager walker)
     {
         Debug.Log("Attack State");
-        Context.M.SetActive(true);
     }
 
     public override void UpdateState(WalkerStateManager walker)
@@ -18,7 +17,6 @@ public class WalkerAttackState : WalkerBaseState
         if (Context.Distance > Context.DistanceChase)
         {
             walker.SwitchState(walker.PoToPoState);
-            Context.M.SetActive(false);
             Context.Animator.SetBool("IsAttack1", false);
         }
 

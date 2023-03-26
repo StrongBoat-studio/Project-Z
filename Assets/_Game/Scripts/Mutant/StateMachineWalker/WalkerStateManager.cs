@@ -83,7 +83,6 @@ public class WalkerStateManager : MonoBehaviour
     public int PLife { get { return _pLife; } set { _pLife = value; } }
     public int MLife { get { return _mLife; } set { _mLife = value; } }
     public float DistanceAttack { get { return _distanceAttack; } set { _distanceAttack = value;} }
-    public GameObject M { get { return _m; } }
     public Animator Animator { get { return _animator; } }
 
 
@@ -95,7 +94,6 @@ public class WalkerStateManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _lifeM;
     private int _pLife=100;
     private int _mLife=100;
-    [SerializeField] private GameObject _m;
 
     //Animations
     [SerializeField] private GameObject _alert;
