@@ -11,6 +11,8 @@ public class InteractionManager : MonoBehaviour
 
     private Transform _lastOver = null;
 
+    public Transform LastOver { get { return _lastOver; } }
+
     private void Awake()
     {
         _playerInput = new PlayerInput();

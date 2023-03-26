@@ -1,0 +1,34 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class BulletController : MonoBehaviour
+{
+    private float _speed = 20f;
+    private Rigidbody2D _rigidbody2D;
+    private WalkerStateManager _walkerStateManager;
+    // Start is called before the first frame update
+    void Start()
+    {
+        _rigidbody2D = GetComponent<Rigidbody2D>();
+
+        _rigidbody2D.velocity = transform.right * _speed;
+    }
+
+    private void Update()
+    {
+        if(transform.position.x>6f || transform.position.x < -6f)
+            Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        _walkerStateManager = collision.GetComponent<WalkerStateManager>();
+        if (_walkerStateManager != null)
+        {
+            _walkerStateManager.TakeDamage(20);
+            Destroy(gameObject);
+        }
+            
+    }
+}

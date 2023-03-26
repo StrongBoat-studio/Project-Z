@@ -47,6 +47,9 @@ public class Movement : MonoBehaviour
 
     public MovementState[] ms;
 
+    [Header("Shooting")]
+    [SerializeField] private GameObject _firePoint;
+
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -242,13 +245,15 @@ public class Movement : MonoBehaviour
 
     void ChangeSide()
     {
-        if (_playerInput.InGame.Walk.ReadValue<float>() < 0)
+        if (_playerInput.InGame.Walk.ReadValue<float>() == -1)
         {
             _transform.localScale = new Vector3(1, _transform.localScale.y, _transform.localScale.z);
+            _firePoint.transform.rotation = new Quaternion (0f, 180, 0f, 0f);
         }
-        else if (_playerInput.InGame.Walk.ReadValue<float>() > 0)
+        else if (_playerInput.InGame.Walk.ReadValue<float>() == 1)
         {
             _transform.localScale = new Vector3(-1, _transform.localScale.y, _transform.localScale.z);
+            _firePoint.transform.rotation = new Quaternion(0f, 0, 0f, 0f);
         }
     }
 }

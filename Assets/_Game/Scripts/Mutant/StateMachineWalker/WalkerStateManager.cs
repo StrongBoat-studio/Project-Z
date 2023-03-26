@@ -148,4 +148,14 @@ public class WalkerStateManager : MonoBehaviour
         currentState.Context = this; 
         state.EnterState(this);
     }
+
+    public void TakeDamage(int damage)
+    {
+        _mLife -= damage;
+        if(_mLife<=0)
+        {
+            _mutant.SetActive(false);
+            _lifeM.text = "Mutant life: 0";
+        }
+    }
 }

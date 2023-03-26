@@ -54,4 +54,13 @@ public class WeaponSwitching : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Get active weapon
+    /// </summary>
+    /// <returns>0 for empty, 1 for gun and 2 for knife</returns>
+    public int GetWeapon()
+    {
+        return _selectedWeapon;
+    }
+
 }
