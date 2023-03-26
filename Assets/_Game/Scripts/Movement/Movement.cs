@@ -98,6 +98,11 @@ public class Movement : MonoBehaviour
         CalculateStaminaChange();
 
         ChangeSide();
+
+        if (GetMovementStates().Contains(Movement.MovementState.Crouching))
+            _boxCollider.size = new Vector2(1.025f, 0.968f);
+        else
+            _boxCollider.size = new Vector2(0.5625f, 1.8125f);
     }
 
     private void FixedUpdate()
@@ -159,7 +164,6 @@ public class Movement : MonoBehaviour
             //Force relese keys, reset states
             _playerInput.InGame.Creep.Reset();
             _playerInput.InGame.Run.Reset();
-
             moveRaw *= _crouchMultipier;
         }
 

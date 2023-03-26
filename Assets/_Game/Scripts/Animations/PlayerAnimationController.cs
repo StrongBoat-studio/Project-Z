@@ -5,10 +5,7 @@ using UnityEngine;
 public class PlayerAnimationController : MonoBehaviour
 {
     [SerializeField] private Movement _movement;
-    private Transform _transform;
     private Animator _animator;
-
-    [SerializeField] private float _side;
 
     void Awake()
     {
@@ -18,8 +15,14 @@ public class PlayerAnimationController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        IsWalking();
+        IsSprint();
+        IsCrouching();
+    }
 
-        if(_movement.GetMovementStates().Contains(Movement.MovementState.Walking))
+    private void IsWalking()
+    {
+        if (_movement.GetMovementStates().Contains(Movement.MovementState.Walking))
         {
             _animator.SetBool("IsWalking", true);
         }
@@ -27,8 +30,29 @@ public class PlayerAnimationController : MonoBehaviour
         {
             _animator.SetBool("IsWalking", false); ;
         }
-
-        
     }
 
+    private void IsSprint()
+    {
+        if (_movement.GetMovementStates().Contains(Movement.MovementState.Running))
+        {
+            _animator.SetBool("IsSprint", true);
+        }
+        else
+        {
+            _animator.SetBool("IsSprint", false); ;
+        }
+    }
+
+    private void IsCrouching()
+    {
+        if (_movement.GetMovementStates().Contains(Movement.MovementState.Crouching))
+        {
+            _animator.SetBool("IsCrounch", true);
+        }
+        else
+        {
+            _animator.SetBool("IsCrounch", false); ;
+        }
+    }
 }
