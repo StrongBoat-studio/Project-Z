@@ -9,6 +9,7 @@ public class Item
 {
     public enum ItemType
     {
+        None = 0,
         CD = 1,
         Gun = 2,
         Key = 3,
