@@ -2363,6 +2363,7 @@ GameObject:
   - component: {fileID: 1913262203}
   - component: {fileID: 1913262208}
   - component: {fileID: 1913262209}
+  - component: {fileID: 1913262210}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2505,12 +2506,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackRange: 0.24
+  _demage: 10
   _knife: {fileID: 1345009190}
   _enemyLayer:
     serializedVersion: 2
     m_Bits: 256
   _weapon: {fileID: 1345009192}
   _animator: {fileID: 1412441462}
+--- !u!114 &1913262210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913262202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0754f8fe66693be4293871b64d81e22e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackRange: 0.2
+  _demage: 5
+  _emptyHand: {fileID: 2108174324}
+  _enemyLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  _weapon: {fileID: 1345009192}
 --- !u!1 &2104263214
 GameObject:
   m_ObjectHideFlags: 0

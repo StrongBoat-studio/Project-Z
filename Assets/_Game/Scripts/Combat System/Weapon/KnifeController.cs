@@ -71,7 +71,7 @@ public class KnifeController : MonoBehaviour
             _walkerStateManager = _hitEnemie.GetComponent<WalkerStateManager>();
             if (_walkerStateManager != null)
             {
-                _walkerStateManager.TakeDamage(_demage);
+                _walkerStateManager.TakeDamage(_demage, 2);
             }
         }
     }
@@ -81,16 +81,16 @@ public class KnifeController : MonoBehaviour
         Gizmos.DrawWireSphere(_knife.transform.position, _attackRange);
     }
 
-    private void OnDestroy()
-    {
-        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
-        _playerInput.Stab.Stab.performed -= Stab;
-    }
-
     private void KnifeAnim()
     {
         _time = 0.5f;
         _animator.SetBool("IsKnife", true);
         _isTime = true;
+    }
+
+    private void OnDestroy()
+    {
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+        _playerInput.Stab.Stab.performed -= Stab;
     }
 }

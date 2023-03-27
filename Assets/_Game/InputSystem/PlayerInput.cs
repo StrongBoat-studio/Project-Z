@@ -470,6 +470,54 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""HandToHand"",
+            ""id"": ""52f51bd5-29f8-4791-8b09-1a01cdc41c67"",
+            ""actions"": [
+                {
+                    ""name"": ""Hit"",
+                    ""type"": ""Button"",
+                    ""id"": ""010240ed-f607-442d-87ec-175160cb68a7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MousePosition"",
+                    ""type"": ""Button"",
+                    ""id"": ""c435a5fd-f3a9-4d78-8baa-9859661be801"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""ddfc9c62-1314-4bc2-a741-4515b5745595"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Hit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""eab7b183-a4c8-44e4-8f96-3441fe9289ea"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MousePosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -507,6 +555,10 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_Stab = asset.FindActionMap("Stab", throwIfNotFound: true);
         m_Stab_Stab = m_Stab.FindAction("Stab", throwIfNotFound: true);
         m_Stab_MousePosition = m_Stab.FindAction("MousePosition", throwIfNotFound: true);
+        // HandToHand
+        m_HandToHand = asset.FindActionMap("HandToHand", throwIfNotFound: true);
+        m_HandToHand_Hit = m_HandToHand.FindAction("Hit", throwIfNotFound: true);
+        m_HandToHand_MousePosition = m_HandToHand.FindAction("MousePosition", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -898,6 +950,47 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         }
     }
     public StabActions @Stab => new StabActions(this);
+
+    // HandToHand
+    private readonly InputActionMap m_HandToHand;
+    private IHandToHandActions m_HandToHandActionsCallbackInterface;
+    private readonly InputAction m_HandToHand_Hit;
+    private readonly InputAction m_HandToHand_MousePosition;
+    public struct HandToHandActions
+    {
+        private @PlayerInput m_Wrapper;
+        public HandToHandActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Hit => m_Wrapper.m_HandToHand_Hit;
+        public InputAction @MousePosition => m_Wrapper.m_HandToHand_MousePosition;
+        public InputActionMap Get() { return m_Wrapper.m_HandToHand; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(HandToHandActions set) { return set.Get(); }
+        public void SetCallbacks(IHandToHandActions instance)
+        {
+            if (m_Wrapper.m_HandToHandActionsCallbackInterface != null)
+            {
+                @Hit.started -= m_Wrapper.m_HandToHandActionsCallbackInterface.OnHit;
+                @Hit.performed -= m_Wrapper.m_HandToHandActionsCallbackInterface.OnHit;
+                @Hit.canceled -= m_Wrapper.m_HandToHandActionsCallbackInterface.OnHit;
+                @MousePosition.started -= m_Wrapper.m_HandToHandActionsCallbackInterface.OnMousePosition;
+                @MousePosition.performed -= m_Wrapper.m_HandToHandActionsCallbackInterface.OnMousePosition;
+                @MousePosition.canceled -= m_Wrapper.m_HandToHandActionsCallbackInterface.OnMousePosition;
+            }
+            m_Wrapper.m_HandToHandActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Hit.started += instance.OnHit;
+                @Hit.performed += instance.OnHit;
+                @Hit.canceled += instance.OnHit;
+                @MousePosition.started += instance.OnMousePosition;
+                @MousePosition.performed += instance.OnMousePosition;
+                @MousePosition.canceled += instance.OnMousePosition;
+            }
+        }
+    }
+    public HandToHandActions @HandToHand => new HandToHandActions(this);
     public interface IInGameActions
     {
         void OnWalk(InputAction.CallbackContext context);
@@ -937,6 +1030,11 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     public interface IStabActions
     {
         void OnStab(InputAction.CallbackContext context);
+        void OnMousePosition(InputAction.CallbackContext context);
+    }
+    public interface IHandToHandActions
+    {
+        void OnHit(InputAction.CallbackContext context);
         void OnMousePosition(InputAction.CallbackContext context);
     }
 }

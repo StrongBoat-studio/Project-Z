@@ -28,7 +28,7 @@ public class BulletController : MonoBehaviour
         _walkerStateManager = collision.GetComponent<WalkerStateManager>();
         if (_walkerStateManager != null)
         {
-            _walkerStateManager.TakeDamage(20);
+            _walkerStateManager.TakeDamage(20, 1);
             Destroy(gameObject);
         }
             

@@ -138,7 +138,7 @@ public class WalkerStateManager : MonoBehaviour
         state.EnterState(this);
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, int weapon)
     {
         _mLife -= damage;
         if(_mLife<=0)

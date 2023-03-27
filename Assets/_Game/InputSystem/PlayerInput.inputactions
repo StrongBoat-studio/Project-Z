@@ -448,6 +448,54 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "HandToHand",
+            "id": "52f51bd5-29f8-4791-8b09-1a01cdc41c67",
+            "actions": [
+                {
+                    "name": "Hit",
+                    "type": "Button",
+                    "id": "010240ed-f607-442d-87ec-175160cb68a7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MousePosition",
+                    "type": "Button",
+                    "id": "c435a5fd-f3a9-4d78-8baa-9859661be801",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ddfc9c62-1314-4bc2-a741-4515b5745595",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Hit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "eab7b183-a4c8-44e4-8f96-3441fe9289ea",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MousePosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
