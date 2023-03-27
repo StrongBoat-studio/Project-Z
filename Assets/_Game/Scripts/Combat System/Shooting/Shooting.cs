@@ -9,24 +9,18 @@ public class Shooting : MonoBehaviour
     [SerializeField] Transform _firePoint;
     [SerializeField] WeaponSwitching _weapon;
     [SerializeField] GameObject _bulletPrefab;
+    private PlayerInput _playerInput;
 
     private bool _canShoot=true;
 
     private void Awake()
     {
+        _playerInput = new PlayerInput();
+        _playerInput.Shooting.Enable();
+        _playerInput.Shooting.Shoot.performed += Shoot;
+
         if (GameStateManager.Instance != null)
             GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-        if(Input.GetButtonDown("Fire1") && _weapon.GetWeapon()==1)
-        {
-            Shoot();
-        }
-
     }
 
     private void OnGameStateChanged(GameStateManager.GameState newGameState)
@@ -34,9 +28,9 @@ public class Shooting : MonoBehaviour
         _canShoot = newGameState == GameStateManager.GameState.Gameplay;
     }
 
-    private void Shoot()
+    private void Shoot (InputAction.CallbackContext context)
     {
-        Vector2 mousePos = Mouse.current.position.ReadValue();
+        Vector2 mousePos = _playerInput.Shooting.MousePosition.ReadValue<Vector2>();
         RaycastHit2D[] hits = Physics2D.RaycastAll(FindObjectOfType<Camera>().ScreenToWorldPoint(mousePos), Vector2.zero);
 
         if (hits.Any(x => x.collider.GetComponent<IInteractable>() != null) == false && _canShoot==true)
@@ -47,6 +41,7 @@ public class Shooting : MonoBehaviour
 
     private void OnDestroy()
     {
-            GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+        _playerInput.Shooting.Shoot.performed -= Shoot;
     }
 }
