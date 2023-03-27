@@ -422,6 +422,54 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Stab"",
+            ""id"": ""0bdf4b2e-3d6b-4b4e-988c-333cb23034ea"",
+            ""actions"": [
+                {
+                    ""name"": ""Stab"",
+                    ""type"": ""Button"",
+                    ""id"": ""41bb98dc-7747-459c-b13c-1203d9ba356d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MousePosition"",
+                    ""type"": ""Button"",
+                    ""id"": ""ae4d08a8-62eb-4d55-94ea-c4c37f73ffe7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""2e74fce4-f5a6-4356-a19b-8152b53def00"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Stab"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f7b61cd6-184d-4e60-9bbc-09d35b64272d"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MousePosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -455,6 +503,10 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_Shooting = asset.FindActionMap("Shooting", throwIfNotFound: true);
         m_Shooting_Shoot = m_Shooting.FindAction("Shoot", throwIfNotFound: true);
         m_Shooting_MousePosition = m_Shooting.FindAction("MousePosition", throwIfNotFound: true);
+        // Stab
+        m_Stab = asset.FindActionMap("Stab", throwIfNotFound: true);
+        m_Stab_Stab = m_Stab.FindAction("Stab", throwIfNotFound: true);
+        m_Stab_MousePosition = m_Stab.FindAction("MousePosition", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -805,6 +857,47 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         }
     }
     public ShootingActions @Shooting => new ShootingActions(this);
+
+    // Stab
+    private readonly InputActionMap m_Stab;
+    private IStabActions m_StabActionsCallbackInterface;
+    private readonly InputAction m_Stab_Stab;
+    private readonly InputAction m_Stab_MousePosition;
+    public struct StabActions
+    {
+        private @PlayerInput m_Wrapper;
+        public StabActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Stab => m_Wrapper.m_Stab_Stab;
+        public InputAction @MousePosition => m_Wrapper.m_Stab_MousePosition;
+        public InputActionMap Get() { return m_Wrapper.m_Stab; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(StabActions set) { return set.Get(); }
+        public void SetCallbacks(IStabActions instance)
+        {
+            if (m_Wrapper.m_StabActionsCallbackInterface != null)
+            {
+                @Stab.started -= m_Wrapper.m_StabActionsCallbackInterface.OnStab;
+                @Stab.performed -= m_Wrapper.m_StabActionsCallbackInterface.OnStab;
+                @Stab.canceled -= m_Wrapper.m_StabActionsCallbackInterface.OnStab;
+                @MousePosition.started -= m_Wrapper.m_StabActionsCallbackInterface.OnMousePosition;
+                @MousePosition.performed -= m_Wrapper.m_StabActionsCallbackInterface.OnMousePosition;
+                @MousePosition.canceled -= m_Wrapper.m_StabActionsCallbackInterface.OnMousePosition;
+            }
+            m_Wrapper.m_StabActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Stab.started += instance.OnStab;
+                @Stab.performed += instance.OnStab;
+                @Stab.canceled += instance.OnStab;
+                @MousePosition.started += instance.OnMousePosition;
+                @MousePosition.performed += instance.OnMousePosition;
+                @MousePosition.canceled += instance.OnMousePosition;
+            }
+        }
+    }
+    public StabActions @Stab => new StabActions(this);
     public interface IInGameActions
     {
         void OnWalk(InputAction.CallbackContext context);
@@ -839,6 +932,11 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     public interface IShootingActions
     {
         void OnShoot(InputAction.CallbackContext context);
+        void OnMousePosition(InputAction.CallbackContext context);
+    }
+    public interface IStabActions
+    {
+        void OnStab(InputAction.CallbackContext context);
         void OnMousePosition(InputAction.CallbackContext context);
     }
 }

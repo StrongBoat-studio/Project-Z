@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3390996011138361454}
   - component: {fileID: 3390996011138361455}
   - component: {fileID: 7644650491457122658}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Walker
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -81,7 +81,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.012666702, y: 0}

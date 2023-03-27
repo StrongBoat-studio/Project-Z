@@ -400,6 +400,54 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Stab",
+            "id": "0bdf4b2e-3d6b-4b4e-988c-333cb23034ea",
+            "actions": [
+                {
+                    "name": "Stab",
+                    "type": "Button",
+                    "id": "41bb98dc-7747-459c-b13c-1203d9ba356d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MousePosition",
+                    "type": "Button",
+                    "id": "ae4d08a8-62eb-4d55-94ea-c4c37f73ffe7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "2e74fce4-f5a6-4356-a19b-8152b53def00",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Stab",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f7b61cd6-184d-4e60-9bbc-09d35b64272d",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MousePosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
