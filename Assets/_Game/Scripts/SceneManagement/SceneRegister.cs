@@ -16,6 +16,8 @@ public class SceneRegister : MonoBehaviour
         SampleScene = 4,
         SampleSceneTestTP = 5,
         Player = 6,
+        Comms = 7,
+        ParadGround = 8,
     }
 
     public static SceneRegister Instance { get; private set; }
@@ -56,7 +58,7 @@ public class SceneRegister : MonoBehaviour
         }
 
         //Destroy current global light
-        Destroy(FindObjectsOfType<Light2D>().First(x => x.lightType == Light2D.LightType.Global).gameObject);
+        //Destroy(FindObjectsOfType<Light2D>().First(x => x.lightType == Light2D.LightType.Global).gameObject);
 
         //Async load new scene
         List<AsyncOperation> ops = new List<AsyncOperation>();

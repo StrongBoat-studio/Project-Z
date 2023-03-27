@@ -83,7 +83,7 @@ public class MainMenu : MonoBehaviour
 
         // Load/Unload scenes
         Queue<(SceneRegister.Scenes scene, bool load)> ops = new Queue<(SceneRegister.Scenes scene, bool load)>();
-        ops.Enqueue((SceneRegister.Scenes.SampleScene, true));
+        ops.Enqueue((SceneRegister.Scenes.ParadGround, true));
         ops.Enqueue((SceneRegister.Scenes.Player, true));
 
         while (ops.Count > 0)
