@@ -48,6 +48,7 @@ public class WalkerStateManager : MonoBehaviour
 
     //Variables for chasing
     private bool _zone1 = false, _zone2 = false, _zone3 = false;
+    private Vector3 _target2;
 
     //getter and setter
     public Vector3 Pos1 { get { return _pos1; } }
@@ -147,5 +148,60 @@ public class WalkerStateManager : MonoBehaviour
             _alert.SetActive(false);
             _lifeM.text = "Mutant life: 0";
         }
+
+        switch(weapon)
+        {
+            case 0:
+                {
+                    ReactionToEmpytHand();
+                    break;
+                }
+            case 1:
+                {
+                    ReactionToShoot();
+                    break;
+                }
+            case 2:
+                {
+                    ReactionToKnife();
+                    break;
+                }
+        }
+
+        Chasing();
+    }
+
+    private void ReactionToShoot()
+    {
+        if(_player.transform.localScale.x==1)
+            _walker.position = new Vector3(_walker.position.x - .5f, _walker.position.y, _walker.position.z);
+
+        if (_player.transform.localScale.x == -1)
+            _walker.position = new Vector3(_walker.position.x + .5f, _walker.position.y, _walker.position.z);
+    }
+
+    private void ReactionToKnife()
+    {
+        if (_player.transform.localScale.x == 1)
+            _walker.position = new Vector3(_walker.position.x - .2f, _walker.position.y, _walker.position.z);
+
+        if (_player.transform.localScale.x == -1)
+            _walker.position = new Vector3(_walker.position.x + .2f, _walker.position.y, _walker.position.z);
+    }
+
+    private void ReactionToEmpytHand()
+    {
+        if (_player.transform.localScale.x == 1)
+            _walker.position = new Vector3(_walker.position.x - .1f, _walker.position.y, _walker.position.z);
+
+        if (_player.transform.localScale.x == -1)
+            _walker.position = new Vector3(_walker.position.x + .1f, _walker.position.y, _walker.position.z);
+    }
+
+    private void Chasing()
+    {
+        _target2 = new Vector3(_target.position.x, transform.position.y, transform.position.z);
+
+        transform.position = Vector2.MoveTowards(transform.position, _target2, (_speed + 1f) * Time.deltaTime);
     }
 }

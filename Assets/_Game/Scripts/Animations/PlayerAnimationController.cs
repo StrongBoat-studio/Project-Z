@@ -7,6 +7,8 @@ public class PlayerAnimationController : MonoBehaviour
     [SerializeField] private Movement _movement;
     private Animator _animator;
 
+    [SerializeField] private GameObject _weaponHolder;
+
     void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -48,10 +50,12 @@ public class PlayerAnimationController : MonoBehaviour
     {
         if (_movement.GetMovementStates().Contains(Movement.MovementState.Crouching))
         {
+            _weaponHolder.SetActive(false);
             _animator.SetBool("IsCrounch", true);
         }
         else
         {
+            _weaponHolder.SetActive(true);
             _animator.SetBool("IsCrounch", false); ;
         }
     }

@@ -2651,6 +2651,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movement: {fileID: 1913262206}
+  _weaponHolder: {fileID: 1345009190}
 --- !u!1 &2108174324
 GameObject:
   m_ObjectHideFlags: 0
