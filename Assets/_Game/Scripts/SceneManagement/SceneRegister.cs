@@ -18,6 +18,7 @@ public class SceneRegister : MonoBehaviour
         Player = 6,
         Comms = 7,
         ParadGround = 8,
+        Greenhouse = 9,
     }
 
     public static SceneRegister Instance { get; private set; }
