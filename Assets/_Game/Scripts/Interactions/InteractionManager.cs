@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Linq;
 
 public class InteractionManager : MonoBehaviour
 {
@@ -63,26 +64,32 @@ public class InteractionManager : MonoBehaviour
     private void ProcessInteraction()
     {
         Vector2 mousePos = _playerInput.Interactions.MousePosition.ReadValue<Vector2>();
-        RaycastHit2D hit = Physics2D.Raycast(_cam.ScreenToWorldPoint(mousePos), Vector2.zero);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(_cam.ScreenToWorldPoint(mousePos), Vector2.zero);
+        RaycastHit2D hitInteractable = hits.FirstOrDefault(x => x.collider.GetComponent<IInteractable>() != null);
 
-        if (hit == true)
+        if (hits.Length > 0 && hitInteractable)
         {
             //1. Mouse enters new interactable
             //2. Mouse enters new interactable without leaving the previus one
-            IInteractable interactable = hit.collider.GetComponent<IInteractable>();
+            IInteractable interactable = hitInteractable.collider.GetComponent<IInteractable>();
 
             if (_lastOver == null && interactable != null)
             {
-                _lastOver = hit.transform;
+                _lastOver = hitInteractable.transform;
                 _lastOver.GetComponent<IInteractable>()?.CursorEnter();
             }
-            else if (_lastOver != null && interactable != null && _lastOver != hit.transform)
+            else if (_lastOver != null && interactable != null && _lastOver != hitInteractable.transform)
             {
                 _lastOver.GetComponent<IInteractable>()?.CursorExit();
                 _lastOver = null;
 
-                _lastOver = hit.transform;
+                _lastOver = hitInteractable.transform;
                 _lastOver.GetComponent<IInteractable>()?.CursorEnter();
+            }
+            else if(_lastOver != null && interactable == null)
+            {
+                _lastOver?.GetComponent<IInteractable>()?.CursorExit();
+                _lastOver = null;
             }
         }
         else
