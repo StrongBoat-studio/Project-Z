@@ -77,6 +77,8 @@ public class CraftingSlot : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if(_itemType == Item.ItemType.None) return;
+        
         if (_interactable == false) return;
         if (_crafting.GetNextCraftingStep() != _itemType)
         {
