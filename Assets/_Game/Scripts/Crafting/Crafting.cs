@@ -40,7 +40,7 @@ public class Crafting : MonoBehaviour, IInteractable
         _recipeProgress = new List<Item.ItemType>();
     }
 
-    private void Destroy()
+    private void OnDestroy()
     {
         _playerInput.Crafting.CloseExclusive.performed -= OnCloseExclusivePerformed;
         GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;

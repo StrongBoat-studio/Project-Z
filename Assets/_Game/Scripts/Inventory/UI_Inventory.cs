@@ -25,7 +25,7 @@ public class UI_Inventory : MonoBehaviour
     [SerializeField] private float _cellPaddingRight;
     [SerializeField] private float _cellPaddingBottom;
 
-    private void Destroy()  
+    private void OnDestroy()  
     {
         if (_inventory == null) return;
         _inventory.OnInventoryChanged -= OnInventoryChanged;
