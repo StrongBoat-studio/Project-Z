@@ -194,7 +194,7 @@ public class Movement : MonoBehaviour
         _uiStaminaBar.value = Mathf.Clamp(_staminaCurrent / _staminaMax, 0f, 1f);
     }
 
-    private bool IsGrounded()
+    public bool IsGrounded()
     {
         return Physics2D.BoxCast(_boxCollider.bounds.center, _boxCollider.bounds.size, 0f, Vector2.down, 1 / 32f, _groundLayer);
     }

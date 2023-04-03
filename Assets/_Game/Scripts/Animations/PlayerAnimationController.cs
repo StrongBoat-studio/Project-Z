@@ -20,6 +20,7 @@ public class PlayerAnimationController : MonoBehaviour
         IsWalking();
         IsSprint();
         IsCrouching();
+        IsJumping();
     }
 
     private void IsWalking()
@@ -58,5 +59,18 @@ public class PlayerAnimationController : MonoBehaviour
             _weaponHolder.SetActive(true);
             _animator.SetBool("IsCrounch", false); ;
         }
+    }
+
+    private void IsJumping()
+    {
+        if(!_movement.IsGrounded())
+        {
+            _animator.SetBool("IsJumping", true);
+        }
+        else
+        {
+            _animator.SetBool("IsJumping", false);
+        }
+
     }
 }
