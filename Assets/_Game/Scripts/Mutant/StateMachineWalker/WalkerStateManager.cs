@@ -174,28 +174,28 @@ public class WalkerStateManager : MonoBehaviour
     private void ReactionToShoot()
     {
         if(_player.transform.localScale.x==1)
+            _walker.position = new Vector3(_walker.position.x - .7f, _walker.position.y, _walker.position.z);
+
+        if (_player.transform.localScale.x == -1)
+            _walker.position = new Vector3(_walker.position.x + .7f, _walker.position.y, _walker.position.z);
+    }
+
+    private void ReactionToKnife()
+    {
+        if (_player.transform.localScale.x == 1)
             _walker.position = new Vector3(_walker.position.x - .5f, _walker.position.y, _walker.position.z);
 
         if (_player.transform.localScale.x == -1)
             _walker.position = new Vector3(_walker.position.x + .5f, _walker.position.y, _walker.position.z);
     }
 
-    private void ReactionToKnife()
+    private void ReactionToEmpytHand()
     {
         if (_player.transform.localScale.x == 1)
             _walker.position = new Vector3(_walker.position.x - .2f, _walker.position.y, _walker.position.z);
 
         if (_player.transform.localScale.x == -1)
             _walker.position = new Vector3(_walker.position.x + .2f, _walker.position.y, _walker.position.z);
-    }
-
-    private void ReactionToEmpytHand()
-    {
-        if (_player.transform.localScale.x == 1)
-            _walker.position = new Vector3(_walker.position.x - .1f, _walker.position.y, _walker.position.z);
-
-        if (_player.transform.localScale.x == -1)
-            _walker.position = new Vector3(_walker.position.x + .1f, _walker.position.y, _walker.position.z);
     }
 
     private void Chasing()

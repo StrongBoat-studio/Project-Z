@@ -406,10 +406,10 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.21510418
-    y: 0.023148147
-    width: 0.33333334
-    height: 0.3333333
+    x: 0
+    y: 0
+    width: 1
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 37
@@ -2559,7 +2559,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _attackRange: 0.2
   _demage: 5
-  _emptyHand: {fileID: 2108174324}
+  _emptyHand: {fileID: 1345009190}
   _enemyLayer:
     serializedVersion: 2
     m_Bits: 256

@@ -16,7 +16,7 @@ public class WalkerAttackState : WalkerBaseState
     {
         AttackM();
         PositionCheck();
-        //LookAtThePlayer();
+        LookAtThePlayer();
 
         if (Context.Distance > Context.DistanceChase)
         {

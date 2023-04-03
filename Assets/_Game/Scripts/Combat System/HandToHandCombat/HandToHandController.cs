@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class HandToHandController : MonoBehaviour
 {
@@ -61,6 +62,6 @@ public class HandToHandController : MonoBehaviour
     private void OnDestroy()
     {
         GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
-        _playerInput.Stab.Stab.performed -= Hit;
+        _playerInput.HandToHand.Hit.performed -= Hit;
     }
 }
