@@ -35,4 +35,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Greenhouse.unity
     guid: 20a49d7c8cb614447b01786225be92e5
+  - enabled: 1
+    path: Assets/Scenes/ControlsMenu.unity
+    guid: d443d7ff439f6e34ab713d18531b4cf9
   m_configObjects: {}

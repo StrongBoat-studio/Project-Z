@@ -19,6 +19,7 @@ public class SceneRegister : MonoBehaviour
         Comms = 7,
         ParadGround = 8,
         Greenhouse = 9,
+        ControlsMenu = 10,
     }
 
     public static SceneRegister Instance { get; private set; }

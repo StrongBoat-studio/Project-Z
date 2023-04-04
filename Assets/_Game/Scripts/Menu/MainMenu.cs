@@ -9,6 +9,7 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] private Transform _btnStart;
     [SerializeField] private Transform _btnOptions;
+    [SerializeField] private Transform _btnControls;
     [SerializeField] private Transform _btnCredits;
     [SerializeField] private Transform _btnExit;
 
@@ -44,10 +45,18 @@ public class MainMenu : MonoBehaviour
         );
     }
 
+    public void BtnControls()
+    {
+        SceneManager.LoadSceneAsync(
+          (int)SceneRegister.Scenes.ControlsMenu,
+          LoadSceneMode.Additive  
+        );
+    }
+
     public void BtnCredits()
     {
         SceneManager.LoadSceneAsync(
-            (int)SceneRegister.Scenes.OptionsMenu,
+            (int)SceneRegister.Scenes.CreditsMenu,
             LoadSceneMode.Additive
         );
     }
