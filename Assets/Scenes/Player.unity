@@ -404,10 +404,10 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
+    x: 0.6604748
     y: 0
-    width: 1
-    height: 1
+    width: 0.6604748
+    height: 0.6605505
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 37
@@ -1282,14 +1282,14 @@ MonoBehaviour:
   _inventorySlotPrefab: {fileID: 239625042002686812, guid: 93439c22020a2c4478b074ef08d03e7f, type: 3}
   _panel: {fileID: 1543823292}
   _panelSlotContainer: {fileID: 18498204}
-  _offset: {x: -290, y: 125}
-  _paddingLeft: 20
-  _paddingTop: 20
+  _offset: {x: -145, y: 62.5}
+  _paddingLeft: 10
+  _paddingTop: 10
   _maxColumns: 5
-  _cellWidth: 100
-  _cellHeight: 100
-  _cellPaddingRight: 10
-  _cellPaddingBottom: 10
+  _cellWidth: 50
+  _cellHeight: 50
+  _cellPaddingRight: 5
+  _cellPaddingBottom: 5
 --- !u!1 &1041433752
 GameObject:
   m_ObjectHideFlags: 0
@@ -2174,7 +2174,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 580, y: 250}
+  m_SizeDelta: {x: 290, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1647008731
 GameObject:
