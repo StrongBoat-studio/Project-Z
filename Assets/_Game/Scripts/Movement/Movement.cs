@@ -23,7 +23,7 @@ public class Movement : MonoBehaviour
     private BoxCollider2D _boxCollider;
     private Transform _transform;
 
-    private int _movementState = (int)MovementState.Standing; //State of the player, represented ad bits 
+    private int _movementState = (int)MovementState.Standing; //State of the player, represented as bits 
     private float _movementSpeedCalculated = 0f;
 
     #region Movement variables
@@ -41,6 +41,8 @@ public class Movement : MonoBehaviour
     [Range(0f, 10f)][SerializeField] private float _staminaRecoveryDelay;
     [Range(0f, 10f)][SerializeField] private float _staminaRecoverySpeed;
     [Range(0f, 10f)][SerializeField] private float _staminaDrainJump;
+
+
     private float _staminaCurrent;
     private float _staminaRecoveryCurrentTime;
     #endregion
@@ -62,7 +64,7 @@ public class Movement : MonoBehaviour
         _playerInput = new PlayerInput();
         _playerInput.InGame.Enable();
 
-        _playerInput.InGame.Walk.performed +=
+        _playerInput.InGame.Walk.performed += 
             ctx => AlterMovementState(MovementState.Walking, 0);
         _playerInput.InGame.Walk.canceled +=
             ctx => AlterMovementState(0, MovementState.Walking);
@@ -79,10 +81,8 @@ public class Movement : MonoBehaviour
 
         _playerInput.InGame.Jump.performed += OnJump;
 
-        _playerInput.InGame.Crouch.performed +=
-            ctx => AlterMovementState(MovementState.Crouching, 0);
-        _playerInput.InGame.Crouch.canceled +=
-            ctx => AlterMovementState(0, MovementState.Crouching);
+        _playerInput.InGame.Crouch.performed += OnCrouchPerformed;
+        _playerInput.InGame.Crouch.canceled += OnCrouchCanceled;
 
         GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
     }
@@ -113,7 +113,7 @@ public class Movement : MonoBehaviour
         //Check Jump
         if (currentStates.Contains(MovementState.Jumping))
         {
-            if (IsGrounded()) AlterMovementState(0, MovementState.Jumping);
+            if (IsGrounded() == true) AlterMovementState(0, MovementState.Jumping);
         }
 
         CalculateMovementSpeed();
@@ -135,8 +135,11 @@ public class Movement : MonoBehaviour
             if (_staminaCurrent > 0f)
             {
                 //Force relese keys, reset states
-                _playerInput.InGame.Creep.Reset();
-                _playerInput.InGame.Crouch.Reset();
+                if(states.Contains(MovementState.Crouching))
+                    _playerInput.InGame.Crouch.Reset();
+                
+                if(states.Contains(MovementState.Creeping))
+                    _playerInput.InGame.Creep.Reset();
 
                 moveRaw *= _runMultiplier;
 
@@ -154,16 +157,20 @@ public class Movement : MonoBehaviour
         else if (states.Contains(MovementState.Creeping))
         {
             //Force relese keys, reset states
-            _playerInput.InGame.Run.Reset();
-            _playerInput.InGame.Crouch.Reset();
+            if(states.Contains(MovementState.Running))
+                _playerInput.InGame.Run.Reset();
+            if(states.Contains(MovementState.Crouching))
+                _playerInput.InGame.Crouch.Reset();
 
             moveRaw *= _creepMultipier;
         }
         else if (states.Contains(MovementState.Crouching))
         {
             //Force relese keys, reset states
-            _playerInput.InGame.Creep.Reset();
-            _playerInput.InGame.Run.Reset();
+            if(states.Contains(MovementState.Creeping))
+                _playerInput.InGame.Creep.Reset();
+            if(states.Contains(MovementState.Running))
+                _playerInput.InGame.Run.Reset();
             moveRaw *= _crouchMultipier;
         }
 
@@ -204,8 +211,27 @@ public class Movement : MonoBehaviour
         if (!IsGrounded()) return;
         if (_staminaCurrent < _staminaDrainJump) return;
 
+        AlterMovementState(MovementState.Jumping, 0);
         _staminaCurrent -= _staminaDrainJump;
         _rigidbody.AddForce(Vector2.up * _jumpForce * Time.fixedDeltaTime * JUMPFORCE_SCALE, ForceMode2D.Impulse);
+
+        _playerInput.InGame.Crouch.Reset();
+    }
+
+    private void OnCrouchPerformed(InputAction.CallbackContext context)
+    {
+        if(IsGrounded() == true)
+        {
+            AlterMovementState(MovementState.Crouching, 0);
+            _playerInput.InGame.Creep.Reset();
+            _playerInput.InGame.Run.Reset();
+            _playerInput.InGame.Jump.Reset();
+        }
+    }
+
+    private void OnCrouchCanceled(InputAction.CallbackContext context)
+    {
+        AlterMovementState(0, MovementState.Crouching);
     }
 
     ///<summary>
@@ -246,8 +272,7 @@ public class Movement : MonoBehaviour
         else if(newGameState == GameStateManager.GameState.Gameplay) _playerInput.InGame.Enable();
     }
 
-
-    void ChangeSide()
+    private void ChangeSide()
     {
         if (_playerInput.InGame.Walk.ReadValue<float>() == -1)
         {
