@@ -759,109 +759,99 @@ MonoBehaviour:
   _lightGroups:
   - lights:
     - {fileID: 2056194056}
-    minIntensity: 0
-    maxIntensity: 1
-    smoothing: 15
-    frequency: 5
-    frequencyRandomenss: 2
+    preset: {fileID: 11400000, guid: 11de9dc44ddcf6047ae7d23adce0cebd, type: 2}
     lastSum: 0
     currentFrequency: 0
-    currentWait: 0
+    flickerWait: 0
+    failWait: 0
+    failed: 0
+    workWait: 0
   - lights:
     - {fileID: 548243505}
-    minIntensity: 0
-    maxIntensity: 1
-    smoothing: 15
-    frequency: 5
-    frequencyRandomenss: 2
+    preset: {fileID: 11400000, guid: 11de9dc44ddcf6047ae7d23adce0cebd, type: 2}
     lastSum: 0
     currentFrequency: 0
-    currentWait: 0
+    flickerWait: 0
+    failWait: 0
+    failed: 0
+    workWait: 0
   - lights:
     - {fileID: 396579707}
-    minIntensity: 0
-    maxIntensity: 1
-    smoothing: 15
-    frequency: 5
-    frequencyRandomenss: 2
+    preset: {fileID: 11400000, guid: 11de9dc44ddcf6047ae7d23adce0cebd, type: 2}
     lastSum: 0
     currentFrequency: 0
-    currentWait: 0
+    flickerWait: 0
+    failWait: 0
+    failed: 0
+    workWait: 0
   - lights:
     - {fileID: 233860581}
-    minIntensity: 0
-    maxIntensity: 1
-    smoothing: 15
-    frequency: 5
-    frequencyRandomenss: 2
+    preset: {fileID: 11400000, guid: 11de9dc44ddcf6047ae7d23adce0cebd, type: 2}
     lastSum: 0
     currentFrequency: 0
-    currentWait: 0
+    flickerWait: 0
+    failWait: 0
+    failed: 0
+    workWait: 0
   - lights:
     - {fileID: 765394114}
-    minIntensity: 0
-    maxIntensity: 1
-    smoothing: 15
-    frequency: 5
-    frequencyRandomenss: 2
+    preset: {fileID: 11400000, guid: 11de9dc44ddcf6047ae7d23adce0cebd, type: 2}
     lastSum: 0
     currentFrequency: 0
-    currentWait: 0
+    flickerWait: 0
+    failWait: 0
+    failed: 0
+    workWait: 0
   - lights:
     - {fileID: 1220534484}
     - {fileID: 1106998852}
-    minIntensity: 0
-    maxIntensity: 1.5
-    smoothing: 10
-    frequency: 10
-    frequencyRandomenss: 1
+    preset: {fileID: 11400000, guid: 6cc616aafafbec24f9679638287d7afe, type: 2}
     lastSum: 0
     currentFrequency: 0
-    currentWait: 0
+    flickerWait: 0
+    failWait: 0
+    failed: 0
+    workWait: 0
   - lights:
     - {fileID: 1083972188}
     - {fileID: 910848470}
-    minIntensity: 0
-    maxIntensity: 1.5
-    smoothing: 10
-    frequency: 10
-    frequencyRandomenss: 1
+    preset: {fileID: 11400000, guid: 6cc616aafafbec24f9679638287d7afe, type: 2}
     lastSum: 0
     currentFrequency: 0
-    currentWait: 0
+    flickerWait: 0
+    failWait: 0
+    failed: 0
+    workWait: 0
   - lights:
     - {fileID: 416424942}
     - {fileID: 934730267}
-    minIntensity: 0
-    maxIntensity: 1.5
-    smoothing: 10
-    frequency: 10
-    frequencyRandomenss: 1
+    preset: {fileID: 11400000, guid: 6cc616aafafbec24f9679638287d7afe, type: 2}
     lastSum: 0
     currentFrequency: 0
-    currentWait: 0
+    flickerWait: 0
+    failWait: 0
+    failed: 0
+    workWait: 0
   - lights:
     - {fileID: 382471580}
     - {fileID: 1782937318}
-    minIntensity: 0
-    maxIntensity: 1.5
-    smoothing: 10
-    frequency: 10
-    frequencyRandomenss: 1
+    preset: {fileID: 11400000, guid: 6cc616aafafbec24f9679638287d7afe, type: 2}
     lastSum: 0
     currentFrequency: 0
-    currentWait: 0
+    flickerWait: 0
+    failWait: 0
+    failed: 0
+    workWait: 0
   - lights:
     - {fileID: 1280069447}
     - {fileID: 2133466153}
-    minIntensity: 0
-    maxIntensity: 1.5
-    smoothing: 10
-    frequency: 10
-    frequencyRandomenss: 1
+    preset: {fileID: 11400000, guid: 6cc616aafafbec24f9679638287d7afe, type: 2}
     lastSum: 0
     currentFrequency: 0
-    currentWait: 0
+    flickerWait: 0
+    failWait: 0
+    failed: 0
+    workWait: 0
 --- !u!1001 &280831415
 PrefabInstance:
   m_ObjectHideFlags: 0
