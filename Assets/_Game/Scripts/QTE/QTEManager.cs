@@ -9,6 +9,7 @@ public class QTEManager : MonoBehaviour
     public static QTEManager Instance { get; private set; }
 
     [Header("Letter objects")]
+    [SerializeField] private GameObject button;
     [SerializeField] private GameObject j;
     [SerializeField] private GameObject k;
     [SerializeField] private GameObject l;
@@ -122,6 +123,7 @@ public class QTEManager : MonoBehaviour
         _isSuccess = 0;
 
         _array[_lottery].SetActive(false);
+        button.SetActive(false);
     }
 
     private void EventSuccess()
@@ -129,6 +131,7 @@ public class QTEManager : MonoBehaviour
         _eventSuccess = false;
         _lottery = generator.Next(8);
         _array[_lottery].SetActive(true);
+        button.SetActive(true);
     }
 
 
@@ -154,6 +157,7 @@ public class QTEManager : MonoBehaviour
         {
             _eventSuccess = true;
             _array[_lottery].SetActive(false);
+            button.SetActive(false);
             _fillAmount = 0;
             _howManyLettersV++;
         }
@@ -269,6 +273,7 @@ public class QTEManager : MonoBehaviour
         _isSuccess = -1;
 
         _array[_lottery].SetActive(false);
+        button.SetActive(false);
         //Debug.Log("fail");
     }
 
@@ -280,6 +285,7 @@ public class QTEManager : MonoBehaviour
         _isSuccess = 1;
 
         _array[_lottery].SetActive(false);
+        button.SetActive(false);
         //Debug.Log("win");
     }
 

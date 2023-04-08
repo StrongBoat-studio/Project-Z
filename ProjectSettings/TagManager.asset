@@ -9,6 +9,7 @@ TagManager:
   - Frame
   - Interactions
   - Enemy
+  - J
   layers:
   - Default
   - TransparentFX
@@ -54,4 +55,7 @@ TagManager:
     locked: 0
   - name: NPC
     uniqueID: 2347565357
+    locked: 0
+  - name: UI
+    uniqueID: 1107541251
     locked: 0
