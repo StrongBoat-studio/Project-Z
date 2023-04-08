@@ -62,21 +62,21 @@ public class SceneRegister : MonoBehaviour
         //Destroy current global light
         //Destroy(FindObjectsOfType<Light2D>().First(x => x.lightType == Light2D.LightType.Global).gameObject);
 
-        //Async load new scene
+        //Async unload old scenes
         List<AsyncOperation> ops = new List<AsyncOperation>();
-        ops.Add(SceneManager.LoadSceneAsync((int)roomLoader.GetTargetDoor().scene, LoadSceneMode.Additive));
-
-        //Wait for destination scene to load
-        yield return new WaitUntil(() => ops.TrueForAll(x => x.isDone == true));
-
-        //Clear ops and unload old scene
-        ops.Clear();
         foreach (Scene s in unload)
         {
             ops.Add(SceneManager.UnloadSceneAsync(s));
         }
 
         //Wait for unload to finish
+        yield return new WaitUntil(() => ops.TrueForAll(x => x.isDone == true));
+
+        //Clear ops and async load new scenes
+        ops.Clear();
+        ops.Add(SceneManager.LoadSceneAsync((int)roomLoader.GetTargetDoor().scene, LoadSceneMode.Additive));
+
+        //Wait for destination scene to load
         yield return new WaitUntil(() => ops.TrueForAll(x => x.isDone == true));
 
         //Find door and teleport player to them
