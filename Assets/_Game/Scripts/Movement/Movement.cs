@@ -41,10 +41,17 @@ public class Movement : MonoBehaviour
     [Range(0f, 10f)][SerializeField] private float _staminaRecoveryDelay;
     [Range(0f, 10f)][SerializeField] private float _staminaRecoverySpeed;
     [Range(0f, 10f)][SerializeField] private float _staminaDrainJump;
+    [Range(0f, 10f)][SerializeField] private float _crouchTimeout;
 
+    private bool _isWalking = false;
+    private bool _isRunning = false;
+    private bool _isCrouching = false;
+    private bool _isCreeping = false;
+    private bool _isJumping = false;
 
     private float _staminaCurrent;
     private float _staminaRecoveryCurrentTime;
+    private float _crouchTimer = 0f;
     #endregion
 
     public MovementState[] ms;
@@ -64,28 +71,22 @@ public class Movement : MonoBehaviour
         _playerInput = new PlayerInput();
         _playerInput.InGame.Enable();
 
-        _playerInput.InGame.Walk.performed += 
-            ctx => AlterMovementState(MovementState.Walking, 0);
-        _playerInput.InGame.Walk.canceled +=
-            ctx => AlterMovementState(0, MovementState.Walking);
+        _playerInput.InGame.Walk.performed += _ => _isWalking = true;
+        _playerInput.InGame.Walk.canceled += _ => _isWalking = false;
 
-        _playerInput.InGame.Run.started +=
-            ctx => AlterMovementState(MovementState.Running, 0);
-        _playerInput.InGame.Run.canceled +=
-            ctx => AlterMovementState(0, MovementState.Running);
+        _playerInput.InGame.Run.started += _ => _isRunning = true;
+        _playerInput.InGame.Run.canceled += _ => _isRunning = false;
 
-        _playerInput.InGame.Creep.performed +=
-            ctx => AlterMovementState(MovementState.Creeping, 0);
-        _playerInput.InGame.Creep.canceled +=
-            ctx => AlterMovementState(0, MovementState.Creeping);
+        _playerInput.InGame.Creep.performed += _ => _isCreeping = true;
+        _playerInput.InGame.Creep.canceled += _ => _isCreeping = false;
 
         _playerInput.InGame.Jump.performed += OnJump;
 
-        _playerInput.InGame.Crouch.performed += OnCrouchPerformed;
-        _playerInput.InGame.Crouch.canceled += OnCrouchCanceled;
+        _playerInput.InGame.Crouch.performed += _ => _isCrouching = true;
+        _playerInput.InGame.Crouch.canceled += _ => _isCrouching = false;
 
         GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
-    }
+    } 
 
     private void OnDestroy()
     {
@@ -95,6 +96,10 @@ public class Movement : MonoBehaviour
 
     private void Update()
     {
+        if(_crouchTimer > 0f) _crouchTimer -= Time.deltaTime;
+
+        CalculateState();
+
         CalculateStaminaChange();
 
         ChangeSide();
@@ -118,6 +123,112 @@ public class Movement : MonoBehaviour
 
         CalculateMovementSpeed();
         _rigidbody.velocity = new Vector2(_movementSpeedCalculated, _rigidbody.velocity.y);
+    }
+
+    private void CalculateState()
+    {
+        List<MovementState> states = GetMovementStates();
+
+        // Walking
+        if(
+            states.Contains(MovementState.Walking) == false && 
+            _isWalking == true &&
+            IsGrounded() == true
+        ) 
+        {
+            AlterMovementState(MovementState.Walking, 0);
+        }
+        else if (
+            _isWalking == false ||
+            IsGrounded() == false
+        )
+        {
+            // If player is not walking, he can't run or creep
+            AlterMovementState(0, MovementState.Walking); 
+            AlterMovementState(0, MovementState.Running); 
+            AlterMovementState(0, MovementState.Creeping);
+        }
+
+
+        // Running
+        if(
+            states.Contains(MovementState.Walking) == true &&
+            states.Contains(MovementState.Running) == false &&
+            _isRunning == true && 
+            IsGrounded() == true
+        ) 
+        {
+            if(states.Contains(MovementState.Crouching) == true && _crouchTimer <= 0f) _crouchTimer = _crouchTimeout; 
+            AlterMovementState(MovementState.Running, 0f);
+            AlterMovementState(0f, MovementState.Creeping);
+            AlterMovementState(0f, MovementState.Crouching);
+
+            _playerInput.InGame.Creep.Reset(); 
+            _playerInput.InGame.Crouch.Reset(); 
+        }
+        else if (
+            _isRunning == false || 
+            IsGrounded() == false
+        )
+        {
+            AlterMovementState(0, MovementState.Running);
+        }
+
+        // Crouching
+        if(
+            states.Contains(MovementState.Crouching) == false &&
+            _isCrouching == true && 
+            IsGrounded() == true &&
+            _crouchTimer <= 0f
+        )
+        {
+            AlterMovementState(MovementState.Crouching, 0f);
+            AlterMovementState(0f, MovementState.Creeping);
+            AlterMovementState(0f, MovementState.Running);
+
+            _playerInput.InGame.Creep.Reset(); 
+            _playerInput.InGame.Run.Reset(); 
+        }
+        else if (
+            states.Contains(MovementState.Crouching) == true &&
+            _isCrouching == true &&
+            IsGrounded() == false
+        )
+        {
+            // Player is falling to crouch, do nothing
+        }
+        else if (
+            _isCrouching == false ||
+            IsGrounded() == false
+        )
+        {
+            if(states.Contains(MovementState.Crouching) == true && _crouchTimer <= 0f) _crouchTimer = _crouchTimeout; 
+            AlterMovementState(0, MovementState.Crouching);
+        }
+
+        // Creeping
+        if(
+            states.Contains(MovementState.Walking) == true &&
+            states.Contains(MovementState.Creeping) == false && 
+            _isCreeping == true && 
+            IsGrounded() == true
+        )
+        {
+            if(states.Contains(MovementState.Crouching) == true && _crouchTimer <= 0f) _crouchTimer = _crouchTimeout; 
+            AlterMovementState(MovementState.Creeping, 0f);
+            AlterMovementState(0f, MovementState.Crouching);
+            AlterMovementState(0f, MovementState.Running);
+
+            _playerInput.InGame.Crouch.Reset(); 
+            _playerInput.InGame.Run.Reset(); 
+        } 
+        else if (
+            _isCreeping == false ||
+            IsGrounded() == false
+        )
+        {
+            AlterMovementState(0, MovementState.Creeping);
+        }
     }
 
     private void CalculateMovementSpeed()
@@ -180,6 +291,9 @@ public class Movement : MonoBehaviour
 
     private void CalculateStaminaChange()
     {
+        //Only regenerate stamina if player is grounded
+        if(!IsGrounded()) return;
+
         List<MovementState> states = GetMovementStates();
 
         if (_staminaCurrent <= 0f && _staminaRecoveryCurrentTime < _staminaRecoveryDelay)
@@ -216,22 +330,6 @@ public class Movement : MonoBehaviour
         _rigidbody.AddForce(Vector2.up * _jumpForce * Time.fixedDeltaTime * JUMPFORCE_SCALE, ForceMode2D.Impulse);
 
         _playerInput.InGame.Crouch.Reset();
-    }
-
-    private void OnCrouchPerformed(InputAction.CallbackContext context)
-    {
-        if(IsGrounded() == true)
-        {
-            AlterMovementState(MovementState.Crouching, 0);
-            _playerInput.InGame.Creep.Reset();
-            _playerInput.InGame.Run.Reset();
-            _playerInput.InGame.Jump.Reset();
-        }
-    }
-
-    private void OnCrouchCanceled(InputAction.CallbackContext context)
-    {
-        AlterMovementState(0, MovementState.Crouching);
     }
 
     ///<summary>

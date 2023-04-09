@@ -2554,6 +2554,7 @@ MonoBehaviour:
   _staminaRecoveryDelay: 2
   _staminaRecoverySpeed: 1
   _staminaDrainJump: 1
+  _crouchTimeout: 1
   ms: 
   _firePoint: {fileID: 24993564}
 --- !u!4 &1913262207
