@@ -159,7 +159,6 @@ public class Crafting : MonoBehaviour, IInteractable
     {
         if (GameStateManager.Instance.GetCurrentState() == GameStateManager.GameState.Crafting)
         {
-            ResetCrafting();
             GameStateManager.Instance.ResetLastState();
         }
     }
@@ -179,7 +178,11 @@ public class Crafting : MonoBehaviour, IInteractable
         }
         else
         {
-            _uiCrafting.gameObject.SetActive(false);
+            if(_uiCrafting.gameObject.activeSelf == true)
+            {
+                _uiCrafting.gameObject.SetActive(false);
+                ResetCrafting();
+            }
         }
 
         if (newGameState != GameStateManager.GameState.Crafting)

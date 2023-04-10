@@ -38,4 +38,9 @@ public class UI_Crafting : MonoBehaviour
             slot.Reset();
         }
     }
+
+    public void CloseCrafting()
+    {
+        if(GameStateManager.Instance != null) GameStateManager.Instance.ResetLastState();
+    }
 }

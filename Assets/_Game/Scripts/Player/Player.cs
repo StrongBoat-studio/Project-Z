@@ -56,7 +56,13 @@ public class Player : MonoBehaviour
     {
         _uiInventory.GetComponent<UI_Inventory>().ToggleInventoryPanel(newGameState == GameStateManager.GameState.Inventory);
         
-        if(newGameState == GameStateManager.GameState.Paused) _playerInput.Inventory.Disable();
+        if(
+            newGameState == GameStateManager.GameState.Paused ||
+            newGameState == GameStateManager.GameState.Crafting
+        )
+        {
+            _playerInput.Inventory.Disable();
+        }
         else _playerInput.Inventory.Enable();
     }
 
