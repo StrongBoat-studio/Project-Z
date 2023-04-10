@@ -118,7 +118,6 @@ public class OptionsMenu : MonoBehaviour
 
     public void MenuButton()
     {
-        SettingsManager.Instance.LoadSettings();
         SceneManager.UnloadSceneAsync((int)SceneRegister.Scenes.OptionsMenu);
     }
 
@@ -146,6 +145,7 @@ public class OptionsMenu : MonoBehaviour
         else Debug.LogError("No AudioManager in scene!");
 
         SettingsManager.Instance.SaveSettings();
+        SettingsManager.Instance.LoadSettings();
     }
 }
 
