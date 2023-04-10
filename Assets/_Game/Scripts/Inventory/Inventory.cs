@@ -10,6 +10,8 @@ public class Inventory
     private List<Item> _items;
     [SerializeField] private int _inventorySize = 10;
 
+    public bool IsFull { get => _items.Count >= _inventorySize; }
+
     public delegate void OnInventoryChangedHandler();
     public event OnInventoryChangedHandler OnInventoryChanged;
 
@@ -86,6 +88,17 @@ public class Inventory
 
             OnInventoryChanged?.Invoke();
         }
+    }
+
+    /// <summary>
+    /// Checks whether removing this item will result in
+    /// emptying any inventory slots
+    /// </summary>
+    /// <returns>True if slot will be emptied</returns>
+    public bool WillRemoveItemClearSlot(Item.ItemType type, int amount)
+    {
+        if(_items.Find(x => x.itemType == type).amount == amount) return true;
+        else return false;
     }
 
     /// <summary>

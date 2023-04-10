@@ -13,17 +13,18 @@ public class Crafting : MonoBehaviour, IInteractable
     [SerializeField] private Transform _craftingSprite;
 
     [Tooltip("Recipe available for this crafing")]
-    [SerializeField] private List<Item.ItemType> _recipe = new List<Item.ItemType>(){
+    [SerializeField]
+    private List<Item.ItemType> _recipe = new List<Item.ItemType>(){
         Item.ItemType.Letter,
         Item.ItemType.CD,
         Item.ItemType.Key,
         Item.ItemType.PC,
         Item.ItemType.Potion
     };
-    
+
     [Tooltip("Item to be crafted")]
     [SerializeField] private Item.ItemType _recipeOutput = Item.ItemType.Gun;
-    
+
     private List<Item.ItemType> _recipeProgress;
     private PlayerInput _playerInput;
     private LocalKeyword _OUTLINE_ON;
@@ -80,14 +81,27 @@ public class Crafting : MonoBehaviour, IInteractable
 
             Item item = ItemRegister.Instance.GetNewItem(_recipeOutput);
             item.amount = 1;
-            pInv.AddItem(item);
-            
-            foreach(var recipeItem in _recipeProgress)
+
+            // Check if removing any recipe item will empty inventory slot
+            bool slotWillBeEmptied = false;
+            foreach (var recipeItem in _recipeProgress)
             {
-                if(pInv.GetInventoryItems().Find(x => x.itemType == recipeItem) != null)
+                if (pInv.WillRemoveItemClearSlot(recipeItem, 1) == true) slotWillBeEmptied = true;
+            }
+
+            // If there will be empty slot or if the inventory is not full
+            // Remove recipe items and add result
+            if (slotWillBeEmptied == true || pInv.IsFull == false)
+            {
+                foreach (var recipeItem in _recipeProgress)
                 {
-                    pInv.RemoveItem(recipeItem, 1);
+                    if (pInv.GetInventoryItems().Find(x => x.itemType == recipeItem) != null)
+                    {
+                        pInv.RemoveItem(recipeItem, 1);
+                    }
                 }
+
+                pInv.AddItem(item);
             }
         }
     }
@@ -95,20 +109,20 @@ public class Crafting : MonoBehaviour, IInteractable
     private void RefreshCraftingItems()
     {
         Player player = null;
-        if(GameManager.Instance != null && GameManager.Instance.player != null)
+        if (GameManager.Instance != null && GameManager.Instance.player != null)
         {
             player = GameManager.Instance.player.GetComponent<Player>();
         }
 
-        foreach(var slot in _uiCrafting.UIItemSlots)
+        foreach (var slot in _uiCrafting.UIItemSlots)
         {
             slot.Reset();
         }
 
         List<Item> invItems = player.GetInventory().GetInventoryItems();
-        foreach(var item in _recipe)
+        foreach (var item in _recipe)
         {
-            if(
+            if (
                 invItems.Find(x => x.itemType == item) != null &&
                 _uiCrafting.EmptySlot != null
             )
@@ -154,9 +168,9 @@ public class Crafting : MonoBehaviour, IInteractable
     {
         //Crafting window should be only closed when pause menu is opened
         //Crafting window has priority over other UI elements
-        if(newGameState == GameStateManager.GameState.Crafting)
+        if (newGameState == GameStateManager.GameState.Crafting)
             _uiCrafting.gameObject.SetActive(true);
-        else if(
+        else if (
             GameStateManager.Instance.HasStateInHistory(GameStateManager.GameState.Crafting) &&
             newGameState != GameStateManager.GameState.Paused
         )
