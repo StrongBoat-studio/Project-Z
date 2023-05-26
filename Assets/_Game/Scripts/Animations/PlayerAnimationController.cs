@@ -49,7 +49,8 @@ public class PlayerAnimationController : MonoBehaviour
 
     private void IsCrouching()
     {
-        if (_movement.GetMovementStates().Contains(Movement.MovementState.Crouching))
+        //if (_movement.GetMovementStates().Contains(Movement.MovementState.Crouching))
+        if(_movement.GetMovementStates().Contains(Movement.MovementState.Crouching))
         {
             _weaponHolder.SetActive(false);
             _animator.SetBool("IsCrounch", true);
@@ -63,7 +64,7 @@ public class PlayerAnimationController : MonoBehaviour
 
     private void IsJumping()
     {
-        if(!_movement.IsGrounded())
+        if(!_movement.IsGrounded() && !_movement.GetMovementStates().Contains(Movement.MovementState.Crouching))
         {
             _animator.SetBool("IsJumping", true);
         }
