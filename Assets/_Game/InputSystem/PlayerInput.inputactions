@@ -496,6 +496,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Journal",
+            "id": "b61cddb5-70b7-4fc2-a3a3-b5ed91db444c",
+            "actions": [
+                {
+                    "name": "Open",
+                    "type": "Button",
+                    "id": "e596b0a6-e5f2-44d4-aa57-d38112dfc98d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "6245e80b-2867-4a75-bb89-8e879fc9a978",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Open",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

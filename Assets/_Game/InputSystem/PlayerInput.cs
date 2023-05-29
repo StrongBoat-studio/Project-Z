@@ -518,6 +518,34 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Journal"",
+            ""id"": ""b61cddb5-70b7-4fc2-a3a3-b5ed91db444c"",
+            ""actions"": [
+                {
+                    ""name"": ""Open"",
+                    ""type"": ""Button"",
+                    ""id"": ""e596b0a6-e5f2-44d4-aa57-d38112dfc98d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""6245e80b-2867-4a75-bb89-8e879fc9a978"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Open"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -559,6 +587,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_HandToHand = asset.FindActionMap("HandToHand", throwIfNotFound: true);
         m_HandToHand_Hit = m_HandToHand.FindAction("Hit", throwIfNotFound: true);
         m_HandToHand_MousePosition = m_HandToHand.FindAction("MousePosition", throwIfNotFound: true);
+        // Journal
+        m_Journal = asset.FindActionMap("Journal", throwIfNotFound: true);
+        m_Journal_Open = m_Journal.FindAction("Open", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -991,6 +1022,39 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         }
     }
     public HandToHandActions @HandToHand => new HandToHandActions(this);
+
+    // Journal
+    private readonly InputActionMap m_Journal;
+    private IJournalActions m_JournalActionsCallbackInterface;
+    private readonly InputAction m_Journal_Open;
+    public struct JournalActions
+    {
+        private @PlayerInput m_Wrapper;
+        public JournalActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Open => m_Wrapper.m_Journal_Open;
+        public InputActionMap Get() { return m_Wrapper.m_Journal; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(JournalActions set) { return set.Get(); }
+        public void SetCallbacks(IJournalActions instance)
+        {
+            if (m_Wrapper.m_JournalActionsCallbackInterface != null)
+            {
+                @Open.started -= m_Wrapper.m_JournalActionsCallbackInterface.OnOpen;
+                @Open.performed -= m_Wrapper.m_JournalActionsCallbackInterface.OnOpen;
+                @Open.canceled -= m_Wrapper.m_JournalActionsCallbackInterface.OnOpen;
+            }
+            m_Wrapper.m_JournalActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Open.started += instance.OnOpen;
+                @Open.performed += instance.OnOpen;
+                @Open.canceled += instance.OnOpen;
+            }
+        }
+    }
+    public JournalActions @Journal => new JournalActions(this);
     public interface IInGameActions
     {
         void OnWalk(InputAction.CallbackContext context);
@@ -1036,5 +1100,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     {
         void OnHit(InputAction.CallbackContext context);
         void OnMousePosition(InputAction.CallbackContext context);
+    }
+    public interface IJournalActions
+    {
+        void OnOpen(InputAction.CallbackContext context);
     }
 }

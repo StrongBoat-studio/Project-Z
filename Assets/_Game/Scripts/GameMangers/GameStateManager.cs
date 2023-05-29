@@ -11,7 +11,8 @@ public class GameStateManager : MonoBehaviour
         Dialogue,
         Inventory,
         Crafting,
-        MainMenu
+        MainMenu,
+        Journal
     }
 
     public static GameStateManager Instance { get; private set; }
