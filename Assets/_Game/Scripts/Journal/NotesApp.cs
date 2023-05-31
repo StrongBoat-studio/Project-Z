@@ -32,4 +32,18 @@ public class NotesApp : MonoBehaviour
         Notes.Add(note);
         OnNoteAdded?.Invoke();
     }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.KeypadPlus))
+        {
+            Notes.Add(testNotes[2]);
+            OnNoteAdded?.Invoke();
+        }
+        if(Input.GetKeyDown(KeyCode.KeypadMinus))
+        {
+            Notes.RemoveAt(Notes.Count - 1);
+            OnNoteAdded?.Invoke();
+        }
+    }
 }

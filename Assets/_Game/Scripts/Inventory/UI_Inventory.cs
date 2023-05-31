@@ -25,7 +25,7 @@ public class UI_Inventory : MonoBehaviour
     [SerializeField] private float _cellPaddingRight;
     [SerializeField] private float _cellPaddingBottom;
 
-    private void OnDestroy()  
+    private void OnDestroy()
     {
         if (_inventory == null) return;
         _inventory.OnInventoryChanged -= OnInventoryChanged;
@@ -48,7 +48,7 @@ public class UI_Inventory : MonoBehaviour
         UpdatePanel();
     }
 
-    private void UpdatePanel()
+    public void UpdatePanel()
     {
         Debug.Log("UpdatePanel!");
         for (int i = 0; i < _panelSlotContainer.childCount; i++)
@@ -60,10 +60,10 @@ public class UI_Inventory : MonoBehaviour
         {
             for (int y = 0; y < Mathf.Ceil(_inventory.GetSize() / _maxColumns); y++)
             {
-                if (y * 5 + x < _inventory.GetInventoryItems().Count)
+                if (y * _maxColumns + x < _inventory.GetInventoryItems().Count)
                 {
                     RectTransform slot = Instantiate(_inventorySlotPrefab, Vector3.zero, Quaternion.identity, _panelSlotContainer);
-                    slot.GetComponent<UI_InventorySlot>().SetItem(_inventory.GetInventoryItems()[y * 5 + x]);
+                    slot.GetComponent<UI_InventorySlot>().SetItem(_inventory.GetInventoryItems()[y * _maxColumns + x]);
                     slot.anchoredPosition = new Vector3(
                         _offset.x + _paddingLeft + _cellWidth / 2 + x * (_cellWidth + _cellPaddingRight),
                         _offset.y + (-_paddingTop) - _cellHeight / 2 - y * (_cellHeight + _cellPaddingBottom)

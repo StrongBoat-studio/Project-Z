@@ -9,7 +9,6 @@ public class GameStateManager : MonoBehaviour
         Gameplay,
         Paused,
         Dialogue,
-        Inventory,
         Crafting,
         MainMenu,
         Journal

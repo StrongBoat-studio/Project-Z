@@ -14,6 +14,7 @@ public class Journal : MonoBehaviour
         _playerInput = new PlayerInput();
         _playerInput.Journal.Enable();
         _playerInput.Journal.Open.performed += OnJournalOpen;
+        _playerInput.Journal.ExclusiveClose.performed += OnJournalExculusiveClose;
         GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
     }
 
@@ -31,13 +32,21 @@ public class Journal : MonoBehaviour
 
     private void OnGameStateChanged(GameStateManager.GameState newGameState)
     {
-        if(newGameState == GameStateManager.GameState.Journal)
+        _journal.gameObject.SetActive(newGameState == GameStateManager.GameState.Journal);
+        
+        if(
+            newGameState == GameStateManager.GameState.Paused ||
+            newGameState == GameStateManager.GameState.Crafting ||
+            newGameState == GameStateManager.GameState.Dialogue
+        )
         {
-            if(_journal.gameObject.activeSelf == false) _journal.gameObject.SetActive(true);
+            _playerInput.Journal.Disable();
         }
-        else if(newGameState != GameStateManager.GameState.Journal && _journal.gameObject.activeSelf == true)
-        {
-            _journal.gameObject.SetActive(false);
-        }
+        else _playerInput.Journal.Enable();
+    }
+    
+    private void OnJournalExculusiveClose(InputAction.CallbackContext context)
+    {
+        if(_journal.gameObject.activeSelf == true) GameStateManager.Instance.ResetLastState();
     }
 }
