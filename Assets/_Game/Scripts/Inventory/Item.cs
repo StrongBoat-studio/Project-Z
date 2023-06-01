@@ -24,4 +24,6 @@ public class Item
     public bool stackable;
     public UnityEvent<Item, int> Use;
     public TextAsset collectDialogue;
+    public TextAsset itemDecription;
+    public string itemName;
 }

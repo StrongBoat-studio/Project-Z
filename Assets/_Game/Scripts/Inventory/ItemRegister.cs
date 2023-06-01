@@ -32,7 +32,9 @@ public class ItemRegister : MonoBehaviour
             sprite = item.sprite,
             stackable = item.stackable,
             Use = item.Use,
-            collectDialogue = item.collectDialogue
+            collectDialogue = item.collectDialogue,
+            itemName = item.itemName,
+            itemDecription = item.itemDecription
         };
         return copy;
     }

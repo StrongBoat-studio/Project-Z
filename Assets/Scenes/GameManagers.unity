@@ -2477,6 +2477,8 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     collectDialogue: {fileID: 4900000, guid: 836094dd9eb5d52499d720c02a86dc79, type: 3}
+    itemDecription: {fileID: 4900000, guid: aeb0ae4317369864ea82cf66006494ef, type: 3}
+    itemName: "P\u0142yta CD"
   - itemType: 2
     amount: 0
     sprite: {fileID: 21300000, guid: 6ff84b40bd206824ba9c3fd6e67ff090, type: 3}
@@ -2497,6 +2499,8 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     collectDialogue: {fileID: 4900000, guid: 836094dd9eb5d52499d720c02a86dc79, type: 3}
+    itemDecription: {fileID: 4900000, guid: 0cb0641c2c91c05439c8f56efb05768a, type: 3}
+    itemName: Glock 18 duh
   - itemType: 3
     amount: 0
     sprite: {fileID: 21300000, guid: 5cdd3dfdfdee97d43b64f608df5c7c90, type: 3}
@@ -2517,6 +2521,8 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     collectDialogue: {fileID: 4900000, guid: 836094dd9eb5d52499d720c02a86dc79, type: 3}
+    itemDecription: {fileID: 4900000, guid: b82fec90bc49dbd49ab648ecd6e3e8ea, type: 3}
+    itemName: Pikselowy klucz
   - itemType: 4
     amount: 0
     sprite: {fileID: 21300000, guid: 142ace99b94a0b541a73d36e712fb517, type: 3}
@@ -2537,6 +2543,8 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     collectDialogue: {fileID: 4900000, guid: 836094dd9eb5d52499d720c02a86dc79, type: 3}
+    itemDecription: {fileID: 4900000, guid: f751b7a51cbb51d4f938b23a852c0793, type: 3}
+    itemName: "List, nie otwiera\u0107"
   - itemType: 5
     amount: 0
     sprite: {fileID: 21300000, guid: 9ebf048c144f56548b10501644668829, type: 3}
@@ -2557,6 +2565,8 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     collectDialogue: {fileID: 4900000, guid: 836094dd9eb5d52499d720c02a86dc79, type: 3}
+    itemDecription: {fileID: 4900000, guid: 701fb4bad0085384a836fb1f0004f910, type: 3}
+    itemName: Komputer, a raczej monitor
   - itemType: 6
     amount: 0
     sprite: {fileID: 21300000, guid: 6d6d180aa82c26743bfe2a69af70ddbf, type: 3}
@@ -2577,6 +2587,8 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     collectDialogue: {fileID: 4900000, guid: 836094dd9eb5d52499d720c02a86dc79, type: 3}
+    itemDecription: {fileID: 4900000, guid: a42a67e642c274947a24abcd848459c3, type: 3}
+    itemName: "Sok z gumijag\xF3d (Denaturat)"
 --- !u!4 &1421069937
 Transform:
   m_ObjectHideFlags: 0
@@ -2617,9 +2629,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   recipes:
-  - itemBase: 0
-    itemDrop: 3
-    itemResult: 4
+  - itemBase: 4
+    itemDrop: 1
+    itemResult: 2
   - itemBase: 2
     itemDrop: 1
     itemResult: 5
