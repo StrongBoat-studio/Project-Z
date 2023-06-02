@@ -746,10 +746,10 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.07597173
-    y: 0.021238938
-    width: 0.84805655
-    height: 0.9557522
+    x: 0
+    y: 0
+    width: 1
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 37
@@ -2193,6 +2193,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 625597822}
+  - component: {fileID: 625597823}
   m_Layer: 5
   m_Name: ToolTipBox
   m_TagString: Untagged
@@ -2220,9 +2221,21 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -256, y: 110}
+  m_AnchoredPosition: {x: -192, y: 196}
   m_SizeDelta: {x: 192, y: 96}
   m_Pivot: {x: 0, y: 1}
+--- !u!225 &625597823
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 625597821}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &662940394
 GameObject:
   m_ObjectHideFlags: 0

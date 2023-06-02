@@ -11,6 +11,7 @@ public class UI_InventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDragH
     private Item _item;
     private Vector2 _dragStartPos;
     private UI_Inventory _uiInventory;
+    private Vector2 _positionIndex;
 
     [SerializeField] private RectTransform _itemSprite;
 
@@ -18,12 +19,13 @@ public class UI_InventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDragH
     ///Set item's  sprite and amount
     ///</summary>
     ///<param name="item"></param>
-    public void SetItem(Item item, UI_Inventory uiInventory)
+    public void SetItem(Item item, UI_Inventory uiInventory, Vector2 posIndex)
     {
         _item = item;
         transform.Find("Item").GetComponent<Image>().sprite = item.sprite;
         transform.Find("Amount").GetComponent<TextMeshProUGUI>().text = item.amount.ToString();
         _uiInventory = uiInventory;
+        _positionIndex = posIndex;
     }
 
     public Item GetItem()
@@ -80,7 +82,7 @@ public class UI_InventorySlot : MonoBehaviour, IPointerClickHandler, IBeginDragH
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        _uiInventory.ShowTooltip(GetComponent<RectTransform>(), _item.itemName, _item.itemDecription);
+        _uiInventory.ShowTooltip(GetComponent<RectTransform>(), _item.itemName, _item.itemDecription, _positionIndex);
     }
 
     public void OnPointerExit(PointerEventData eventData)

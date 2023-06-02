@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 
 public class UI_Inventory : MonoBehaviour
 {
@@ -29,6 +30,7 @@ public class UI_Inventory : MonoBehaviour
     [SerializeField] private RectTransform _tooltipBox;
     [SerializeField] private TextMeshProUGUI _tooltipName;
     [SerializeField] private TextMeshProUGUI _tooltipDescription;
+    private bool _tweening = false;
 
     private void OnDestroy()
     {
@@ -69,7 +71,7 @@ public class UI_Inventory : MonoBehaviour
                 if (y * _maxColumns + x < _inventory.GetInventoryItems().Count)
                 {
                     RectTransform slot = Instantiate(_inventorySlotPrefab, Vector3.zero, Quaternion.identity, _panelSlotContainer);
-                    slot.GetComponent<UI_InventorySlot>().SetItem(_inventory.GetInventoryItems()[y * _maxColumns + x], this);
+                    slot.GetComponent<UI_InventorySlot>().SetItem(_inventory.GetInventoryItems()[y * _maxColumns + x], this, new Vector2(x, y));
                     slot.anchoredPosition = new Vector3(
                         _offset.x + _paddingLeft + _cellWidth / 2 + x * (_cellWidth + _cellPaddingRight),
                         _offset.y + (-_paddingTop) - _cellHeight / 2 - y * (_cellHeight + _cellPaddingBottom)
@@ -79,19 +81,23 @@ public class UI_Inventory : MonoBehaviour
         }
     }
 
-    public void ShowTooltip(RectTransform itemSlot, string itemName, TextAsset itemDescription)
+    public void ShowTooltip(RectTransform itemSlot, string itemName, TextAsset itemDescription, Vector2 posIndex)
     {
         _tooltipBox.SetParent(itemSlot);
-        _tooltipBox.anchoredPosition = new Vector2(-_tooltipBox.rect.width / 2, _tooltipBox.rect.height + itemSlot.rect.height);
-        _tooltipBox.gameObject.SetActive(true);
+        //Show tooltip on the right for slots on the left half and on the left for slots on the right half
+        _tooltipBox.anchoredPosition = new Vector2(
+            (posIndex.x >= _inventory.GetSize() / 4) ? -_tooltipBox.rect.width : 0f,
+            _tooltipBox.rect.height + itemSlot.rect.height / 2
+        );
         _tooltipName.text = itemName;
         _tooltipDescription.text = itemDescription.text;
         _tooltipBox.SetParent(_panel);
+        _tooltipBox.GetComponent<CanvasGroup>().DOFade(1f, .2f);
     }
 
     public void HideToolTip()
     {
-        _tooltipBox.gameObject.SetActive(false);
+        _tooltipBox.GetComponent<CanvasGroup>().DOFade(0f, .2f);
     }
 
     public void ToggleInventoryPanel(bool state)
