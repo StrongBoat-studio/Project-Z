@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using DG.Tweening;
 
 public class Journal : MonoBehaviour
 {
     private PlayerInput _playerInput;
+    private bool _isOpen = false;
 
-    [SerializeField] private Transform _journal;   
+    [SerializeField] private RectTransform _journal;   
 
     private void Awake()
     {
@@ -26,13 +28,27 @@ public class Journal : MonoBehaviour
 
     private void OnJournalOpen(InputAction.CallbackContext context)
     {
-        if(_journal.gameObject.activeSelf) GameStateManager.Instance.ResetLastState();
+        if(_isOpen == true) GameStateManager.Instance.ResetLastState();
         else GameStateManager.Instance.SetState(GameStateManager.GameState.Journal);
     }
 
     private void OnGameStateChanged(GameStateManager.GameState newGameState)
     {
-        _journal.gameObject.SetActive(newGameState == GameStateManager.GameState.Journal);
+        //_journal.gameObject.SetActive(newGameState == GameStateManager.GameState.Journal);
+        if(newGameState == GameStateManager.GameState.Journal && _isOpen == false)
+        {
+            _journal.DOAnchorPosX(0f, .25f, true);
+            _isOpen = true;
+        }
+        else if(newGameState != GameStateManager.GameState.Journal && _isOpen == true)
+        {
+            _journal.DOAnchorPosX(
+                -_journal.rect.width - (_journal.GetComponentInParent<Canvas>().gameObject.GetComponent<RectTransform>().rect.width - _journal.rect.width) / 2, 
+                .25f, 
+                true
+            );
+            _isOpen = false;
+        }
         
         if(
             newGameState == GameStateManager.GameState.Paused ||
