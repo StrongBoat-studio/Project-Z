@@ -63,6 +63,6 @@ public class Journal : MonoBehaviour
     
     private void OnJournalExculusiveClose(InputAction.CallbackContext context)
     {
-        if(_journal.gameObject.activeSelf == true) GameStateManager.Instance.ResetLastState();
+        if(_isOpen == true) GameStateManager.Instance.ResetLastState();
     }
 }
