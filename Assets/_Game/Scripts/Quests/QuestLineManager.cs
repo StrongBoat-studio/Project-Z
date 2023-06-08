@@ -29,22 +29,6 @@ public class QuestLineManager : MonoBehaviour
         {
             ValidateQuests();
         }
-
-        if(Input.GetKeyDown(KeyCode.Keypad1))
-        {
-            _quests[0].CompleteTask(1);
-            ValidateQuests();
-        }
-        if(Input.GetKeyDown(KeyCode.Keypad2))
-        {
-            _quests[0].CompleteTask(2);
-            ValidateQuests();
-        }
-        if(Input.GetKeyDown(KeyCode.Keypad3))
-        {
-            _quests[0].CompleteTask(3);
-            ValidateQuests();
-        }
     }
 
     public void ValidateQuests()
@@ -63,5 +47,35 @@ public class QuestLineManager : MonoBehaviour
     {
         if(qo.QuestID != _quests[0].ID) return;
         _quests[0].CompleteTask(qo.QuestTaskID);
+        ValidateQuests();
+    }
+
+    public void CheckJournalQuest(QuestObjective qo, int app)
+    {
+        if(qo.QuestID != _quests[0].ID) return;
+        if((int)_quests[0].Tasks[0].JournalAppToOpen == app) _quests[0].CompleteTask(qo.QuestTaskID);
+        ValidateQuests();
+    }
+
+    public void CheckQuestItems(List<Item> items)
+    {
+        string completionHint = $"";
+        if(items.FindIndex(x => x.itemType == _quests[0].Tasks[0].ItemToCollect.itemType) == -1)
+        {
+            completionHint += $"{_quests[0].Tasks[0].ItemToCollect.itemType.ToString()} 0/{_quests[0].Tasks[0].ItemToCollect.amount}\n";
+            return;
+        }
+
+        Item.ItemType iType = _quests[0].Tasks[0].ItemToCollect.itemType;
+        int iAmount = 0;
+        foreach(Item i in items.FindAll(x => x.itemType == iType))
+        {
+            iAmount += i.amount;
+        }
+        if(iAmount >= _quests[0].Tasks[0].ItemToCollect.amount) _quests[0].Tasks[0].Complete();
+        else completionHint += $"{_quests[0].Tasks[0].ItemToCollect.itemType.ToString()} {iAmount}/{_quests[0].Tasks[0].ItemToCollect.amount}";
+
+        _quests[0].Tasks[0].CompletionHint = completionHint;
+        ValidateQuests();
     }
 }

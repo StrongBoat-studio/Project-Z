@@ -49,11 +49,23 @@ public class Inventory
 
             _items.Add(item);
             OnInventoryChanged?.Invoke();
+
+            //Update Quest
+            if(QuestLineManager.Instance != null)
+            {
+                QuestLineManager.Instance.CheckQuestItems(_items);
+            }
         }
         else
         {
             _items.Find(x => x.itemType == item.itemType).amount += item.amount;
             OnInventoryChanged?.Invoke();
+
+            //Update Quest
+            if(QuestLineManager.Instance != null)
+            {
+                QuestLineManager.Instance.CheckQuestItems(_items);
+            }
         }
         return true;
     }
@@ -87,6 +99,12 @@ public class Inventory
             }
 
             OnInventoryChanged?.Invoke();
+
+            //Update Quest
+            if(QuestLineManager.Instance != null)
+            {
+                QuestLineManager.Instance.CheckQuestItems(_items);
+            }
         }
     }
 

@@ -45,8 +45,10 @@ public class ItemWorld : MonoBehaviour, IInteractable
     {
         if (GameManager.Instance.player != null)
         {
-            if(GameManager.Instance.player.GetComponent<Player>().GetInventory().AddItem(GetItem()))
+            if (GameManager.Instance.player.GetComponent<Player>().GetInventory().AddItem(GetItem()))
+            {
                 Destroy(gameObject);
+            }
         }
         else
         {

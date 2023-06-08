@@ -5,6 +5,14 @@ using UnityEngine;
 [System.Serializable]
 public class Quest
 {
+    public enum TaskType
+    {
+        Talk,
+        GoToLocation,
+        OpenJournal,
+        CollectItems
+    }
+
     [field: SerializeField] public int ID { get; private set; }
     [field: SerializeField] public string Title { get; private set; }
     [field: SerializeField] public List<QuestTask> Tasks { get; private set; }

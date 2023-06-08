@@ -1541,37 +1541,76 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _quests:
   - <ID>k__BackingField: 1
-    <Title>k__BackingField: First Task
+    <Title>k__BackingField: Tutorial
     <Tasks>k__BackingField:
     - <ID>k__BackingField: 1
-      <Text>k__BackingField: Task 1
+      <Title>k__BackingField: Open EQ
+      <DisplayCompletionHint>k__BackingField: 0
+      <CompletionHint>k__BackingField: 
       <IsCompleted>k__BackingField: 0
+      <TaskType>k__BackingField: 2
+      <ItemToCollect>k__BackingField:
+        itemType: 0
+        amount: 0
+      <JournalAppToOpen>k__BackingField: 1
     - <ID>k__BackingField: 2
-      <Text>k__BackingField: Task 2
+      <Title>k__BackingField: Open Notes
+      <DisplayCompletionHint>k__BackingField: 0
+      <CompletionHint>k__BackingField: 
       <IsCompleted>k__BackingField: 0
+      <TaskType>k__BackingField: 2
+      <ItemToCollect>k__BackingField:
+        itemType: 0
+        amount: 0
+      <JournalAppToOpen>k__BackingField: 2
     <IsCompleted>k__BackingField: 0
   - <ID>k__BackingField: 2
-    <Title>k__BackingField: Second Task
+    <Title>k__BackingField: Talk to people
     <Tasks>k__BackingField:
     - <ID>k__BackingField: 1
-      <Text>k__BackingField: Task 1
+      <Title>k__BackingField: Left guy
+      <DisplayCompletionHint>k__BackingField: 0
+      <CompletionHint>k__BackingField: 
       <IsCompleted>k__BackingField: 0
+      <TaskType>k__BackingField: 0
+      <ItemToCollect>k__BackingField:
+        itemType: 0
+        amount: 0
+      <JournalAppToOpen>k__BackingField: 0
     - <ID>k__BackingField: 2
-      <Text>k__BackingField: Task 2
+      <Title>k__BackingField: Right guy
+      <DisplayCompletionHint>k__BackingField: 0
+      <CompletionHint>k__BackingField: 
       <IsCompleted>k__BackingField: 0
+      <TaskType>k__BackingField: 0
+      <ItemToCollect>k__BackingField:
+        itemType: 0
+        amount: 0
+      <JournalAppToOpen>k__BackingField: 0
     <IsCompleted>k__BackingField: 0
   - <ID>k__BackingField: 3
-    <Title>k__BackingField: Third Task
+    <Title>k__BackingField: Collect items
     <Tasks>k__BackingField:
     - <ID>k__BackingField: 1
-      <Text>k__BackingField: Task 1
+      <Title>k__BackingField: Collect 1 CD
+      <DisplayCompletionHint>k__BackingField: 1
+      <CompletionHint>k__BackingField: 
       <IsCompleted>k__BackingField: 0
+      <TaskType>k__BackingField: 3
+      <ItemToCollect>k__BackingField:
+        itemType: 1
+        amount: 1
+      <JournalAppToOpen>k__BackingField: 0
     - <ID>k__BackingField: 2
-      <Text>k__BackingField: Task 2
+      <Title>k__BackingField: Collect 3 Letters
+      <DisplayCompletionHint>k__BackingField: 1
+      <CompletionHint>k__BackingField: 
       <IsCompleted>k__BackingField: 0
-    - <ID>k__BackingField: 3
-      <Text>k__BackingField: Task 3
-      <IsCompleted>k__BackingField: 0
+      <TaskType>k__BackingField: 3
+      <ItemToCollect>k__BackingField:
+        itemType: 4
+        amount: 3
+      <JournalAppToOpen>k__BackingField: 0
     <IsCompleted>k__BackingField: 0
 --- !u!4 &927334019
 Transform:
