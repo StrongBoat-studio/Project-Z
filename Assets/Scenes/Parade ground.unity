@@ -1309,7 +1309,7 @@ PrefabInstance:
     - target: {fileID: 3176867123582371367, guid: 32b3e9453b3789d42a5e43248238bb69, type: 3}
       propertyPath: _dialogue._dialogueTextAsset
       value: 
-      objectReference: {fileID: 4900000, guid: 0f377816cd2c08d4b8c4007b30912a36, type: 3}
+      objectReference: {fileID: 4900000, guid: 099c5208fded1ff4e8dd97fa72e4c85b, type: 3}
     - target: {fileID: 3176867123582371384, guid: 32b3e9453b3789d42a5e43248238bb69, type: 3}
       propertyPath: m_SortingLayer
       value: 2
