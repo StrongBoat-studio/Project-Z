@@ -16,8 +16,9 @@ public class WalkerStateManager : MonoBehaviour
     public WalkerHearingState HearingState = new WalkerHearingState();
 
     //Movement variables
-    [SerializeField] private Vector3 _pos1, _pos2, _startPos;
+    [SerializeField] private Vector3 _maxPos1, _maxPos2;
     [SerializeField] private GameObject _mutant;
+    [SerializeField] private Rigidbody2D _rigidbody;
     private GameObject _player;
     [SerializeField] private Transform _walker;
     private Transform _player2;
@@ -51,8 +52,8 @@ public class WalkerStateManager : MonoBehaviour
     private Vector3 _target2;
 
     //getter and setter
-    public Vector3 Pos1 { get { return _pos1; } }
-    public Vector3 Pos2 { get { return _pos2; } }
+    public Vector3 Pos1 { get { return _maxPos1; } }
+    public Vector3 Pos2 { get { return _maxPos2; } }
     public Vector3 NextPos { get { return nextPos; } set { nextPos = value; } }
     public float Speed { get { return _speed; } }
     public bool Zone1 { get { return _zone1; } set { _zone1 = value; } }
@@ -84,6 +85,7 @@ public class WalkerStateManager : MonoBehaviour
     public int MLife { get { return _mLife; } set { _mLife = value; } }
     public float DistanceAttack { get { return _distanceAttack; } set { _distanceAttack = value;} }
     public Animator Animator { get { return _animator; } }
+    public Rigidbody2D Rigidbody { get { return _rigidbody; }  set { _rigidbody = value; } }
 
 
     //Ui 
@@ -111,7 +113,7 @@ public class WalkerStateManager : MonoBehaviour
         currentState.Context = this;
         currentState.EnterState(this);
 
-        nextPos = _startPos;
+        nextPos = _maxPos1;
         _distance = Vector3.Distance(_mutant.transform.position, _player.transform.position);
 
     }

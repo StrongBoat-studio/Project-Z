@@ -17,6 +17,7 @@ public class WalkerPoToPoState : WalkerBaseState
 
     public override void UpdateState(WalkerStateManager walker)
     {
+        SetPosition();
         Moving();
         PositionCheck();
         SecondsElapsedAndDistanceChase();
@@ -29,23 +30,34 @@ public class WalkerPoToPoState : WalkerBaseState
 
     }
 
-    private void Moving()
+    private void SetPosition()
     {
-        if (Context.transform.position == Context.Pos1)
+        if (Context.transform.position.x >= Context.Pos1.x)
         {
             Context.NextPos = Context.Pos2;
             Context.CheckVector = new Vector2(1f, 0f);
             Context.Mutant.transform.localScale = new Vector3(1, 1, 0);
         }
 
-        if (Context.transform.position == Context.Pos2)
+        if (Context.transform.position.x <= Context.Pos2.x)
         {
             Context.NextPos = Context.Pos1;
             Context.CheckVector = new Vector2(-1f, 0f);
             Context.Mutant.transform.localScale = new Vector3(-1, 1, 0);
         }
+    }
 
-        Context.transform.position = Vector3.MoveTowards(Context.transform.position, Context.NextPos, Context.Speed * Time.deltaTime);
+    private void Moving()
+    {
+        if(Context.NextPos==Context.Pos1)
+        {
+            Context.Rigidbody.velocity = new Vector2(Context.Speed, Context.transform.position.y);
+        }
+        else
+        {
+            Context.Rigidbody.velocity = new Vector2(-Context.Speed, Context.transform.position.y);
+        }
+
     }
 
     //Checking whether the Player is in front of or behind the Mutant
