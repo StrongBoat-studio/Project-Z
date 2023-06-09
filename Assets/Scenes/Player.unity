@@ -404,10 +404,10 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
+    x: 0.23333335
+    y: 0.023148147
+    width: 0.33333334
+    height: 0.3333333
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 37
@@ -2589,6 +2589,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7443e024656698d4a8a11a864c803fee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _movement: {fileID: 1913262206}
   _firePoint: {fileID: 24993565}
   _weapon: {fileID: 1345009192}
   _bulletPrefab: {fileID: 17335071800648654, guid: a716cac6e3268b44ba6b8d9b83df1fdf, type: 3}
@@ -2645,6 +2646,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerBoxCollider2D: {fileID: 1913262205}
   _animBoxCollider2D: {fileID: 2104263219}
+  player_size: {x: 0, y: 0}
+  anim_size: {x: 0, y: 0}
 --- !u!1 &2104263214
 GameObject:
   m_ObjectHideFlags: 0
@@ -2783,7 +2786,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.5, y: 2}
+    oldSize: {x: 0.5625, y: 1.8125}
     newSize: {x: 1, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
