@@ -8,6 +8,7 @@ using UnityEngine.Rendering.UI;
 public class Inventory
 {
     private List<Item> _items;
+    public List<Item> Items { get => _items; }
     [SerializeField] private int _inventorySize = 12;
 
     public bool IsFull { get => _items.Count >= _inventorySize; }
