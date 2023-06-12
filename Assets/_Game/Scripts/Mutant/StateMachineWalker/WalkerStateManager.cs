@@ -15,15 +15,10 @@ public class WalkerStateManager : MonoBehaviour
     public WalkerDeathState DeathState=new WalkerDeathState();
     public WalkerHearingState HearingState = new WalkerHearingState();
 
-    //Movement variables
-    [SerializeField] private Vector3 _maxPos1, _maxPos2;
-    [SerializeField] private GameObject _mutant;
-    [SerializeField] private Rigidbody2D _rigidbody;
+    //Components use for movement
+    private GameObject _mutant;
     [SerializeField] private WalkerPatrolling _walkerPatrolling;
     private GameObject _player;
-    [SerializeField] private Transform _walker;
-    private Transform _player2;
-    private Vector3 nextPos;
     private Movement _movement; 
 
     //Stealth Settings for Designers
@@ -53,9 +48,6 @@ public class WalkerStateManager : MonoBehaviour
     private Vector3 _target2;
 
     //getter and setter
-    public Vector3 Pos1 { get { return _maxPos1; } }
-    public Vector3 Pos2 { get { return _maxPos2; } }
-    public Vector3 NextPos { get { return nextPos; } set { nextPos = value; } }
     public float Speed { get { return _speed; } }
     public bool Zone1 { get { return _zone1; } set { _zone1 = value; } }
     public bool Zone2 { get { return _zone2; } set { _zone2 = value; } }
@@ -65,8 +57,6 @@ public class WalkerStateManager : MonoBehaviour
     public Vector2 PlayerPosition { get { return _playerPosition; } set { _playerPosition = value; } }
     public Vector2 WalkerPosition { get { return _walkerPosition; } set { _walkerPosition = value; } }
     public Vector2 Direction { get { return _direction; } set { _direction = value; } }
-    public Transform Walker { get { return _walker; } set { _walker= value; } }
-    public Transform Player2 { get { return _player2; } set { _player2 = value;} }
     public float DotPro { get { return dotPro; } set { dotPro = value; } }
     public float SecondsElapsed { get { return _secondsElapsed; } set { _secondsElapsed=value; } }
     public float SecondOfSleepFront { get { return _secondOfSleepFront; } set { _secondOfSleepFront=value; } }
@@ -82,20 +72,12 @@ public class WalkerStateManager : MonoBehaviour
     public float SecondHearingNormally { get { return _secondHearingNormally; } }
     public GameObject Alert { get { return _alert; } }
     public Transform Target { get { return _target; } }
-    public int PLife { get { return _pLife; } set { _pLife = value; } }
-    public int MLife { get { return _mLife; } set { _mLife = value; } }
     public float DistanceAttack { get { return _distanceAttack; } set { _distanceAttack = value;} }
     public Animator Animator { get { return _animator; } }
-    public Rigidbody2D Rigidbody { get { return _rigidbody; }  set { _rigidbody = value; } }
+    public GameObject Player { get { return _player; } }
 
 
-    //Ui 
-    [Header("UI")]
-    [SerializeField] private TextMeshProUGUI _timeS;
-    [SerializeField] private TextMeshProUGUI _timeH;
-    [SerializeField] private TextMeshProUGUI _lifeP;
-    [SerializeField] private TextMeshProUGUI _lifeM;
-    private int _pLife=100;
+    //Life 
     private int _mLife=100;
 
     //Animations
@@ -103,23 +85,19 @@ public class WalkerStateManager : MonoBehaviour
     [SerializeField] private Animator _animator;
 
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
-        _player2=GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         _movement= GameObject.FindGameObjectWithTag("Player").GetComponent<Movement>();
+        _mutant = GameObject.FindGameObjectWithTag("Enemy");
 
         currentState = PatrollingState;
         currentState.Context = this;
         currentState.EnterState(this);
 
-        nextPos = _maxPos1;
         _distance = Vector3.Distance(_mutant.transform.position, _player.transform.position);
-
     }
 
-    // Update is called once per frame
     void Update()
     {
         currentState.UpdateState(this);
@@ -127,13 +105,6 @@ public class WalkerStateManager : MonoBehaviour
         _distance = Vector3.Distance(_mutant.transform.position, _player.transform.position);
         _target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         _checkVector = _walkerPatrolling.GetCheckVector();
-
-        _timeS.text = "Time seeing: " + Mathf.Clamp(Mathf.CeilToInt(_secondsElapsed), 0, float.MaxValue).ToString();
-        _timeH.text = "Time hearing: " + Mathf.Clamp(Mathf.CeilToInt(_secondsHearingElapsed), 0, float.MaxValue).ToString();
-
-        _lifeP.text="Player life: "+Mathf.Clamp(_pLife, 0, int.MaxValue).ToString();
-        _lifeM.text = "Mutant life: " + Mathf.Clamp(_mLife, 0, int.MaxValue).ToString();
-
     }
 
     public void SwitchState (WalkerBaseState state)
@@ -146,7 +117,6 @@ public class WalkerStateManager : MonoBehaviour
     public WalkerBaseState GetWalkerState()
     {
         return currentState;
-
     }
 
     public void TakeDamage(int damage, int weapon)
@@ -156,7 +126,6 @@ public class WalkerStateManager : MonoBehaviour
         {
             _mutant.SetActive(false);
             _alert.SetActive(false);
-            _lifeM.text = "Mutant life: 0";
         }
 
         switch(weapon)
@@ -184,28 +153,28 @@ public class WalkerStateManager : MonoBehaviour
     private void ReactionToShoot()
     {
         if(_player.transform.localScale.x==1)
-            _walker.position = new Vector3(_walker.position.x - .7f, _walker.position.y, _walker.position.z);
+            _mutant.transform.position = new Vector3(_mutant.transform.position.x - .7f, _mutant.transform.position.y, _mutant.transform.position.z);
 
         if (_player.transform.localScale.x == -1)
-            _walker.position = new Vector3(_walker.position.x + .7f, _walker.position.y, _walker.position.z);
+            _mutant.transform.position = new Vector3(_mutant.transform.position.x + .7f, _mutant.transform.position.y, _mutant.transform.position.z);
     }
 
     private void ReactionToKnife()
     {
         if (_player.transform.localScale.x == 1)
-            _walker.position = new Vector3(_walker.position.x - .5f, _walker.position.y, _walker.position.z);
+            _mutant.transform.position = new Vector3(_mutant.transform.position.x - .5f, _mutant.transform.position.y, _mutant.transform.position.z);
 
         if (_player.transform.localScale.x == -1)
-            _walker.position = new Vector3(_walker.position.x + .5f, _walker.position.y, _walker.position.z);
+            _mutant.transform.position = new Vector3(_mutant.transform.position.x + .5f, _mutant.transform.position.y, _mutant.transform.position.z);
     }
 
     private void ReactionToEmpytHand()
     {
         if (_player.transform.localScale.x == 1)
-            _walker.position = new Vector3(_walker.position.x - .2f, _walker.position.y, _walker.position.z);
+            _mutant.transform.position = new Vector3(_mutant.transform.position.x - .2f, _mutant.transform.position.y, _mutant.transform.position.z);
 
         if (_player.transform.localScale.x == -1)
-            _walker.position = new Vector3(_walker.position.x + .2f, _walker.position.y, _walker.position.z);
+            _mutant.transform.position = new Vector3(_mutant.transform.position.x + .2f, _mutant.transform.position.y, _mutant.transform.position.z);
     }
 
     private void Chasing()

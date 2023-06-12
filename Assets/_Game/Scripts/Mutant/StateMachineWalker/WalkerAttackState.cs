@@ -6,6 +6,7 @@ public class WalkerAttackState : WalkerBaseState
     private float _time = 1f;
     public System.Random generator = new System.Random();
     private double _anim;
+    private Vector3 _target;
 
     public override void EnterState(WalkerStateManager walker)
     {
@@ -16,8 +17,9 @@ public class WalkerAttackState : WalkerBaseState
     {
         AttackM();
         PositionCheck();
+        Chasing();
         //Context.Mutant.transform.LookAt(Context.Player2);
-        LookAtThePlayer();
+        // LookAtThePlayer();
 
         if (Context.Distance > Context.DistanceChase)
         {
@@ -45,7 +47,7 @@ public class WalkerAttackState : WalkerBaseState
                 Context.Animator.SetBool("InAttack2", true);
             }
             
-            Context.PLife -= 10;
+            //Context.PLife -= 10;
             _time = 1f;
         }
 
@@ -54,8 +56,8 @@ public class WalkerAttackState : WalkerBaseState
     //Checking whether the Player is in front of or behind the Mutant
     private void PositionCheck()
     {
-        Context.PlayerPosition = Context.Player2.position;
-        Context.WalkerPosition = Context.Walker.position;
+        Context.PlayerPosition = Context.Player.transform.position;
+        Context.WalkerPosition = Context.Mutant.transform.position;
 
         Context.Direction = Context.PlayerPosition - Context.WalkerPosition;
         Context.Direction.Normalize();
@@ -63,15 +65,22 @@ public class WalkerAttackState : WalkerBaseState
         Context.DotPro = Vector2.Dot(Context.Direction, Context.CheckVector);
     }
 
+    private void Chasing()
+    {
+        _target = new Vector3(Context.Target.position.x, Context.transform.position.y, Context.transform.position.z);
+
+        Context.transform.position = Vector2.MoveTowards(Context.transform.position, _target, (Context.Speed + 1f) * Time.deltaTime);
+    }
+
     private void LookAtThePlayer()
     {
-        if(Context.Player2.transform.localScale.x==1)
+        if(Context.Player.transform.localScale.x==1)
         {
-            Context.Walker.transform.localScale = new Vector3(-1f, 1f, 0f);
+            Context.Mutant.transform.localScale = new Vector3(-1f, 1f, 0f);
         }
-        if (Context.Player2.transform.localScale.x == -1)
+        if (Context.Player.transform.localScale.x == -1)
         {
-            Context.Walker.transform.localScale = new Vector3(1f, 1f, 0f);
+            Context.Mutant.transform.localScale = new Vector3(1f, 1f, 0f);
         }
     }
 

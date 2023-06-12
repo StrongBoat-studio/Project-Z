@@ -29,8 +29,8 @@ public class WalkerBeforeChaseState : WalkerBaseState
     //Checking whether the Player is in front of or behind the Mutant
     private void PositionCheck()
     {
-        Context.PlayerPosition = Context.Player2.position;
-        Context.WalkerPosition = Context.Walker.position;
+        Context.PlayerPosition = Context.Player.transform.position;
+        Context.WalkerPosition = Context.Mutant.transform.position;
 
         Context.Direction = Context.PlayerPosition - Context.WalkerPosition;
         Context.Direction.Normalize();
