@@ -9,6 +9,7 @@ public class WalkerPatrolling : MonoBehaviour
     private WalkerStateManager _walkerStateManager;
     private Transform _mutantTransform;
     private Rigidbody2D _mutantRigidbody2D;
+    private Animator _animator;
 
     [Header("Mutant movement area")]
     [SerializeField] private int _maxLeftX;
@@ -16,19 +17,19 @@ public class WalkerPatrolling : MonoBehaviour
 
     [Header("Patrol Settings")]
     [Range(0f, 10f)] [SerializeField] private float _speed;
+    [Range(0f, 10f)] [SerializeField] private int _standingTimeInSeconds;
 
-    [Header("System check")]
     //Variable for potrolling
-    [SerializeField] private int _nextPosition;
+    private int _nextPosition;
+    private float _secondsCountdown;
+
     private Vector2 _checkVector = new Vector2(1f, 0f);
     private WalkerBaseState _currensState;
     private System.Random _random = new System.Random();
 
-    [SerializeField] private List<WalkerBaseState> _walkerBaseStates=new List<WalkerBaseState>();
+    private List<WalkerBaseState> _walkerBaseStates=new List<WalkerBaseState>();
+    private List<int> _walking = new List<int>();
 
-
-    //controlling bool variables
-    private bool _isWalking = false;
     /// <summary>
     /// If true, the mutant must go right, if false, then left
     /// </summary>
@@ -40,55 +41,57 @@ public class WalkerPatrolling : MonoBehaviour
         Standing=2,
     }
 
+    private WalkerPatrollingState  _walkerPatrollingState = WalkerPatrollingState.Moving;
+
     void Awake()
     {
-        //Default to the first position
+        //Default variable values
         _nextPosition = _maxRightX;
+        _secondsCountdown = _standingTimeInSeconds;
+        _walkerPatrollingState = WalkerPatrollingState.Moving;
 
         //downloading the appropriate components
         _walkerStateManager = GetComponent<WalkerStateManager>();
         _mutantTransform = GetComponent<Transform>();
         _mutantRigidbody2D = GetComponent<Rigidbody2D>();
+        _animator = GetComponentInChildren<Animator>();
 
         //Adding states to the list
         _walkerBaseStates.Add(_walkerStateManager.PatrollingState);
         _walkerBaseStates.Add(_walkerStateManager.BeforeChaseState);
         _walkerBaseStates.Add(_walkerStateManager.HearingState);
+
+        //Adding variables to the list for the draw
+        _walking.Add(1);
+        _walking.Add(2);
     }
 
-    // Update is called once per frame
     private void FixedUpdate()
     {
         _currensState = _walkerStateManager.GetWalkerState();
 
         if (_walkerBaseStates.Contains(_currensState))
         {
-            WalkerPatrollingState walkerPatrollingState = WalkerPatrollingState.Moving;
-
-            if (_isWalking) walkerPatrollingState = WalkerPatrollingState.Moving;
-            if (!_isWalking) walkerPatrollingState = WalkerPatrollingState.Standing;
-
-            switch (walkerPatrollingState)
+            switch (_walkerPatrollingState)
             {
                 case WalkerPatrollingState.Moving:
                     {
                         SetPosition();
                         Moving();
-
+                        _animator.SetBool("IsStanding", false);
                         break;
                     }
-
                 case WalkerPatrollingState.Standing:
                     {
+                        _animator.SetBool("IsStanding", true);
+                        Standing();
                         break;
                     }
-
                 default:
                     {
                         break;
                     }
-            }
-            
+            }  
         }
     }
 
@@ -102,7 +105,6 @@ public class WalkerPatrolling : MonoBehaviour
             _nextPosition = _random.Next(_maxLeftX, (int)_mutantTransform.position.x+1);
 
             return _nextPosition;
-
         }
         if (!_chectNextPosition)
         {
@@ -117,7 +119,7 @@ public class WalkerPatrolling : MonoBehaviour
 
     private void SetPosition()
     {
-        if(_chectNextPosition)
+        if (_chectNextPosition)
         {
             _checkVector = new Vector2(-1f, 0f);
             _mutantTransform.localScale = new Vector3(-1, 1, 0);
@@ -125,6 +127,7 @@ public class WalkerPatrolling : MonoBehaviour
             if(_mutantTransform.position.x >= _nextPosition)
             {
                 _nextPosition = DrawNextPosition();
+                DrawNextState();
             }
         }
         else if (!_chectNextPosition)
@@ -135,11 +138,9 @@ public class WalkerPatrolling : MonoBehaviour
             if(_mutantTransform.position.x <= _nextPosition)
             {
                 _nextPosition = DrawNextPosition();
-            }
-
-            
+                DrawNextState();
+            } 
         }
-
     }
 
     private void Moving()
@@ -152,7 +153,39 @@ public class WalkerPatrolling : MonoBehaviour
         {
             _mutantRigidbody2D.velocity = new Vector2(-_speed, _mutantTransform.position.y);
         }
+    }
 
+    private void Standing()
+    {
+        TimeManipulation();
+
+        if(_secondsCountdown<=0)
+        {
+            DrawNextState();
+        }
+    }
+
+    /// <summary>
+    /// This function is responsible for whether the mutant's next move will be walking or standing still for a while
+    /// </summary>
+    private void DrawNextState()
+    {
+        int _nextStateDraw = _random.Next(1, 4);
+
+        if(_walking.Contains(_nextStateDraw))
+        {
+            _walkerPatrollingState = WalkerPatrollingState.Moving;
+        }
+        else
+        {
+            _walkerPatrollingState = WalkerPatrollingState.Standing;
+            _secondsCountdown = _standingTimeInSeconds;
+        }
+    }
+
+    private void TimeManipulation()
+    {
+        _secondsCountdown -= Time.deltaTime;
     }
 
     /// <returns>Returns the vector needed for the dot product in the walker state machine</returns>
