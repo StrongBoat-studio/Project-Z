@@ -8,7 +8,7 @@ public class WalkerStateManager : MonoBehaviour
 {
     //State Machine variables
     WalkerBaseState currentState;
-    public WalkerPoToPoState PoToPoState=new WalkerPoToPoState();
+    public WalkerPatrollingState PatrollingState = new WalkerPatrollingState();
     public WalkerBeforeChaseState BeforeChaseState=new WalkerBeforeChaseState();
     public WalkerChaseState ChaseState=new WalkerChaseState();
     public WalkerAttackState AttackState=new WalkerAttackState();
@@ -19,6 +19,7 @@ public class WalkerStateManager : MonoBehaviour
     [SerializeField] private Vector3 _maxPos1, _maxPos2;
     [SerializeField] private GameObject _mutant;
     [SerializeField] private Rigidbody2D _rigidbody;
+    [SerializeField] private WalkerPatrolling _walkerPatrolling;
     private GameObject _player;
     [SerializeField] private Transform _walker;
     private Transform _player2;
@@ -32,8 +33,8 @@ public class WalkerStateManager : MonoBehaviour
     [Range(0f, 10f)][SerializeField] private float _secondOfSleepFront, _secondOfSleepBack;
     [Range(0f, 10f)][SerializeField] private float _distanceLineOfHearing, _secondHearingNormally, _secondHearingCrounching;
 
-    //Stealth Chack for Designers
-    [Header("Stealth Chack")]
+    //Stealth Check for Designers
+    [Header("Stealth Check")]
     [SerializeField] private float _secondsElapsed;
     [SerializeField] private float _secondsHearingElapsed;
     [SerializeField] private float _distance;
@@ -109,7 +110,7 @@ public class WalkerStateManager : MonoBehaviour
         _player2=GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         _movement= GameObject.FindGameObjectWithTag("Player").GetComponent<Movement>();
 
-        currentState = PoToPoState;
+        currentState = PatrollingState;
         currentState.Context = this;
         currentState.EnterState(this);
 
@@ -125,6 +126,7 @@ public class WalkerStateManager : MonoBehaviour
 
         _distance = Vector3.Distance(_mutant.transform.position, _player.transform.position);
         _target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        _checkVector = _walkerPatrolling.GetCheckVector();
 
         _timeS.text = "Time seeing: " + Mathf.Clamp(Mathf.CeilToInt(_secondsElapsed), 0, float.MaxValue).ToString();
         _timeH.text = "Time hearing: " + Mathf.Clamp(Mathf.CeilToInt(_secondsHearingElapsed), 0, float.MaxValue).ToString();
@@ -139,6 +141,12 @@ public class WalkerStateManager : MonoBehaviour
         currentState = state;
         currentState.Context = this; 
         state.EnterState(this);
+    }
+
+    public WalkerBaseState GetWalkerState()
+    {
+        return currentState;
+
     }
 
     public void TakeDamage(int damage, int weapon)

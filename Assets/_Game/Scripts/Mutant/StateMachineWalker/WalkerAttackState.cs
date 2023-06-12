@@ -16,11 +16,12 @@ public class WalkerAttackState : WalkerBaseState
     {
         AttackM();
         PositionCheck();
+        //Context.Mutant.transform.LookAt(Context.Player2);
         LookAtThePlayer();
 
         if (Context.Distance > Context.DistanceChase)
         {
-            walker.SwitchState(walker.PoToPoState);
+            walker.SwitchState(walker.PatrollingState);
             Context.Animator.SetBool("IsAttack1", false);
             Context.Animator.SetBool("InAttack2", false);
         }

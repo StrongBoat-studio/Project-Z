@@ -10,15 +10,13 @@ public class WalkerHearingState : WalkerBaseState
 
     public override void UpdateState(WalkerStateManager walker)
     {
-        SetPosition();
-        Moving();
         PositionCheck();
         SecondsElapsedAndDistanceChase();
         HearingTime();
 
         if (Context.Distance > Context.DistanceLineOfHearing)
         {
-            walker.SwitchState(walker.PoToPoState);
+            walker.SwitchState(walker.PatrollingState);
         }
 
         if (Context.Distance < Context.DistanceChase)
@@ -30,36 +28,6 @@ public class WalkerHearingState : WalkerBaseState
         {
             walker.SwitchState(walker.ChaseState);
         }
-    }
-
-    private void SetPosition()
-    {
-        if (Context.transform.position.x >= Context.Pos1.x)
-        {
-            Context.NextPos = Context.Pos2;
-            Context.CheckVector = new Vector2(1f, 0f);
-            Context.Mutant.transform.localScale = new Vector3(1, 1, 0);
-        }
-
-        if (Context.transform.position.x <= Context.Pos2.x)
-        {
-            Context.NextPos = Context.Pos1;
-            Context.CheckVector = new Vector2(-1f, 0f);
-            Context.Mutant.transform.localScale = new Vector3(-1, 1, 0);
-        }
-    }
-
-    private void Moving()
-    {
-        if (Context.NextPos == Context.Pos1)
-        {
-            Context.Rigidbody.velocity = new Vector2(Context.Speed, Context.transform.position.y);
-        }
-        else
-        {
-            Context.Rigidbody.velocity = new Vector2(-Context.Speed, Context.transform.position.y);
-        }
-
     }
 
     private void HearingTime()

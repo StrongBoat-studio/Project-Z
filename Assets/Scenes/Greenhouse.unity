@@ -2985,6 +2985,10 @@ PrefabInstance:
       propertyPath: _startPos.y
       value: -1.7
       objectReference: {fileID: 0}
+    - target: {fileID: 3390996011138361455, guid: 3e5aedb6d3a88f145a08439037cd1ea1, type: 3}
+      propertyPath: _walkerPatrolling
+      value: 
+      objectReference: {fileID: 794954773}
     - target: {fileID: 3390996011353045468, guid: 3e5aedb6d3a88f145a08439037cd1ea1, type: 3}
       propertyPath: m_SortingLayer
       value: 2
@@ -3029,6 +3033,40 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &794954773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 794954771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db8fe360dd084084a88a29304d488405, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _walkerStateManager: {fileID: 794954774}
+  _mutantTransform: {fileID: 794954775}
+  _mutantRigidbody2D: {fileID: 794954772}
+  _maxLeftX: 0
+  _maxRightX: 15
+  _speed: 2
+--- !u!114 &794954774 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3390996011138361455, guid: 3e5aedb6d3a88f145a08439037cd1ea1, type: 3}
+  m_PrefabInstance: {fileID: 794954770}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 794954771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e2183ee28e1843418d15753e597173d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &794954775 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3390996011138361454, guid: 3e5aedb6d3a88f145a08439037cd1ea1, type: 3}
+  m_PrefabInstance: {fileID: 794954770}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &904588458
 PrefabInstance:
   m_ObjectHideFlags: 0

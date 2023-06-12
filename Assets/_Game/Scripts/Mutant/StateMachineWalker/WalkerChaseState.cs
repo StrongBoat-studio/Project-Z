@@ -17,7 +17,7 @@ public class WalkerChaseState : WalkerBaseState
 
         if(Context.Distance>Context.DistanceChase)
         {
-            walker.SwitchState(walker.PoToPoState);
+            walker.SwitchState(walker.PatrollingState);
         }
 
         if (Context.Distance<Context.DistanceAttack)
