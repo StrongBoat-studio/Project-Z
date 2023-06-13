@@ -91,7 +91,7 @@ public class WalkerStateManager : MonoBehaviour
         _movement= GameObject.FindGameObjectWithTag("Player").GetComponent<Movement>();
         _mutant = GameObject.FindGameObjectWithTag("Enemy");
 
-        currentState = PatrollingState;
+        currentState = ChaseState;
         currentState.Context = this;
         currentState.EnterState(this);
 

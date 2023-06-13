@@ -12,17 +12,17 @@ public class WalkerChaseState : WalkerBaseState
 
     public override void UpdateState(WalkerStateManager walker)
     {
-        Chasing();
+        //Chasing();
         PositionCheck();
 
         if(Context.Distance>Context.DistanceChase)
         {
-            walker.SwitchState(walker.PatrollingState);
+            //walker.SwitchState(walker.PatrollingState);
         }
 
         if (Context.Distance<Context.DistanceAttack)
         {
-            walker.SwitchState(walker.AttackState);
+            //walker.SwitchState(walker.AttackState);
         }
     }
 
