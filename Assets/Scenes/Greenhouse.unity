@@ -3049,9 +3049,19 @@ MonoBehaviour:
   _maxRightX: 15
   _speed: 2
   _standingTimeInSeconds: 2
-  _nextPosition: 0
-  _walkerPatrollingState: 1
-  _secondsCountdown: 0
+--- !u!114 &794954774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 794954771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56792df3838f385429a742033a8c3d83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 0
 --- !u!1001 &904588458
 PrefabInstance:
   m_ObjectHideFlags: 0
