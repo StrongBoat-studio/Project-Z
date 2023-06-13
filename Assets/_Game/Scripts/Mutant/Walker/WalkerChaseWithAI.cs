@@ -21,24 +21,23 @@ public class WalkerChaseWithAI : MonoBehaviour
 
     //Variables for AI
     private Transform _target;
-    private float _nextWaypointDistance = 3f;
+    private float _nextWaypointDistance = 2f;
     private Path _path;
     private int _currentWaypoint = 0;
-    private bool _reachedEndOfPath = false;
-    private Vector2 _direction;
-    private Vector2 _force;
-    private float _distance;
+    [SerializeField] private bool _reachedEndOfPath = false;
+    [SerializeField] private Vector2 _direction;
+    [SerializeField] private float _distance;
 
     private void Awake()
     {
         //downloading the appropriate components
         _walkerStateManager = GetComponent<WalkerStateManager>();
-
-        //Adding states to the list
-        _walkerBaseStates.Add(_walkerStateManager.ChaseState);
         _target= GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         _seeker = GetComponent<Seeker>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
+
+        //Adding states to the list
+        _walkerBaseStates.Add(_walkerStateManager.ChaseState);
 
         //Start Path generate
         InvokeRepeating("UpdatePath", 0f, .5f);
@@ -56,7 +55,9 @@ public class WalkerChaseWithAI : MonoBehaviour
     {
         _currensState = _walkerStateManager.GetWalkerState();
 
-        if(_walkerBaseStates.Contains(_currensState) && _path!=null)
+        if (_path == null) return;
+
+        if(_walkerBaseStates.Contains(_currensState))
         {
             if(_currentWaypoint>=_path.vectorPath.Count)
             {
@@ -71,15 +72,15 @@ public class WalkerChaseWithAI : MonoBehaviour
             Chase();
             DistanceCalculation();
             IsNextWaypoint();
+            RotatingMutant();
         }
     }
 
     private void Chase()
     {
         _direction = ((Vector2)_path.vectorPath[_currentWaypoint] - _rigidbody2D.position).normalized;
-        _force = _direction * _speed * Time.deltaTime;
 
-        _rigidbody2D.AddForce(_force);
+        _rigidbody2D.velocity = new Vector2(_speed*_direction.x, _rigidbody2D.position.y);
     }
 
     private void DistanceCalculation()
@@ -101,6 +102,18 @@ public class WalkerChaseWithAI : MonoBehaviour
         {
             _path = path;
             _currentWaypoint = 0;
+        }
+    }
+
+    private void RotatingMutant()
+    {
+        if(_rigidbody2D.velocity.x>=0.01f)
+        {
+            transform.localScale = new Vector3(-1f, 1f, 1f);
+        }
+        else if(_rigidbody2D.velocity.x <= -0.01f)
+        {
+            transform.localScale = new Vector3(1f, 1f, 1f);
         }
     }
 }

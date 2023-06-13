@@ -3029,7 +3029,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 80
-  m_LinearDrag: 1.5
+  m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}
@@ -3093,7 +3093,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56792df3838f385429a742033a8c3d83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 400
+  _speed: 3
+  _target: {fileID: 0}
+  _nextWaypointDistance: 2
+  _currentWaypoint: 0
+  _reachedEndOfPath: 0
+  _direction: {x: 0, y: 0}
+  _dirX: 0
+  _force: {x: 0, y: 0}
+  _distance: 0
 --- !u!1001 &904588458
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4565,7 +4573,7 @@ MonoBehaviour:
   manualDebugFloorRoof: 0
   showSearchTree: 0
   unwalkableNodeDebugSize: 0.3
-  logPathResults: 1
+  logPathResults: 0
   maxNearestNodeDistance: 100
   scanOnStartup: 1
   fullGetNearestSearch: 0
