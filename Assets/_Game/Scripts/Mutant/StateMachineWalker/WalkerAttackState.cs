@@ -17,9 +17,6 @@ public class WalkerAttackState : WalkerBaseState
     {
         AttackM();
         PositionCheck();
-        Chasing();
-        //Context.Mutant.transform.LookAt(Context.Player2);
-        // LookAtThePlayer();
 
         if (Context.Distance > Context.DistanceChase)
         {
@@ -27,7 +24,6 @@ public class WalkerAttackState : WalkerBaseState
             Context.Animator.SetBool("IsAttack1", false);
             Context.Animator.SetBool("InAttack2", false);
         }
-
     }
 
     private void AttackM()
@@ -46,11 +42,8 @@ public class WalkerAttackState : WalkerBaseState
                 Context.Animator.SetBool("IsAttack1", false);
                 Context.Animator.SetBool("InAttack2", true);
             }
-            
-            //Context.PLife -= 10;
             _time = 1f;
         }
-
     }
 
     //Checking whether the Player is in front of or behind the Mutant
@@ -64,24 +57,4 @@ public class WalkerAttackState : WalkerBaseState
 
         Context.DotPro = Vector2.Dot(Context.Direction, Context.CheckVector);
     }
-
-    private void Chasing()
-    {
-        _target = new Vector3(Context.Target.position.x, Context.transform.position.y, Context.transform.position.z);
-
-        Context.transform.position = Vector2.MoveTowards(Context.transform.position, _target, (Context.Speed + 1f) * Time.deltaTime);
-    }
-
-    private void LookAtThePlayer()
-    {
-        if(Context.Player.transform.localScale.x==1)
-        {
-            Context.Mutant.transform.localScale = new Vector3(-1f, 1f, 0f);
-        }
-        if (Context.Player.transform.localScale.x == -1)
-        {
-            Context.Mutant.transform.localScale = new Vector3(1f, 1f, 0f);
-        }
-    }
-
 }

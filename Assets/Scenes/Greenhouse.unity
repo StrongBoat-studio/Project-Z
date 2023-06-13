@@ -3094,13 +3094,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 3
-  _target: {fileID: 0}
-  _nextWaypointDistance: 2
-  _currentWaypoint: 0
   _reachedEndOfPath: 0
   _direction: {x: 0, y: 0}
-  _dirX: 0
-  _force: {x: 0, y: 0}
   _distance: 0
 --- !u!1001 &904588458
 PrefabInstance:

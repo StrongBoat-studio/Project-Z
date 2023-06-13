@@ -17,7 +17,7 @@ public class WalkerStateManager : MonoBehaviour
 
     //Components use for movement
     private GameObject _mutant;
-    [SerializeField] private WalkerPatrolling _walkerPatrolling;
+    private WalkerPatrolling _walkerPatrolling;
     private GameObject _player;
     private Movement _movement; 
 
@@ -34,7 +34,6 @@ public class WalkerStateManager : MonoBehaviour
     [SerializeField] private float _secondsHearingElapsed;
     [SerializeField] private float _distance;
     [SerializeField] private float dotPro;
-    private Transform _target;
     [SerializeField] private float _distanceChase;
 
     //DotPro
@@ -71,7 +70,6 @@ public class WalkerStateManager : MonoBehaviour
     public float SecondHearingCrounching { get { return _secondHearingCrounching; } }
     public float SecondHearingNormally { get { return _secondHearingNormally; } }
     public GameObject Alert { get { return _alert; } }
-    public Transform Target { get { return _target; } }
     public float DistanceAttack { get { return _distanceAttack; } set { _distanceAttack = value;} }
     public Animator Animator { get { return _animator; } }
     public GameObject Player { get { return _player; } }
@@ -82,7 +80,7 @@ public class WalkerStateManager : MonoBehaviour
 
     //Animations
     [SerializeField] private GameObject _alert;
-    [SerializeField] private Animator _animator;
+    private Animator _animator;
 
 
     void Awake()
@@ -90,8 +88,10 @@ public class WalkerStateManager : MonoBehaviour
         _player = GameObject.FindGameObjectWithTag("Player");
         _movement= GameObject.FindGameObjectWithTag("Player").GetComponent<Movement>();
         _mutant = GameObject.FindGameObjectWithTag("Enemy");
+        _walkerPatrolling = GetComponent<WalkerPatrolling>();
+        _animator = GetComponentInChildren<Animator>();
 
-        currentState = ChaseState;
+        currentState = PatrollingState;
         currentState.Context = this;
         currentState.EnterState(this);
 
@@ -103,7 +103,6 @@ public class WalkerStateManager : MonoBehaviour
         currentState.UpdateState(this);
 
         _distance = Vector3.Distance(_mutant.transform.position, _player.transform.position);
-        _target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         _checkVector = _walkerPatrolling.GetCheckVector();
     }
 
@@ -146,8 +145,6 @@ public class WalkerStateManager : MonoBehaviour
                     break;
                 }
         }
-
-        Chasing();
     }
 
     private void ReactionToShoot()
@@ -175,12 +172,5 @@ public class WalkerStateManager : MonoBehaviour
 
         if (_player.transform.localScale.x == -1)
             _mutant.transform.position = new Vector3(_mutant.transform.position.x + .2f, _mutant.transform.position.y, _mutant.transform.position.z);
-    }
-
-    private void Chasing()
-    {
-        _target2 = new Vector3(_target.position.x, transform.position.y, transform.position.z);
-
-        transform.position = Vector2.MoveTowards(transform.position, _target2, (_speed + 1f) * Time.deltaTime);
     }
 }

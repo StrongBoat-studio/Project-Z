@@ -12,7 +12,7 @@ public class WalkerChaseWithAI : MonoBehaviour
 
 
     [Header("Chase Settings")]
-    [Range(0f, 1000f)] [SerializeField] private float _speed;
+    [Range(0f, 10f)] [SerializeField] private float _speed;
 
 
     //Variable for chase
@@ -38,6 +38,7 @@ public class WalkerChaseWithAI : MonoBehaviour
 
         //Adding states to the list
         _walkerBaseStates.Add(_walkerStateManager.ChaseState);
+        _walkerBaseStates.Add(_walkerStateManager.AttackState);
 
         //Start Path generate
         InvokeRepeating("UpdatePath", 0f, .5f);
