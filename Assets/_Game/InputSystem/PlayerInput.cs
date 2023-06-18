@@ -241,65 +241,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
             ]
         },
         {
-            ""name"": ""Inventory"",
-            ""id"": ""cbf08f4a-7c3f-4c53-9c9c-185ac38a3bc4"",
-            ""actions"": [
-                {
-                    ""name"": ""Open"",
-                    ""type"": ""Button"",
-                    ""id"": ""7cbd082f-e173-44f1-8e54-acbfa66a7c70"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""CloseExclusive"",
-                    ""type"": ""Button"",
-                    ""id"": ""1e2336c3-4770-4d2d-a474-5ab1a12b1760"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""11751eea-ae4d-4d70-a637-0b380333dacb"",
-                    ""path"": ""<Keyboard>/i"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Open"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""a28b26eb-14b5-40be-ba36-7f7cf77f3c12"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Open"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""d30d63f7-069e-4858-9339-82e5c2d9253f"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""CloseExclusive"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
             ""name"": ""Dialogue"",
             ""id"": ""acdfb363-9535-495b-b0cc-61f0a011592c"",
             ""actions"": [
@@ -518,6 +459,54 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Journal"",
+            ""id"": ""b61cddb5-70b7-4fc2-a3a3-b5ed91db444c"",
+            ""actions"": [
+                {
+                    ""name"": ""Open"",
+                    ""type"": ""Button"",
+                    ""id"": ""e596b0a6-e5f2-44d4-aa57-d38112dfc98d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ExclusiveClose"",
+                    ""type"": ""Button"",
+                    ""id"": ""8d4a3a3f-ad69-4d04-83ab-50dddec67560"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""6245e80b-2867-4a75-bb89-8e879fc9a978"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Open"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""93bd5aa2-f81f-4c9f-aafd-a6dab0fb4366"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ExclusiveClose"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -536,10 +525,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         // PauseMenu
         m_PauseMenu = asset.FindActionMap("PauseMenu", throwIfNotFound: true);
         m_PauseMenu_Pause = m_PauseMenu.FindAction("Pause", throwIfNotFound: true);
-        // Inventory
-        m_Inventory = asset.FindActionMap("Inventory", throwIfNotFound: true);
-        m_Inventory_Open = m_Inventory.FindAction("Open", throwIfNotFound: true);
-        m_Inventory_CloseExclusive = m_Inventory.FindAction("CloseExclusive", throwIfNotFound: true);
         // Dialogue
         m_Dialogue = asset.FindActionMap("Dialogue", throwIfNotFound: true);
         m_Dialogue_ContinueKbd = m_Dialogue.FindAction("ContinueKbd", throwIfNotFound: true);
@@ -559,6 +544,10 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_HandToHand = asset.FindActionMap("HandToHand", throwIfNotFound: true);
         m_HandToHand_Hit = m_HandToHand.FindAction("Hit", throwIfNotFound: true);
         m_HandToHand_MousePosition = m_HandToHand.FindAction("MousePosition", throwIfNotFound: true);
+        // Journal
+        m_Journal = asset.FindActionMap("Journal", throwIfNotFound: true);
+        m_Journal_Open = m_Journal.FindAction("Open", throwIfNotFound: true);
+        m_Journal_ExclusiveClose = m_Journal.FindAction("ExclusiveClose", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -753,47 +742,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         }
     }
     public PauseMenuActions @PauseMenu => new PauseMenuActions(this);
-
-    // Inventory
-    private readonly InputActionMap m_Inventory;
-    private IInventoryActions m_InventoryActionsCallbackInterface;
-    private readonly InputAction m_Inventory_Open;
-    private readonly InputAction m_Inventory_CloseExclusive;
-    public struct InventoryActions
-    {
-        private @PlayerInput m_Wrapper;
-        public InventoryActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Open => m_Wrapper.m_Inventory_Open;
-        public InputAction @CloseExclusive => m_Wrapper.m_Inventory_CloseExclusive;
-        public InputActionMap Get() { return m_Wrapper.m_Inventory; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(InventoryActions set) { return set.Get(); }
-        public void SetCallbacks(IInventoryActions instance)
-        {
-            if (m_Wrapper.m_InventoryActionsCallbackInterface != null)
-            {
-                @Open.started -= m_Wrapper.m_InventoryActionsCallbackInterface.OnOpen;
-                @Open.performed -= m_Wrapper.m_InventoryActionsCallbackInterface.OnOpen;
-                @Open.canceled -= m_Wrapper.m_InventoryActionsCallbackInterface.OnOpen;
-                @CloseExclusive.started -= m_Wrapper.m_InventoryActionsCallbackInterface.OnCloseExclusive;
-                @CloseExclusive.performed -= m_Wrapper.m_InventoryActionsCallbackInterface.OnCloseExclusive;
-                @CloseExclusive.canceled -= m_Wrapper.m_InventoryActionsCallbackInterface.OnCloseExclusive;
-            }
-            m_Wrapper.m_InventoryActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @Open.started += instance.OnOpen;
-                @Open.performed += instance.OnOpen;
-                @Open.canceled += instance.OnOpen;
-                @CloseExclusive.started += instance.OnCloseExclusive;
-                @CloseExclusive.performed += instance.OnCloseExclusive;
-                @CloseExclusive.canceled += instance.OnCloseExclusive;
-            }
-        }
-    }
-    public InventoryActions @Inventory => new InventoryActions(this);
 
     // Dialogue
     private readonly InputActionMap m_Dialogue;
@@ -991,6 +939,47 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         }
     }
     public HandToHandActions @HandToHand => new HandToHandActions(this);
+
+    // Journal
+    private readonly InputActionMap m_Journal;
+    private IJournalActions m_JournalActionsCallbackInterface;
+    private readonly InputAction m_Journal_Open;
+    private readonly InputAction m_Journal_ExclusiveClose;
+    public struct JournalActions
+    {
+        private @PlayerInput m_Wrapper;
+        public JournalActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Open => m_Wrapper.m_Journal_Open;
+        public InputAction @ExclusiveClose => m_Wrapper.m_Journal_ExclusiveClose;
+        public InputActionMap Get() { return m_Wrapper.m_Journal; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(JournalActions set) { return set.Get(); }
+        public void SetCallbacks(IJournalActions instance)
+        {
+            if (m_Wrapper.m_JournalActionsCallbackInterface != null)
+            {
+                @Open.started -= m_Wrapper.m_JournalActionsCallbackInterface.OnOpen;
+                @Open.performed -= m_Wrapper.m_JournalActionsCallbackInterface.OnOpen;
+                @Open.canceled -= m_Wrapper.m_JournalActionsCallbackInterface.OnOpen;
+                @ExclusiveClose.started -= m_Wrapper.m_JournalActionsCallbackInterface.OnExclusiveClose;
+                @ExclusiveClose.performed -= m_Wrapper.m_JournalActionsCallbackInterface.OnExclusiveClose;
+                @ExclusiveClose.canceled -= m_Wrapper.m_JournalActionsCallbackInterface.OnExclusiveClose;
+            }
+            m_Wrapper.m_JournalActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Open.started += instance.OnOpen;
+                @Open.performed += instance.OnOpen;
+                @Open.canceled += instance.OnOpen;
+                @ExclusiveClose.started += instance.OnExclusiveClose;
+                @ExclusiveClose.performed += instance.OnExclusiveClose;
+                @ExclusiveClose.canceled += instance.OnExclusiveClose;
+            }
+        }
+    }
+    public JournalActions @Journal => new JournalActions(this);
     public interface IInGameActions
     {
         void OnWalk(InputAction.CallbackContext context);
@@ -1007,11 +996,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     public interface IPauseMenuActions
     {
         void OnPause(InputAction.CallbackContext context);
-    }
-    public interface IInventoryActions
-    {
-        void OnOpen(InputAction.CallbackContext context);
-        void OnCloseExclusive(InputAction.CallbackContext context);
     }
     public interface IDialogueActions
     {
@@ -1036,5 +1020,10 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     {
         void OnHit(InputAction.CallbackContext context);
         void OnMousePosition(InputAction.CallbackContext context);
+    }
+    public interface IJournalActions
+    {
+        void OnOpen(InputAction.CallbackContext context);
+        void OnExclusiveClose(InputAction.CallbackContext context);
     }
 }

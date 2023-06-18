@@ -16,7 +16,19 @@ public class DialogueHolder : MonoBehaviour, IInteractable
     public void CursorClick()
     {
         _dialogue.Play();
-    }
+
+        //Update quests
+        if(GetComponents<QuestObjective>().Length <= 0) return;
+        if(QuestLineManager.Instance == null) 
+        {
+            Debug.Log("QuestLineManager Instance is null");
+            return;
+        }
+        foreach(QuestObjective qo in GetComponents<QuestObjective>())
+        {
+            QuestLineManager.Instance.CheckQuest(qo);
+        }
+    }   
 
     public void CursorEnter()
     {

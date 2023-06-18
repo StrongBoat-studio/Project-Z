@@ -28,7 +28,18 @@ public class RoomLoader : MonoBehaviour, IInteractable
     public void CursorClick()
     {
         SceneRegister.Instance.LoadNextLevel(this);
-        //StartCoroutine("HandleSceneSwap", unload);
+
+        //Update quests
+        if(GetComponents<QuestObjective>().Length <= 0) return;
+        if(QuestLineManager.Instance == null) 
+        {
+            Debug.Log("QuestLineManager Instance is null");
+            return;
+        }
+        foreach(QuestObjective qo in GetComponents<QuestObjective>())
+        {
+            QuestLineManager.Instance.CheckQuest(qo);
+        }
     }
 
     public void CursorEnter()

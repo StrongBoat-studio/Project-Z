@@ -8,14 +8,15 @@ using UnityEngine.Rendering.UI;
 public class Inventory
 {
     private List<Item> _items;
-    [SerializeField] private int _inventorySize = 10;
+    public List<Item> Items { get => _items; }
+    [SerializeField] private int _inventorySize = 12;
 
     public bool IsFull { get => _items.Count >= _inventorySize; }
 
     public delegate void OnInventoryChangedHandler();
     public event OnInventoryChangedHandler OnInventoryChanged;
 
-    public Inventory(int size = 10)
+    public Inventory(int size = 12)
     {
         this._inventorySize = size;
         _items = new List<Item>();
@@ -49,11 +50,23 @@ public class Inventory
 
             _items.Add(item);
             OnInventoryChanged?.Invoke();
+
+            //Update Quest
+            if(QuestLineManager.Instance != null)
+            {
+                QuestLineManager.Instance.CheckQuestItems(_items);
+            }
         }
         else
         {
             _items.Find(x => x.itemType == item.itemType).amount += item.amount;
             OnInventoryChanged?.Invoke();
+
+            //Update Quest
+            if(QuestLineManager.Instance != null)
+            {
+                QuestLineManager.Instance.CheckQuestItems(_items);
+            }
         }
         return true;
     }
@@ -87,6 +100,12 @@ public class Inventory
             }
 
             OnInventoryChanged?.Invoke();
+
+            //Update Quest
+            if(QuestLineManager.Instance != null)
+            {
+                QuestLineManager.Instance.CheckQuestItems(_items);
+            }
         }
     }
 

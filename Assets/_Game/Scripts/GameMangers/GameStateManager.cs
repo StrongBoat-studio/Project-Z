@@ -9,9 +9,9 @@ public class GameStateManager : MonoBehaviour
         Gameplay,
         Paused,
         Dialogue,
-        Inventory,
         Crafting,
-        MainMenu
+        MainMenu,
+        Journal
     }
 
     public static GameStateManager Instance { get; private set; }

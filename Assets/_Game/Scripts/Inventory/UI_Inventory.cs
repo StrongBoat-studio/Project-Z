@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 
 public class UI_Inventory : MonoBehaviour
 {
@@ -25,7 +26,13 @@ public class UI_Inventory : MonoBehaviour
     [SerializeField] private float _cellPaddingRight;
     [SerializeField] private float _cellPaddingBottom;
 
-    private void OnDestroy()  
+    [Header("Tooltip box")]
+    [SerializeField] private RectTransform _tooltipBox;
+    [SerializeField] private TextMeshProUGUI _tooltipName;
+    [SerializeField] private TextMeshProUGUI _tooltipDescription;
+    private bool _tweening = false;
+
+    private void OnDestroy()
     {
         if (_inventory == null) return;
         _inventory.OnInventoryChanged -= OnInventoryChanged;
@@ -48,8 +55,9 @@ public class UI_Inventory : MonoBehaviour
         UpdatePanel();
     }
 
-    private void UpdatePanel()
+    public void UpdatePanel()
     {
+        HideToolTip();
         Debug.Log("UpdatePanel!");
         for (int i = 0; i < _panelSlotContainer.childCount; i++)
         {
@@ -60,10 +68,10 @@ public class UI_Inventory : MonoBehaviour
         {
             for (int y = 0; y < Mathf.Ceil(_inventory.GetSize() / _maxColumns); y++)
             {
-                if (y * 5 + x < _inventory.GetInventoryItems().Count)
+                if (y * _maxColumns + x < _inventory.GetInventoryItems().Count)
                 {
                     RectTransform slot = Instantiate(_inventorySlotPrefab, Vector3.zero, Quaternion.identity, _panelSlotContainer);
-                    slot.GetComponent<UI_InventorySlot>().SetItem(_inventory.GetInventoryItems()[y * 5 + x]);
+                    slot.GetComponent<UI_InventorySlot>().SetItem(_inventory.GetInventoryItems()[y * _maxColumns + x], this, new Vector2(x, y));
                     slot.anchoredPosition = new Vector3(
                         _offset.x + _paddingLeft + _cellWidth / 2 + x * (_cellWidth + _cellPaddingRight),
                         _offset.y + (-_paddingTop) - _cellHeight / 2 - y * (_cellHeight + _cellPaddingBottom)
@@ -71,6 +79,25 @@ public class UI_Inventory : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void ShowTooltip(RectTransform itemSlot, string itemName, TextAsset itemDescription, Vector2 posIndex)
+    {
+        _tooltipBox.SetParent(itemSlot);
+        //Show tooltip on the right for slots on the left half and on the left for slots on the right half
+        _tooltipBox.anchoredPosition = new Vector2(
+            (posIndex.x >= _inventory.GetSize() / 4) ? -_tooltipBox.rect.width : 0f,
+            _tooltipBox.rect.height + itemSlot.rect.height / 2
+        );
+        _tooltipName.text = itemName;
+        _tooltipDescription.text = itemDescription.text;
+        _tooltipBox.SetParent(_panel);
+        _tooltipBox.GetComponent<CanvasGroup>().DOFade(1f, .2f);
+    }
+
+    public void HideToolTip()
+    {
+        _tooltipBox.GetComponent<CanvasGroup>().DOFade(0f, .2f);
     }
 
     public void ToggleInventoryPanel(bool state)

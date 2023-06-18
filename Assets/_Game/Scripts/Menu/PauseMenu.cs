@@ -30,7 +30,7 @@ public class PauseMenu : MonoBehaviour
         _pauseMenu.gameObject.SetActive(newGameState == GameStateManager.GameState.Paused);
 
         if(
-            newGameState == GameStateManager.GameState.Inventory ||
+            newGameState == GameStateManager.GameState.Journal ||
             newGameState == GameStateManager.GameState.Crafting
         ) _playerInput.PauseMenu.Disable();
         else _playerInput.PauseMenu.Enable();
