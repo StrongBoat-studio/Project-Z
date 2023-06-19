@@ -364,13 +364,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 24993564}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -0.572, y: 0.446, z: 0}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalPosition: {x: -0.448, y: -0.448, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1913262207}
-  m_RootOrder: 3
+  m_Father: {fileID: 287957375}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &28416909
 GameObject:
@@ -1272,6 +1272,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 28416910}
+  - {fileID: 24993565}
   m_Father: {fileID: 1345009191}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6754,7 +6755,6 @@ Transform:
   - {fileID: 856224900}
   - {fileID: 2104263215}
   - {fileID: 1345009191}
-  - {fileID: 24993565}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6771,6 +6771,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bulletPrefab: {fileID: 17335071800648654, guid: a716cac6e3268b44ba6b8d9b83df1fdf, type: 3}
+  _arms: {fileID: 28416909}
   _playerHandsSpritesList:
   - {fileID: 21300000, guid: 675314c774c84c347811a75f1e403eea, type: 3}
   - {fileID: 21300000, guid: e7fc9c843a0d38b43bc7db4c461a0c97, type: 3}
@@ -6781,7 +6782,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 1c970214016e9174ba84f3314eef2afb, type: 3}
   - {fileID: 21300000, guid: 3cfbb4168aba3ae44aa26df43b2c6ab4, type: 3}
   - {fileID: 21300000, guid: b2d802c8c84e2ce4bace280300db343a, type: 3}
+  _firePoint: {fileID: 24993565}
   mousePos: {x: 0, y: 0}
+  _whichArm: 5
 --- !u!114 &1913262209
 MonoBehaviour:
   m_ObjectHideFlags: 0

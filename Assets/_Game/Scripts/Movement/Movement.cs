@@ -371,12 +371,12 @@ public class Movement : MonoBehaviour
         if (_playerInput.InGame.Walk.ReadValue<float>() == -1)
         {
             _transform.localScale = new Vector3(1, _transform.localScale.y, _transform.localScale.z);
-            _firePoint.transform.rotation = new Quaternion (0f, 180, 0f, 0f);
+            _firePoint.transform.rotation = new Quaternion (0f, 180, _firePoint.transform.localRotation.z, 0f);
         }
         else if (_playerInput.InGame.Walk.ReadValue<float>() == 1)
         {
             _transform.localScale = new Vector3(-1, _transform.localScale.y, _transform.localScale.z);
-            _firePoint.transform.rotation = new Quaternion(180f, 0, 0f, 0f);
+            _firePoint.transform.rotation = new Quaternion(0f, 0, _firePoint.transform.localRotation.z, 0f);
         }
     }
 }
