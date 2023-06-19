@@ -59,3 +59,6 @@ TagManager:
   - name: UI
     uniqueID: 1107541251
     locked: 0
+  - name: PlayerHands
+    uniqueID: 1362417965
+    locked: 0

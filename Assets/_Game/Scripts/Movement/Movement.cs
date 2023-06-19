@@ -376,7 +376,7 @@ public class Movement : MonoBehaviour
         else if (_playerInput.InGame.Walk.ReadValue<float>() == 1)
         {
             _transform.localScale = new Vector3(-1, _transform.localScale.y, _transform.localScale.z);
-            _firePoint.transform.rotation = new Quaternion(0f, 0, 0f, 0f);
+            _firePoint.transform.rotation = new Quaternion(180f, 0, 0f, 0f);
         }
     }
 }

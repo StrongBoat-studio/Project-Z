@@ -34,7 +34,7 @@ public class Shooting : MonoBehaviour
         Vector2 mousePos = _playerInput.Shooting.MousePosition.ReadValue<Vector2>();
         RaycastHit2D[] hits = Physics2D.RaycastAll(FindObjectOfType<Camera>().ScreenToWorldPoint(mousePos), Vector2.zero);
 
-        if (hits.Any(x => x.collider.GetComponent<IInteractable>() != null) == false && _canShoot==true && _weapon.GetWeapon()==1 && !_movement.GetMovementStates().Contains(Movement.MovementState.Crouching)) 
+        if (hits.Any(x => x.collider.GetComponent<IInteractable>() != null) == false && _canShoot==true && _weapon.GetWeapon()==1 && !_movement.GetMovementStates().Contains(Movement.MovementState.Crouching) && !_movement.GetMovementStates().Contains(Movement.MovementState.Running)) 
         {
             Instantiate(_bulletPrefab, _firePoint.position, _firePoint.rotation);
         }

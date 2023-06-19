@@ -8,6 +8,11 @@ public class PlayerAnimationController : MonoBehaviour
     private Animator _animator;
 
     [SerializeField] private GameObject _weaponHolder;
+    [SerializeField] private RuntimeAnimatorController _player;
+    [SerializeField] private RuntimeAnimatorController _playerWH;
+    [SerializeField] private WeaponSwitching _weaponSwitching;
+
+    private int _selectWeapon;
 
     void Awake()
     {
@@ -18,9 +23,26 @@ public class PlayerAnimationController : MonoBehaviour
     void Update()
     {
         IsWalking();
+        IsJumping();
         IsSprint();
         IsCrouching();
-        IsJumping();
+
+        _selectWeapon = _weaponSwitching.GetWeapon();
+
+        if(_selectWeapon==1)
+        {
+            _animator.runtimeAnimatorController = _playerWH;
+        }
+        else
+        {
+            _animator.runtimeAnimatorController = _player;
+        }
+
+        if(!_movement.GetMovementStates().Contains(Movement.MovementState.Crouching) && !_movement.GetMovementStates().Contains(Movement.MovementState.Running))
+        {
+            _weaponHolder.SetActive(true);
+        }
+        
     }
 
     private void IsWalking()
@@ -39,6 +61,7 @@ public class PlayerAnimationController : MonoBehaviour
     {
         if (_movement.GetMovementStates().Contains(Movement.MovementState.Running))
         {
+            _weaponHolder.SetActive(false);
             _animator.SetBool("IsSprint", true);
         }
         else
@@ -50,15 +73,15 @@ public class PlayerAnimationController : MonoBehaviour
     private void IsCrouching()
     {
         //if (_movement.GetMovementStates().Contains(Movement.MovementState.Crouching))
-        if(_movement.GetMovementStates().Contains(Movement.MovementState.Crouching))
-        {
+
+        if (_movement.GetMovementStates().Contains(Movement.MovementState.Crouching))
+        {   
             _weaponHolder.SetActive(false);
             _animator.SetBool("IsCrounch", true);
         }
         else
         {
-            _weaponHolder.SetActive(true);
-            _animator.SetBool("IsCrounch", false); ;
+            _animator.SetBool("IsCrounch", false);
         }
     }
 
