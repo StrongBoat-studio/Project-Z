@@ -450,7 +450,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.125, y: 1.3125}
+  m_Size: {x: 0.36, y: 0.66}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -921,7 +921,7 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0.22604167
-    y: 0.023148147
+    y: 0.0046296297
     width: 0.33333334
     height: 0.3333333
   near clip plane: 0.3
