@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class WalkerStateManager : MonoBehaviour
 {
@@ -36,6 +37,8 @@ public class WalkerStateManager : MonoBehaviour
     [SerializeField] private float dotPro;
     [SerializeField] private float _distanceChase;
 
+    [Header("Health")]
+    [SerializeField] private Slider _slider;
     //DotPro
     private Vector2 _checkVector = new Vector2(1f, 0f);
     private Vector2 _playerPosition;
@@ -96,6 +99,8 @@ public class WalkerStateManager : MonoBehaviour
         currentState.EnterState(this);
 
         _distance = Vector3.Distance(_mutant.transform.position, _player.transform.position);
+
+        _slider.value = 1f;
     }
 
     void Update()
@@ -121,6 +126,7 @@ public class WalkerStateManager : MonoBehaviour
     public void TakeDamage(int damage, int weapon)
     {
         _mLife -= damage;
+        _slider.value -= damage * 0.01f;
         if(_mLife<=0)
         {
             _mutant.SetActive(false);
