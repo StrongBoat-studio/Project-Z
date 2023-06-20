@@ -113,6 +113,17 @@ public class MainMenu : MonoBehaviour
 
         Debug.Log("Game done loading");
         SceneManager.UnloadSceneAsync((int)SceneRegister.Scenes.MainMenu);
+
+        //Try load game
+        if(GameSaveManager.Instance != null)
+        {
+            GameSaveManager.Instance.LoadJson();
+
+            //Load Inventory
+            GameManager.Instance.player.GetComponent<Player>().GetInventory().LoadSave(
+                GameSaveManager.Instance.currentSave.inventoryItems
+            );
+        }
         yield return null;
     }
 }

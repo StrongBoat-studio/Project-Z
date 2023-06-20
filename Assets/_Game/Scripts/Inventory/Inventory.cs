@@ -26,7 +26,7 @@ public class Inventory
     /// Adds given Item to the inventory if there is available space
     /// </summary>
     /// <param name="item"></param>
-    public bool AddItem(Item item)
+    public bool AddItem(Item item, bool silent = false)
     {
         if (
             _items.Count >= _inventorySize &&
@@ -43,7 +43,7 @@ public class Inventory
         if (_items.Find(x => x.itemType == item.itemType) == null || item.stackable == false)
         {
             //Item dialogue note on add only for new items
-            if (DialogueManager.Instance != null && _items.Find(x => x.itemType == item.itemType) == null)
+            if (DialogueManager.Instance != null && _items.Find(x => x.itemType == item.itemType) == null && silent == false)
             {
                 DialogueManager.Instance.EnqueueStory(item.collectDialogue);
             }
@@ -132,5 +132,15 @@ public class Inventory
     public int GetSize()
     {
         return _inventorySize;
+    }
+
+    public void LoadSave(GameData.InventoryItemState[] inventoryItems)
+    {
+        foreach(var item in inventoryItems)
+        {
+            Item i = ItemRegister.Instance.GetNewItem((Item.ItemType)item.type);
+            i.amount = item.amount;
+            AddItem(i, true);
+        }
     }
 }

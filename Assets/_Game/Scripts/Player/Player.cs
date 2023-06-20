@@ -69,4 +69,9 @@ public class Player : MonoBehaviour
     {
         return _inventory;
     }
+
+    public int GetHP()
+    {
+        return _hp;
+    }
 }

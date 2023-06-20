@@ -42,6 +42,49 @@ public class SceneRegister : MonoBehaviour
 
     public void LoadNextLevel(RoomLoader roomLoader)
     {
+        //Save data
+        if(GameSaveManager.Instance != null)
+        {
+            //Player's HP
+            GameSaveManager.Instance.currentSave.playerHp = GameManager.Instance.player.GetComponent<Player>().GetHP();
+
+            //Notes' ids
+            List<int> notes = new List<int>();
+            foreach(var note in GameManager.Instance.player.GetComponent<NotesApp>().GetNotes())
+            {
+                notes.Add(note.id);
+            }
+            GameSaveManager.Instance.currentSave.journalNotes = notes.ToArray();
+
+            //Quests
+            List<GameData.QuestState> quests = new List<GameData.QuestState>();
+            foreach(var quest in QuestLineManager.Instance.Quests)
+            {
+                List<int> tasks = new List<int>();
+                foreach(var task in quest.Tasks)
+                {
+                    tasks.Add(task.ID);
+                }
+                quests.Add(new GameData.QuestState(quest.ID, tasks.ToArray()));
+            }
+            GameSaveManager.Instance.currentSave.quests = quests.ToArray();
+
+            //Items
+            List<GameData.InventoryItemState> eqItems = new List<GameData.InventoryItemState>();
+            foreach(var item in GameManager.Instance.player.GetComponent<Player>().GetInventory().Items)
+            {
+                eqItems.Add(new GameData.InventoryItemState(item.itemType, item.amount));
+            }
+            GameSaveManager.Instance.currentSave.inventoryItems = eqItems.ToArray();
+
+            //Save
+            GameSaveManager.Instance.SaveJson();
+        }
+        else
+        {
+            Debug.Log("GameSaveManager is null. Can't save gameData");
+        }
+
         StartCoroutine(HandleSceneSwap(roomLoader));
     }
 

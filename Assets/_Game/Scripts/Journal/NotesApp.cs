@@ -46,4 +46,9 @@ public class NotesApp : MonoBehaviour
             OnNoteAdded?.Invoke();
         }
     }
+
+    public Note[] GetNotes()
+    {
+        return Notes.ToArray();
+    }
 }
