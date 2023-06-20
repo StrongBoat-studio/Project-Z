@@ -12,6 +12,7 @@ TagManager:
   - J
   - FirePoint
   - WeaponHolder
+  - Gun
   layers:
   - Default
   - TransparentFX
