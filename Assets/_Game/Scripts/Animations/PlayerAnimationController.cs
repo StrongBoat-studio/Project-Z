@@ -13,6 +13,8 @@ public class PlayerAnimationController : MonoBehaviour
     [SerializeField] private WeaponSwitching _weaponSwitching;
 
     private int _selectWeapon;
+    
+    public bool _weaponHolderActive=true;
 
     void Awake()
     {
@@ -40,9 +42,15 @@ public class PlayerAnimationController : MonoBehaviour
 
         if(!_movement.GetMovementStates().Contains(Movement.MovementState.Crouching) && !_movement.GetMovementStates().Contains(Movement.MovementState.Running))
         {
-            _weaponHolder.SetActive(true);
+            //_weaponHolder.SetActive(true);
         }
-        
+
+        WeaponHolderActive(_weaponHolderActive);
+    }
+
+    private void WeaponHolderActive(bool _active)
+    {
+        _weaponHolder.SetActive(_active);
     }
 
     private void IsWalking()
@@ -61,7 +69,7 @@ public class PlayerAnimationController : MonoBehaviour
     {
         if (_movement.GetMovementStates().Contains(Movement.MovementState.Running))
         {
-            _weaponHolder.SetActive(false);
+            //_weaponHolder.SetActive(false);
             _animator.SetBool("IsSprint", true);
         }
         else
@@ -76,7 +84,7 @@ public class PlayerAnimationController : MonoBehaviour
 
         if (_movement.GetMovementStates().Contains(Movement.MovementState.Crouching))
         {   
-            _weaponHolder.SetActive(false);
+            //_weaponHolder.SetActive(false);
             _animator.SetBool("IsCrounch", true);
         }
         else

@@ -920,10 +920,10 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.22604167
-    y: 0.0046296297
-    width: 0.33333334
-    height: 0.3333333
+    x: 0
+    y: 0
+    width: 1
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 37
@@ -6739,7 +6739,6 @@ MonoBehaviour:
   _staminaDrainJump: 1
   _crouchTimeout: 1
   ms: 
-  _firePoint: {fileID: 24993564}
 --- !u!4 &1913262207
 Transform:
   m_ObjectHideFlags: 0
@@ -6782,6 +6781,26 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 1c970214016e9174ba84f3314eef2afb, type: 3}
   - {fileID: 21300000, guid: 3cfbb4168aba3ae44aa26df43b2c6ab4, type: 3}
   - {fileID: 21300000, guid: b2d802c8c84e2ce4bace280300db343a, type: 3}
+  _firePointPosition:
+  - {x: -0.096, y: 1.105}
+  - {x: -0.289, y: 0.838}
+  - {x: -0.372, y: 0.803}
+  - {x: -0.417, y: 0.54}
+  - {x: -0.448, y: 0.448}
+  - {x: -0.424, y: 0.24}
+  - {x: -0.363, y: 0.057}
+  - {x: -0.264, y: -0.089}
+  - {x: -0.137, y: -0.191}
+  _firePointRotation:
+  - {x: 0.574, y: 0.819}
+  - {x: 0.423, y: 0.906}
+  - {x: 0.342, y: 0.939}
+  - {x: 0.044, y: 0.999}
+  - {x: 0, y: 1}
+  - {x: -0.044, y: 0.999}
+  - {x: -0.13, y: 0.991}
+  - {x: -0.174, y: 0.985}
+  - {x: -0.34, y: 0.94}
   _firePoint: {fileID: 24993565}
   mousePos: {x: 0, y: 0}
   _whichArm: 5
@@ -7428,7 +7447,7 @@ Animator:
   m_GameObject: {fileID: 2104263214}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 762f9667b284f0d408e0a2bd8bd1e151, type: 2}
+  m_Controller: {fileID: 22100000, guid: e180b27064ccb484ebef2390f2af3455, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -7455,6 +7474,7 @@ MonoBehaviour:
   _player: {fileID: 9100000, guid: 762f9667b284f0d408e0a2bd8bd1e151, type: 2}
   _playerWH: {fileID: 22100000, guid: e180b27064ccb484ebef2390f2af3455, type: 2}
   _weaponSwitching: {fileID: 1345009192}
+  _weaponHolderActive: 1
 --- !u!61 &2104263219
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7472,7 +7492,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.78125, y: 1.8125}
+    oldSize: {x: 0.875, y: 1.875}
     newSize: {x: 1, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
