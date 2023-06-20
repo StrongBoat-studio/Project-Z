@@ -11,6 +11,7 @@ public class PlayerAnimationController : MonoBehaviour
     private Animator _animator;
     private GameObject _weaponHolder;
     [SerializeField] private GameObject _gun;
+    [SerializeField] private Animator _animGun;
 
     private int _selectWeapon;
 
@@ -96,10 +97,12 @@ public class PlayerAnimationController : MonoBehaviour
         if(!_movement.IsGrounded() && !_movement.GetMovementStates().Contains(Movement.MovementState.Crouching))
         {
             _animator.SetBool("IsJumping", true);
+            _animGun.SetBool("IsJumping", true);
         }
         else
         {
             _animator.SetBool("IsJumping", false);
+            _animGun.SetBool("IsJumping", false);
         }
     }
 

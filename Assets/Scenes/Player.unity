@@ -398,7 +398,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 28416909}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.00996, y: -0.0781, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -465,7 +465,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 28416909}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: d7f0367b55f6378408145ecb662e50b7, type: 2}
   m_CullingMode: 0
@@ -1279,7 +1279,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &287957375
 Transform:
   m_ObjectHideFlags: 0
@@ -3212,7 +3212,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &838639698
 Transform:
   m_ObjectHideFlags: 0
@@ -7447,7 +7447,7 @@ SpriteRenderer:
   m_SortingLayerID: 267422455
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0c67d66858b94974181e234218c90da6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5c364b924a385f242b4c87a002b30ff0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -7468,7 +7468,7 @@ Animator:
   m_GameObject: {fileID: 2104263214}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 762f9667b284f0d408e0a2bd8bd1e151, type: 2}
+  m_Controller: {fileID: 22100000, guid: e180b27064ccb484ebef2390f2af3455, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -7495,6 +7495,7 @@ MonoBehaviour:
   _playerWH: {fileID: 22100000, guid: e180b27064ccb484ebef2390f2af3455, type: 2}
   _weaponSwitching: {fileID: 1345009192}
   _gun: {fileID: 1345009190}
+  _animGun: {fileID: 28416912}
   _weaponHolderActive: 1
   _gunPosition: {x: 0, y: 0}
 --- !u!61 &2104263219
@@ -7513,8 +7514,8 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.78125, y: 1.8125}
+    pivot: {x: 0.34, y: 0.49999997}
+    oldSize: {x: 0.5, y: 1.8125}
     newSize: {x: 1, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
