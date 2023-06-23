@@ -836,10 +836,10 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
+    x: 0.4166667
+    y: 0.037037037
+    width: 0.16666667
+    height: 0.16666666
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 37
@@ -6825,7 +6825,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c4ed17c5bb136b448da257b4239e5f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testNotes:
+  notesRegister:
   - {fileID: 11400000, guid: e6d01f1866f3c464f81e13620cadec27, type: 2}
   - {fileID: 11400000, guid: b1dfe4693c53fd94c92d74d822a8a727, type: 2}
   - {fileID: 11400000, guid: 1735ab3d6e31094409410338eb910c9f, type: 2}

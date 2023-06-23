@@ -74,4 +74,9 @@ public class Player : MonoBehaviour
     {
         return _hp;
     }
+
+    public void SetHP(int hp)
+    {
+        _hp = hp;
+    }
 }

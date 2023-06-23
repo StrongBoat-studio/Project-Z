@@ -4,29 +4,26 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    [System.Serializable]
-    public struct MutantState
+    [SerializeField] private LevelManagerData _levelData;
+
+    public LevelManagerData GetLevelData()
     {
-        public Transform mutant;
-        public bool load;
+        return _levelData;
     }
 
-    [System.Serializable]
-    public struct ItemWorldState
+    public void SetLevelData(LevelManagerData lmd)
     {
-        public Transform item;
-        public bool load;
+        _levelData = lmd;
     }
 
-    [System.Serializable]
-    public struct NPCState
+    public void ExecuteDataLoad()
     {
-        public Transform npc;
-        public bool load;
+        foreach(var i in _levelData.items)
+        {
+            if(i.load == false)
+            {
+                Destroy(i.item);
+            }
+        }
     }
-
-    public int sceneIndex;
-    public MutantState[] mutants;
-    public ItemWorldState[] items;
-    public NPCState[] npcs;
 }

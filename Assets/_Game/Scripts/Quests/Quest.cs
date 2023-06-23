@@ -36,4 +36,9 @@ public class Quest
         Tasks[0].Complete();
         ValidateTasks();
     }
+
+    public void CompleteQuest()
+    {
+        IsCompleted = true;
+    }
 }

@@ -134,8 +134,10 @@ public class Inventory
         return _inventorySize;
     }
 
-    public void LoadSave(GameData.InventoryItemState[] inventoryItems)
+    public void LoadSave(List<GameData.InventoryItemState> inventoryItems)
     {
+        if(inventoryItems.Count <= 0) return;
+
         foreach(var item in inventoryItems)
         {
             Item i = ItemRegister.Instance.GetNewItem((Item.ItemType)item.type);

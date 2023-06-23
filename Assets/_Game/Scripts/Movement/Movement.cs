@@ -379,4 +379,14 @@ public class Movement : MonoBehaviour
             _firePoint.transform.rotation = new Quaternion(0f, 0, 0f, 0f);
         }
     }
+
+    public float GetStamina()
+    {
+        return _staminaCurrent;
+    }
+
+    public void SetStamina(float stamina)
+    {
+        _staminaCurrent = stamina;
+    }
 }

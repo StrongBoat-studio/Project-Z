@@ -8,14 +8,14 @@ public class GameData
     [System.Serializable]
     public struct QuestState
     {
-        public QuestState(int id, int[] tasks)
+        public QuestState(int id, List<int> tasks)
         {
             this.id = id;
             this.tasks = tasks;
         }
 
         public int id;
-        public int[] tasks;
+        public List<int> tasks;
     }
 
     [System.Serializable]
@@ -32,17 +32,21 @@ public class GameData
     }
 
     [Header("Level managers")]
-    public LevelManager[] levelManagers;
+    public List<LevelManagerData> levelManagerDatas = new List<LevelManagerData>();
 
     [Header("Journal")]
-    public int[] journalNotes;
+    public List<int> journalNotes = new List<int>();
 
     [Header("Inventory")]
-    public InventoryItemState[] inventoryItems;
+    public List<InventoryItemState> inventoryItems = new List<InventoryItemState>();
 
     [Header("Player")]
     public int playerHp;
+    public float playerStamina;
+    public int locationIndex = 8;
+    public Vector3 spawnPosition; 
 
     [Header("Quests")]
-    public QuestState[] quests;
+    public bool isQuestLineFinised;
+    public List<QuestState> quests = new List<QuestState>();
 }

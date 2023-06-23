@@ -80,8 +80,12 @@ public class MainMenu : MonoBehaviour
             GameManager.Instance != null &&
             DialogueManager.Instance != null &&
             GameStateManager.Instance != null &&
-            AudioManager.Instance != null
+            AudioManager.Instance != null &&
+            GameSaveManager.Instance != null
         );
+        //Load game save
+        GameSaveManager.Instance.LoadJson();
+
         // Init managers 
         GameManager.Instance.Reset();
         DialogueManager.Instance.Reset();
@@ -92,7 +96,16 @@ public class MainMenu : MonoBehaviour
 
         // Load/Unload scenes
         Queue<(SceneRegister.Scenes scene, bool load)> ops = new Queue<(SceneRegister.Scenes scene, bool load)>();
-        ops.Enqueue((SceneRegister.Scenes.ParadGround, true));
+        Debug.Log(GameSaveManager.Instance.currentSave.locationIndex);
+        ops.Enqueue(
+            GameSaveManager.Instance != null ? (
+                GameSaveManager.Instance.currentSave.locationIndex >= 0 ? 
+                ((SceneRegister.Scenes)GameSaveManager.Instance.currentSave.locationIndex, true) : 
+                (SceneRegister.Scenes.ParadGround, true)
+            ) : (
+                (SceneRegister.Scenes.ParadGround, true)
+            )
+        );
         ops.Enqueue((SceneRegister.Scenes.Player, true));
 
         while (ops.Count > 0)
@@ -114,16 +127,9 @@ public class MainMenu : MonoBehaviour
         Debug.Log("Game done loading");
         SceneManager.UnloadSceneAsync((int)SceneRegister.Scenes.MainMenu);
 
-        //Try load game
-        if(GameSaveManager.Instance != null)
-        {
-            GameSaveManager.Instance.LoadJson();
-
-            //Load Inventory
-            GameManager.Instance.player.GetComponent<Player>().GetInventory().LoadSave(
-                GameSaveManager.Instance.currentSave.inventoryItems
-            );
-        }
+        //Load data after location load
+        GameSaveManager.Instance.LoadData();
+        
         yield return null;
     }
 }

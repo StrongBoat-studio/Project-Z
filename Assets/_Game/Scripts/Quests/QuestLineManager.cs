@@ -25,6 +25,8 @@ public class QuestLineManager : MonoBehaviour
 
     [SerializeField] private List<Quest> _quests;
     public List<Quest> Quests { get => _quests; }
+    private bool _isFinised = false;
+    public bool IsFinised { get => _isFinised; }
 
     private void Update()
     {
@@ -46,6 +48,7 @@ public class QuestLineManager : MonoBehaviour
             {
                 _quests.RemoveAt(0);
                 RefreshQuestItems();
+                if(_quests.Count <= 0) _isFinised = true;
             }
             else check = false;
         }

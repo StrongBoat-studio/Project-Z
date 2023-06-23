@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NotesApp : MonoBehaviour
 {
-    public List<Note> testNotes;
+    public List<Note> notesRegister;
     public List<Note> Notes { get; private set; }
 
     public delegate void OnNoteAddedHandler();
@@ -13,12 +13,6 @@ public class NotesApp : MonoBehaviour
     private void Start()
     {
         Notes = new List<Note>();
-
-        //Test
-        AddNote(testNotes[0]);
-        AddNote(testNotes[1]);
-        AddNote(testNotes[2]);
-        AddNote(testNotes[3]);
     }
 
     public void AddNote(Note note)
@@ -37,7 +31,7 @@ public class NotesApp : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.KeypadPlus))
         {
-            Notes.Add(testNotes[2]);
+            Notes.Add(notesRegister[Random.Range(0, notesRegister.Count)]);
             OnNoteAdded?.Invoke();
         }
         if(Input.GetKeyDown(KeyCode.KeypadMinus))

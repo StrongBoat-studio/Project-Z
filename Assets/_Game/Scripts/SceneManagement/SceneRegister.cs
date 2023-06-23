@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Linq;
-using UnityEngine.Rendering.Universal;
+using System;
 
 public class SceneRegister : MonoBehaviour
 {
@@ -27,7 +27,6 @@ public class SceneRegister : MonoBehaviour
     private void Awake()
     {
         // If there is an instance, and it's not me, delete myself.
-
         if (Instance != null && Instance != this)
         {
             Destroy(this);
@@ -43,42 +42,10 @@ public class SceneRegister : MonoBehaviour
     public void LoadNextLevel(RoomLoader roomLoader)
     {
         //Save data
-        if(GameSaveManager.Instance != null)
+        if (GameSaveManager.Instance != null)
         {
-            //Player's HP
-            GameSaveManager.Instance.currentSave.playerHp = GameManager.Instance.player.GetComponent<Player>().GetHP();
-
-            //Notes' ids
-            List<int> notes = new List<int>();
-            foreach(var note in GameManager.Instance.player.GetComponent<NotesApp>().GetNotes())
-            {
-                notes.Add(note.id);
-            }
-            GameSaveManager.Instance.currentSave.journalNotes = notes.ToArray();
-
-            //Quests
-            List<GameData.QuestState> quests = new List<GameData.QuestState>();
-            foreach(var quest in QuestLineManager.Instance.Quests)
-            {
-                List<int> tasks = new List<int>();
-                foreach(var task in quest.Tasks)
-                {
-                    tasks.Add(task.ID);
-                }
-                quests.Add(new GameData.QuestState(quest.ID, tasks.ToArray()));
-            }
-            GameSaveManager.Instance.currentSave.quests = quests.ToArray();
-
-            //Items
-            List<GameData.InventoryItemState> eqItems = new List<GameData.InventoryItemState>();
-            foreach(var item in GameManager.Instance.player.GetComponent<Player>().GetInventory().Items)
-            {
-                eqItems.Add(new GameData.InventoryItemState(item.itemType, item.amount));
-            }
-            GameSaveManager.Instance.currentSave.inventoryItems = eqItems.ToArray();
-
-            //Save
-            GameSaveManager.Instance.SaveJson();
+            //Save new location (destination of door)
+            GameSaveManager.Instance.currentSave.locationIndex = (int)roomLoader.GetTargetDoor().scene;
         }
         else
         {
@@ -90,6 +57,12 @@ public class SceneRegister : MonoBehaviour
 
     private IEnumerator HandleSceneSwap(RoomLoader roomLoader)
     {
+        if (GameSaveManager.Instance == null)
+        {
+            Debug.Log("Can't save data, try again");
+            yield return null;
+        }
+
         //Find scenes to unload
         List<Scene> unload = new List<Scene>();
         for (int i = 0; i < SceneManager.sceneCount; i++)
@@ -101,9 +74,6 @@ public class SceneRegister : MonoBehaviour
                 unload.Add(SceneManager.GetSceneAt(i));
             }
         }
-
-        //Destroy current global light
-        //Destroy(FindObjectsOfType<Light2D>().First(x => x.lightType == Light2D.LightType.Global).gameObject);
 
         //Async unload old scenes
         List<AsyncOperation> ops = new List<AsyncOperation>();
@@ -150,12 +120,18 @@ public class SceneRegister : MonoBehaviour
                     //y set to raycast hit y pos + 1/2 of player's collider + 1 pixel (1/PPU) to avoid clipping
                     rhitGround.point.y + (player.GetComponent<Collider2D>().bounds.extents.y + 0.03125f)
                 );
+
+                //Set player spawn for save
+                GameSaveManager.Instance.currentSave.spawnPosition = player.transform.position;
             }
             else
             {
                 Debug.LogWarning("Player not found on scene!");
             }
         }
+
+        //When scene loading is done, save data to json file
+        GameSaveManager.Instance.SaveJson();
         yield return null;
     }
 }
