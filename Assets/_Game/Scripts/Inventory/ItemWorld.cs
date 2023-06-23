@@ -15,7 +15,8 @@ public class ItemWorld : MonoBehaviour, IInteractable
     {
         _OUTLINE_ON = new LocalKeyword(GetComponent<SpriteRenderer>().material.shader, "_OUTLINE_ON");
 
-        GetComponent<SpriteRenderer>().sprite = ItemRegister.Instance.items.Find(x => x.itemType == _itemType).sprite;
+        if (_itemType != Item.ItemType.None)
+            GetComponent<SpriteRenderer>().sprite = ItemRegister.Instance.items.Find(x => x.itemType == _itemType).sprite;
     }
 
     ///<summary>
@@ -47,6 +48,26 @@ public class ItemWorld : MonoBehaviour, IInteractable
         {
             if (GameManager.Instance.player.GetComponent<Player>().GetInventory().AddItem(GetItem()))
             {
+                //Find item in game save to update its load state
+                LevelManagerData.ItemWorldState cmp = new LevelManagerData.ItemWorldState(
+                    _itemType, _amount, transform.position, true
+                );
+
+                if (GameSaveManager.Instance != null)
+                {
+                    bool isRemoved = GameSaveManager.Instance.currentSave.levelManagerDatas.Find(
+                        x => (int)x.sceneIndex == GameSaveManager.Instance.currentSave.locationIndex
+                    ).items.Remove(cmp);
+
+                    if (isRemoved == true)
+                    {
+                        cmp.load = false;
+                        GameSaveManager.Instance.currentSave.levelManagerDatas.Find(
+                            x => (int)x.sceneIndex == GameSaveManager.Instance.currentSave.locationIndex
+                        ).items.Add(cmp);
+                    }
+                }
+
                 Destroy(gameObject);
             }
         }

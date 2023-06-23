@@ -6,29 +6,22 @@ using UnityEngine;
 public class LevelManagerData
 {
     [System.Serializable]
-    public struct MutantState
-    {
-        public Transform mutant;
-        public bool load;
-    }
-
-    [System.Serializable]
     public struct ItemWorldState
     {
-        public Transform item;
-        public bool load;
-    }
+        public ItemWorldState(Item.ItemType itemType, int amount, Vector3 position, bool load)
+        {
+            this.itemType = itemType;
+            this.amount = amount;
+            this.position = position;
+            this.load = load; 
+        }
 
-    [System.Serializable]
-    public struct NPCState
-    {
-        public Transform npc;
+        public Item.ItemType itemType;
+        public int amount;
+        public Vector3 position;
         public bool load;
-        public bool interactable;
     }
 
     public SceneRegister.Scenes sceneIndex;
-    public MutantState[] mutants;
-    public ItemWorldState[] items;
-    public NPCState[] npcs;
+    public List<ItemWorldState> items;
 }

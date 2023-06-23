@@ -10,6 +10,7 @@ TagManager:
   - Interactions
   - Enemy
   - J
+  - ItemContainer
   layers:
   - Default
   - TransparentFX

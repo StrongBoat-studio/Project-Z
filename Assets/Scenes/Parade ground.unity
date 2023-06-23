@@ -291,11 +291,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   QuestID: 2
   QuestTaskID: 2
---- !u!4 &120705605 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5805874290070289776, guid: b17bd4fc1ae959448883bc2475396bfc, type: 3}
-  m_PrefabInstance: {fileID: 120705602}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &214983692
 GameObject:
   m_ObjectHideFlags: 0
@@ -856,23 +851,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levelData:
     sceneIndex: 8
-    mutants: []
-    items:
-    - item: {fileID: 1603522337}
-      load: 1
-    - item: {fileID: 1095042280}
-      load: 1
-    - item: {fileID: 1801464003}
-      load: 1
-    - item: {fileID: 1234391167}
-      load: 1
-    npcs:
-    - npc: {fileID: 1541635817}
-      load: 1
-      interactable: 1
-    - npc: {fileID: 120705605}
-      load: 1
-      interactable: 1
+    items: []
 --- !u!1 &958492674
 GameObject:
   m_ObjectHideFlags: 0
@@ -1499,6 +1478,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1424574689
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1424574690}
+  m_Layer: 0
+  m_Name: ItemWorldContainer
+  m_TagString: ItemContainer
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1424574690
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1424574689}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1541635814
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1595,11 +1605,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   QuestID: 2
   QuestTaskID: 1
---- !u!4 &1541635817 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3176867123582371366, guid: 32b3e9453b3789d42a5e43248238bb69, type: 3}
-  m_PrefabInstance: {fileID: 1541635814}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1581918423
 GameObject:
   m_ObjectHideFlags: 0

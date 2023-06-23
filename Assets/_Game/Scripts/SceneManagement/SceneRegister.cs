@@ -63,6 +63,12 @@ public class SceneRegister : MonoBehaviour
             yield return null;
         }
 
+        //Save origin location's level data
+        if (FindObjectOfType<LevelManager>() != null)
+        {
+            SaveLevelManagerData(FindObjectOfType<LevelManager>().GetLevelData());
+        }
+
         //Find scenes to unload
         List<Scene> unload = new List<Scene>();
         for (int i = 0; i < SceneManager.sceneCount; i++)
@@ -130,8 +136,52 @@ public class SceneRegister : MonoBehaviour
             }
         }
 
+        //Load nad save destination location's level data
+        if (FindObjectOfType<LevelManager>() != null)
+        {
+            LoadLevelManagerData(FindObjectOfType<LevelManager>());
+            SaveLevelManagerData(FindObjectOfType<LevelManager>().GetLevelData());
+        }
+
         //When scene loading is done, save data to json file
         GameSaveManager.Instance.SaveJson();
         yield return null;
+    }
+
+    public void SaveLevelManagerData(LevelManagerData lmd)
+    {
+        int idx = GameSaveManager.Instance.currentSave.levelManagerDatas.FindIndex(
+            x => x.sceneIndex == lmd.sceneIndex
+        );
+
+        if (idx != -1)
+        {
+            //Update level manager's data
+            GameSaveManager.Instance.currentSave.levelManagerDatas[idx] = lmd;
+        }
+        else
+        {
+            //Add new level manager data if it did not exist in save
+            GameSaveManager.Instance.currentSave.levelManagerDatas.Add(lmd);
+        }
+    }
+
+    public void LoadLevelManagerData(LevelManager lm)
+    {
+        int idx = GameSaveManager.Instance.currentSave.levelManagerDatas.FindIndex(
+            x => x.sceneIndex == lm.GetLevelData().sceneIndex
+        );
+
+        if (idx != -1)
+        {
+            lm.SetLevelData(GameSaveManager.Instance.currentSave.levelManagerDatas[idx]);
+        }
+        else
+        {
+            //Add new level manager data if it did not exist in save
+            GameSaveManager.Instance.currentSave.levelManagerDatas.Add(lm.GetLevelData());
+        }
+
+        lm.ExecuteDataLoad();
     }
 }

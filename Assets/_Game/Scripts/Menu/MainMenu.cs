@@ -129,6 +129,8 @@ public class MainMenu : MonoBehaviour
 
         //Load data after location load
         GameSaveManager.Instance.LoadData();
+        SceneRegister.Instance.LoadLevelManagerData(FindObjectOfType<LevelManager>());
+        SceneRegister.Instance.SaveLevelManagerData(FindObjectOfType<LevelManager>().GetLevelData());
         
         yield return null;
     }

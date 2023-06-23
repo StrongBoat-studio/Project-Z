@@ -44,9 +44,17 @@ public class ItemRegister : MonoBehaviour
     /// </summary>
     /// <param name="item">Item to create</param>
     /// <param name="position">Position on which the item will be created</param>
-    public void CreateWorldItem(Item.ItemType itemType, int amount, Vector2 position)
-    {
-        Transform worldItem = Instantiate(worldItemPrefab, position, Quaternion.identity).transform;
-        worldItem.GetComponent<ItemWorld>().SetItem(itemType, amount);
+    public void CreateWorldItem(Item.ItemType itemType, int amount, Vector2 position, Transform parent = null)
+    {   
+        if(parent != null)
+        {
+            Transform worldItem = Instantiate(worldItemPrefab, position, Quaternion.identity, parent).transform;
+            worldItem.GetComponent<ItemWorld>().SetItem(itemType, amount);
+        }
+        else
+        {
+            Transform worldItem = Instantiate(worldItemPrefab, position, Quaternion.identity).transform;
+            worldItem.GetComponent<ItemWorld>().SetItem(itemType, amount);
+        }
     }
 }
