@@ -12,7 +12,7 @@ public class WalkerChaseWithAI : MonoBehaviour
 
 
     [Header("Chase Settings")]
-    [Range(0f, 10f)] [SerializeField] private float _speed;
+    [Range(0f, 10f)] [SerializeField] private float _speed = 3.0f;
 
 
     //Variable for chase
@@ -24,15 +24,15 @@ public class WalkerChaseWithAI : MonoBehaviour
     private float _nextWaypointDistance = 2f;
     private Path _path;
     private int _currentWaypoint = 0;
-    [SerializeField] private bool _reachedEndOfPath = false;
-    [SerializeField] private Vector2 _direction;
-    [SerializeField] private float _distance;
+    private bool _reachedEndOfPath = false;
+    private Vector2 _direction;
+    private float _distance;
 
     private void Awake()
     {
         //downloading the appropriate components
         _walkerStateManager = GetComponent<WalkerStateManager>();
-        _target= GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        _target = GameManager.Instance.player;
         _seeker = GetComponent<Seeker>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
 

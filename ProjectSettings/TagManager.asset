@@ -13,6 +13,7 @@ TagManager:
   - FirePoint
   - WeaponHolder
   - Gun
+  - ChaseAlertScreen
   layers:
   - Default
   - TransparentFX
