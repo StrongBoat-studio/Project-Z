@@ -15,6 +15,7 @@ public class KnifeController : MonoBehaviour
     private Collider2D _hitEnemie;
     private PlayerInput _playerInput;
     private WalkerStateManager _walkerStateManager;
+    private JumperStateManager _jumperStateManager;
     private float _time = 0.5f;
     private bool _isTime = false;
 
@@ -69,9 +70,16 @@ public class KnifeController : MonoBehaviour
         if (hits.Any(x => x.collider.GetComponent<IInteractable>() != null) == false && _hitEnemie != null && _canStab==true && _weapon.GetWeapon() == 2)
         {
             _walkerStateManager = _hitEnemie.GetComponent<WalkerStateManager>();
+            _jumperStateManager = _hitEnemie.GetComponent<JumperStateManager>();
+
             if (_walkerStateManager != null)
             {
                 _walkerStateManager.TakeDamage(_demage, 2);
+            }
+
+            if (_jumperStateManager != null)
+            {
+                _jumperStateManager.TakeDamage(_demage, 2);
             }
         }
     }
