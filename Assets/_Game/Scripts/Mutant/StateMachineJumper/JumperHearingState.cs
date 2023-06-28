@@ -53,6 +53,11 @@ public class JumperHearingState : JumperBaseState
     //Checking whether the Player is in front of or behind the Mutant
     private void PositionCheck()
     {
+        if (Context.Player == null)
+        {
+            return;
+        }
+
         Context.PlayerPosition = Context.Player.position;
         Context.JumperPosition = Context.Mutant.position;
 

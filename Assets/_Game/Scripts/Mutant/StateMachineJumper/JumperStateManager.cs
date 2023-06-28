@@ -42,7 +42,6 @@ public class JumperStateManager : MonoBehaviour
     //Stealth Chack for Designers
     [Header("Stealth Chack")]
     [SerializeField] private float _distance;
-    private Transform _target;
     [SerializeField] private float dotPro=0;
 
     //Dot
@@ -70,7 +69,6 @@ public class JumperStateManager : MonoBehaviour
     public float SecondsElapsedSight { get { return _secondElapsedSight; } set { _secondElapsedSight = value; } }
     public GameObject Alert { get { return _alert; } }
     public float DistanceAttack { get { return _distanceAttack; } }
-    public Transform Target { get { return _target; } }
     public Transform Player { get { return _player; } }
 
     //UI
@@ -110,8 +108,6 @@ public class JumperStateManager : MonoBehaviour
     {
         currentState.UpdateState(this);
 
-        _distance = Vector3.Distance(_mutant.transform.position, _player.transform.position);
-
         if (_player != null)
         {
             _distance = Vector3.Distance(_mutant.transform.position, _player.transform.position);
@@ -120,8 +116,6 @@ public class JumperStateManager : MonoBehaviour
         {
             _distance = Mathf.Infinity;
         }
-
-        _target = GameManager.Instance.player;
 
         _checkVector = _jumperPatrolling.GetCheckVector();
         _mutant = transform;
@@ -209,5 +203,30 @@ public class JumperStateManager : MonoBehaviour
 
         if (_player.transform.localScale.x == -1)
             _mutant.transform.position = new Vector3(_mutant.transform.position.x + .2f, _mutant.transform.position.y, _mutant.transform.position.z);
+    }
+
+    public int GetJumperLife()
+    {
+        return _mLife;
+    }
+
+    public Transform GetJumperTransform()
+    {
+        return _mutant;
+    }
+
+    public void SetJumperLife(int life)
+    {
+        _mLife = life;
+    }
+    
+    public void SetJumperTransform(Vector3 position)
+    {
+        _mutant.position = position;
+    }
+
+    public void SetDefaultState()
+    {
+        currentState = PatrollingState;
     }
 }

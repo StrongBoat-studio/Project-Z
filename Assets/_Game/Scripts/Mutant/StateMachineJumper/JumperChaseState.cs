@@ -13,9 +13,9 @@ public class JumperChaseState : JumperBaseState
         PositionCheck();
 
         if (Context.Distace>Context.DistanceHearing)
-                {
-                    jumper.SwitchState(jumper.PatrollingState);
-                }
+        {
+            jumper.SwitchState(jumper.PatrollingState);
+        }
 
         if(Context.Distace<=Context.DistanceAttack)
         {
@@ -26,6 +26,11 @@ public class JumperChaseState : JumperBaseState
     //Checking whether the Player is in front of or behind the Mutant
     private void PositionCheck()
     {
+        if (Context.Player == null)
+        {
+            return;
+        }
+
         Context.PlayerPosition = Context.Player.position;
         Context.JumperPosition = Context.Mutant.position;
 
