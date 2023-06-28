@@ -31,7 +31,7 @@ public class WalkerPatrollingState : WalkerBaseState
     //Checking whether the Player is in front of or behind the Mutant
     private void PositionCheck() 
     {
-        if (Context.Player == null)
+        if (Context.Player == null || Context.Mutant==null)
         {
             return;
         }

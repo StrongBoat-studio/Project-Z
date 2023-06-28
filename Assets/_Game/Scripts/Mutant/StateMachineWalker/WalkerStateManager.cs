@@ -17,7 +17,7 @@ public class WalkerStateManager : MonoBehaviour
     public WalkerHearingState HearingState = new WalkerHearingState();
 
     //Components use for movement
-    private GameObject _mutant;
+    private Transform _mutant;
     private WalkerPatrolling _walkerPatrolling;
     private Transform _player;
     private Movement _movement; 
@@ -55,7 +55,7 @@ public class WalkerStateManager : MonoBehaviour
     public bool Zone2 { get { return _zone2; } set { _zone2 = value; } }
     public bool Zone3 { get { return _zone3; } set { _zone3 = value; } }
     public Vector2 CheckVector { get { return _checkVector; } set { _checkVector = value; } }
-    public GameObject Mutant { get { return _mutant; } set { _mutant = value; } }
+    public Transform Mutant { get { return _mutant; } set { _mutant = value; } }
     public Vector2 PlayerPosition { get { return _playerPosition; } set { _playerPosition = value; } }
     public Vector2 WalkerPosition { get { return _walkerPosition; } set { _walkerPosition = value; } }
     public Vector2 Direction { get { return _direction; } set { _direction = value; } }
@@ -78,7 +78,7 @@ public class WalkerStateManager : MonoBehaviour
     public Transform Player { get { return _player; } }
 
     //Life 
-    private int _mLife=100;
+    [SerializeField] private int _mLife=100;
 
     //Animations
     [SerializeField] private GameObject _alert;
@@ -88,7 +88,7 @@ public class WalkerStateManager : MonoBehaviour
     {
         _player = GameManager.Instance.player;
         _movement = GameManager.Instance.movement;
-        _mutant = GameObject.FindGameObjectWithTag("Enemy");
+        _mutant = transform;
         _walkerPatrolling = GetComponent<WalkerPatrolling>();
         _animator = GetComponentInChildren<Animator>();
         
@@ -123,6 +123,8 @@ public class WalkerStateManager : MonoBehaviour
         }
 
         _checkVector = _walkerPatrolling.GetCheckVector();
+
+        _mutant = transform;
     }
 
     public void SwitchState (WalkerBaseState state)
@@ -143,7 +145,7 @@ public class WalkerStateManager : MonoBehaviour
         _slider.value -= damage * 0.01f;
         if(_mLife<=0)
         {
-            _mutant.SetActive(false);
+            //_mutant.SetActive(false);
             _alert.SetActive(false);
         }
 
@@ -227,5 +229,10 @@ public class WalkerStateManager : MonoBehaviour
     public void SetDefaultState()
     {
         currentState = PatrollingState;
+    }
+
+    public void SetWalkerTransform(Vector3 transform)
+    {
+        _mutant.transform.position = transform;
     }
 }

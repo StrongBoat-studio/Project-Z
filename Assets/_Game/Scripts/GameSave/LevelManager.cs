@@ -143,6 +143,7 @@ public class LevelManager : MonoBehaviour
                     Transform walker = Instantiate(_walkerPrefab, ms.position, Quaternion.identity, mutantContainer);
                     walker.GetComponent<WalkerStateManager>().SetWalkerLife(ms.hp);
                     walker.GetComponent<WalkerStateManager>().SetDefaultState();
+                    walker.GetComponent<WalkerStateManager>().SetWalkerTransform(ms.position);
                 }
 
             }
@@ -152,6 +153,7 @@ public class LevelManager : MonoBehaviour
                 Transform walker = Instantiate(_walkerPrefab, ms.position, Quaternion.identity);
                 walker.GetComponent<WalkerStateManager>().SetWalkerLife(ms.hp);
                 walker.GetComponent<WalkerStateManager>().SetDefaultState();
+                walker.GetComponent<WalkerStateManager>().SetWalkerTransform(ms.position);
             }
         }
     }

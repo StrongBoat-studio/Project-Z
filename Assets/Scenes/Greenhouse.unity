@@ -5414,6 +5414,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Walker
       objectReference: {fileID: 0}
+    - target: {fileID: 1595312744772529114, guid: e3df743392f33664c90deace42a43b1f, type: 3}
+      propertyPath: _mutant
+      value: 
+      objectReference: {fileID: 4119822356352389032}
     - target: {fileID: 1595312744772529115, guid: e3df743392f33664c90deace42a43b1f, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -5468,3 +5472,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3df743392f33664c90deace42a43b1f, type: 3}
+--- !u!1 &4119822356352389032 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1595312744772529113, guid: e3df743392f33664c90deace42a43b1f, type: 3}
+  m_PrefabInstance: {fileID: 4119822356352389031}
+  m_PrefabAsset: {fileID: 0}
