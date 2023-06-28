@@ -49,6 +49,11 @@ public class WalkerAttackState : WalkerBaseState
     //Checking whether the Player is in front of or behind the Mutant
     private void PositionCheck()
     {
+        if(Context.Player==null)
+        {
+            return;
+        }
+
         Context.PlayerPosition = Context.Player.transform.position;
         Context.WalkerPosition = Context.Mutant.transform.position;
 
