@@ -20,23 +20,30 @@ public class Quest
 
     public void ValidateTasks()
     {
-        while(Tasks.Count > 0 && Tasks[0].IsCompleted == true) Tasks.RemoveAt(0);
-        if(Tasks.Count <= 0) IsCompleted = true;
+        while (Tasks.Count > 0 && Tasks[0].IsCompleted == true) Tasks.RemoveAt(0);
+        if (Tasks.Count <= 0) IsCompleted = true;
     }
 
-    public void CompleteTask(int taskID)
+    ///<summary>
+    ///Tries to complete task with given ID
+    ///</summary>
+    ///<returns>
+    ///True if task with given ID was completed, false otherwise
+    ///</returns>
+    public bool CompleteTask(int taskID)
     {
-        if(Tasks.Count <= 0) return;
+        if (Tasks.Count <= 0) return false;
 
-        if(Tasks[0].ID != taskID)
+        if (Tasks[0].ID != taskID)
         {
             Debug.Log("This isn't the next task");
-            return;
+            return false;
         }
         Tasks[0].Complete();
         ValidateTasks();
+        return true;
     }
-
+    
     public void CompleteQuest()
     {
         IsCompleted = true;

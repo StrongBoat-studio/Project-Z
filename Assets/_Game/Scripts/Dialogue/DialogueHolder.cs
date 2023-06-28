@@ -6,7 +6,11 @@ using UnityEngine.Rendering;
 public class DialogueHolder : MonoBehaviour, IInteractable
 {
     private LocalKeyword _OUTLINE_ON;
-    [SerializeField] private DialogueController _dialogue;
+
+    [Tooltip("Dialogue holder's ID on scene")]
+    public int npcSceneID;
+    [SerializeField] private DialogueController _dialogueIdle;
+    [SerializeField] private DialogueController _dialogueQuest;
 
     void Awake()
     {
@@ -15,8 +19,6 @@ public class DialogueHolder : MonoBehaviour, IInteractable
 
     public void CursorClick()
     {
-        _dialogue.Play();
-
         //Update quests
         if(GetComponents<QuestObjective>().Length <= 0) return;
         if(QuestLineManager.Instance == null) 
@@ -26,7 +28,16 @@ public class DialogueHolder : MonoBehaviour, IInteractable
         }
         foreach(QuestObjective qo in GetComponents<QuestObjective>())
         {
-            QuestLineManager.Instance.CheckQuest(qo);
+            bool questTaskCompleted = QuestLineManager.Instance.CheckQuest(qo);
+
+            //Player quest dialogue only if quest was completed
+            //Othwerwise play idle dialogue
+            if(questTaskCompleted == true && _dialogueQuest != null)
+                _dialogueQuest.Play();
+            else if (_dialogueIdle != null)
+                _dialogueIdle.Play();
+            else
+                Debug.Log("NPC has no dialogues attached");
         }
     }   
 
@@ -39,4 +50,21 @@ public class DialogueHolder : MonoBehaviour, IInteractable
     {
         GetComponent<SpriteRenderer>().material.SetKeyword(_OUTLINE_ON, false);
     }
+
+    public void SetDialogues(TextAsset dialogueIdle, TextAsset dialogueQuest = null)
+    {
+        _dialogueIdle.SetDialogue(dialogueIdle);
+        _dialogueQuest.SetDialogue(dialogueQuest);
+    }
+
+    public TextAsset GetDialogueIdle()
+    {
+        return _dialogueIdle.GetDialogue();
+    }
+
+    public TextAsset GetDialogueQuest()
+    {
+        return _dialogueQuest.GetDialogue();
+    }
+    
 }

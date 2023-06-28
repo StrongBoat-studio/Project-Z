@@ -262,9 +262,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5805874290070289777, guid: b17bd4fc1ae959448883bc2475396bfc, type: 3}
+      propertyPath: npcSceneID
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5805874290070289779, guid: b17bd4fc1ae959448883bc2475396bfc, type: 3}
       propertyPath: m_SortingLayer
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5805874290070289779, guid: b17bd4fc1ae959448883bc2475396bfc, type: 3}
       propertyPath: m_SortingLayerID
@@ -852,6 +856,8 @@ MonoBehaviour:
   _levelData:
     sceneIndex: 8
     items: []
+    mutants: []
+    npcs: []
 --- !u!1 &958492674
 GameObject:
   m_ObjectHideFlags: 0
@@ -934,8 +940,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5ca78f5cae3b1d4d9c9ac015b4058c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dialogue:
-    _dialogueTextAsset: {fileID: 4900000, guid: 099c5208fded1ff4e8dd97fa72e4c85b, type: 3}
+  npcSceneID: 2
+  _dialogueIdle:
+    _dialogueTextAsset: {fileID: 0}
+  _dialogueQuest:
+    _dialogueTextAsset: {fileID: 0}
 --- !u!61 &1044653419
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1576,9 +1585,17 @@ PrefabInstance:
       propertyPath: _dialogue._dialogueTextAsset
       value: 
       objectReference: {fileID: 4900000, guid: 099c5208fded1ff4e8dd97fa72e4c85b, type: 3}
+    - target: {fileID: 3176867123582371367, guid: 32b3e9453b3789d42a5e43248238bb69, type: 3}
+      propertyPath: _dialogueIdle._dialogueTextAsset
+      value: 
+      objectReference: {fileID: 4900000, guid: ce5a41ec6c988414f9470739db7e535c, type: 3}
+    - target: {fileID: 3176867123582371367, guid: 32b3e9453b3789d42a5e43248238bb69, type: 3}
+      propertyPath: _dialogueQuest._dialogueTextAsset
+      value: 
+      objectReference: {fileID: 4900000, guid: 099c5208fded1ff4e8dd97fa72e4c85b, type: 3}
     - target: {fileID: 3176867123582371384, guid: 32b3e9453b3789d42a5e43248238bb69, type: 3}
       propertyPath: m_SortingLayer
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3176867123582371384, guid: 32b3e9453b3789d42a5e43248238bb69, type: 3}
       propertyPath: m_SortingLayerID

@@ -9,6 +9,19 @@ public class DialogueController
 
     public void Play()
     {
-        DialogueManager.Instance.EnqueueStory(_dialogueTextAsset);
+        if(_dialogueTextAsset != null)
+            DialogueManager.Instance.EnqueueStory(_dialogueTextAsset);
+        else
+            Debug.LogWarning("Dialogue is not set");
+    }
+
+    public void SetDialogue(TextAsset dialogue)
+    {
+        _dialogueTextAsset = dialogue;
+    }
+
+    public TextAsset GetDialogue()
+    {
+        return _dialogueTextAsset;
     }
 }

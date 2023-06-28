@@ -20,6 +20,15 @@ public class LevelManager : MonoBehaviour
                 true
             ));
         }
+
+        _levelData.npcs = new List<LevelManagerData.NPCState>();
+        foreach(DialogueHolder dh in FindObjectsOfType<DialogueHolder>())
+        {
+            _levelData.npcs.Add(new LevelManagerData.NPCState(
+               dh.npcSceneID,
+               true
+            ));
+        }
     }
 
     public LevelManagerData GetLevelData()
@@ -29,12 +38,23 @@ public class LevelManager : MonoBehaviour
 
     public void SetLevelData(LevelManagerData lmd)
     {
-        _levelData = lmd;
+        //Load data only if there isn't any problem
+        if(_levelData.items.Count == lmd.items.Count)
+            _levelData.items = lmd.items;
+        
+        if(_levelData.npcs.Count == lmd.npcs.Count)
+            _levelData.npcs = lmd.npcs;
+
+        if(_levelData.mutants.Count == lmd.mutants.Count)
+            _levelData.mutants = lmd.mutants;
+
+        _levelData.sceneIndex = lmd.sceneIndex;
     }
 
     public void ExecuteDataLoad()
     {
        LoadWorldItems();
+       LoadNPCs();
     }
 
     private void LoadWorldItems()
@@ -61,6 +81,27 @@ public class LevelManager : MonoBehaviour
                 Debug.LogWarning("Can't find game object with itemContainer tag, create one on level's scene.");
                 ItemRegister.Instance.CreateWorldItem(iws.itemType, iws.amount, iws.position);
             }
+        }
+    }
+
+    private void LoadNPCs()
+    {
+        if(GameSaveManager.Instance == null) return;
+        if(FindObjectsOfType<DialogueHolder>().Length <= 0) return;
+
+        foreach(DialogueHolder dh in FindObjectsOfType<DialogueHolder>())
+        {
+            int lmIDX = GameSaveManager.Instance.currentSave.levelManagerDatas.FindIndex(
+                x => (int)x.sceneIndex == GameSaveManager.Instance.currentSave.locationIndex
+            );
+            if(lmIDX == -1) continue;
+            int npcStateIDX = GameSaveManager.Instance.currentSave.levelManagerDatas[lmIDX].npcs.FindIndex(x => x.id == dh.npcSceneID);
+            
+            if(npcStateIDX == -1) continue;
+            LevelManagerData.NPCState npcState = GameSaveManager.Instance.currentSave.levelManagerDatas[lmIDX].npcs[npcStateIDX];
+            
+            if(npcState.load == false) 
+                Destroy(dh.gameObject);
         }
     }
 }

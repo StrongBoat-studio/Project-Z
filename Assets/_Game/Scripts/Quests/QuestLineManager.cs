@@ -70,11 +70,18 @@ public class QuestLineManager : MonoBehaviour
         CheckQuestItems(GameManager.Instance.player.GetComponent<Player>().GetInventory().Items);
     }
 
-    public void CheckQuest(QuestObjective qo)
+    ///<summary>
+    ///Tries to update quest/complete task based on QuestObjective passed
+    ///</summary>
+    ///<returns>
+    ///True if task was completed, false otherwise
+    ///</returns>
+    public bool CheckQuest(QuestObjective qo)
     {
-        if (qo.QuestID != _quests[0].ID) return;
-        _quests[0].CompleteTask(qo.QuestTaskID);
+        if (qo.QuestID != _quests[0].ID) return false;
+        bool taskCompleted = _quests[0].CompleteTask(qo.QuestTaskID);
         ValidateQuests();
+        return taskCompleted;
     }
 
     public void CheckJournalQuest(QuestObjective qo, int app)
