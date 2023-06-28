@@ -66,6 +66,7 @@ public class SceneRegister : MonoBehaviour
         //Save origin location's level data
         if (FindObjectOfType<LevelManager>() != null)
         {
+            FindObjectOfType<LevelManager>().SaveMutants();
             SaveLevelManagerData(FindObjectOfType<LevelManager>().GetLevelData());
         }
 
@@ -140,6 +141,7 @@ public class SceneRegister : MonoBehaviour
         if (FindObjectOfType<LevelManager>() != null)
         {
             LoadLevelManagerData(FindObjectOfType<LevelManager>());
+            FindObjectOfType<LevelManager>().SaveMutants();
             SaveLevelManagerData(FindObjectOfType<LevelManager>().GetLevelData());
         }
 

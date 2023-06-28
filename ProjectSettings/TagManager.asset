@@ -15,6 +15,7 @@ TagManager:
   - WeaponHolder
   - Gun
   - ChaseAlertScreen
+  - MutantContainer
   layers:
   - Default
   - TransparentFX

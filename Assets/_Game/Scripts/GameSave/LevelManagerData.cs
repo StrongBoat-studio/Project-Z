@@ -32,6 +32,14 @@ public class LevelManagerData
     [System.Serializable]
     public struct MutantState
     {
+        public MutantState(Vector3 position, MutantType type, int hp, bool load)
+        {
+            this.position = position;
+            this.type = type;
+            this.hp = hp;
+            this.load = load;
+        }
+
         public Vector3 position;
         public MutantType type;
         public int hp;

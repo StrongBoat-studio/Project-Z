@@ -185,8 +185,18 @@ public class WalkerStateManager : MonoBehaviour
         return _mLife;
     }
 
+    public void SetWalkerLife(int life)
+    {
+        _mLife = life;
+    }
+
     public Transform GetWalkerTransform()
     {
         return _mutant.transform;
+    }
+
+    public void SetDefaultState()
+    {
+        currentState = PatrollingState;
     }
 }
