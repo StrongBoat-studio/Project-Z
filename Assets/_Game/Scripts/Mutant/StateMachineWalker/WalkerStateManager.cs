@@ -77,7 +77,6 @@ public class WalkerStateManager : MonoBehaviour
     public Animator Animator { get { return _animator; } }
     public Transform Player { get { return _player; } }
 
-
     //Life 
     private int _mLife=100;
 
@@ -98,7 +97,14 @@ public class WalkerStateManager : MonoBehaviour
         currentState.Context = this;
         currentState.EnterState(this);
 
-        _distance = Vector3.Distance(_mutant.transform.position, _player.transform.position);
+        if (_player != null)
+        {
+            _distance = Vector3.Distance(_mutant.transform.position, _player.transform.position);
+        }
+        else
+        {
+            _distance = Mathf.Infinity;
+        }
 
         _slider.value = 1f;
     }
@@ -107,7 +113,15 @@ public class WalkerStateManager : MonoBehaviour
     {
         currentState.UpdateState(this);
 
-        _distance = Vector3.Distance(_mutant.transform.position, _player.transform.position);
+        if(_player != null)
+        {
+            _distance = Vector3.Distance(_mutant.transform.position, _player.transform.position);
+        }
+        else
+        {
+            _distance = Mathf.Infinity;
+        }
+
         _checkVector = _walkerPatrolling.GetCheckVector();
     }
 
@@ -155,6 +169,11 @@ public class WalkerStateManager : MonoBehaviour
 
     private void ReactionToShoot()
     {
+        if(_player==null)
+        {
+            return;
+        }
+
         if(_player.transform.localScale.x==1)
             _mutant.transform.position = new Vector3(_mutant.transform.position.x - .7f, _mutant.transform.position.y, _mutant.transform.position.z);
 
@@ -164,6 +183,11 @@ public class WalkerStateManager : MonoBehaviour
 
     private void ReactionToKnife()
     {
+        if (_player == null)
+        {
+            return;
+        }
+
         if (_player.transform.localScale.x == 1)
             _mutant.transform.position = new Vector3(_mutant.transform.position.x - .5f, _mutant.transform.position.y, _mutant.transform.position.z);
 
@@ -173,6 +197,11 @@ public class WalkerStateManager : MonoBehaviour
 
     private void ReactionToEmpytHand()
     {
+        if (_player == null)
+        {
+            return;
+        }
+
         if (_player.transform.localScale.x == 1)
             _mutant.transform.position = new Vector3(_mutant.transform.position.x - .2f, _mutant.transform.position.y, _mutant.transform.position.z);
 
