@@ -4,7 +4,7 @@ public class JumperPatrollingState : JumperBaseState
 {
     public override void EnterState(JumperStateManager jumper)
     {
-        Debug.Log("Point To Point State");
+        Debug.Log("Patrolling State");
 
         Context.Zone1 = false;
         Context.Zone2 = false;
