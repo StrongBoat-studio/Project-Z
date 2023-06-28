@@ -39,6 +39,7 @@ public class WalkerStateManager : MonoBehaviour
 
     [Header("Health")]
     [SerializeField] private Slider _slider;
+
     //DotPro
     private Vector2 _checkVector = new Vector2(1f, 0f);
     private Vector2 _playerPosition;

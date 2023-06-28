@@ -15,9 +15,23 @@ public class JumperPatrollingState : JumperBaseState
 
     public override void UpdateState(JumperStateManager jumper)
     {
-        if(Context.Distace<=Context.DistanceHearing)
+        PositionCheck();
+
+        if (Context.Distace<=Context.DistanceHearing)
         {
             jumper.SwitchState(jumper.HearingState);
         }
+    }
+
+    //Checking whether the Player is in front of or behind the Mutant
+    private void PositionCheck()
+    {
+        Context.PlayerPosition = Context.Player.position;
+        Context.JumperPosition = Context.Mutant.position;
+
+        Context.Direction = Context.PlayerPosition - Context.JumperPosition;
+        Context.Direction.Normalize();
+
+        Context.DotPro = Vector2.Dot(Context.Direction, Context.CheckVector);
     }
 }

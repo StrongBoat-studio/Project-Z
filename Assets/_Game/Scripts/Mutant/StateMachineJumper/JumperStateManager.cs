@@ -18,25 +18,22 @@ public class JumperStateManager : MonoBehaviour
     public JumperDeathState DeathState=new JumperDeathState();
 
     //Movement variables
-    [SerializeField] private GameObject _mutant;
-    private GameObject _player;
-    [SerializeField] private Transform _jumper;
-    private Transform _player2;
-    private Vector3 nextPos;
+    private Transform _mutant;
+    private Transform _player;
+    private JumperPatrolling _jumperPatrolling;
 
     //Stealth Settings for Designers
     [Header("Stealth Settings")]
-    [Range(0f, 10f)][SerializeField] private float _speed;
-    [Range(0f, 10f)][SerializeField] private float _distanceAttack;
-    [Range(0f, 10f)][SerializeField] private float _distanceHearing;
-    [Range(0f, 10f)][SerializeField] private float _secondsHearing;
-    [Range(0f, 10f)][SerializeField] private float _distanceSight;
-    [Range(0f, 10f)][SerializeField] private float _secondsSight;
+    [Range(0f, 10f)] [SerializeField] private float _speed = 3.0f;
+    [Range(0f, 10f)] [SerializeField] private float _distanceAttack = 1.5f;
+    [Range(0f, 10f)] [SerializeField] private float _distanceHearing = 10.0f;
+    [Range(0f, 10f)] [SerializeField] private float _secondsHearing = 6.0f;
+    [Range(0f, 10f)] [SerializeField] private float _distanceSight = 6.0f;
+    [Range(0f, 10f)] [SerializeField] private float _secondsSight = 2.0f;
     [SerializeField] private Slider _slider;
 
 
     //Variables for chasing
-    private Vector2 _checkVector;
     private bool _zone1 = false;
     private bool _zone2 = false;
     private float _secondElapsedHearing;
@@ -49,15 +46,15 @@ public class JumperStateManager : MonoBehaviour
     [SerializeField] private float dotPro=0;
 
     //Dot
+    private Vector2 _checkVector = new Vector2(1f, 0f);
     private Vector2 _playerPosition;
     private Vector2 _jumperPosition;
     private Vector2 _direction;
 
     //getter and setter
-    public Vector3 NextPos { get { return nextPos; } set { nextPos = value; } }
     public float Speed { get { return _speed; } set { _speed = value; } }
     public Vector2 CheckVector { get { return _checkVector; } set { _checkVector= value; } }
-    public GameObject Mutant { get { return _mutant; } }
+    public Transform Mutant { get { return _mutant; } }
     public float Distace { get { return _distance; } }
     public float DistanceHearing { get { return _distanceHearing; } }
     public bool Zone1 { get { return _zone1; } set { _zone1 = value; } }
@@ -68,14 +65,13 @@ public class JumperStateManager : MonoBehaviour
     public float SecondsSight { get { return _secondsSight; } set { _secondsSight = value; } }
     public Vector2 PlayerPosition { get { return _playerPosition; } set { _playerPosition = value; } }
     public Vector2 JumperPosition { get { return _jumperPosition; } set { _jumperPosition = value; } }
-    public Transform Player2 { get { return _player2; } }
-    public Transform Jumper { get { return _jumper; } }
     public Vector2 Direction { get { return _direction; } set { _direction = value; } } 
     public float DotPro { get { return dotPro; } set { dotPro = value; } }
     public float SecondsElapsedSight { get { return _secondElapsedSight; } set { _secondElapsedSight = value; } }
     public GameObject Alert { get { return _alert; } }
     public float DistanceAttack { get { return _distanceAttack; } }
     public Transform Target { get { return _target; } }
+    public Transform Player { get { return _player; } }
 
     //UI
     private int _mLife = 100;
@@ -86,19 +82,27 @@ public class JumperStateManager : MonoBehaviour
 
     private void Awake()
     {
-        _player = GameObject.FindGameObjectWithTag("Player");
-        _player2 = GameManager.Instance.player;
-
+        _player = GameManager.Instance.player;
+        _jumperPatrolling = GetComponent<JumperPatrolling>();
+        _mutant = transform;
 
         currentState = PatrollingState;
         currentState.Context = this;
         currentState.EnterState(this);
 
-
-        _distance = Vector3.Distance(_mutant.transform.position, _player.transform.position);
+        if (_player != null)
+        {
+            _distance = Vector3.Distance(_mutant.transform.position, _player.transform.position);
+        }
+        else
+        {
+            _distance = Mathf.Infinity;
+        }
 
         _secondElapsedHearing = _secondsHearing;
         _secondElapsedSight = _secondsSight;
+
+        _slider.value = 1f;
     }
 
     // Update is called once per frame
@@ -107,7 +111,20 @@ public class JumperStateManager : MonoBehaviour
         currentState.UpdateState(this);
 
         _distance = Vector3.Distance(_mutant.transform.position, _player.transform.position);
-        _target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+
+        if (_player != null)
+        {
+            _distance = Vector3.Distance(_mutant.transform.position, _player.transform.position);
+        }
+        else
+        {
+            _distance = Mathf.Infinity;
+        }
+
+        _target = GameManager.Instance.player;
+
+        _checkVector = _jumperPatrolling.GetCheckVector();
+        _mutant = transform;
     }
 
     public void SwitchState(JumperBaseState state)
@@ -128,7 +145,7 @@ public class JumperStateManager : MonoBehaviour
         _slider.value -= damage * 0.01f;
         if (_mLife <= 0)
         {
-            _mutant.SetActive(false);
+            //_mutant.SetActive(false);
             _alert.SetActive(false);
         }
 
@@ -154,6 +171,11 @@ public class JumperStateManager : MonoBehaviour
 
     private void ReactionToShoot()
     {
+        if(_player==null)
+        {
+            return;
+        }
+
         if (_player.transform.localScale.x == 1)
             _mutant.transform.position = new Vector3(_mutant.transform.position.x - .7f, _mutant.transform.position.y, _mutant.transform.position.z);
 
@@ -163,6 +185,11 @@ public class JumperStateManager : MonoBehaviour
 
     private void ReactionToKnife()
     {
+        if (_player == null)
+        {
+            return;
+        }
+
         if (_player.transform.localScale.x == 1)
             _mutant.transform.position = new Vector3(_mutant.transform.position.x - .5f, _mutant.transform.position.y, _mutant.transform.position.z);
 
@@ -172,6 +199,11 @@ public class JumperStateManager : MonoBehaviour
 
     private void ReactionToEmpytHand()
     {
+        if (_player == null)
+        {
+            return;
+        }
+
         if (_player.transform.localScale.x == 1)
             _mutant.transform.position = new Vector3(_mutant.transform.position.x - .2f, _mutant.transform.position.y, _mutant.transform.position.z);
 
