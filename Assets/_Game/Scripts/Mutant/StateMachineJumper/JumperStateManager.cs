@@ -72,23 +72,16 @@ public class JumperStateManager : MonoBehaviour
     public Vector2 Direction { get { return _direction; } set { _direction = value; } } 
     public float DotPro { get { return dotPro; } set { dotPro = value; } }
     public float SecondsElapsedSight { get { return _secondElapsedSight; } set { _secondElapsedSight = value; } }
-    public int PLife { get { return _pLife; } set { _pLife = value;} }
-    public int MLife { get { return _mLife; } set { _mLife = value; } }
     public GameObject Alert { get { return _alert; } }
-    public GameObject M { get { return _m; } }
     public float DistanceAttack { get { return _distanceAttack; } }
-    public Transform Target { get { return _target; } } 
+    public Transform Target { get { return _target; } }
 
     //UI
-    [Header("UI")]
-    [SerializeField] private TextMeshProUGUI _timeHearing;
-    [SerializeField] private TextMeshProUGUI _timeSight;
-    [SerializeField] private TextMeshProUGUI _lifeP;
-    [SerializeField] private TextMeshProUGUI _lifeM;
-    private int _pLife = 100;
     private int _mLife = 100;
-    [SerializeField] private GameObject _m;
+
+    //Animations
     [SerializeField] private GameObject _alert;
+    private Animator _animator;
 
     // Start is called before the first frame update
     void Start()
@@ -112,23 +105,6 @@ public class JumperStateManager : MonoBehaviour
 
         _distance = Vector3.Distance(_mutant.transform.position, _player.transform.position);
         _target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-
-        _timeHearing.text = "Time hearing: " + Mathf.Clamp(Mathf.CeilToInt(_secondElapsedHearing), 0, float.MaxValue).ToString();
-        _timeSight.text = "Time sight: " + Mathf.Clamp(Mathf.CeilToInt(_secondElapsedSight), 0, float.MaxValue).ToString();
-
-        _lifeP.text = "Player life: " + Mathf.Clamp(_pLife, 0, int.MaxValue).ToString();
-        _lifeM.text = "Mutant life: " + Mathf.Clamp(_mLife, 0, int.MaxValue).ToString();
-
-        if (_pLife == 0)
-        {
-            SceneManager.LoadScene(1);
-        }
-
-        if (_mLife == 0)
-        {
-            SwitchState(DeathState);
-            SceneManager.LoadScene(2);
-        }
     }
 
     public void SwitchState(JumperBaseState state)
@@ -137,4 +113,11 @@ public class JumperStateManager : MonoBehaviour
         currentState.Context = this;
         state.EnterState(this);
     }
+
+    public JumperBaseState GetWalkerState()
+    {
+        return currentState;
+    }
+
+
 }
