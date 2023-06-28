@@ -1964,6 +1964,9 @@ GameObject:
   m_Component:
   - component: {fileID: 533872394}
   - component: {fileID: 533872395}
+  - component: {fileID: 533872397}
+  - component: {fileID: 533872396}
+  - component: {fileID: 533872398}
   m_Layer: 0
   m_Name: Jumper
   m_TagString: Untagged
@@ -1979,7 +1982,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 533872393}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.61, y: -2.39, z: 0}
+  m_LocalPosition: {x: 4.67, y: -2.39, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2001,27 +2004,81 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0288697f3272bc6419f667ab8864ac03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pos1: {x: 0, y: 0, z: 0}
-  _pos2: {x: 0, y: 0, z: 0}
-  _startPos: {x: 0, y: 0, z: 0}
-  _mutant: {fileID: 0}
-  _player: {fileID: 0}
-  _jumper: {fileID: 0}
-  _player2: {fileID: 0}
-  _speed: 0
-  _distanceAttack: 0
-  _distanceHearing: 0
-  _secondsHearing: 0
-  _distanceSight: 0
-  _secondsSight: 0
+  _mutant: {fileID: 533872393}
+  _jumper: {fileID: 533872394}
+  _speed: 3
+  _distanceAttack: 1.5
+  _distanceHearing: 10
+  _secondsHearing: 6
+  _distanceSight: 6
+  _secondsSight: 2
+  _slider: {fileID: 942895356}
   _distance: 0
   dotPro: 0
-  _timeHearing: {fileID: 0}
-  _timeSight: {fileID: 0}
-  _lifeP: {fileID: 0}
-  _lifeM: {fileID: 0}
-  _m: {fileID: 0}
-  _alert: {fileID: 0}
+  _alert: {fileID: 1934386867}
+--- !u!50 &533872396
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 533872393}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 80
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 1
+  m_SleepingMode: 0
+  m_CollisionDetection: 1
+  m_Constraints: 4
+--- !u!61 &533872397
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 533872393}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.6, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &533872398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 533872393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54be9ba027253a34fbaaac1328ea8f78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxLeftX: 0
+  _maxRightX: 15
+  _speed: 2
+  _standingTimeInSeconds: 2
 --- !u!1 &548243503
 GameObject:
   m_ObjectHideFlags: 0
@@ -5602,6 +5659,11 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
+--- !u!1 &1934386867 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6694964266237201241, guid: cba8c2dad0adcb14998172d77cf38d82, type: 3}
+  m_PrefabInstance: {fileID: 1934386863}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1948184001
 GameObject:
   m_ObjectHideFlags: 0

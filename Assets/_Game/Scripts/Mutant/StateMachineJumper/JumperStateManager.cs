@@ -4,12 +4,13 @@ using Unity.VisualScripting;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class JumperStateManager : MonoBehaviour
 {
     //State Machine variables
     JumperBaseState currentState;
-    public JumperPoToPoState PoToPoState=new JumperPoToPoState();
+    public JumperPatrollingState PatrollingState =new JumperPatrollingState();
     public JumperHearingState HearingState=new JumperHearingState();
     public JumperBeforeChaseState BeforeChaseState=new JumperBeforeChaseState();
     public JumperChaseState ChaseState=new JumperChaseState();
@@ -17,9 +18,10 @@ public class JumperStateManager : MonoBehaviour
     public JumperDeathState DeathState=new JumperDeathState();
 
     //Movement variables
-    [SerializeField] private Vector3 _pos1, _pos2, _startPos;
-    [SerializeField] private GameObject _mutant, _player;
-    [SerializeField] private Transform _jumper, _player2;
+    [SerializeField] private GameObject _mutant;
+    private GameObject _player;
+    [SerializeField] private Transform _jumper;
+    private Transform _player2;
     private Vector3 nextPos;
 
     //Stealth Settings for Designers
@@ -30,6 +32,7 @@ public class JumperStateManager : MonoBehaviour
     [Range(0f, 10f)][SerializeField] private float _secondsHearing;
     [Range(0f, 10f)][SerializeField] private float _distanceSight;
     [Range(0f, 10f)][SerializeField] private float _secondsSight;
+    [SerializeField] private Slider _slider;
 
 
     //Variables for chasing
@@ -51,8 +54,6 @@ public class JumperStateManager : MonoBehaviour
     private Vector2 _direction;
 
     //getter and setter
-    public Vector3 Pos1 { get { return _pos1; } set { _pos1 = value; } }
-    public Vector3 Pos2 { get { return _pos2; } set { _pos2 = value; } }
     public Vector3 NextPos { get { return nextPos; } set { nextPos = value; } }
     public float Speed { get { return _speed; } set { _speed = value; } }
     public Vector2 CheckVector { get { return _checkVector; } set { _checkVector= value; } }
@@ -83,19 +84,21 @@ public class JumperStateManager : MonoBehaviour
     [SerializeField] private GameObject _alert;
     private Animator _animator;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        currentState = PoToPoState;
+        _player = GameObject.FindGameObjectWithTag("Player");
+        _player2 = GameManager.Instance.player;
+
+
+        currentState = PatrollingState;
         currentState.Context = this;
         currentState.EnterState(this);
 
-        nextPos = _startPos;
+
         _distance = Vector3.Distance(_mutant.transform.position, _player.transform.position);
 
         _secondElapsedHearing = _secondsHearing;
         _secondElapsedSight = _secondsSight;
-
     }
 
     // Update is called once per frame
@@ -114,10 +117,65 @@ public class JumperStateManager : MonoBehaviour
         state.EnterState(this);
     }
 
-    public JumperBaseState GetWalkerState()
+    public JumperBaseState GetJumperState()
     {
         return currentState;
     }
 
+    public void TakeDamage(int damage, int weapon)
+    {
+        _mLife -= damage;
+        _slider.value -= damage * 0.01f;
+        if (_mLife <= 0)
+        {
+            _mutant.SetActive(false);
+            _alert.SetActive(false);
+        }
 
+        switch (weapon)
+        {
+            case 0:
+                {
+                    ReactionToEmpytHand();
+                    break;
+                }
+            case 1:
+                {
+                    ReactionToShoot();
+                    break;
+                }
+            case 2:
+                {
+                    ReactionToKnife();
+                    break;
+                }
+        }
+    }
+
+    private void ReactionToShoot()
+    {
+        if (_player.transform.localScale.x == 1)
+            _mutant.transform.position = new Vector3(_mutant.transform.position.x - .7f, _mutant.transform.position.y, _mutant.transform.position.z);
+
+        if (_player.transform.localScale.x == -1)
+            _mutant.transform.position = new Vector3(_mutant.transform.position.x + .7f, _mutant.transform.position.y, _mutant.transform.position.z);
+    }
+
+    private void ReactionToKnife()
+    {
+        if (_player.transform.localScale.x == 1)
+            _mutant.transform.position = new Vector3(_mutant.transform.position.x - .5f, _mutant.transform.position.y, _mutant.transform.position.z);
+
+        if (_player.transform.localScale.x == -1)
+            _mutant.transform.position = new Vector3(_mutant.transform.position.x + .5f, _mutant.transform.position.y, _mutant.transform.position.z);
+    }
+
+    private void ReactionToEmpytHand()
+    {
+        if (_player.transform.localScale.x == 1)
+            _mutant.transform.position = new Vector3(_mutant.transform.position.x - .2f, _mutant.transform.position.y, _mutant.transform.position.z);
+
+        if (_player.transform.localScale.x == -1)
+            _mutant.transform.position = new Vector3(_mutant.transform.position.x + .2f, _mutant.transform.position.y, _mutant.transform.position.z);
+    }
 }

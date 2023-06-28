@@ -6,8 +6,6 @@ public class JumperChaseState : JumperBaseState
     public override void EnterState(JumperStateManager jumper)
     {
         Debug.Log("Chase State");
-
-        
     }
 
     public override void UpdateState(JumperStateManager jumper)
@@ -16,7 +14,7 @@ public class JumperChaseState : JumperBaseState
 
         if (Context.Distace>Context.DistanceHearing)
                 {
-                    jumper.SwitchState(jumper.PoToPoState);
+                    jumper.SwitchState(jumper.PatrollingState);
                 }
 
         if(Context.Distace<=Context.DistanceAttack)
