@@ -31,6 +31,11 @@ public class WalkerPatrollingState : WalkerBaseState
     //Checking whether the Player is in front of or behind the Mutant
     private void PositionCheck() 
     {
+        if (Context.Player == null)
+        {
+            return;
+        }
+
         Context.PlayerPosition = Context.Player.transform.position;
         Context.WalkerPosition = Context.Mutant.transform.position;
 
@@ -56,6 +61,11 @@ public class WalkerPatrollingState : WalkerBaseState
 
     private void CrounchingCheck()
     {
+        if(Context.Movement==null)
+        {
+            return;
+        }
+
         if (Context.Movement.GetMovementStates().Contains(Movement.MovementState.Crouching))
         {
             Context.SecondsHearingElapsed = Context.SecondHearingCrounching;
