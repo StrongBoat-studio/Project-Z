@@ -11,6 +11,10 @@ TagManager:
   - Enemy
   - J
   - ItemContainer
+  - FirePoint
+  - WeaponHolder
+  - Gun
+  - ChaseAlertScreen
   layers:
   - Default
   - TransparentFX
@@ -53,6 +57,9 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 267422455
+    locked: 0
+  - name: PlayerHands
+    uniqueID: 1362417965
     locked: 0
   - name: NPC
     uniqueID: 2347565357

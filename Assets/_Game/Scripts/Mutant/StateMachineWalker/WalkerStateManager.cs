@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class WalkerStateManager : MonoBehaviour
 {
@@ -18,15 +19,15 @@ public class WalkerStateManager : MonoBehaviour
     //Components use for movement
     private GameObject _mutant;
     private WalkerPatrolling _walkerPatrolling;
-    private GameObject _player;
+    private Transform _player;
     private Movement _movement; 
 
     //Stealth Settings for Designers
     [Header("Stealth Settings")]
-    [Range(0f, 10f)][SerializeField] private float _speed;
-    [Range(0f, 10f)][SerializeField] private float _distanceChaseFront, _distanceChaseBack, _distanceAttack;
-    [Range(0f, 10f)][SerializeField] private float _secondOfSleepFront, _secondOfSleepBack;
-    [Range(0f, 10f)][SerializeField] private float _distanceLineOfHearing, _secondHearingNormally, _secondHearingCrounching;
+    [Range(0f, 10f)][SerializeField] private float _speed=2.0f;
+    [Range(0f, 10f)][SerializeField] private float _distanceChaseFront=4.0f, _distanceChaseBack=2.0f, _distanceAttack=1.0f;
+    [Range(0f, 10f)][SerializeField] private float _secondOfSleepFront=6.0f, _secondOfSleepBack=2.0f;
+    [Range(0f, 10f)][SerializeField] private float _distanceLineOfHearing=6.0f, _secondHearingNormally=3.0f, _secondHearingCrounching=10.0f;
 
     //Stealth Check for Designers
     [Header("Stealth Check")]
@@ -36,6 +37,8 @@ public class WalkerStateManager : MonoBehaviour
     [SerializeField] private float dotPro;
     [SerializeField] private float _distanceChase;
 
+    [Header("Health")]
+    [SerializeField] private Slider _slider;
     //DotPro
     private Vector2 _checkVector = new Vector2(1f, 0f);
     private Vector2 _playerPosition;
@@ -72,7 +75,7 @@ public class WalkerStateManager : MonoBehaviour
     public GameObject Alert { get { return _alert; } }
     public float DistanceAttack { get { return _distanceAttack; } set { _distanceAttack = value;} }
     public Animator Animator { get { return _animator; } }
-    public GameObject Player { get { return _player; } }
+    public Transform Player { get { return _player; } }
 
 
     //Life 
@@ -82,20 +85,22 @@ public class WalkerStateManager : MonoBehaviour
     [SerializeField] private GameObject _alert;
     private Animator _animator;
 
-
     void Awake()
     {
-        _player = GameObject.FindGameObjectWithTag("Player");
-        _movement= GameObject.FindGameObjectWithTag("Player").GetComponent<Movement>();
+        _player = GameManager.Instance.player;
+        _movement = GameManager.Instance.movement;
         _mutant = GameObject.FindGameObjectWithTag("Enemy");
         _walkerPatrolling = GetComponent<WalkerPatrolling>();
         _animator = GetComponentInChildren<Animator>();
+        
 
         currentState = PatrollingState;
         currentState.Context = this;
         currentState.EnterState(this);
 
         _distance = Vector3.Distance(_mutant.transform.position, _player.transform.position);
+
+        _slider.value = 1f;
     }
 
     void Update()
@@ -121,6 +126,7 @@ public class WalkerStateManager : MonoBehaviour
     public void TakeDamage(int damage, int weapon)
     {
         _mLife -= damage;
+        _slider.value -= damage * 0.01f;
         if(_mLife<=0)
         {
             _mutant.SetActive(false);
@@ -172,5 +178,15 @@ public class WalkerStateManager : MonoBehaviour
 
         if (_player.transform.localScale.x == -1)
             _mutant.transform.position = new Vector3(_mutant.transform.position.x + .2f, _mutant.transform.position.y, _mutant.transform.position.z);
+    }
+
+    public int GetWalkerLife()
+    {
+        return _mLife;
+    }
+
+    public Transform GetWalkerTransform()
+    {
+        return _mutant.transform;
     }
 }

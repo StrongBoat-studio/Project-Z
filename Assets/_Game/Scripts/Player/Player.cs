@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         GameManager.Instance.player = transform;
+        GameManager.Instance.movement = this.GetComponent<Movement>();
 
         _playerInput = new PlayerInput();
         GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;

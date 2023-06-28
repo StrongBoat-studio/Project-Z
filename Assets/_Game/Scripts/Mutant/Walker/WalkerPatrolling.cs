@@ -12,12 +12,12 @@ public class WalkerPatrolling : MonoBehaviour
     private Animator _animator;
 
     [Header("Mutant movement area")]
-    [SerializeField] private int _maxLeftX;
-    [SerializeField] private int _maxRightX;
+    [SerializeField] private int _maxLeftX = 0;
+    [SerializeField] private int _maxRightX = 15;
 
     [Header("Patrol Settings")]
-    [Range(0f, 10f)] [SerializeField] private float _speed;
-    [Range(0f, 10f)] [SerializeField] private int _standingTimeInSeconds;
+    [Range(0f, 10f)] [SerializeField] private float _speed = 2.0f;
+    [Range(0f, 10f)] [SerializeField] private int _standingTimeInSeconds = 2;
 
     //Variable for potrolling
     private int _nextPosition;

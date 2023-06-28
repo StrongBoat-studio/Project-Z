@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     }
     
     public Transform player;
+    public Movement movement;
 
     public void Reset()
     {
