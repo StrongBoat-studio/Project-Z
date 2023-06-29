@@ -142,10 +142,6 @@ public class LevelManager : MonoBehaviour
                         mutant = Instantiate(_jumperPrefab, ms.position, Quaternion.identity, mutantContainer);
                         break;
                 }
-                if (ms.type == LevelManagerData.MutantType.Walker)
-                {
-
-                }
 
                 IMutantInit imi = mutant.GetComponent<IMutantInit>();
                 imi.SetLife(ms.hp);
