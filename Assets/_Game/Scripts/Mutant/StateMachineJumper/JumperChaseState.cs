@@ -6,18 +6,16 @@ public class JumperChaseState : JumperBaseState
     public override void EnterState(JumperStateManager jumper)
     {
         Debug.Log("Chase State");
-
-        
     }
 
     public override void UpdateState(JumperStateManager jumper)
     {
-        Chasing();
+        PositionCheck();
 
         if (Context.Distace>Context.DistanceHearing)
-                {
-                    jumper.SwitchState(jumper.PoToPoState);
-                }
+        {
+            jumper.SwitchState(jumper.PatrollingState);
+        }
 
         if(Context.Distace<=Context.DistanceAttack)
         {
@@ -25,12 +23,20 @@ public class JumperChaseState : JumperBaseState
         }
     }
 
-    private void Chasing()
+    //Checking whether the Player is in front of or behind the Mutant
+    private void PositionCheck()
     {
-        _target = new Vector3(Context.Target.position.x, Context.transform.position.y, Context.transform.position.z);
+        if (Context.Player == null)
+        {
+            return;
+        }
 
-        Context.transform.position = Vector2.MoveTowards(Context.transform.position, _target, (Context.Speed + 1f) * Time.deltaTime);
+        Context.PlayerPosition = Context.Player.position;
+        Context.JumperPosition = Context.Mutant.position;
+
+        Context.Direction = Context.PlayerPosition - Context.JumperPosition;
+        Context.Direction.Normalize();
+
+        Context.DotPro = Vector2.Dot(Context.Direction, Context.CheckVector);
     }
-
-
 }

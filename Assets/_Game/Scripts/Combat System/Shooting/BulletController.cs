@@ -7,6 +7,7 @@ public class BulletController : MonoBehaviour
     private float _speed = 20f;
     private Rigidbody2D _rigidbody2D;
     private WalkerStateManager _walkerStateManager;
+    private JumperStateManager _jumperStateManager;
     private Transform _player;
     // Start is called before the first frame update
     void Start()
@@ -26,9 +27,17 @@ public class BulletController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         _walkerStateManager = collision.GetComponent<WalkerStateManager>();
+        _jumperStateManager = collision.GetComponent<JumperStateManager>();
+
         if (_walkerStateManager != null)
         {
             _walkerStateManager.TakeDamage(20, 1);
+            Destroy(gameObject);
+        }
+
+        if(_jumperStateManager!=null)
+        {
+            _jumperStateManager.TakeDamage(20, 1);
             Destroy(gameObject);
         }
             
