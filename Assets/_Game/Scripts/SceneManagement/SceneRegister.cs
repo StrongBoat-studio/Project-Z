@@ -66,7 +66,6 @@ public class SceneRegister : MonoBehaviour
         //Save origin location's level data
         if (FindObjectOfType<LevelManager>() != null)
         {
-            FindObjectOfType<LevelManager>().SaveMutants();
             SaveLevelManagerData(FindObjectOfType<LevelManager>().GetLevelData());
         }
 
@@ -137,14 +136,6 @@ public class SceneRegister : MonoBehaviour
             }
         }
 
-        //Load nad save destination location's level data
-        if (FindObjectOfType<LevelManager>() != null)
-        {
-            LoadLevelManagerData(FindObjectOfType<LevelManager>());
-            FindObjectOfType<LevelManager>().SaveMutants();
-            SaveLevelManagerData(FindObjectOfType<LevelManager>().GetLevelData());
-        }
-
         //When scene loading is done, save data to json file
         GameSaveManager.Instance.SaveJson();
         yield return null;
@@ -166,24 +157,5 @@ public class SceneRegister : MonoBehaviour
             //Add new level manager data if it did not exist in save
             GameSaveManager.Instance.currentSave.levelManagerDatas.Add(lmd);
         }
-    }
-
-    public void LoadLevelManagerData(LevelManager lm)
-    {
-        int idx = GameSaveManager.Instance.currentSave.levelManagerDatas.FindIndex(
-            x => x.sceneIndex == lm.GetLevelData().sceneIndex
-        );
-
-        if (idx != -1)
-        {
-            lm.SetLevelData(GameSaveManager.Instance.currentSave.levelManagerDatas[idx]);
-        }
-        else
-        {
-            //Add new level manager data if it did not exist in save
-            GameSaveManager.Instance.currentSave.levelManagerDatas.Add(lm.GetLevelData());
-        }
-
-        lm.ExecuteDataLoad();
     }
 }

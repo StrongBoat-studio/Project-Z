@@ -24,6 +24,7 @@ public class GameSaveManager : MonoBehaviour
     }
 
     public GameData currentSave;
+    private bool _isNewSave = false;
 
     public void SaveJson()
     {
@@ -81,6 +82,7 @@ public class GameSaveManager : MonoBehaviour
         if (File.Exists(savePath) == false)
         {
             currentSave = new GameData();
+            _isNewSave = true;
             return;
         }
 
@@ -119,21 +121,24 @@ public class GameSaveManager : MonoBehaviour
             }
             QuestLineManager.Instance.ValidateQuests();
         }
-        else if(currentSave.isQuestLineFinised == true)
+        else if (currentSave.isQuestLineFinised == true)
         {
             QuestLineManager.Instance.Quests.ForEach(x => x.CompleteQuest());
             QuestLineManager.Instance.ValidateQuests();
         }
 
         //Load notes
-        foreach(int noteID in currentSave.journalNotes)
+        foreach (int noteID in currentSave.journalNotes)
         {
             NotesApp app = GameManager.Instance.player.GetComponent<NotesApp>();
             app.AddNote(app.notesRegister.Find(x => x.id == noteID));
         }
 
         //Player data
-        GameManager.Instance.player.GetComponent<Player>().SetHP(currentSave.playerHp);
-        GameManager.Instance.player.GetComponent<Movement>().SetStamina(currentSave.playerStamina);
+        if (_isNewSave == false)
+        {
+            GameManager.Instance.player.GetComponent<Player>().SetHP(currentSave.playerHp);
+            GameManager.Instance.player.GetComponent<Movement>().SetStamina(currentSave.playerStamina);
+        }
     }
 }

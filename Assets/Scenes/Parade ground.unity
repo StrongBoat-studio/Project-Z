@@ -859,6 +859,7 @@ MonoBehaviour:
     mutants: []
     npcs: []
   _walkerPrefab: {fileID: 1595312744772529115, guid: e3df743392f33664c90deace42a43b1f, type: 3}
+  _jumperPrefab: {fileID: 6730284663396985444, guid: 5c907acacda686248a5051f042c54217, type: 3}
 --- !u!1 &958492674
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,7 +5,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class WalkerStateManager : MonoBehaviour
+public class WalkerStateManager : MonoBehaviour, IMutantInit
 {
     //State Machine variables
     WalkerBaseState currentState;
@@ -212,19 +212,24 @@ public class WalkerStateManager : MonoBehaviour
             _mutant.transform.position = new Vector3(_mutant.transform.position.x + .2f, _mutant.transform.position.y, _mutant.transform.position.z);
     }
 
-    public int GetWalkerLife()
+    public int GetLife()
     {
         return _mLife;
     }
 
-    public void SetWalkerLife(int life)
+    public void SetLife(int life)
     {
         _mLife = life;
     }
 
-    public Transform GetWalkerTransform()
+    public Vector3 GetPosition()
     {
-        return _mutant.transform;
+        return _mutant.position;
+    }
+    
+    public void SetPosition(Vector3 position)
+    {
+        _mutant.transform.position = position;
     }
 
     public void SetDefaultState()
@@ -232,8 +237,13 @@ public class WalkerStateManager : MonoBehaviour
         currentState = PatrollingState;
     }
 
-    public void SetWalkerTransform(Vector3 transform)
+    public LevelManagerData.MutantType GetMutantType()
     {
-        _mutant.transform.position = transform;
+        return LevelManagerData.MutantType.Walker;
+    }
+
+    public void UpdateInit()
+    {
+        _slider.value = _mLife / 100f;
     }
 }

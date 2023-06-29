@@ -8,43 +8,37 @@ public class LevelManager : MonoBehaviour
 {
     [SerializeField] private LevelManagerData _levelData;
     [SerializeField] private Transform _walkerPrefab;
+    [SerializeField] private Transform _jumperPrefab;
 
     private void Awake()
     {
-        _levelData.items = new List<LevelManagerData.ItemWorldState>();
-        foreach (ItemWorld iw in FindObjectsOfType<ItemWorld>())
+        if (GameSaveManager.Instance != null)
         {
-            _levelData.items.Add(new LevelManagerData.ItemWorldState(
-                iw.GetItem().itemType,
-                iw.GetItem().amount,
-                iw.transform.position,
-                true
-            ));
-        }
+            int idx = GameSaveManager.Instance.currentSave.levelManagerDatas.FindIndex(
+                x => x.sceneIndex == _levelData.sceneIndex
+            );
 
-        _levelData.npcs = new List<LevelManagerData.NPCState>();
-        foreach (DialogueHolder dh in FindObjectsOfType<DialogueHolder>())
-        {
-            _levelData.npcs.Add(new LevelManagerData.NPCState(
-               dh.npcSceneID,
-               true
-            ));
-        }
-
-        _levelData.mutants = new List<LevelManagerData.MutantState>();
-        foreach (WalkerStateManager wsm in FindObjectsOfType<WalkerStateManager>())
-        {
-            _levelData.mutants.Add(new LevelManagerData.MutantState(
-                wsm.GetWalkerTransform().position,
-                LevelManagerData.MutantType.Walker,
-                wsm.GetWalkerLife(),
-                true
-            ));
+            if (idx != -1)
+            {
+                _levelData = GameSaveManager.Instance.currentSave.levelManagerDatas[idx];
+                ExecuteDataLoad();
+            }
+            else
+            {
+                //Save items
+                SaveItems();
+                //Save npcs
+                SaveNPCS();
+                //Save mutants
+                SaveMutants();
+            }
         }
     }
 
     public LevelManagerData GetLevelData()
     {
+        //Get level data with updated mutants
+        SaveMutants();
         return _levelData;
     }
 
@@ -121,11 +115,11 @@ public class LevelManager : MonoBehaviour
     private void LoadMutants()
     {
         if (GameSaveManager.Instance == null) return;
-        if (FindObjectsOfType<WalkerStateManager>().Length <= 0) return;
+        if (GameObject.FindGameObjectsWithTag("Enemy").Length <= 0) return;
 
-        foreach (WalkerStateManager wsm in FindObjectsOfType<WalkerStateManager>())
+        foreach (GameObject mutant in GameObject.FindGameObjectsWithTag("Enemy"))
         {
-            Destroy(wsm.gameObject);
+            Destroy(mutant);
         }
 
         Transform mutantContainer = null;
@@ -138,23 +132,57 @@ public class LevelManager : MonoBehaviour
 
             if (mutantContainer != null)
             {
+                Transform mutant = null;
+                switch (ms.type)
+                {
+                    case LevelManagerData.MutantType.Walker:
+                        mutant = Instantiate(_walkerPrefab, ms.position, Quaternion.identity, mutantContainer);
+                        break;
+                    case LevelManagerData.MutantType.Jumper:
+                        mutant = Instantiate(_jumperPrefab, ms.position, Quaternion.identity, mutantContainer);
+                        break;
+                }
                 if (ms.type == LevelManagerData.MutantType.Walker)
                 {
-                    Transform walker = Instantiate(_walkerPrefab, ms.position, Quaternion.identity, mutantContainer);
-                    walker.GetComponent<WalkerStateManager>().SetWalkerLife(ms.hp);
-                    walker.GetComponent<WalkerStateManager>().SetDefaultState();
-                    walker.GetComponent<WalkerStateManager>().SetWalkerTransform(ms.position);
+
                 }
 
+                IMutantInit imi = mutant.GetComponent<IMutantInit>();
+                imi.SetLife(ms.hp);
+                imi.SetDefaultState();
+                imi.SetPosition(ms.position);
+                imi.UpdateInit();
             }
             else
             {
                 Debug.LogWarning("Can't find game object with mutantContainer tag, create one on level's scene.");
-                Transform walker = Instantiate(_walkerPrefab, ms.position, Quaternion.identity);
-                walker.GetComponent<WalkerStateManager>().SetWalkerLife(ms.hp);
-                walker.GetComponent<WalkerStateManager>().SetDefaultState();
-                walker.GetComponent<WalkerStateManager>().SetWalkerTransform(ms.position);
             }
+        }
+    }
+
+    public void SaveItems()
+    {
+        _levelData.items = new List<LevelManagerData.ItemWorldState>();
+        foreach (ItemWorld iw in FindObjectsOfType<ItemWorld>())
+        {
+            _levelData.items.Add(new LevelManagerData.ItemWorldState(
+                iw.GetItem().itemType,
+                iw.GetItem().amount,
+                iw.transform.position,
+                true
+            ));
+        }
+    }
+
+    public void SaveNPCS()
+    {
+        _levelData.npcs = new List<LevelManagerData.NPCState>();
+        foreach (DialogueHolder dh in FindObjectsOfType<DialogueHolder>())
+        {
+            _levelData.npcs.Add(new LevelManagerData.NPCState(
+               dh.npcSceneID,
+               true
+            ));
         }
     }
 
@@ -162,16 +190,17 @@ public class LevelManager : MonoBehaviour
     public void SaveMutants()
     {
         if (GameSaveManager.Instance == null) return;
-        if (FindObjectsOfType<WalkerStateManager>().Length <= 0) return;
+        if (GameObject.FindGameObjectsWithTag("Enemy").Length <= 0) return;
 
         _levelData.mutants = new List<LevelManagerData.MutantState>();
-        foreach(WalkerStateManager wsm in FindObjectsOfType<WalkerStateManager>())
+        foreach (GameObject mutant in GameObject.FindGameObjectsWithTag("Enemy"))
         {
+            IMutantInit imi = mutant.GetComponent<IMutantInit>();
             _levelData.mutants.Add(new LevelManagerData.MutantState(
-                wsm.GetWalkerTransform().position,
-                LevelManagerData.MutantType.Walker,
-                wsm.GetWalkerLife(),
-                wsm.GetWalkerLife() <= 0 ? false : true
+                imi.GetPosition(),
+                imi.GetMutantType(),
+                imi.GetLife(),
+                imi.GetLife() <= 0 ? false : true
             ));
         }
     }

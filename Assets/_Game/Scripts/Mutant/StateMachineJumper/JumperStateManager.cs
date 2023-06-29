@@ -6,7 +6,7 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class JumperStateManager : MonoBehaviour
+public class JumperStateManager : MonoBehaviour, IMutantInit
 {
     //State Machine variables
     JumperBaseState currentState;
@@ -99,8 +99,6 @@ public class JumperStateManager : MonoBehaviour
 
         _secondElapsedHearing = _secondsHearing;
         _secondElapsedSight = _secondsSight;
-
-        _slider.value = 1f;
     }
 
     // Update is called once per frame
@@ -205,22 +203,22 @@ public class JumperStateManager : MonoBehaviour
             _mutant.transform.position = new Vector3(_mutant.transform.position.x + .2f, _mutant.transform.position.y, _mutant.transform.position.z);
     }
 
-    public int GetJumperLife()
+    public int GetLife()
     {
         return _mLife;
     }
 
-    public Transform GetJumperTransform()
-    {
-        return _mutant;
-    }
-
-    public void SetJumperLife(int life)
+    public void SetLife(int life)
     {
         _mLife = life;
     }
     
-    public void SetJumperTransform(Vector3 position)
+    public Vector3 GetPosition()
+    {
+        return _mutant.position;
+    }
+
+    public void SetPosition(Vector3 position)
     {
         _mutant.position = position;
     }
@@ -228,5 +226,15 @@ public class JumperStateManager : MonoBehaviour
     public void SetDefaultState()
     {
         currentState = PatrollingState;
+    }
+
+    public LevelManagerData.MutantType GetMutantType()
+    {
+        return LevelManagerData.MutantType.Jumper;
+    }
+
+    public void UpdateInit()
+    {
+        _slider.value = _mLife / 100f;
     }
 }
