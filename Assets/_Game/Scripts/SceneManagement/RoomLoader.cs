@@ -12,6 +12,9 @@ public class RoomLoader : MonoBehaviour, IInteractable
     [Tooltip("ID of this door (can be repeted on different scene")]
     [SerializeField] private int _id;
 
+    [Tooltip("Spawn location of this door")]
+    [SerializeField] private Transform _spawnPoint;
+
     [Tooltip("Tageted scene for destination door")]
     [SerializeField] private SceneRegister.Scenes _targetScene;
 
@@ -60,5 +63,10 @@ public class RoomLoader : MonoBehaviour, IInteractable
     public (int id, SceneRegister.Scenes scene) GetTargetDoor()
     {
         return (_targetDoorId, _targetScene);
+    }
+
+    public Vector3 GetSpawnPosition()
+    {
+        return _spawnPoint.position;
     }
 }

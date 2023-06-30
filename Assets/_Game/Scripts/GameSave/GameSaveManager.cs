@@ -95,7 +95,7 @@ public class GameSaveManager : MonoBehaviour
         GameManager.Instance.player.GetComponent<Player>().GetInventory().LoadSave(
             GameSaveManager.Instance.currentSave.inventoryItems
         );
-        GameManager.Instance.player.transform.position = currentSave.spawnPosition + new Vector3(0, 1, 0);
+        GameManager.Instance.player.transform.position = currentSave.spawnPosition;
 
         //Load Quests
         if (currentSave.quests.Count > 0)

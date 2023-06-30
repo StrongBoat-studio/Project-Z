@@ -117,18 +117,14 @@ public class SceneRegister : MonoBehaviour
             {
                 Player player = FindObjectOfType<Player>(); // Player ref is set
 
-                RaycastHit2D[] rhit = Physics2D.RaycastAll(matchingDoors[0].transform.position, Vector2.down);
-                RaycastHit2D rhitGround = rhit.First(x => x.transform.gameObject.layer == 7);
-                //Scale 
-                player.transform.position = new Vector2(
-                    //x set to <RoomLoader>'s position
-                    matchingDoors[0].transform.position.x,
-                    //y set to raycast hit y pos + 1/2 of player's collider + 1 pixel (1/PPU) to avoid clipping
-                    rhitGround.point.y + (player.GetComponent<Collider2D>().bounds.extents.y + 0.03125f)
+                Vector3 spawnPos = new Vector2(
+                    matchingDoors[0].GetSpawnPosition().x,
+                    matchingDoors[0].GetSpawnPosition().y + player.GetComponent<Collider2D>().bounds.size.y / 2 + 1/16
                 );
+                player.transform.position = spawnPos;
 
                 //Set player spawn for save
-                GameSaveManager.Instance.currentSave.spawnPosition = player.transform.position;
+                GameSaveManager.Instance.currentSave.spawnPosition = spawnPos;
             }
             else
             {
