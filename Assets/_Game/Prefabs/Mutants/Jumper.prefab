@@ -326,8 +326,10 @@ MonoBehaviour:
   _distanceSight: 6
   _secondsSight: 2
   _slider: {fileID: 6730284662757270930}
+  _sliderObject: {fileID: 6730284663202780891}
   _distance: 0
   dotPro: 0
+  _jumperCurrentState: 
   _alert: {fileID: 112463242216323224}
 --- !u!61 &6730284663396985443
 BoxCollider2D:
@@ -481,6 +483,7 @@ GameObject:
   - component: {fileID: 6730284663654290278}
   - component: {fileID: 6730284663654290276}
   - component: {fileID: 6730284663654290279}
+  - component: {fileID: 6730284663695955314}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -575,6 +578,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6730284663695955314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6730284663654290281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc57a37194da99845895f24d0b80df4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _jumperStateManager: {fileID: 6730284663396985445}
+  _deadJumper: {fileID: 7697922920744831955, guid: 64808eefceb2a3743976918ae161459c, type: 3}
 --- !u!1 &6730284664693568646
 GameObject:
   m_ObjectHideFlags: 0

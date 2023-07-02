@@ -218,7 +218,7 @@ public class WalkerStateManager : MonoBehaviour, IMutantInit
     public void DestroyWalker()
     {
         //SaveSystem Code
-        //_animator.SetBool("IsDeath", false);
+
         Destroy(this.gameObject);
     }
 

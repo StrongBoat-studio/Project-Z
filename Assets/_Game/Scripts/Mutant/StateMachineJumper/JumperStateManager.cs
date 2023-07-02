@@ -31,6 +31,7 @@ public class JumperStateManager : MonoBehaviour, IMutantInit
     [Range(0f, 10f)] [SerializeField] private float _distanceSight = 6.0f;
     [Range(0f, 10f)] [SerializeField] private float _secondsSight = 2.0f;
     [SerializeField] private Slider _slider;
+    [SerializeField] private GameObject _sliderObject;
 
 
     //Variables for chasing
@@ -84,6 +85,7 @@ public class JumperStateManager : MonoBehaviour, IMutantInit
         _player = GameManager.Instance.player;
         _jumperPatrolling = GetComponent<JumperPatrolling>();
         _mutant = transform;
+        _animator = GetComponentInChildren<Animator>();
 
         currentState = PatrollingState;
         currentState.Context = this;
@@ -141,7 +143,12 @@ public class JumperStateManager : MonoBehaviour, IMutantInit
         _slider.value -= damage * 0.01f;
         if (_mLife <= 0)
         {
-            Destroy(GameObject.FindGameObjectWithTag("Enemy"));
+            currentState = DeathState;
+            _sliderObject.SetActive(false);
+
+            _animator.SetBool("IsStanding", false);
+            _animator.SetBool("IsDeath", true);
+
             _alert.SetActive(false);
         }
 
@@ -217,6 +224,17 @@ public class JumperStateManager : MonoBehaviour, IMutantInit
         if (currentState == HearingState) _jumperCurrentState = "HearingState";
     }
 
+    public void DestroyJumper()
+    {
+        //SaveSystem Code
+
+        Destroy(this.gameObject);
+    }
+
+    public Vector3 GetScale()
+    {
+        return transform.localScale;
+    }
 
     public int GetLife()
     {
