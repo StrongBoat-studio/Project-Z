@@ -5,7 +5,7 @@ public class JumperChaseState : JumperBaseState
     private Vector3 _target;
     public override void EnterState(JumperStateManager jumper)
     {
-        Debug.Log("Chase State");
+
     }
 
     public override void UpdateState(JumperStateManager jumper)

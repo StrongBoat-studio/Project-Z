@@ -4,7 +4,7 @@ public class JumperHearingState : JumperBaseState
 {
     public override void EnterState(JumperStateManager jumper)
     {
-        Debug.Log("Hearing State");
+
 
         Context.Alert.SetActive(true);
     }

@@ -48,7 +48,9 @@ public class JumperChaseWithAI : MonoBehaviour
     {
         if (_target == null)
         {
-            return;
+            _target = GameManager.Instance.player;
+
+            if (_target == null) return;          
         }
 
         if (_seeker.IsDone())

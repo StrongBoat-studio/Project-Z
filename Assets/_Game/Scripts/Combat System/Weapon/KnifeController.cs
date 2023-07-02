@@ -74,12 +74,18 @@ public class KnifeController : MonoBehaviour
 
             if (_walkerStateManager != null)
             {
-                _walkerStateManager.TakeDamage(_demage, 2);
+                if (_walkerStateManager.GetLife() > 0)
+                {
+                    _walkerStateManager.TakeDamage(_demage, 2);
+                }
             }
 
             if (_jumperStateManager != null)
             {
-                _jumperStateManager.TakeDamage(_demage, 2);
+                if(_jumperStateManager.GetLife()>0)
+                {
+                    _jumperStateManager.TakeDamage(_demage, 2);
+                }
             }
         }
     }

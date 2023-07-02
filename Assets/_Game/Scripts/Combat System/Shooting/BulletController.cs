@@ -31,15 +31,20 @@ public class BulletController : MonoBehaviour
 
         if (_walkerStateManager != null)
         {
-            _walkerStateManager.TakeDamage(20, 1);
+            if(_walkerStateManager.GetLife()>0)
+            {
+                _walkerStateManager.TakeDamage(20, 1);
+            }
             Destroy(gameObject);
         }
 
         if(_jumperStateManager!=null)
         {
-            _jumperStateManager.TakeDamage(20, 1);
+            if (_jumperStateManager.GetLife() > 0)
+            {
+                _jumperStateManager.TakeDamage(20, 1);
+            } 
             Destroy(gameObject);
         }
-            
     }
 }

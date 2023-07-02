@@ -43,6 +43,7 @@ public class JumperStateManager : MonoBehaviour, IMutantInit
     [Header("Stealth Chack")]
     [SerializeField] private float _distance;
     [SerializeField] private float dotPro=0;
+    [SerializeField] private string _jumperCurrentState;
 
     //Dot
     private Vector2 _checkVector = new Vector2(1f, 0f);
@@ -106,6 +107,8 @@ public class JumperStateManager : MonoBehaviour, IMutantInit
     {
         currentState.UpdateState(this);
 
+        DebugState();
+
         if (_player != null)
         {
             _distance = Vector3.Distance(_mutant.transform.position, _player.transform.position);
@@ -113,6 +116,7 @@ public class JumperStateManager : MonoBehaviour, IMutantInit
         else
         {
             _distance = Mathf.Infinity;
+            _player = GameManager.Instance.player;
         }
 
         _checkVector = _jumperPatrolling.GetCheckVector();
@@ -137,7 +141,7 @@ public class JumperStateManager : MonoBehaviour, IMutantInit
         _slider.value -= damage * 0.01f;
         if (_mLife <= 0)
         {
-            //_mutant.SetActive(false);
+            Destroy(GameObject.FindGameObjectWithTag("Enemy"));
             _alert.SetActive(false);
         }
 
@@ -202,6 +206,17 @@ public class JumperStateManager : MonoBehaviour, IMutantInit
         if (_player.transform.localScale.x == -1)
             _mutant.transform.position = new Vector3(_mutant.transform.position.x + .2f, _mutant.transform.position.y, _mutant.transform.position.z);
     }
+
+    private void DebugState()
+    {
+        if (currentState == PatrollingState) _jumperCurrentState = "PatrollingState";
+        if (currentState == AttackState) _jumperCurrentState = "AttackState";
+        if (currentState == BeforeChaseState) _jumperCurrentState = "BeforeChaseState";
+        if (currentState == ChaseState) _jumperCurrentState = "ChaseState";
+        if (currentState == DeathState) _jumperCurrentState = "DeathState";
+        if (currentState == HearingState) _jumperCurrentState = "HearingState";
+    }
+
 
     public int GetLife()
     {

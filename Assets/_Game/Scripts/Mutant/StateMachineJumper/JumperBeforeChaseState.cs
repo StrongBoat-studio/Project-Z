@@ -4,7 +4,7 @@ public class JumperBeforeChaseState : JumperBaseState
 {
     public override void EnterState(JumperStateManager jumper)
     {
-        Debug.Log("Before Chase State");
+
     }
 
     public override void UpdateState(JumperStateManager jumper)

@@ -46,12 +46,14 @@ public class WalkerChaseWithAI : MonoBehaviour
 
     private void UpdatePath()
     {
-        if(_target==null)
+        if (_target == null)
         {
-            return;
+            _target = GameManager.Instance.player;
+
+            if (_target == null) return;
         }
 
-        if(_seeker.IsDone())
+        if (_seeker.IsDone())
         {
             _seeker.StartPath(_rigidbody2D.position, _target.position, OnPathComplete);
         }

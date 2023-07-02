@@ -39,6 +39,7 @@ public class WalkerStateManager : MonoBehaviour, IMutantInit
 
     [Header("Health")]
     [SerializeField] private Slider _slider;
+    [SerializeField] private GameObject _sliderObject;
 
     //DotPro
     private Vector2 _checkVector = new Vector2(1f, 0f);
@@ -48,7 +49,6 @@ public class WalkerStateManager : MonoBehaviour, IMutantInit
 
     //Variables for chasing
     private bool _zone1 = false, _zone2 = false, _zone3 = false;
-    private Vector3 _target2;
 
     //getter and setter
     public float Speed { get { return _speed; } }
@@ -121,6 +121,7 @@ public class WalkerStateManager : MonoBehaviour, IMutantInit
         else
         {
             _distance = Mathf.Infinity;
+            _player = GameManager.Instance.player;
         }
 
         _checkVector = _walkerPatrolling.GetCheckVector();
@@ -146,7 +147,9 @@ public class WalkerStateManager : MonoBehaviour, IMutantInit
         _slider.value -= damage * 0.01f;
         if(_mLife<=0)
         {
-            //_mutant.SetActive(false);
+            currentState = DeathState;
+            _sliderObject.SetActive(false);
+            _animator.SetBool("IsDeath", true);
             _alert.SetActive(false);
         }
 
@@ -210,6 +213,18 @@ public class WalkerStateManager : MonoBehaviour, IMutantInit
 
         if (_player.transform.localScale.x == -1)
             _mutant.transform.position = new Vector3(_mutant.transform.position.x + .2f, _mutant.transform.position.y, _mutant.transform.position.z);
+    }
+
+    public void DestroyWalker()
+    {
+        //SaveSystem Code
+        //_animator.SetBool("IsDeath", false);
+        Destroy(this.gameObject);
+    }
+
+    public Vector3 GetScale()
+    {
+        return transform.localScale;
     }
 
     public int GetLife()

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1595312744541469290}
   - component: {fileID: 1595312744541469289}
   - component: {fileID: 1595312744541469288}
+  - component: {fileID: 4119822356352389034}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -79,7 +80,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.5625, y: 2.375}
+  m_Size: {x: 3.75, y: 3.125}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -105,6 +106,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4119822356352389034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595312744541469207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f459bce4fe67b84fa8b9cd2925692a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _walkerStateManager: {fileID: 1595312744772529114}
+  _deadWalker: {fileID: 6872797364292304265, guid: a0dd1fdc3a9ca5a4191416b04377c69f, type: 3}
 --- !u!1 &1595312744772529113
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,6 +187,8 @@ MonoBehaviour:
   dotPro: 0
   _distanceChase: 0
   _slider: {fileID: 4119822355779251652}
+  _sliderObject: {fileID: 4119822355037493476}
+  _mLife: 100
   _alert: {fileID: 7333485399079477577}
 --- !u!61 &5997613298683212503
 BoxCollider2D:
@@ -232,8 +249,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db8fe360dd084084a88a29304d488405, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxLeftX: 0
-  _maxRightX: 15
+  _maxLeftX: -9
+  _maxRightX: 9
   _speed: 2
   _standingTimeInSeconds: 2
 --- !u!114 &4119822355805160379

@@ -9,7 +9,7 @@ public class JumperAttackState : JumperBaseState
 
     public override void EnterState(JumperStateManager jumper)
     {
-        Debug.Log("Attack State");
+
     }
 
     public override void UpdateState(JumperStateManager jumper)
