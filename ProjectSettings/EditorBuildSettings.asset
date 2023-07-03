@@ -38,4 +38,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ControlsMenu.unity
     guid: d443d7ff439f6e34ab713d18531b4cf9
+  - enabled: 1
+    path: Assets/Scenes/Bridge.unity
+    guid: a46de36e3b7e2a848a84bc1b036eec3d
+  - enabled: 1
+    path: Assets/Scenes/Entrance.unity
+    guid: 4755d26f22f0b6340958a2398aad3a3a
+  - enabled: 1
+    path: Assets/Scenes/Lab.unity
+    guid: 6b0d69236591eba418e8c169e16defa5
+  - enabled: 1
+    path: Assets/Scenes/LeadersRoom.unity
+    guid: 96dbcf759164dc6469a29575475c1333
   m_configObjects: {}

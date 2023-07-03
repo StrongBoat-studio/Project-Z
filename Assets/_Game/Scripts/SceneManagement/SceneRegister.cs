@@ -20,6 +20,10 @@ public class SceneRegister : MonoBehaviour
         ParadGround = 8,
         Greenhouse = 9,
         ControlsMenu = 10,
+        Bridge = 11,
+        Entrance = 12,
+        Lab = 13,
+        LeadersRoom = 14,
     }
 
     public static SceneRegister Instance { get; private set; }
