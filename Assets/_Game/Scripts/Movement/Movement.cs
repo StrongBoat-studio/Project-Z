@@ -22,6 +22,7 @@ public class Movement : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private BoxCollider2D _boxCollider;
     private Transform _transform;
+    private PlayerEarthController _playerEarthController;
 
     private int _movementState = (int)MovementState.Standing; //State of the player, represented as bits 
     private float _movementSpeedCalculated = 0f;
@@ -61,6 +62,7 @@ public class Movement : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         _boxCollider = GetComponent<BoxCollider2D>();
         _transform = GetComponent<Transform>();
+        _playerEarthController = GetComponent<PlayerEarthController>();
         _staminaCurrent = _staminaMax;
         _staminaRecoveryCurrentTime = _staminaRecoveryDelay;
 
@@ -152,7 +154,11 @@ public class Movement : MonoBehaviour
         ) 
         {
             if(states.Contains(MovementState.Crouching) == true && _crouchTimer <= 0f) _crouchTimer = _crouchTimeout; 
-            AlterMovementState(MovementState.Running, 0f);
+            if(!_playerEarthController.IsEarth())
+            {
+                AlterMovementState(MovementState.Running, 0f);
+
+            }
             AlterMovementState(0f, MovementState.Creeping);
             AlterMovementState(0f, MovementState.Crouching);
 
@@ -175,7 +181,8 @@ public class Movement : MonoBehaviour
             _crouchTimer <= 0f
         )
         {
-            AlterMovementState(MovementState.Crouching, 0f);
+            if (!_playerEarthController.IsEarth())
+                AlterMovementState(MovementState.Crouching, 0f); 
             AlterMovementState(0f, MovementState.Creeping);
             AlterMovementState(0f, MovementState.Running);
 
@@ -318,9 +325,12 @@ public class Movement : MonoBehaviour
         if (!IsGrounded()) return;
         if (_staminaCurrent < _staminaDrainJump) return;
 
-        AlterMovementState(MovementState.Jumping, 0);
-        _staminaCurrent -= _staminaDrainJump;
-        _rigidbody.AddForce(Vector2.up * _jumpForce * Time.fixedDeltaTime * JUMPFORCE_SCALE, ForceMode2D.Impulse);
+        if(!_playerEarthController.IsEarth())
+        {
+            AlterMovementState(MovementState.Jumping, 0);
+            _staminaCurrent -= _staminaDrainJump;
+            _rigidbody.AddForce(Vector2.up * _jumpForce * Time.fixedDeltaTime * JUMPFORCE_SCALE, ForceMode2D.Impulse);
+        }
 
         _playerInput.InGame.Crouch.Reset();
     }

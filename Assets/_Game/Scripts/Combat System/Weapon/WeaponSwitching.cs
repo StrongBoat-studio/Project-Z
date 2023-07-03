@@ -3,6 +3,7 @@ using UnityEngine;
 public class WeaponSwitching : MonoBehaviour
 {
     [SerializeField] private int _selectedWeapon=0;
+    [SerializeField] private PlayerEarthController _playerEarthController;
     private int _previousSelectedWeapon;
 
     // Start is called before the first frame update
@@ -14,9 +15,28 @@ public class WeaponSwitching : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         _previousSelectedWeapon = _selectedWeapon;
 
-        if (Input.GetAxis("Mouse ScrollWheel")>0f)
+
+        if(!_playerEarthController.IsEarth())
+        {
+            WeaponScroll();
+        }
+        else
+        {
+            _selectedWeapon = 0;
+        }
+
+        if (_previousSelectedWeapon != _selectedWeapon)
+        {
+            SelectWeapon();
+        }
+    }
+
+    private void WeaponScroll()
+    {
+        if (Input.GetAxis("Mouse ScrollWheel") > 0f)
         {
             if (_selectedWeapon >= transform.childCount - 1)
                 _selectedWeapon = 0;
@@ -26,17 +46,11 @@ public class WeaponSwitching : MonoBehaviour
 
         if (Input.GetAxis("Mouse ScrollWheel") < 0f)
         {
-            if (_selectedWeapon <=0)
+            if (_selectedWeapon <= 0)
                 _selectedWeapon = transform.childCount - 1;
             else
                 _selectedWeapon--;
         }
-
-        if(_previousSelectedWeapon!=_selectedWeapon)
-        {
-            SelectWeapon();
-        }
-
     }
 
     private void SelectWeapon()

@@ -5,18 +5,25 @@ using UnityEngine;
 public class PlayerAnimationController : MonoBehaviour
 {
     [SerializeField] private Movement _movement;
+
+    [Header("Runtime Animator Controller")]
     [SerializeField] private RuntimeAnimatorController _player;
     [SerializeField] private RuntimeAnimatorController _playerWH;
+    [SerializeField] private RuntimeAnimatorController _playerEarth;
+
+    [Header("Weapon")]
     [SerializeField] private WeaponSwitching _weaponSwitching;
-    private Animator _animator;
-    private GameObject _weaponHolder;
     [SerializeField] private GameObject _gun;
     [SerializeField] private Animator _animGun;
 
-    private int _selectWeapon;
+    [Header("Earth Controller")]
+    [SerializeField] private PlayerEarthController _playerEarthController;
 
+    private Animator _animator;
+    private GameObject _weaponHolder;
+    private int _selectWeapon;
     public bool _weaponHolderActive=true;
-    public Vector2 _gunPosition = new Vector2(0f, 0f);
+    private Vector2 _gunPosition = new Vector2(0f, 0f);
 
     void Awake()
     {
@@ -31,24 +38,35 @@ public class PlayerAnimationController : MonoBehaviour
     void Update()
     {
         IsWalking();
+        WeaponHolderActive(_weaponHolderActive);
+
+        if (_playerEarthController.IsEarth())
+        {
+            _animator.runtimeAnimatorController = _playerEarth;
+            return;
+        }
+
+        SetAnimatiorController();
+
         IsJumping();
         IsSprint();
         IsCrouching();
+    }
 
+    private void SetAnimatiorController()
+    {
         _selectWeapon = _weaponSwitching.GetWeapon();
 
-        if(_selectWeapon==1 || _selectWeapon==2)
+        if (_selectWeapon == 1 || _selectWeapon == 2)
         {
             _animator.runtimeAnimatorController = _playerWH;
+            _weaponHolderActive = true;
         }
         else
         {
             _animator.runtimeAnimatorController = _player;
+            _weaponHolderActive = true;
         }
-
-        WeaponHolderActive(_weaponHolderActive);
-
-        //SettingTheGunPosition(_gunPosition);
     }
 
     private void WeaponHolderActive(bool _active)
