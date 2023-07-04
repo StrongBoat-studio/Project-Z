@@ -55,16 +55,12 @@ public class ItemWorld : MonoBehaviour, IInteractable
 
                 if (GameSaveManager.Instance != null)
                 {
-                    bool isRemoved = GameSaveManager.Instance.currentSave.levelManagerDatas.Find(
-                        x => (int)x.sceneIndex == GameSaveManager.Instance.currentSave.locationIndex
-                    ).items.Remove(cmp);
+                    bool isRemoved = FindObjectOfType<LevelManager>().GetLevelData().items.Remove(cmp);
 
                     if (isRemoved == true)
                     {
                         cmp.load = false;
-                        GameSaveManager.Instance.currentSave.levelManagerDatas.Find(
-                            x => (int)x.sceneIndex == GameSaveManager.Instance.currentSave.locationIndex
-                        ).items.Add(cmp);
+                        FindObjectOfType<LevelManager>().GetLevelData().items.Add(cmp);
                     }
                 }
 
