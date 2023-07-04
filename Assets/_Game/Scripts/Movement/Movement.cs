@@ -35,7 +35,7 @@ public class Movement : MonoBehaviour
     [Range(0f, 10f)][SerializeField] private float _creepMultipier;
     [Range(0f, 10f)][SerializeField] private float _jumpForce;
     private const float JUMPFORCE_SCALE = 10000f;
-    [SerializeField] private Slider _uiStaminaBar;
+    [SerializeField] private Image _uiStaminaBar;
     [Range(0f, 10f)][SerializeField] private float _staminaMax;
     [Range(0f, 10f)][SerializeField] private float _staminaDrainSpeed;
     [Range(0f, 10f)][SerializeField] private float _staminaRecoveryDelay;
@@ -305,7 +305,7 @@ public class Movement : MonoBehaviour
                 _staminaCurrent = _staminaMax;
         }
 
-        _uiStaminaBar.value = Mathf.Clamp(_staminaCurrent / _staminaMax, 0f, 1f);
+        _uiStaminaBar.fillAmount = Mathf.Clamp(_staminaCurrent / _staminaMax, 0f, 1f);
     }
 
     public bool IsGrounded()

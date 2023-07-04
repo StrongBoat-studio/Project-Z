@@ -55,6 +55,14 @@ public class UI_Inventory : MonoBehaviour
         UpdatePanel();
     }
 
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            UpdatePanel();
+        }
+    }
+
     public void UpdatePanel()
     {
         HideToolTip();
