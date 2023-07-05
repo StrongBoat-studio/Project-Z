@@ -358,7 +358,8 @@ public class Movement : MonoBehaviour
     {
         if(
             newGameState == GameStateManager.GameState.Paused ||
-            newGameState == GameStateManager.GameState.Dialogue
+            newGameState == GameStateManager.GameState.Dialogue ||
+            newGameState == GameStateManager.GameState.Loading
         ) _playerInput.InGame.Disable();
         else if(newGameState == GameStateManager.GameState.Gameplay) _playerInput.InGame.Enable();
     }
