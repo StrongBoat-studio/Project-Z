@@ -20,6 +20,7 @@ public class JumperAttackState : JumperBaseState
         if (Context.Distace > Context.DistanceHearing)
         {
             jumper.SwitchState(jumper.PatrollingState);
+            Context.Animator.SetBool("IsStanding", true);
         }
     }
 
@@ -31,12 +32,14 @@ public class JumperAttackState : JumperBaseState
             _anim = generator.NextDouble();
             if (_anim < .5f)
             {
-                //Context.Animator.SetBool("IsAttack1", true);
+                Context.Animator.SetBool("IsStanding", false);
+                Context.Animator.SetBool("IsAttack1", true);
                 //Context.Animator.SetBool("InAttack2", false);
             }
             else
             {
-                //Context.Animator.SetBool("IsAttack1", false);
+                Context.Animator.SetBool("IsAttack1", false);
+                Context.Animator.SetBool("IsStanding", true);
                 //Context.Animator.SetBool("InAttack2", true);
             }
             _time = 1f;

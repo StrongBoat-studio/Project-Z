@@ -72,6 +72,7 @@ public class JumperStateManager : MonoBehaviour, IMutantInit
     public GameObject Alert { get { return _alert; } }
     public float DistanceAttack { get { return _distanceAttack; } }
     public Transform Player { get { return _player; } }
+    public Animator Animator { get { return _animator; } }
 
     //UI
     private int _mLife = 100;
