@@ -15,7 +15,7 @@ public class JumperBeforeChaseState : JumperBaseState
 
         if (Context.Distace>Context.DistanceSight)
         {
-            jumper.SwitchState(jumper.PatrollingState); 
+            jumper.SwitchState(jumper.HearingState); 
         }
 
         if (Context.SecondsElapsedHearing<=0 || Context.SecondsElapsedSight<=0)

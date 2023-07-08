@@ -17,6 +17,8 @@ TagManager:
   - ChaseAlertScreen
   - MutantContainer
   - DeadMutants
+  - ChasePoints
+  - GroundCheck
   layers:
   - Default
   - TransparentFX
@@ -62,6 +64,9 @@ TagManager:
     locked: 0
   - name: PlayerHands
     uniqueID: 1362417965
+    locked: 0
+  - name: Mutant
+    uniqueID: 845651673
     locked: 0
   - name: NPC
     uniqueID: 2347565357

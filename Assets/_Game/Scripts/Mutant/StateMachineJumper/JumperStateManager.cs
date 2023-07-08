@@ -33,12 +33,15 @@ public class JumperStateManager : MonoBehaviour, IMutantInit
     [SerializeField] private Slider _slider;
     [SerializeField] private GameObject _sliderObject;
 
-
     //Variables for chasing
     private bool _zone1 = false;
     private bool _zone2 = false;
     private float _secondElapsedHearing;
     private float _secondElapsedSight;
+
+    //Attack
+    private Rigidbody2D _rigidbody2D;
+    private JumperChaseWithAI _jumperChaseWithAI;
 
     //Stealth Chack for Designers
     [Header("Stealth Chack")]
@@ -81,12 +84,14 @@ public class JumperStateManager : MonoBehaviour, IMutantInit
     [SerializeField] private GameObject _alert;
     private Animator _animator;
 
+
     private void Awake()
     {
         _player = GameManager.Instance.player;
         _jumperPatrolling = GetComponent<JumperPatrolling>();
         _mutant = transform;
         _animator = GetComponentInChildren<Animator>();
+        _jumperChaseWithAI = GetComponent<JumperChaseWithAI>();
 
         currentState = PatrollingState;
         currentState.Context = this;
@@ -133,9 +138,19 @@ public class JumperStateManager : MonoBehaviour, IMutantInit
         state.EnterState(this);
     }
 
+    public void SwitchStateToAttack()
+    {
+        currentState = AttackState;
+    }
+
     public JumperBaseState GetJumperState()
     {
         return currentState;
+    }
+
+    public void Jump()
+    {
+        _jumperChaseWithAI.Jump();
     }
 
     public void TakeDamage(int damage, int weapon)

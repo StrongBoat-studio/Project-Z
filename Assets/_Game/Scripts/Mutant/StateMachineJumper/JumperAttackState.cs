@@ -34,13 +34,15 @@ public class JumperAttackState : JumperBaseState
             {
                 Context.Animator.SetBool("IsStanding", false);
                 Context.Animator.SetBool("IsAttack1", true);
-                //Context.Animator.SetBool("InAttack2", false);
+                Context.Animator.SetBool("InAttack2", false);
             }
             else
             {
                 Context.Animator.SetBool("IsAttack1", false);
                 Context.Animator.SetBool("IsStanding", true);
-                //Context.Animator.SetBool("InAttack2", true);
+                Context.Animator.SetBool("InAttack2", true);
+                Context.Jump();
+
             }
             _time = 1f;
         }
