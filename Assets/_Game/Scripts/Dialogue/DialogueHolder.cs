@@ -67,4 +67,8 @@ public class DialogueHolder : MonoBehaviour, IInteractable
         return _dialogueQuest.GetDialogue();
     }
     
+    public void PlayDialogueQuest()
+    {
+        _dialogueQuest.Play();
+    }
 }

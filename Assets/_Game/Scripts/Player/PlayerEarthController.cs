@@ -15,11 +15,6 @@ public class PlayerEarthController : MonoBehaviour
     {
         _scenes = SceneManager.GetAllScenes();
 
-        foreach(int i in _earthLocationsId)
-        {
-            Debug.Log(i);
-        }
-
         IsEarthCheck();
     }
 

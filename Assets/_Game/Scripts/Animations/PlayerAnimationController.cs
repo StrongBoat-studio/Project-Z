@@ -1,6 +1,7 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerAnimationController : MonoBehaviour
 {
@@ -19,10 +20,13 @@ public class PlayerAnimationController : MonoBehaviour
     [Header("Earth Controller")]
     [SerializeField] private PlayerEarthController _playerEarthController;
 
+    [SerializeField] private Animator _locationLoader;
+
     private Animator _animator;
     private GameObject _weaponHolder;
     private int _selectWeapon;
     public bool _weaponHolderActive=true;
+    public bool _isDoorAnimationPlay = false;
     private Vector2 _gunPosition = new Vector2(0f, 0f);
 
     void Awake()
@@ -37,12 +41,24 @@ public class PlayerAnimationController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         IsWalking();
         WeaponHolderActive(_weaponHolderActive);
+        _movement.IsDoorAnimationPlay = _isDoorAnimationPlay;
 
         if (_playerEarthController.IsEarth())
         {
             _animator.runtimeAnimatorController = _playerEarth;
+
+            try
+            {
+                _locationLoader = GameObject.FindGameObjectWithTag("RoomLoader").GetComponentInChildren<Animator>();
+            }
+            catch
+            {
+                _locationLoader = null;
+            }
+
             return;
         }
 
@@ -130,5 +146,18 @@ public class PlayerAnimationController : MonoBehaviour
     private void SettingTheGunPosition()
     {
         _gun.transform.position = new Vector2(_gun.transform.position.x+_gunPosition.x, _gun.transform.position.y + _gunPosition.y);
+    }
+
+    public void RoomLoaderAnimStart()
+    {
+        if(_locationLoader != null)
+        {
+            _locationLoader.SetBool("IsOpen", true);
+        }
+    }
+
+    public void Rotation()
+    {
+        transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
     }
 }

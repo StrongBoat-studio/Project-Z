@@ -19,6 +19,7 @@ TagManager:
   - DeadMutants
   - ChasePoints
   - GroundCheck
+  - RoomLoader
   layers:
   - Default
   - TransparentFX

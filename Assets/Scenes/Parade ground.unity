@@ -944,6 +944,8 @@ GameObject:
   - component: {fileID: 1044653420}
   - component: {fileID: 1044653421}
   - component: {fileID: 1044653422}
+  - component: {fileID: 1044653423}
+  - component: {fileID: 1044653424}
   m_Layer: 0
   m_Name: Dictator
   m_TagString: Untagged
@@ -978,11 +980,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5ca78f5cae3b1d4d9c9ac015b4058c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcSceneID: 2
+  npcSceneID: 0
   _dialogueIdle:
-    _dialogueTextAsset: {fileID: 0}
+    _dialogueTextAsset: {fileID: 4900000, guid: ce5a41ec6c988414f9470739db7e535c, type: 3}
   _dialogueQuest:
-    _dialogueTextAsset: {fileID: 0}
+    _dialogueTextAsset: {fileID: 4900000, guid: 099c5208fded1ff4e8dd97fa72e4c85b, type: 3}
 --- !u!61 &1044653419
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1094,6 +1096,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 1044653421}
+--- !u!114 &1044653423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1044653416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d7399e17f434bf4e894773a2c15f41d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  QuestID: 0
+  QuestTaskID: 0
+--- !u!114 &1044653424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1044653416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69816e4a0c4acb94f84562040c7918bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dialogueHolder: {fileID: 1044653418}
 --- !u!1001 &1095042279
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -53,6 +53,9 @@ public class Movement : MonoBehaviour
     private float _staminaCurrent;
     private float _staminaRecoveryCurrentTime;
     private float _crouchTimer = 0f;
+
+    public bool IsDoorAnimationPlay = false;
+    private Vector2 _positionDuringDoorAnimation;
     #endregion
 
     public MovementState[] ms;
@@ -102,6 +105,8 @@ public class Movement : MonoBehaviour
         CalculateStaminaChange();
 
         ChangeSide();
+
+        PositionDuringDoorAnimation();
             
     }
 
@@ -117,7 +122,11 @@ public class Movement : MonoBehaviour
         }
 
         CalculateMovementSpeed();
-        _rigidbody.velocity = new Vector2(_movementSpeedCalculated, _rigidbody.velocity.y);
+
+        if(IsDoorAnimationPlay==false)
+        {
+            _rigidbody.velocity = new Vector2(_movementSpeedCalculated, _rigidbody.velocity.y);
+        }
     }
 
     private void CalculateState()
@@ -131,7 +140,15 @@ public class Movement : MonoBehaviour
             IsGrounded() == true
         ) 
         {
-            AlterMovementState(MovementState.Walking, 0);
+            if(IsDoorAnimationPlay==false)
+            {
+                AlterMovementState(MovementState.Walking, 0);
+            }
+            else
+            {
+                AlterMovementState(0, MovementState.Walking);
+            }
+            
         }
         else if (
             _isWalking == false ||
@@ -375,6 +392,11 @@ public class Movement : MonoBehaviour
 
     private void ChangeSide()
     {
+        if(IsDoorAnimationPlay)
+        {
+            return;
+        }
+
         if (_playerInput.InGame.Walk.ReadValue<float>() == -1)
         {
             _transform.localScale = new Vector3(1, _transform.localScale.y, _transform.localScale.z);
@@ -382,6 +404,18 @@ public class Movement : MonoBehaviour
         else if (_playerInput.InGame.Walk.ReadValue<float>() == 1)
         {
             _transform.localScale = new Vector3(-1, _transform.localScale.y, _transform.localScale.z);
+        }
+    }
+
+    private void PositionDuringDoorAnimation()
+    {
+        if (IsDoorAnimationPlay == false)
+        {
+            _positionDuringDoorAnimation = transform.position;
+        }
+        else
+        {
+            transform.position = new Vector2(_positionDuringDoorAnimation.x, transform.position.y);
         }
     }
 
@@ -394,4 +428,5 @@ public class Movement : MonoBehaviour
     {
         _staminaCurrent = stamina;
     }
+
 }

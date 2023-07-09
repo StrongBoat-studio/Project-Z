@@ -6856,6 +6856,7 @@ MonoBehaviour:
   _staminaRecoverySpeed: 1
   _staminaDrainJump: 1
   _crouchTimeout: 1
+  IsDoorAnimationPlay: 0
   ms: 
 --- !u!4 &1913262207
 Transform:
@@ -7579,7 +7580,7 @@ Animator:
   m_GameObject: {fileID: 2104263214}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: e180b27064ccb484ebef2390f2af3455, type: 2}
+  m_Controller: {fileID: 9100000, guid: 658a01a0d2cffc644a97292b0fa3b912, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -7609,7 +7610,10 @@ MonoBehaviour:
   _gun: {fileID: 1345009190}
   _animGun: {fileID: 28416912}
   _playerEarthController: {fileID: 1913262213}
+  _LocationsId: 0b000000
+  _roomLoader: {fileID: 2104263217}
   _weaponHolderActive: 1
+  _isDoorAnimationPlay: 0
 --- !u!61 &2104263219
 BoxCollider2D:
   m_ObjectHideFlags: 0

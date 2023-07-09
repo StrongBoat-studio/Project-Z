@@ -57,7 +57,7 @@ public class JumperChaseWithAI : MonoBehaviour
         _jumperBaseStates.Add(_jumperStateManager.AttackState);
 
         //Start Path generate
-        InvokeRepeating("UpdatePath", 0f, .5f);
+        InvokeRepeating("UpdatePath", 0f, 0.5f);
     }
 
     private void UpdatePath()
@@ -92,7 +92,7 @@ public class JumperChaseWithAI : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //isGrounded = Physics2D.OverlapCapsule(_groundCheck.position, new Vector2(1.65f, 0.075f), CapsuleDirection2D.Horizontal, 0, _groundlayer);
+        isGrounded = Physics2D.OverlapCapsule(_groundCheck.position, new Vector2(1.65f, 0.075f), CapsuleDirection2D.Horizontal, 0, _groundlayer);
         _currensState = _jumperStateManager.GetJumperState();
 
         if (_path == null) return;
