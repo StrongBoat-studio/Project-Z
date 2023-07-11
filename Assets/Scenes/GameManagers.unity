@@ -605,6 +605,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cam: {fileID: 0}
+  _maxInteractionDistance: 2
 --- !u!4 &151645618
 Transform:
   m_ObjectHideFlags: 0

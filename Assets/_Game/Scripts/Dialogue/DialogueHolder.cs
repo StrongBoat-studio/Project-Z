@@ -7,6 +7,9 @@ public class DialogueHolder : MonoBehaviour, IInteractable
 {
     private LocalKeyword _OUTLINE_ON;
 
+    [SerializeField] private Color _canInteractColor;
+    [SerializeField] private Color _cannotInteractColor;
+
     [Tooltip("Dialogue holder's ID on scene")]
     public int npcSceneID;
     [SerializeField] private DialogueController _dialogueIdle;
@@ -41,9 +44,10 @@ public class DialogueHolder : MonoBehaviour, IInteractable
         }
     }   
 
-    public void CursorEnter()
+    public void CursorEnter(bool canInteract)
     {
         GetComponent<SpriteRenderer>().material.SetKeyword(_OUTLINE_ON, true);
+        GetComponent<SpriteRenderer>().material.SetColor("_Color", canInteract ? _canInteractColor : _cannotInteractColor);
     }
 
     public void CursorExit()

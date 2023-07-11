@@ -46,11 +46,6 @@ public class UI_Journal : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        Debug.Log(_backButtonHistory.Count);
-    }
-
     public void SetBackButtonAction(Action btnClickAction)
     {
         Action a = () =>

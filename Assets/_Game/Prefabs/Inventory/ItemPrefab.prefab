@@ -127,6 +127,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemType: 0
   _amount: 1
+  _canInteractColor: {r: 0.62352943, g: 1, b: 0.41960785, a: 1}
+  _cannotInteractColor: {r: 1, g: 0.4117647, b: 0.4117647, a: 1}
 --- !u!114 &3939629315314745271
 MonoBehaviour:
   m_ObjectHideFlags: 0

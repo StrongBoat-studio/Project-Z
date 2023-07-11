@@ -266,6 +266,38 @@ PrefabInstance:
       propertyPath: npcSceneID
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5805874290070289777, guid: b17bd4fc1ae959448883bc2475396bfc, type: 3}
+      propertyPath: _canInteractColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5805874290070289777, guid: b17bd4fc1ae959448883bc2475396bfc, type: 3}
+      propertyPath: _canInteractColor.b
+      value: 0.41960785
+      objectReference: {fileID: 0}
+    - target: {fileID: 5805874290070289777, guid: b17bd4fc1ae959448883bc2475396bfc, type: 3}
+      propertyPath: _canInteractColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5805874290070289777, guid: b17bd4fc1ae959448883bc2475396bfc, type: 3}
+      propertyPath: _canInteractColor.r
+      value: 0.62352943
+      objectReference: {fileID: 0}
+    - target: {fileID: 5805874290070289777, guid: b17bd4fc1ae959448883bc2475396bfc, type: 3}
+      propertyPath: _cannotInteractColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5805874290070289777, guid: b17bd4fc1ae959448883bc2475396bfc, type: 3}
+      propertyPath: _cannotInteractColor.b
+      value: 0.4117647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5805874290070289777, guid: b17bd4fc1ae959448883bc2475396bfc, type: 3}
+      propertyPath: _cannotInteractColor.g
+      value: 0.4117647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5805874290070289777, guid: b17bd4fc1ae959448883bc2475396bfc, type: 3}
+      propertyPath: _cannotInteractColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5805874290070289778, guid: b17bd4fc1ae959448883bc2475396bfc, type: 3}
       propertyPath: m_Size.x
       value: 0.5625
@@ -958,6 +990,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5ca78f5cae3b1d4d9c9ac015b4058c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _canInteractColor: {r: 0.62352943, g: 1, b: 0.41960785, a: 1}
+  _cannotInteractColor: {r: 1, g: 0.4117647, b: 0.4117647, a: 1}
   npcSceneID: 2
   _dialogueIdle:
     _dialogueTextAsset: {fileID: 0}
@@ -1606,6 +1640,38 @@ PrefabInstance:
     - target: {fileID: 3176867123582371366, guid: 32b3e9453b3789d42a5e43248238bb69, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3176867123582371367, guid: 32b3e9453b3789d42a5e43248238bb69, type: 3}
+      propertyPath: _canInteractColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3176867123582371367, guid: 32b3e9453b3789d42a5e43248238bb69, type: 3}
+      propertyPath: _canInteractColor.b
+      value: 0.41960785
+      objectReference: {fileID: 0}
+    - target: {fileID: 3176867123582371367, guid: 32b3e9453b3789d42a5e43248238bb69, type: 3}
+      propertyPath: _canInteractColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3176867123582371367, guid: 32b3e9453b3789d42a5e43248238bb69, type: 3}
+      propertyPath: _canInteractColor.r
+      value: 0.62352943
+      objectReference: {fileID: 0}
+    - target: {fileID: 3176867123582371367, guid: 32b3e9453b3789d42a5e43248238bb69, type: 3}
+      propertyPath: _cannotInteractColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3176867123582371367, guid: 32b3e9453b3789d42a5e43248238bb69, type: 3}
+      propertyPath: _cannotInteractColor.b
+      value: 0.4117647
+      objectReference: {fileID: 0}
+    - target: {fileID: 3176867123582371367, guid: 32b3e9453b3789d42a5e43248238bb69, type: 3}
+      propertyPath: _cannotInteractColor.g
+      value: 0.4117647
+      objectReference: {fileID: 0}
+    - target: {fileID: 3176867123582371367, guid: 32b3e9453b3789d42a5e43248238bb69, type: 3}
+      propertyPath: _cannotInteractColor.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3176867123582371367, guid: 32b3e9453b3789d42a5e43248238bb69, type: 3}
       propertyPath: _dialogue._dialogueTextAsset

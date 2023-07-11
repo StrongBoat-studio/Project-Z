@@ -10,6 +10,8 @@ public class ItemWorld : MonoBehaviour, IInteractable
     [SerializeField] private Item.ItemType _itemType;
     [SerializeField] private int _amount;
     private LocalKeyword _OUTLINE_ON;
+    [SerializeField] private Color _canInteractColor;
+    [SerializeField] private Color _cannotInteractColor;
 
     private void Awake()
     {
@@ -73,9 +75,10 @@ public class ItemWorld : MonoBehaviour, IInteractable
         }
     }
 
-    public void CursorEnter()
+    public void CursorEnter(bool canInteract)
     {
         GetComponent<SpriteRenderer>().material.SetKeyword(_OUTLINE_ON, true);
+        GetComponent<SpriteRenderer>().material.SetColor("_Color", canInteract ? _canInteractColor : _cannotInteractColor);
     }
 
     public void CursorExit()
