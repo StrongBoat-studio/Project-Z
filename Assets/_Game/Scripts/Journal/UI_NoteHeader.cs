@@ -24,6 +24,10 @@ public class UI_NoteHeader : MonoBehaviour
         app.Note.GetComponent<UI_Note>().Init(_note);
         app.Note.gameObject.SetActive(true);
         app.CloseList();
-        app.ShowBackButton();
+
+        GetComponentInParent<UI_Journal>().SetBackButtonAction(() => {
+            app.OpenList();
+            app.Note.gameObject.SetActive(false);
+        });
     }
 }

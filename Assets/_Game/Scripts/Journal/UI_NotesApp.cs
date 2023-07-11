@@ -21,7 +21,7 @@ public class UI_NotesApp : MonoBehaviour
 
     private void OnDestroy()
     {
-
+        _notesApp.OnNoteAdded -= OnNoteAdded;
     }
 
     private void OnNoteAdded()
@@ -53,11 +53,6 @@ public class UI_NotesApp : MonoBehaviour
     public void CloseList()
     {
         _headers.gameObject.SetActive(false);
-    }
-
-    public void ShowBackButton()
-    {
-        _backButton.gameObject.SetActive(true);
     }
 
     public void HideBackButton()
