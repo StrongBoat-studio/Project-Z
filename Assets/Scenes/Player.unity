@@ -7005,7 +7005,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7eb8a6ed23adb9546a0f322b8ff99b8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _earthLocationsId: 080000000b0000000c000000
+  _earthLocationsId: 080000000b0000000c0000000f00000010000000
 --- !u!1 &1916680211
 GameObject:
   m_ObjectHideFlags: 0
@@ -7610,8 +7610,7 @@ MonoBehaviour:
   _gun: {fileID: 1345009190}
   _animGun: {fileID: 28416912}
   _playerEarthController: {fileID: 1913262213}
-  _LocationsId: 0b000000
-  _roomLoader: {fileID: 2104263217}
+  _locationLoader: {fileID: 0}
   _weaponHolderActive: 1
   _isDoorAnimationPlay: 0
 --- !u!61 &2104263219

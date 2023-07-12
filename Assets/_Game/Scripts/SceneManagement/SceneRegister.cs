@@ -24,6 +24,8 @@ public class SceneRegister : MonoBehaviour
         Entrance = 12,
         Lab = 13,
         LeadersRoom = 14,
+        EarthLeadersRoom = 15,
+        Cutscenka = 16,
     }
 
     public static SceneRegister Instance { get; private set; }
