@@ -1628,6 +1628,40 @@ MonoBehaviour:
         amount: 0
       <JournalAppToOpen>k__BackingField: 0
     <IsCompleted>k__BackingField: 0
+  - <ID>k__BackingField: 1
+    <Title>k__BackingField: "\u201CEchoes of\u2026? \u201D"
+    <Tasks>k__BackingField:
+    - <ID>k__BackingField: 0
+      <Title>k__BackingField: Have a conversation with Boris
+      <DisplayCompletionHint>k__BackingField: 0
+      <CompletionHint>k__BackingField: 
+      <IsCompleted>k__BackingField: 0
+      <TaskType>k__BackingField: 0
+      <ItemToCollect>k__BackingField:
+        itemType: 0
+        amount: 0
+      <JournalAppToOpen>k__BackingField: 0
+    - <ID>k__BackingField: 1
+      <Title>k__BackingField: Talk to Shimura
+      <DisplayCompletionHint>k__BackingField: 0
+      <CompletionHint>k__BackingField: 
+      <IsCompleted>k__BackingField: 0
+      <TaskType>k__BackingField: 0
+      <ItemToCollect>k__BackingField:
+        itemType: 0
+        amount: 0
+      <JournalAppToOpen>k__BackingField: 0
+    - <ID>k__BackingField: 2
+      <Title>k__BackingField: Open the Mission Log
+      <DisplayCompletionHint>k__BackingField: 0
+      <CompletionHint>k__BackingField: 
+      <IsCompleted>k__BackingField: 0
+      <TaskType>k__BackingField: 2
+      <ItemToCollect>k__BackingField:
+        itemType: 0
+        amount: 0
+      <JournalAppToOpen>k__BackingField: 3
+    <IsCompleted>k__BackingField: 0
 --- !u!4 &927334019
 Transform:
   m_ObjectHideFlags: 0
