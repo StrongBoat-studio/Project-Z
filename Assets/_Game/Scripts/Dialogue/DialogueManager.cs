@@ -48,6 +48,8 @@ public class DialogueManager : MonoBehaviour
     private float _currentTypeSpeed;
     private bool _isTyping = false;
 
+    public TextAsset _currentTextAsset;
+
     private void OnDialogueContinueKeyboard(InputAction.CallbackContext context)
     {
         ContinueStory();
@@ -78,6 +80,7 @@ public class DialogueManager : MonoBehaviour
         {
             EnterDialogueMode();
             _currentStory = new Story(storyTextAsset.text);
+            _currentTextAsset = storyTextAsset;
             ContinueStory();
         }
         else

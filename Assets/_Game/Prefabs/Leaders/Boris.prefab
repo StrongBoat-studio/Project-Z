@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4505882918976808801}
   - component: {fileID: 4505882918976808804}
   - component: {fileID: 4505882918976808807}
+  - component: {fileID: 4505882919448927686}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -149,7 +150,21 @@ MonoBehaviour:
   _dialogueIdle:
     _dialogueTextAsset: {fileID: 4900000, guid: 76e663e2fc51e6a4ebb7b6306864fc60, type: 3}
   _dialogueQuest:
-    _dialogueTextAsset: {fileID: 4900000, guid: 0f377816cd2c08d4b8c4007b30912a36, type: 3}
+    _dialogueTextAsset: {fileID: 4900000, guid: 76e663e2fc51e6a4ebb7b6306864fc60, type: 3}
+--- !u!114 &4505882919448927686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4505882918976808803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d7399e17f434bf4e894773a2c15f41d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  QuestID: 1
+  QuestTaskID: 0
 --- !u!1 &4505882919154333375
 GameObject:
   m_ObjectHideFlags: 0
@@ -159,6 +174,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4505882919154333373}
+  - component: {fileID: 4505882919448927684}
   m_Layer: 0
   m_Name: Boris
   m_TagString: Untagged
@@ -182,3 +198,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4505882919448927684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4505882919154333375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6247cdbeaad14b3478b5f9ce4dc93fb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dialogueControllers:
+  - _dialogueTextAsset: {fileID: 4900000, guid: 8c20fd94f79e03b4fb40e9b1ed0de09c, type: 3}
+  - _dialogueTextAsset: {fileID: 4900000, guid: 693405e17045afe499b8baba0f7c3022, type: 3}
+  - _dialogueTextAsset: {fileID: 4900000, guid: 9d2dca5f7a7b5d8489d33952c528b56b, type: 3}

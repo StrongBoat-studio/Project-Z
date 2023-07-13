@@ -11,10 +11,36 @@ public class DialogueHolder : MonoBehaviour, IInteractable
     public int npcSceneID;
     [SerializeField] private DialogueController _dialogueIdle;
     [SerializeField] private DialogueController _dialogueQuest;
-
+    private Animator _animator;
+    private bool _isDialogue;
     void Awake()
     {
         _OUTLINE_ON = new LocalKeyword(GetComponent<SpriteRenderer>().material.shader, "_OUTLINE_ON");
+
+        try
+        {
+            _animator = GetComponentInChildren<Animator>();
+        }
+        catch
+        {
+
+        }
+
+        if (GameStateManager.Instance != null)
+            GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+    }
+
+    private void OnGameStateChanged(GameStateManager.GameState newGameState)
+    {
+        _isDialogue = newGameState == GameStateManager.GameState.Dialogue;
+    }
+    private void Update()
+    {
+        if(!_isDialogue)
+        {
+            if(_animator!=null)
+                _animator.SetBool("IsTalking", false);
+        }
     }
 
     public void CursorClick()
@@ -33,9 +59,17 @@ public class DialogueHolder : MonoBehaviour, IInteractable
             //Player quest dialogue only if quest was completed
             //Othwerwise play idle dialogue
             if(questTaskCompleted == true && _dialogueQuest != null)
+            {
                 _dialogueQuest.Play();
+                PlayDialogAnimation();
+            }
+                
             else if (_dialogueIdle != null)
+            {
                 _dialogueIdle.Play();
+                PlayDialogAnimation();
+            }
+                
             else
                 Debug.Log("NPC has no dialogues attached");
         }
@@ -70,5 +104,20 @@ public class DialogueHolder : MonoBehaviour, IInteractable
     public void PlayDialogueQuest()
     {
         _dialogueQuest.Play();
+    }
+
+    public void SetQuestDialogueController(DialogueController dialogue)
+    {
+        _dialogueQuest = dialogue;
+    }
+
+    private void PlayDialogAnimation()
+    {
+        if (_animator == null) return;
+
+        if (_isDialogue)
+        {
+            _animator.SetBool("IsTalking", true);
+        }
     }
 }
