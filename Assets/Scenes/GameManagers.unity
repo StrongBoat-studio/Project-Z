@@ -1662,6 +1662,50 @@ MonoBehaviour:
         amount: 0
       <JournalAppToOpen>k__BackingField: 3
     <IsCompleted>k__BackingField: 0
+  - <ID>k__BackingField: 1
+    <Title>k__BackingField: "\u201CUnleashing Chaos\u201D"
+    <Tasks>k__BackingField:
+    - <ID>k__BackingField: 0
+      <Title>k__BackingField: Talk to Boris
+      <DisplayCompletionHint>k__BackingField: 0
+      <CompletionHint>k__BackingField: 
+      <IsCompleted>k__BackingField: 0
+      <TaskType>k__BackingField: 0
+      <ItemToCollect>k__BackingField:
+        itemType: 0
+        amount: 0
+      <JournalAppToOpen>k__BackingField: 0
+    - <ID>k__BackingField: 1
+      <Title>k__BackingField: Press the Button
+      <DisplayCompletionHint>k__BackingField: 0
+      <CompletionHint>k__BackingField: 
+      <IsCompleted>k__BackingField: 0
+      <TaskType>k__BackingField: 0
+      <ItemToCollect>k__BackingField:
+        itemType: 0
+        amount: 0
+      <JournalAppToOpen>k__BackingField: 0
+    - <ID>k__BackingField: 2
+      <Title>k__BackingField: Return to Boris
+      <DisplayCompletionHint>k__BackingField: 0
+      <CompletionHint>k__BackingField: 
+      <IsCompleted>k__BackingField: 0
+      <TaskType>k__BackingField: 0
+      <ItemToCollect>k__BackingField:
+        itemType: 0
+        amount: 0
+      <JournalAppToOpen>k__BackingField: 0
+    - <ID>k__BackingField: 3
+      <Title>k__BackingField: Re-enter the Cryochamber
+      <DisplayCompletionHint>k__BackingField: 0
+      <CompletionHint>k__BackingField: 
+      <IsCompleted>k__BackingField: 0
+      <TaskType>k__BackingField: 1
+      <ItemToCollect>k__BackingField:
+        itemType: 0
+        amount: 0
+      <JournalAppToOpen>k__BackingField: 0
+    <IsCompleted>k__BackingField: 0
 --- !u!4 &927334019
 Transform:
   m_ObjectHideFlags: 0
@@ -3738,6 +3782,7 @@ MonoBehaviour:
   _messageText: {fileID: 127382851}
   _typeSpeed: 100
   _typeSpeedSkip: 200
+  _currentTextAsset: {fileID: 0}
 --- !u!4 &2146267354
 Transform:
   m_ObjectHideFlags: 0
