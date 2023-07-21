@@ -366,13 +366,32 @@ public class Movement : MonoBehaviour
 
     private void ChangeSide()
     {
-        if (_playerInput.InGame.Walk.ReadValue<float>() == -1)
+        if(
+            Camera.main.ScreenToWorldPoint(_playerInput.InGame.MousePosition.ReadValue<Vector2>()).x >= transform.position.x &&
+            transform.localScale.x != -1
+        )
         {
-            _transform.localScale = new Vector3(1, _transform.localScale.y, _transform.localScale.z);
+            _transform.localScale = new Vector3(-1f, _transform.localScale.y, transform.localScale.z);
         }
-        else if (_playerInput.InGame.Walk.ReadValue<float>() == 1)
+        else if(
+            Camera.main.ScreenToWorldPoint(_playerInput.InGame.MousePosition.ReadValue<Vector2>()).x < transform.position.x &&
+            transform.localScale.x != 1
+        )
         {
-            _transform.localScale = new Vector3(-1, _transform.localScale.y, _transform.localScale.z);
+            _transform.localScale = new Vector3(1f, _transform.localScale.y, transform.localScale.z);
+        }
+
+        //Exit running state if player's movement direction is opposite to player's looking direction
+        if(
+            (GetMovementStates().Contains(MovementState.Running) && 
+            _playerInput.InGame.Walk.ReadValue<float>() == 1f &&
+            transform.localScale.x == 1f) ||
+            (GetMovementStates().Contains(MovementState.Running) && 
+            _playerInput.InGame.Walk.ReadValue<float>() == -1f &&
+            transform.localScale.x == -1f)
+        )
+        {
+            AlterMovementState(0, MovementState.Running);
         }
     }
 

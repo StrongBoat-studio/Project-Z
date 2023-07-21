@@ -71,6 +71,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MousePosition"",
+                    ""type"": ""Value"",
+                    ""id"": ""36ea9354-e4c7-4823-b99c-6955fa51865f"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -159,6 +168,17 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Run"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""16de6b6d-abfb-4360-b951-37aa44370574"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MousePosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -518,6 +538,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_InGame_Crouch = m_InGame.FindAction("Crouch", throwIfNotFound: true);
         m_InGame_Creep = m_InGame.FindAction("Creep", throwIfNotFound: true);
         m_InGame_Run = m_InGame.FindAction("Run", throwIfNotFound: true);
+        m_InGame_MousePosition = m_InGame.FindAction("MousePosition", throwIfNotFound: true);
         // Interactions
         m_Interactions = asset.FindActionMap("Interactions", throwIfNotFound: true);
         m_Interactions_Interact = m_Interactions.FindAction("Interact", throwIfNotFound: true);
@@ -612,6 +633,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_InGame_Crouch;
     private readonly InputAction m_InGame_Creep;
     private readonly InputAction m_InGame_Run;
+    private readonly InputAction m_InGame_MousePosition;
     public struct InGameActions
     {
         private @PlayerInput m_Wrapper;
@@ -621,6 +643,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @Crouch => m_Wrapper.m_InGame_Crouch;
         public InputAction @Creep => m_Wrapper.m_InGame_Creep;
         public InputAction @Run => m_Wrapper.m_InGame_Run;
+        public InputAction @MousePosition => m_Wrapper.m_InGame_MousePosition;
         public InputActionMap Get() { return m_Wrapper.m_InGame; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -645,6 +668,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Run.started -= m_Wrapper.m_InGameActionsCallbackInterface.OnRun;
                 @Run.performed -= m_Wrapper.m_InGameActionsCallbackInterface.OnRun;
                 @Run.canceled -= m_Wrapper.m_InGameActionsCallbackInterface.OnRun;
+                @MousePosition.started -= m_Wrapper.m_InGameActionsCallbackInterface.OnMousePosition;
+                @MousePosition.performed -= m_Wrapper.m_InGameActionsCallbackInterface.OnMousePosition;
+                @MousePosition.canceled -= m_Wrapper.m_InGameActionsCallbackInterface.OnMousePosition;
             }
             m_Wrapper.m_InGameActionsCallbackInterface = instance;
             if (instance != null)
@@ -664,6 +690,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Run.started += instance.OnRun;
                 @Run.performed += instance.OnRun;
                 @Run.canceled += instance.OnRun;
+                @MousePosition.started += instance.OnMousePosition;
+                @MousePosition.performed += instance.OnMousePosition;
+                @MousePosition.canceled += instance.OnMousePosition;
             }
         }
     }
@@ -987,6 +1016,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnCrouch(InputAction.CallbackContext context);
         void OnCreep(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
+        void OnMousePosition(InputAction.CallbackContext context);
     }
     public interface IInteractionsActions
     {
