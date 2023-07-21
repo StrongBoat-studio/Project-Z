@@ -59,4 +59,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BlackScreen1.unity
     guid: 4bf114909c600b1468e47fe8f15d347b
+  - enabled: 1
+    path: Assets/Scenes/Hallway.unity
+    guid: b2c8d9b35807f0741916759b489cf796
   m_configObjects: {}

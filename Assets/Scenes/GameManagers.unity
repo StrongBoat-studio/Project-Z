@@ -2012,6 +2012,60 @@ MonoBehaviour:
         amount: 0
       <JournalAppToOpen>k__BackingField: 0
     <IsCompleted>k__BackingField: 0
+  - <ID>k__BackingField: 3
+    <Title>k__BackingField: "\u201CEvolving Nightmares\u201D"
+    <Tasks>k__BackingField:
+    - <ID>k__BackingField: 0
+      <Title>k__BackingField: Monitor the Mutation Process
+      <DisplayCompletionHint>k__BackingField: 0
+      <CompletionHint>k__BackingField: 
+      <IsCompleted>k__BackingField: 0
+      <TaskType>k__BackingField: 2
+      <ItemToCollect>k__BackingField:
+        itemType: 0
+        amount: 0
+      <JournalAppToOpen>k__BackingField: 4
+    - <ID>k__BackingField: 1
+      <Title>k__BackingField: Check the Camera Recordings
+      <DisplayCompletionHint>k__BackingField: 0
+      <CompletionHint>k__BackingField: 
+      <IsCompleted>k__BackingField: 0
+      <TaskType>k__BackingField: 1
+      <ItemToCollect>k__BackingField:
+        itemType: 0
+        amount: 0
+      <JournalAppToOpen>k__BackingField: 4
+    - <ID>k__BackingField: 2
+      <Title>k__BackingField: Talk to the Crew
+      <DisplayCompletionHint>k__BackingField: 0
+      <CompletionHint>k__BackingField: 
+      <IsCompleted>k__BackingField: 0
+      <TaskType>k__BackingField: 0
+      <ItemToCollect>k__BackingField:
+        itemType: 0
+        amount: 0
+      <JournalAppToOpen>k__BackingField: 4
+    - <ID>k__BackingField: 3
+      <Title>k__BackingField: Turn off the Alarm
+      <DisplayCompletionHint>k__BackingField: 0
+      <CompletionHint>k__BackingField: 
+      <IsCompleted>k__BackingField: 0
+      <TaskType>k__BackingField: 0
+      <ItemToCollect>k__BackingField:
+        itemType: 0
+        amount: 0
+      <JournalAppToOpen>k__BackingField: 4
+    - <ID>k__BackingField: 4
+      <Title>k__BackingField: Wait in the Cryochamber
+      <DisplayCompletionHint>k__BackingField: 0
+      <CompletionHint>k__BackingField: 
+      <IsCompleted>k__BackingField: 0
+      <TaskType>k__BackingField: 1
+      <ItemToCollect>k__BackingField:
+        itemType: 0
+        amount: 0
+      <JournalAppToOpen>k__BackingField: 4
+    <IsCompleted>k__BackingField: 0
 --- !u!4 &927334019
 Transform:
   m_ObjectHideFlags: 0
