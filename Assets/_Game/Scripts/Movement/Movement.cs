@@ -401,14 +401,14 @@ public class Movement : MonoBehaviour
 
         if(
             Camera.main.ScreenToWorldPoint(_playerInput.InGame.MousePosition.ReadValue<Vector2>()).x >= transform.position.x &&
-            transform.localScale.x != -1
+            transform.localScale.x != -1 && !IsDoorAnimationPlay
         )
         {
             _transform.localScale = new Vector3(-1f, _transform.localScale.y, transform.localScale.z);
         }
         else if(
             Camera.main.ScreenToWorldPoint(_playerInput.InGame.MousePosition.ReadValue<Vector2>()).x < transform.position.x &&
-            transform.localScale.x != 1
+            transform.localScale.x != 1 && !IsDoorAnimationPlay
         )
         {
             _transform.localScale = new Vector3(1f, _transform.localScale.y, transform.localScale.z);
@@ -426,6 +426,11 @@ public class Movement : MonoBehaviour
         {
             AlterMovementState(0, MovementState.Running);
         }
+    }
+
+    public void Rotate()
+    {
+        transform.localScale = new Vector2(-1, transform.localScale.y);
     }
 
     private void PositionDuringDoorAnimation()

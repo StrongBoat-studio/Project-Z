@@ -158,6 +158,8 @@ public class PlayerAnimationController : MonoBehaviour
 
     public void Rotation()
     {
+        GameManager.Instance.movement.Rotate();
         transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
+        _animator.SetBool("IsTriggerDoor2", false);
     }
 }
