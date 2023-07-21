@@ -1206,6 +1206,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bb0fa59026323f47bd4da007095dcd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _button:
+    _dialogueTextAsset: {fileID: 4900000, guid: 56e77bda49608124cafc0e8bbb485c93, type: 3}
+  _alarm:
+    _dialogueTextAsset: {fileID: 4900000, guid: 34512efe522e04d45b4cb83c5eb06e14, type: 3}
+  _dialogueHolder: {fileID: 1598857968}
 --- !u!1001 &1857599312
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -20,6 +20,8 @@ public class CryochamberController : MonoBehaviour
 
     private void CheckQuest(string QuestName)
     {
+        if (QuestLineManager.Instance.Quests.Count < 1) return;
+
         if (QuestLineManager.Instance.Quests[0].Tasks[0].Title == QuestName)
         {
             _boxCollider2D.enabled = true;

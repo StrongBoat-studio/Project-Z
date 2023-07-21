@@ -16,6 +16,8 @@ public class ShimuraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (QuestLineManager.Instance.Quests.Count < 1) return;
+
         if (QuestLineManager.Instance.Quests[0].Tasks[0].Title == "Talk to Shimura")
         {
             _dialogueHolder.SetQuestDialogueController(_dialogueControllers[0]);
