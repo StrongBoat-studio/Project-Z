@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cutscenka : MonoBehaviour
+public class ExitingEmptyLocations : MonoBehaviour
 {
     [SerializeField] private RoomLoader _roomLoader;
 

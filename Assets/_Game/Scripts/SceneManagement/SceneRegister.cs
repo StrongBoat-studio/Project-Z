@@ -27,6 +27,7 @@ public class SceneRegister : MonoBehaviour
         LeadersRoom = 14,
         EarthLeadersRoom = 15,
         Cutscenka = 16,
+        BlackScreen1 = 17,
     }
 
     public static SceneRegister Instance { get; private set; }

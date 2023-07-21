@@ -30,7 +30,7 @@ public class BorisController : MonoBehaviour
         if (QuestLineManager.Instance.Quests[0].Tasks[0].Title == "Talk to Boris")
         {
             _dialogueHolder.SetQuestDialogueController(_dialogueControllers[1]);
-            _questObjective.QuestID = 1;
+            _questObjective.QuestID = 2;
             _questObjective.QuestTaskID = 0;
             return;
         }
@@ -38,7 +38,7 @@ public class BorisController : MonoBehaviour
         if (QuestLineManager.Instance.Quests[0].Tasks[0].Title == "Return to Boris")
         {
             _dialogueHolder.SetQuestDialogueController(_dialogueControllers[2]);
-            _questObjective.QuestID = 1;
+            _questObjective.QuestID = 2;
             _questObjective.QuestTaskID = 2;
             return;
         }
