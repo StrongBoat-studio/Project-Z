@@ -10,6 +10,8 @@ public class ItemWorld : MonoBehaviour, IInteractable
     [SerializeField] private Item.ItemType _itemType;
     [SerializeField] private int _amount;
     private LocalKeyword _OUTLINE_ON;
+    [SerializeField] private Color _canInteractColor;
+    [SerializeField] private Color _cannotInteractColor;
 
     private void Awake()
     {
@@ -55,16 +57,12 @@ public class ItemWorld : MonoBehaviour, IInteractable
 
                 if (GameSaveManager.Instance != null)
                 {
-                    bool isRemoved = GameSaveManager.Instance.currentSave.levelManagerDatas.Find(
-                        x => (int)x.sceneIndex == GameSaveManager.Instance.currentSave.locationIndex
-                    ).items.Remove(cmp);
+                    bool isRemoved = FindObjectOfType<LevelManager>().GetLevelData().items.Remove(cmp);
 
                     if (isRemoved == true)
                     {
                         cmp.load = false;
-                        GameSaveManager.Instance.currentSave.levelManagerDatas.Find(
-                            x => (int)x.sceneIndex == GameSaveManager.Instance.currentSave.locationIndex
-                        ).items.Add(cmp);
+                        FindObjectOfType<LevelManager>().GetLevelData().items.Add(cmp);
                     }
                 }
 
@@ -77,9 +75,10 @@ public class ItemWorld : MonoBehaviour, IInteractable
         }
     }
 
-    public void CursorEnter()
+    public void CursorEnter(bool canInteract)
     {
         GetComponent<SpriteRenderer>().material.SetKeyword(_OUTLINE_ON, true);
+        GetComponent<SpriteRenderer>().material.SetColor("_Color", canInteract ? _canInteractColor : _cannotInteractColor);
     }
 
     public void CursorExit()

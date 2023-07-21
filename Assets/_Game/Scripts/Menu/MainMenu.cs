@@ -12,6 +12,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Transform _btnControls;
     [SerializeField] private Transform _btnCredits;
     [SerializeField] private Transform _btnExit;
+    [SerializeField] private LoadScreen _levelTransition;
 
     private void Awake()
     {
@@ -83,52 +84,7 @@ public class MainMenu : MonoBehaviour
             AudioManager.Instance != null &&
             GameSaveManager.Instance != null
         );
-        //Load game save
-        GameSaveManager.Instance.LoadJson();
 
-        // Init managers 
-        GameManager.Instance.Reset();
-        DialogueManager.Instance.Reset();
-
-        GameStateManager.Instance.ResetGameStateStack();
-        GameStateManager.Instance.SetState(GameStateManager.GameState.Gameplay);
-        AudioManager.Instance.InitializeMainTheme(FMODEvents.Instance.MainTheme);
-
-        // Load/Unload scenes
-        Queue<(SceneRegister.Scenes scene, bool load)> ops = new Queue<(SceneRegister.Scenes scene, bool load)>();
-        Debug.Log(GameSaveManager.Instance.currentSave.locationIndex);
-        ops.Enqueue(
-            GameSaveManager.Instance != null ? (
-                GameSaveManager.Instance.currentSave.locationIndex >= 0 ? 
-                ((SceneRegister.Scenes)GameSaveManager.Instance.currentSave.locationIndex, true) : 
-                (SceneRegister.Scenes.ParadGround, true)
-            ) : (
-                (SceneRegister.Scenes.ParadGround, true)
-            )
-        );
-        ops.Enqueue((SceneRegister.Scenes.Player, true));
-
-        while (ops.Count > 0)
-        {
-            AsyncOperation aop;
-            var op = ops.Dequeue();
-            if(op.load == true)
-            {
-                aop = SceneManager.LoadSceneAsync((int)op.scene, LoadSceneMode.Additive);
-            }
-            else
-            {
-                aop = SceneManager.UnloadSceneAsync((int)op.scene);
-            }
-
-            yield return new WaitUntil(() => aop.isDone == true);
-        }
-
-        Debug.Log("Game done loading");
-        SceneManager.UnloadSceneAsync((int)SceneRegister.Scenes.MainMenu);
-
-        //Load data after location load
-        GameSaveManager.Instance.LoadData();
-        yield return null;
+        FindObjectOfType<LoadGame>().StartGame();
     }
 }

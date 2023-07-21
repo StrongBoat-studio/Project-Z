@@ -34,7 +34,6 @@ public class Journal : MonoBehaviour
 
     private void OnGameStateChanged(GameStateManager.GameState newGameState)
     {
-        //_journal.gameObject.SetActive(newGameState == GameStateManager.GameState.Journal);
         if(newGameState == GameStateManager.GameState.Journal && _isOpen == false)
         {
             _journal.DOAnchorPosX(0f, .25f, true);
@@ -53,7 +52,8 @@ public class Journal : MonoBehaviour
         if(
             newGameState == GameStateManager.GameState.Paused ||
             newGameState == GameStateManager.GameState.Crafting ||
-            newGameState == GameStateManager.GameState.Dialogue
+            newGameState == GameStateManager.GameState.Dialogue ||
+            newGameState == GameStateManager.GameState.Loading
         )
         {
             _playerInput.Journal.Disable();

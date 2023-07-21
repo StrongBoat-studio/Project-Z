@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Linq;
 using System;
+using System.Threading.Tasks;
 
 public class SceneRegister : MonoBehaviour
 {
@@ -44,6 +45,7 @@ public class SceneRegister : MonoBehaviour
     }
 
     public List<Scenes> perserverLevelSwap;
+    [SerializeField] private LoadScreen _levelTransition;
 
     public void LoadNextLevel(RoomLoader roomLoader)
     {
@@ -63,6 +65,10 @@ public class SceneRegister : MonoBehaviour
 
     private IEnumerator HandleSceneSwap(RoomLoader roomLoader)
     {
+        //init load screen
+        yield return StartCoroutine(_levelTransition.ShowScreen());
+        _levelTransition.UpdateProgress(0f);
+
         if (GameSaveManager.Instance == null)
         {
             Debug.Log("Can't save data, try again");
@@ -74,6 +80,7 @@ public class SceneRegister : MonoBehaviour
         {
             SaveLevelManagerData(FindObjectOfType<LevelManager>().GetLevelData());
         }
+        _levelTransition.UpdateProgress(5f);
 
         //Find scenes to unload
         List<Scene> unload = new List<Scene>();
@@ -86,6 +93,7 @@ public class SceneRegister : MonoBehaviour
                 unload.Add(SceneManager.GetSceneAt(i));
             }
         }
+        _levelTransition.UpdateProgress(25f);
 
         //Async unload old scenes
         List<AsyncOperation> ops = new List<AsyncOperation>();
@@ -96,6 +104,7 @@ public class SceneRegister : MonoBehaviour
 
         //Wait for unload to finish
         yield return new WaitUntil(() => ops.TrueForAll(x => x.isDone == true));
+        _levelTransition.UpdateProgress(55f);
 
         //Clear ops and async load new scenes
         ops.Clear();
@@ -103,6 +112,7 @@ public class SceneRegister : MonoBehaviour
 
         //Wait for destination scene to load
         yield return new WaitUntil(() => ops.TrueForAll(x => x.isDone == true));
+        _levelTransition.UpdateProgress(75f);
 
         //Find door and teleport player to them
         List<RoomLoader> doors = new List<RoomLoader>();
@@ -137,9 +147,12 @@ public class SceneRegister : MonoBehaviour
                 Debug.LogWarning("Player not found on scene!");
             }
         }
+        _levelTransition.UpdateProgress(90f);
 
         //When scene loading is done, save data to json file
         GameSaveManager.Instance.SaveJson();
+        _levelTransition.UpdateProgress(100f);
+        yield return StartCoroutine(_levelTransition.HideScreen());
         yield return null;
     }
 

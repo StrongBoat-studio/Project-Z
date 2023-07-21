@@ -36,7 +36,7 @@ public class Movement : MonoBehaviour
     [Range(0f, 10f)][SerializeField] private float _creepMultipier;
     [Range(0f, 10f)][SerializeField] private float _jumpForce;
     private const float JUMPFORCE_SCALE = 10000f;
-    [SerializeField] private Slider _uiStaminaBar;
+    [SerializeField] private Image _uiStaminaBar;
     [Range(0f, 10f)][SerializeField] private float _staminaMax;
     [Range(0f, 10f)][SerializeField] private float _staminaDrainSpeed;
     [Range(0f, 10f)][SerializeField] private float _staminaRecoveryDelay;
@@ -329,7 +329,7 @@ public class Movement : MonoBehaviour
                 _staminaCurrent = _staminaMax;
         }
 
-        _uiStaminaBar.value = Mathf.Clamp(_staminaCurrent / _staminaMax, 0f, 1f);
+        _uiStaminaBar.fillAmount = Mathf.Clamp(_staminaCurrent / _staminaMax, 0f, 1f);
     }
 
     public bool IsGrounded()
@@ -385,25 +385,46 @@ public class Movement : MonoBehaviour
     {
         if(
             newGameState == GameStateManager.GameState.Paused ||
-            newGameState == GameStateManager.GameState.Dialogue
+            newGameState == GameStateManager.GameState.Dialogue ||
+            newGameState == GameStateManager.GameState.Loading
         ) _playerInput.InGame.Disable();
         else if(newGameState == GameStateManager.GameState.Gameplay) _playerInput.InGame.Enable();
     }
 
     private void ChangeSide()
     {
+
         if(IsDoorAnimationPlay)
         {
             return;
         }
 
-        if (_playerInput.InGame.Walk.ReadValue<float>() == -1)
+        if(
+            Camera.main.ScreenToWorldPoint(_playerInput.InGame.MousePosition.ReadValue<Vector2>()).x >= transform.position.x &&
+            transform.localScale.x != -1
+        )
         {
-            _transform.localScale = new Vector3(1, _transform.localScale.y, _transform.localScale.z);
+            _transform.localScale = new Vector3(-1f, _transform.localScale.y, transform.localScale.z);
         }
-        else if (_playerInput.InGame.Walk.ReadValue<float>() == 1)
+        else if(
+            Camera.main.ScreenToWorldPoint(_playerInput.InGame.MousePosition.ReadValue<Vector2>()).x < transform.position.x &&
+            transform.localScale.x != 1
+        )
         {
-            _transform.localScale = new Vector3(-1, _transform.localScale.y, _transform.localScale.z);
+            _transform.localScale = new Vector3(1f, _transform.localScale.y, transform.localScale.z);
+        }
+
+        //Exit running state if player's movement direction is opposite to player's looking direction
+        if(
+            (GetMovementStates().Contains(MovementState.Running) && 
+            _playerInput.InGame.Walk.ReadValue<float>() == 1f &&
+            transform.localScale.x == 1f) ||
+            (GetMovementStates().Contains(MovementState.Running) && 
+            _playerInput.InGame.Walk.ReadValue<float>() == -1f &&
+            transform.localScale.x == -1f)
+        )
+        {
+            AlterMovementState(0, MovementState.Running);
         }
     }
 

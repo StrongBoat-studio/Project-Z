@@ -46,8 +46,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5ca78f5cae3b1d4d9c9ac015b4058c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dialogue:
-    _dialogueTextAsset: {fileID: 4900000, guid: 71738196200b1bd4d8f77958043b7c66, type: 3}
+  _canInteractColor: {r: 0.62352943, g: 1, b: 0.41960785, a: 1}
+  _cannotInteractColor: {r: 1, g: 0.4117647, b: 0.4117647, a: 1}
+  npcSceneID: 0
+  _dialogueIdle:
+    _dialogueTextAsset: {fileID: 0}
+  _dialogueQuest:
+    _dialogueTextAsset: {fileID: 0}
 --- !u!61 &5805874290070289778
 BoxCollider2D:
   m_ObjectHideFlags: 0

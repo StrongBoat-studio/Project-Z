@@ -29,6 +29,9 @@ public class Crafting : MonoBehaviour, IInteractable
     private PlayerInput _playerInput;
     private LocalKeyword _OUTLINE_ON;
 
+    [SerializeField] private Color _canInteractColor;
+    [SerializeField] private Color _cannotInteractColor;
+
     private void Awake()
     {
         _OUTLINE_ON = new LocalKeyword(_craftingSprite.GetComponent<SpriteRenderer>().material.shader, "_OUTLINE_ON");
@@ -201,9 +204,10 @@ public class Crafting : MonoBehaviour, IInteractable
         }
     }
 
-    public void CursorEnter()
+    public void CursorEnter(bool canInteract)
     {
         _craftingSprite.GetComponent<SpriteRenderer>().material.SetKeyword(_OUTLINE_ON, true);
+        GetComponent<SpriteRenderer>().material.SetColor("_Color", canInteract ? _canInteractColor : _cannotInteractColor);
     }
 
     public void CursorExit()

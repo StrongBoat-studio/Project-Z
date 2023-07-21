@@ -3,11 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
     private PlayerInput _playerInput;
-    private int _hp = 100;
+    private int _helathMax = 100;
+    private int _currentHelath = 100;
+    [SerializeField] private Image _playerHealthBar;
 
     private Inventory _inventory;
     [SerializeField] private RectTransform _uiInventory;
@@ -54,13 +57,14 @@ public class Player : MonoBehaviour
 
     private void TakeDamage(int dmg)
     {
-        _hp -= dmg;
+        _currentHelath -= dmg;
+        _playerHealthBar.fillAmount = Mathf.Clamp(_currentHelath / _helathMax, 0f, 1f);
 
-        if(_hp <= 20)
+        if(_currentHelath <= 20 && _currentHelath > 0)
         {
             _lowHP.Play();
         }
-        else if(_hp <= 0)
+        else if(_currentHelath <= 0)
         {
             Debug.Log("Dead");
         }
@@ -73,11 +77,11 @@ public class Player : MonoBehaviour
 
     public int GetHP()
     {
-        return _hp;
+        return _currentHelath;
     }
 
-    public void SetHP(int hp)
+    public void SetHP(int health)
     {
-        _hp = hp;
+        _currentHelath = health;
     }
 }

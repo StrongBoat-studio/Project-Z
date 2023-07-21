@@ -31,7 +31,8 @@ public class PauseMenu : MonoBehaviour
 
         if(
             newGameState == GameStateManager.GameState.Journal ||
-            newGameState == GameStateManager.GameState.Crafting
+            newGameState == GameStateManager.GameState.Crafting ||
+            newGameState == GameStateManager.GameState.Loading
         ) _playerInput.PauseMenu.Disable();
         else _playerInput.PauseMenu.Enable();
     }

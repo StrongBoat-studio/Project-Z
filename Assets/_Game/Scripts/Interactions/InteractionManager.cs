@@ -8,6 +8,7 @@ using System.Linq;
 public class InteractionManager : MonoBehaviour
 {
     [SerializeField] private Camera _cam;
+    [SerializeField] private float _maxInteractionDistance = 1f;
     private PlayerInput _playerInput;
 
     private Transform _lastOver = null;
@@ -32,16 +33,21 @@ public class InteractionManager : MonoBehaviour
     ///<summary>
     ///Called when mouse is clicked. 
     ///Checks whether the clicked object has IInteractable interface assigend and calls the method OnClick()
+    ///if player is close enough to the IInteractable object
     ///</summary>
     private void OnClick(InputAction.CallbackContext context)
     {
-        if (_lastOver == null) return;
-        _lastOver.GetComponent<IInteractable>()?.CursorClick();
+        if (_lastOver == null || GameManager.Instance == null) return;
+
+        if (Vector3.Distance(_lastOver.position, GameManager.Instance.player.position) <= _maxInteractionDistance)
+        {
+            _lastOver.GetComponent<IInteractable>()?.CursorClick();
+        }
     }
 
     private void OnGameStateChanged(GameStateManager.GameState newGameState)
     {
-        if(newGameState == GameStateManager.GameState.Gameplay) 
+        if (newGameState == GameStateManager.GameState.Gameplay)
         {
             _playerInput.Interactions.Enable();
         }
@@ -69,6 +75,17 @@ public class InteractionManager : MonoBehaviour
 
         if (hits.Length > 0 && hitInteractable)
         {
+            bool canInteract = false;
+            if(GameManager.Instance != null && _lastOver != null)
+            {
+                float distance = Vector3.Distance(GameManager.Instance.player.position, _lastOver.position);
+                if(distance < _maxInteractionDistance)
+                {
+                    canInteract = true;
+                    Debug.Log("Can interact");
+                }
+            }
+
             //1. Mouse enters new interactable
             //2. Mouse enters new interactable without leaving the previus one
             IInteractable interactable = hitInteractable.collider.GetComponent<IInteractable>();
@@ -76,7 +93,7 @@ public class InteractionManager : MonoBehaviour
             if (_lastOver == null && interactable != null)
             {
                 _lastOver = hitInteractable.transform;
-                _lastOver.GetComponent<IInteractable>()?.CursorEnter();
+                _lastOver.GetComponent<IInteractable>()?.CursorEnter(canInteract);
             }
             else if (_lastOver != null && interactable != null && _lastOver != hitInteractable.transform)
             {
@@ -84,12 +101,16 @@ public class InteractionManager : MonoBehaviour
                 _lastOver = null;
 
                 _lastOver = hitInteractable.transform;
-                _lastOver.GetComponent<IInteractable>()?.CursorEnter();
+                _lastOver.GetComponent<IInteractable>()?.CursorEnter(canInteract);
             }
-            else if(_lastOver != null && interactable == null)
+            else if (_lastOver != null && interactable == null)
             {
                 _lastOver?.GetComponent<IInteractable>()?.CursorExit();
                 _lastOver = null;
+            }
+            else
+            {
+                _lastOver?.GetComponent<IInteractable>()?.CursorEnter(canInteract);
             }
         }
         else

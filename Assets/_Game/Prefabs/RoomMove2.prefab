@@ -130,6 +130,8 @@ MonoBehaviour:
   _spawnPoint: {fileID: 5574857003003168483}
   _targetScene: 4
   _targetDoorId: 1
+  _canInteractColor: {r: 0.6227316, g: 1, b: 0.4198113, a: 1}
+  _cannotInteractColor: {r: 1, g: 0.41037738, b: 0.41037738, a: 1}
 --- !u!1 &8334249133677373584
 GameObject:
   m_ObjectHideFlags: 0
