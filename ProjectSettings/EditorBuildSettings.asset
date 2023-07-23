@@ -65,4 +65,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BlackScreen2.unity
     guid: 6244d29d87edae7459433e9603333962
+  - enabled: 1
+    path: Assets/Scenes/Lobby.unity
+    guid: ef5eb8692fe17bb40b451d4f95400156
   m_configObjects: {}

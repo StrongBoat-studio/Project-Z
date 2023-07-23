@@ -404,6 +404,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2985604164659502589, guid: 2554d2acf8d717949a055979150dcb9d, type: 3}
   m_PrefabInstance: {fileID: 203648901}
   m_PrefabAsset: {fileID: 0}
+--- !u!61 &364373165 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 5570671202888327690, guid: 49e7e3c970c6ce4418997a7a7fb7caad, type: 3}
+  m_PrefabInstance: {fileID: 1901970012}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &400901129
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -698,6 +703,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeec3f8a665aede44872bab204660db8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _boxCollider2: {fileID: 364373165}
+  _roomLoader: {fileID: 1901970016}
 --- !u!61 &859568128
 BoxCollider2D:
   m_ObjectHideFlags: 0
