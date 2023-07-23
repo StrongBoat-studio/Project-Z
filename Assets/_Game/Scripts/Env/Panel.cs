@@ -19,32 +19,44 @@ public class Panel : MonoBehaviour
 
     void Update()
     {
-        if (QuestLineManager.Instance.Quests[0].Tasks[0].Title == "Press the Button")
+        if(CheckQuest("Press the Button"))
         {
-            Debug.Log("press");
             _dialogueHolder.SetQuestDialogueController(_button);
-            _dialogueHolder.enabled = true;
-            _boxCollider2D.enabled = true;
+            SetQuestObjective(2, 1);
 
-            _questObjective.QuestID = 2;
-            _questObjective.QuestTaskID = 1;
-            _questObjective.enabled = true;
+            return;
         }
-        else if (QuestLineManager.Instance.Quests[0].Tasks[0].Title == "Turn off the Alarm")
+
+        if(CheckQuest("Turn off the Alarm"))
         {
             _dialogueHolder.SetQuestDialogueController(_alarm);
+            SetQuestObjective(3, 3);
+
+            return;
+        }
+    }
+
+    private bool CheckQuest(string QuestName)
+    {
+        if (QuestLineManager.Instance.Quests[0].Tasks[0].Title == QuestName)
+        {
             _dialogueHolder.enabled = true;
             _boxCollider2D.enabled = true;
-
-            _questObjective.QuestID = 3;
-            _questObjective.QuestTaskID = 3;
             _questObjective.enabled = true;
+            return true;
         }
         else
         {
             _dialogueHolder.enabled = false;
             _boxCollider2D.enabled = false;
             _questObjective.enabled = false;
+
+            return false;
         }
+    }
+    private void SetQuestObjective(int questId, int taskId)
+    {
+        _questObjective.QuestID = questId;
+        _questObjective.QuestTaskID = taskId;
     }
 }

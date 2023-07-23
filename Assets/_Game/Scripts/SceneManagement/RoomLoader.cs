@@ -73,4 +73,9 @@ public class RoomLoader : MonoBehaviour, IInteractable
     {
         return _spawnPoint.position;
     }
+
+    public void SetTargetScene(SceneRegister.Scenes scene)
+    {
+        _targetScene = scene;
+    }
 }

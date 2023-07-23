@@ -8,6 +8,8 @@ public class LeaderRoomDoor : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (!GameManager.Instance.movement.IsGrounded()) return;
+
         _animator = collision.GetComponentInChildren<Animator>();
 
         _animator.SetBool("IsTriggerDoor2", true);

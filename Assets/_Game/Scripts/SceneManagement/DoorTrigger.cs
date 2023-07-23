@@ -9,6 +9,8 @@ public class DoorTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (!GameManager.Instance.movement.IsGrounded()) return;
+
         _bottomColliderTransform.position = new Vector2(_bottomColliderTransform.position.x, -2.6f);
 
         _animator = collision.GetComponentInChildren<Animator>();

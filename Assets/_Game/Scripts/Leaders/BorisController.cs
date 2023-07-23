@@ -24,38 +24,39 @@ public class BorisController : MonoBehaviour
         if (QuestLineManager.Instance.Quests[0].Tasks[0].Title== "Have a conversation with Boris")
         {
             _dialogueHolder.SetQuestDialogueController(_dialogueControllers[0]);
-            _questObjective.QuestID = 1;
-            _questObjective.QuestTaskID = 0;
+            SetQuestObjective(1, 0);
             return;
         }
 
         if (QuestLineManager.Instance.Quests[0].Tasks[0].Title == "Talk to Boris")
         {
             _dialogueHolder.SetQuestDialogueController(_dialogueControllers[1]);
-            _questObjective.QuestID = 2;
-            _questObjective.QuestTaskID = 0;
+            SetQuestObjective(2, 0);
             return;
         }
 
         if (QuestLineManager.Instance.Quests[0].Tasks[0].Title == "Return to Boris")
         {
             _dialogueHolder.SetQuestDialogueController(_dialogueControllers[2]);
-            _questObjective.QuestID = 2;
-            _questObjective.QuestTaskID = 2;
+            SetQuestObjective(2, 2);
             return;
         }
 
         if(QuestLineManager.Instance.Quests[0].Tasks[0].Title == "Talk to the Crew")
         {
             _dialogueHolder.SetQuestDialogueController(_dialogueControllers[0]);
-            _questObjective.QuestID = 3;
-            _questObjective.QuestTaskID = 2;
+            SetQuestObjective(3, 2);
             ChangePosition(new Vector2(-1.5f, -0.7f));
             return;
         }
     }
 
-    void ChangePosition(Vector2 vector)
+    private void SetQuestObjective(int questId, int taskId)
+    {
+        _questObjective.QuestID = questId;
+        _questObjective.QuestTaskID = taskId;
+    }
+    private void ChangePosition(Vector2 vector)
     {
         transform.position = vector;
     }
