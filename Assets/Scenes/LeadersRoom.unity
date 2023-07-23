@@ -1494,7 +1494,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4505882919154333373, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.8
+      value: -6.5
       objectReference: {fileID: 0}
     - target: {fileID: 4505882919154333373, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1560,6 +1560,10 @@ PrefabInstance:
       propertyPath: item.collectDialogue
       value: 
       objectReference: {fileID: 4900000, guid: 836094dd9eb5d52499d720c02a86dc79, type: 3}
+    - target: {fileID: 4505882919448927684, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
+      propertyPath: _leaderRoomSceneController
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4505882919448927684, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
       propertyPath: item.Use.m_PersistentCalls.m_Calls.Array.size
       value: 0

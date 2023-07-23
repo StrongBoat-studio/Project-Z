@@ -55,6 +55,7 @@ public class Movement : MonoBehaviour
     private float _crouchTimer = 0f;
 
     public bool IsDoorAnimationPlay = false;
+    private bool isInLocker = false;
     private Vector2 _positionDuringDoorAnimation;
     #endregion
 
@@ -340,6 +341,7 @@ public class Movement : MonoBehaviour
     private void OnJump(InputAction.CallbackContext context)
     {
         if (!IsGrounded()) return;
+        if (isInLocker) return;
         if (_staminaCurrent < _staminaDrainJump) return;
 
         if(!_playerEarthController.IsEarth())
@@ -453,6 +455,11 @@ public class Movement : MonoBehaviour
     public void SetStamina(float stamina)
     {
         _staminaCurrent = stamina;
+    }
+
+    public void InLocker(bool isInLocker)
+    {
+        this.isInLocker = isInLocker;
     }
 
 }
