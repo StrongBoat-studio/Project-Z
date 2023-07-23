@@ -10,12 +10,8 @@ public class Item
     public enum ItemType
     {
         None = 0,
-        CD = 1,
+        Knife = 1,
         Gun = 2,
-        Key = 3,
-        Letter = 4,
-        PC = 5,
-        Potion = 6
     }
 
     public ItemType itemType;

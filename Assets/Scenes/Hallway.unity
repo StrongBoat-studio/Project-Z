@@ -471,8 +471,8 @@ SpriteRenderer:
   m_SortingLayerID: 845651673
   m_SortingLayer: 5
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 989fad5b0f4916b4fbe56675a3f8e8de, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 239cae3555b70c8488b7f1a0fd60053c, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.5882353}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -885,7 +885,6 @@ GameObject:
   - component: {fileID: 880845636}
   - component: {fileID: 880845635}
   - component: {fileID: 880845634}
-  - component: {fileID: 880845633}
   m_Layer: 0
   m_Name: Lobby
   m_TagString: Untagged
@@ -909,20 +908,6 @@ Transform:
   m_Father: {fileID: 984034877}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &880845633
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 880845631}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d7399e17f434bf4e894773a2c15f41d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  QuestID: 3
-  QuestTaskID: 1
 --- !u!114 &880845634
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -4,12 +4,14 @@ public class WeaponSwitching : MonoBehaviour
 {
     [SerializeField] private int _selectedWeapon=0;
     [SerializeField] private PlayerEarthController _playerEarthController;
+    [SerializeField] private Player _player = null;
     private int _previousSelectedWeapon;
 
     // Start is called before the first frame update
     void Start()
     {
         SelectWeapon();
+        _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
     // Update is called once per frame
@@ -18,10 +20,14 @@ public class WeaponSwitching : MonoBehaviour
 
         _previousSelectedWeapon = _selectedWeapon;
 
-
-        if(!_playerEarthController.IsEarth())
+        if(!_playerEarthController.IsEarth() && HasKnife() && HasGun())
         {
             WeaponScroll();
+        }
+        else if (!_playerEarthController.IsEarth() && HasKnife())
+        {
+            WeaponScroll();
+            if (_selectedWeapon == 1) _selectedWeapon = 2;
         }
         else
         {
@@ -67,6 +73,34 @@ public class WeaponSwitching : MonoBehaviour
 
             i++;
         }
+    }
+
+    private bool HasKnife()
+    {
+        if (_player == null) return false;
+
+        foreach (Item item in _player.GetInventory().Items)
+        {
+            if (item.itemType == Item.ItemType.Knife)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private bool HasGun()
+    {
+        if (_player == null) return false;
+
+        foreach (Item item in _player.GetInventory().Items)
+        {
+            if (item.itemType == Item.ItemType.Gun)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     /// <summary>

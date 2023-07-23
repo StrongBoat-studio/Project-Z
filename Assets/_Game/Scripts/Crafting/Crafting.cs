@@ -15,15 +15,11 @@ public class Crafting : MonoBehaviour, IInteractable
     [Tooltip("Recipe available for this crafing")]
     [SerializeField]
     private List<Item.ItemType> _recipe = new List<Item.ItemType>(){
-        Item.ItemType.Letter,
-        Item.ItemType.CD,
-        Item.ItemType.Key,
-        Item.ItemType.PC,
-        Item.ItemType.Potion
+        Item.ItemType.Knife,
     };
 
     [Tooltip("Item to be crafted")]
-    [SerializeField] private Item.ItemType _recipeOutput = Item.ItemType.Gun;
+    [SerializeField] private Item.ItemType _recipeOutput = Item.ItemType.Knife;
 
     private List<Item.ItemType> _recipeProgress;
     private PlayerInput _playerInput;

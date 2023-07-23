@@ -1447,6 +1447,8 @@ MonoBehaviour:
   - _dialogueTextAsset: {fileID: 4900000, guid: 8c20fd94f79e03b4fb40e9b1ed0de09c, type: 3}
   - _dialogueTextAsset: {fileID: 4900000, guid: 693405e17045afe499b8baba0f7c3022, type: 3}
   - _dialogueTextAsset: {fileID: 4900000, guid: 9d2dca5f7a7b5d8489d33952c528b56b, type: 3}
+  _dialogueHolder: {fileID: 306542328}
+  _questObjective: {fileID: 306542327}
 --- !u!1001 &4505882919448927682
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1454,6 +1456,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4505882918976808806, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4505882918976808807, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
       propertyPath: npcSceneID
       value: 1
@@ -1488,11 +1494,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4505882919154333373, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.4
+      value: -8.8
       objectReference: {fileID: 0}
     - target: {fileID: 4505882919154333373, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.7
+      value: -0.6
       objectReference: {fileID: 0}
     - target: {fileID: 4505882919154333373, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1529,6 +1535,42 @@ PrefabInstance:
     - target: {fileID: 4505882919154333375, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
       propertyPath: m_Name
       value: Boris
+      objectReference: {fileID: 0}
+    - target: {fileID: 4505882919448927684, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
+      propertyPath: item.sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 03810eec62c43f54db81b633a83b31bb, type: 3}
+    - target: {fileID: 4505882919448927684, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
+      propertyPath: item.itemName
+      value: Knife
+      objectReference: {fileID: 0}
+    - target: {fileID: 4505882919448927684, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
+      propertyPath: item.itemType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4505882919448927684, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
+      propertyPath: item.stackable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4505882919448927684, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
+      propertyPath: item.itemDecription
+      value: 
+      objectReference: {fileID: 4900000, guid: aeb0ae4317369864ea82cf66006494ef, type: 3}
+    - target: {fileID: 4505882919448927684, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
+      propertyPath: item.collectDialogue
+      value: 
+      objectReference: {fileID: 4900000, guid: 836094dd9eb5d52499d720c02a86dc79, type: 3}
+    - target: {fileID: 4505882919448927684, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
+      propertyPath: item.Use.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4505882919448927684, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
+      propertyPath: item.Use.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4505882919448927684, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
+      propertyPath: item.Use.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}

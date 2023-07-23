@@ -2066,6 +2066,40 @@ MonoBehaviour:
         amount: 0
       <JournalAppToOpen>k__BackingField: 4
     <IsCompleted>k__BackingField: 0
+  - <ID>k__BackingField: 4
+    <Title>k__BackingField: "\u201CAccording to the plan\u2026\u201D"
+    <Tasks>k__BackingField:
+    - <ID>k__BackingField: 0
+      <Title>k__BackingField: Take care of Shimura
+      <DisplayCompletionHint>k__BackingField: 0
+      <CompletionHint>k__BackingField: 
+      <IsCompleted>k__BackingField: 0
+      <TaskType>k__BackingField: 0
+      <ItemToCollect>k__BackingField:
+        itemType: 0
+        amount: 0
+      <JournalAppToOpen>k__BackingField: 0
+    - <ID>k__BackingField: 1
+      <Title>k__BackingField: Communicate with Boris
+      <DisplayCompletionHint>k__BackingField: 0
+      <CompletionHint>k__BackingField: 
+      <IsCompleted>k__BackingField: 0
+      <TaskType>k__BackingField: 0
+      <ItemToCollect>k__BackingField:
+        itemType: 0
+        amount: 0
+      <JournalAppToOpen>k__BackingField: 0
+    - <ID>k__BackingField: 2
+      <Title>k__BackingField: Approach the Greenhouse
+      <DisplayCompletionHint>k__BackingField: 0
+      <CompletionHint>k__BackingField: 
+      <IsCompleted>k__BackingField: 0
+      <TaskType>k__BackingField: 1
+      <ItemToCollect>k__BackingField:
+        itemType: 0
+        amount: 0
+      <JournalAppToOpen>k__BackingField: 0
+    <IsCompleted>k__BackingField: 0
 --- !u!4 &927334019
 Transform:
   m_ObjectHideFlags: 0
@@ -3108,7 +3142,7 @@ MonoBehaviour:
   items:
   - itemType: 1
     amount: 0
-    sprite: {fileID: 21300000, guid: 32329332070adcc4897c0597f3e2a39a, type: 3}
+    sprite: {fileID: 21300000, guid: 03810eec62c43f54db81b633a83b31bb, type: 3}
     stackable: 1
     Use:
       m_PersistentCalls:
@@ -3127,98 +3161,10 @@ MonoBehaviour:
           m_CallState: 2
     collectDialogue: {fileID: 4900000, guid: 836094dd9eb5d52499d720c02a86dc79, type: 3}
     itemDecription: {fileID: 4900000, guid: aeb0ae4317369864ea82cf66006494ef, type: 3}
-    itemName: "P\u0142yta CD"
+    itemName: Knife
   - itemType: 2
     amount: 0
-    sprite: {fileID: 21300000, guid: 6ff84b40bd206824ba9c3fd6e67ff090, type: 3}
-    stackable: 0
-    Use:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1421069938}
-          m_TargetAssemblyTypeName: ItemUse, Assembly-CSharp
-          m_MethodName: ConsumeItem
-          m_Mode: 0
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    collectDialogue: {fileID: 4900000, guid: 836094dd9eb5d52499d720c02a86dc79, type: 3}
-    itemDecription: {fileID: 4900000, guid: 0cb0641c2c91c05439c8f56efb05768a, type: 3}
-    itemName: Glock 18 duh
-  - itemType: 3
-    amount: 0
-    sprite: {fileID: 21300000, guid: 5cdd3dfdfdee97d43b64f608df5c7c90, type: 3}
-    stackable: 0
-    Use:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1421069938}
-          m_TargetAssemblyTypeName: ItemUse, Assembly-CSharp
-          m_MethodName: ConsumeItem
-          m_Mode: 0
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    collectDialogue: {fileID: 4900000, guid: 836094dd9eb5d52499d720c02a86dc79, type: 3}
-    itemDecription: {fileID: 4900000, guid: b82fec90bc49dbd49ab648ecd6e3e8ea, type: 3}
-    itemName: Pikselowy klucz
-  - itemType: 4
-    amount: 0
-    sprite: {fileID: 21300000, guid: 142ace99b94a0b541a73d36e712fb517, type: 3}
-    stackable: 0
-    Use:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1421069938}
-          m_TargetAssemblyTypeName: ItemUse, Assembly-CSharp
-          m_MethodName: ConsumeItem
-          m_Mode: 0
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    collectDialogue: {fileID: 4900000, guid: 836094dd9eb5d52499d720c02a86dc79, type: 3}
-    itemDecription: {fileID: 4900000, guid: f751b7a51cbb51d4f938b23a852c0793, type: 3}
-    itemName: "List, nie otwiera\u0107"
-  - itemType: 5
-    amount: 0
-    sprite: {fileID: 21300000, guid: 9ebf048c144f56548b10501644668829, type: 3}
-    stackable: 0
-    Use:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1421069938}
-          m_TargetAssemblyTypeName: ItemUse, Assembly-CSharp
-          m_MethodName: ConsumeItem
-          m_Mode: 0
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    collectDialogue: {fileID: 4900000, guid: 836094dd9eb5d52499d720c02a86dc79, type: 3}
-    itemDecription: {fileID: 4900000, guid: 701fb4bad0085384a836fb1f0004f910, type: 3}
-    itemName: Komputer, a raczej monitor
-  - itemType: 6
-    amount: 0
-    sprite: {fileID: 21300000, guid: 6d6d180aa82c26743bfe2a69af70ddbf, type: 3}
+    sprite: {fileID: 21300000, guid: 30da72e9f5643d3478f0c4439897f876, type: 3}
     stackable: 1
     Use:
       m_PersistentCalls:
@@ -3236,8 +3182,8 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     collectDialogue: {fileID: 4900000, guid: 836094dd9eb5d52499d720c02a86dc79, type: 3}
-    itemDecription: {fileID: 4900000, guid: a42a67e642c274947a24abcd848459c3, type: 3}
-    itemName: "Sok z gumijag\xF3d (Denaturat)"
+    itemDecription: {fileID: 4900000, guid: aeb0ae4317369864ea82cf66006494ef, type: 3}
+    itemName: Gun
 --- !u!4 &1421069937
 Transform:
   m_ObjectHideFlags: 0

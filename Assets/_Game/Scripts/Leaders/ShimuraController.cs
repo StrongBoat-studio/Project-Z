@@ -5,22 +5,28 @@ using UnityEngine;
 public class ShimuraController : MonoBehaviour
 {
     [SerializeField] private List<DialogueController> _dialogueControllers;
-    private DialogueHolder _dialogueHolder;
-    private Animator _animator;
-    private void Awake()
-    {
-        _dialogueHolder = GetComponentInChildren<DialogueHolder>();
-        _animator = GetComponentInChildren<Animator>();
-    }
+    [SerializeField] private DialogueHolder _dialogueHolder;
+    [SerializeField] private QuestObjective _questObjective;
 
     // Update is called once per frame
     void Update()
     {
-        if (QuestLineManager.Instance.Quests.Count < 1) return;
-
         if (QuestLineManager.Instance.Quests[0].Tasks[0].Title == "Talk to Shimura")
         {
             _dialogueHolder.SetQuestDialogueController(_dialogueControllers[0]);
+            SetQuestObjective(1, 1);
         }
+
+        if(QuestLineManager.Instance.Quests[0].Tasks[0].Title == "Take care of Shimura")
+        {
+            _dialogueHolder.SetQuestDialogueController(_dialogueControllers[1]);
+            SetQuestObjective(4, 0);
+        }
+    }
+
+    private void SetQuestObjective(int questId, int taskId)
+    {
+        _questObjective.QuestID = questId;
+        _questObjective.QuestTaskID = taskId;
     }
 }

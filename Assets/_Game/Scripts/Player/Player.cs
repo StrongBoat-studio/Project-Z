@@ -84,4 +84,9 @@ public class Player : MonoBehaviour
     {
         _currentHelath = health;
     }
+
+    public void AddItem(Item item)
+    {
+        _inventory.AddItem(item);
+    }
 }
