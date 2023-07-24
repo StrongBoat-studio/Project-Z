@@ -89,7 +89,7 @@ public class WalkerStateManager : MonoBehaviour, IMutantInit
     {
         _player = GameManager.Instance.player;
         _movement = GameManager.Instance.movement;
-        _mutant = transform;
+        _mutant = this.gameObject.transform;
         _walkerPatrolling = GetComponent<WalkerPatrolling>();
         _animator = GetComponentInChildren<Animator>();
         

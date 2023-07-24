@@ -55,7 +55,7 @@ public class Movement : MonoBehaviour
     private float _crouchTimer = 0f;
 
     public bool IsDoorAnimationPlay = false;
-    private bool isInLocker = false;
+    public bool isInLocker = false;
     private Vector2 _positionDuringDoorAnimation;
     #endregion
 

@@ -20,4 +20,9 @@ public class JumperDeath : MonoBehaviour
         _deadJumper.transform.localScale = _jumperStateManager.GetScale();
         Instantiate(_deadJumper, _jumperStateManager.GetPosition(), Quaternion.identity, _deadMutants);
     }
+
+    public void AttackPlayer()
+    {
+        GameManager.Instance.Player.TakeDamage(10);
+    }
 }

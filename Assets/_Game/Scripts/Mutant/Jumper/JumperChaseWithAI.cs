@@ -69,7 +69,7 @@ public class JumperChaseWithAI : MonoBehaviour
             if (_target == null) return;          
         }
 
-        if (_seeker.IsDone())
+        if (_seeker.IsDone() && this.gameObject.activeSelf == true)
         {
             _seeker.StartPath(_rigidbody2D.position, GetTarget(), OnPathComplete);
         }
@@ -92,7 +92,12 @@ public class JumperChaseWithAI : MonoBehaviour
 
     private void FixedUpdate()
     {
-        isGrounded = Physics2D.OverlapCapsule(_groundCheck.position, new Vector2(1.65f, 0.075f), CapsuleDirection2D.Horizontal, 0, _groundlayer);
+        _groundCheck = GameObject.FindGameObjectWithTag("GroundCheck").GetComponent<Transform>();
+        if(_groundCheck!=null)
+        {
+            isGrounded = Physics2D.OverlapCapsule(_groundCheck.position, new Vector2(1.65f, 0.075f), CapsuleDirection2D.Horizontal, 0, _groundlayer);
+        }
+
         _currensState = _jumperStateManager.GetJumperState();
 
         if (_path == null) return;
@@ -176,7 +181,7 @@ public class JumperChaseWithAI : MonoBehaviour
 
     public void Jump()
     {
-        force = Vector2.up * _jumpPower * Time.fixedDeltaTime * 10000f;
+        force = Vector2.up * _jumpPower * Time.fixedDeltaTime * 12500f;
         _rigidbody2D.AddForce(force, ForceMode2D.Impulse);
     }
 }

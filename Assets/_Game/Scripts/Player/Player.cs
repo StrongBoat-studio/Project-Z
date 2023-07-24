@@ -8,8 +8,8 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     private PlayerInput _playerInput;
-    private int _helathMax = 100;
-    private int _currentHelath = 100;
+    public int _helathMax = 100;
+    public int _currentHelath = 100;
     [SerializeField] private Image _playerHealthBar;
 
     private Inventory _inventory;
@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
     {
         GameManager.Instance.player = transform;
         GameManager.Instance.movement = this.GetComponent<Movement>();
+        GameManager.Instance.Player = this;
 
         _playerInput = new PlayerInput();
         GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
@@ -37,10 +38,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            TakeDamage(20);
-        }
+
     }
 
     private void OnDestroy()
@@ -55,18 +53,25 @@ public class Player : MonoBehaviour
         
     }
 
-    private void TakeDamage(int dmg)
+    public void TakeDamage(int dmg)
     {
-        _currentHelath -= dmg;
-        _playerHealthBar.fillAmount = Mathf.Clamp(_currentHelath / _helathMax, 0f, 1f);
+        if (!GameManager.Instance.movement.isInLocker)
+        {
+            _currentHelath -= dmg;
 
-        if(_currentHelath <= 20 && _currentHelath > 0)
-        {
-            _lowHP.Play();
-        }
-        else if(_currentHelath <= 0)
-        {
-            Debug.Log("Dead");
+            _playerHealthBar.fillAmount = Mathf.Clamp(_playerHealthBar.fillAmount - dmg * 0.01f, 0f, 1f);
+
+            if (_currentHelath <= 20 && _currentHelath > 0)
+            {
+                _lowHP.Play();
+            }
+            else if (_currentHelath <= 0)
+            {
+                GameManager.Instance.showBoris = false;
+                SceneRegister.Instance.LoadNextLevel(GameObject.FindGameObjectWithTag("LeaderRoomLoader").GetComponent<RoomLoader>());
+                _currentHelath = _helathMax;
+                _playerHealthBar.fillAmount = 1.0f;
+            }
         }
     }
 

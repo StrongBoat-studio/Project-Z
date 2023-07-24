@@ -18,9 +18,9 @@ public class WalkerAttackState : WalkerBaseState
         AttackM();
         PositionCheck();
 
-        if (Context.Distance > Context.DistanceChase)
+        if (Context.Distance > Context.DistanceAttack)
         {
-            walker.SwitchState(walker.PatrollingState);
+            walker.SwitchState(walker.ChaseState);
             Context.Animator.SetBool("IsAttack1", false);
             Context.Animator.SetBool("InAttack2", false);
         }

@@ -163,6 +163,8 @@ public class JumperStateManager : MonoBehaviour, IMutantInit
             _sliderObject.SetActive(false);
 
             _animator.SetBool("IsStanding", false);
+            _animator.SetBool("IsAttack1", false);
+            _animator.SetBool("IsAttack2", false);
             _animator.SetBool("IsDeath", true);
 
             _alert.SetActive(false);

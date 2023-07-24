@@ -20,6 +20,13 @@ public class BorisController : MonoBehaviour
     private int count = 0;
     private void Awake()
     {
+        GameManager.Instance.boris = this.gameObject;
+
+        if(!GameManager.Instance.ShowBoris())
+        {
+            this.gameObject.SetActive(false);
+        }
+
         _dialogueHolder = GetComponentInChildren<DialogueHolder>();
         _questObjective = GetComponentInChildren<QuestObjective>();
         _animator = GetComponentInChildren<Animator>();
@@ -133,5 +140,10 @@ public class BorisController : MonoBehaviour
             _player.AddItem(item);
             giveItem = true;
         }
+    }
+
+    private void OnDestroy()
+    {
+        
     }
 }

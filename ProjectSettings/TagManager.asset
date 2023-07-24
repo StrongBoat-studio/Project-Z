@@ -20,6 +20,7 @@ TagManager:
   - ChasePoints
   - GroundCheck
   - RoomLoader
+  - LeaderRoomLoader
   layers:
   - Default
   - TransparentFX

@@ -20,4 +20,9 @@ public class WalkerDeath : MonoBehaviour
         _deadWalker.transform.localScale = _walkerStateManager.GetScale();
         Instantiate(_deadWalker, _walkerStateManager.GetPosition(), Quaternion.identity, _deadMutants);
     }
+
+    public void AttackPlayer()
+    {
+        GameManager.Instance.Player.TakeDamage(10);
+    }
 }

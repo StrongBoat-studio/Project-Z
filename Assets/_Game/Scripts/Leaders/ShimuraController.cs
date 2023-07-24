@@ -9,6 +9,12 @@ public class ShimuraController : MonoBehaviour
     [SerializeField] private QuestObjective _questObjective;
 
     // Update is called once per frame
+
+    private void Awake()
+    {
+        GameManager.Instance.shimura = this.gameObject;
+    }
+
     void Update()
     {
         if (QuestLineManager.Instance.Quests[0].Tasks[0].Title == "Talk to Shimura")
