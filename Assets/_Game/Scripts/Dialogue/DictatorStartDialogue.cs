@@ -12,6 +12,7 @@ public class DictatorStartDialogue : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance.movement == null) return;
         if(GameManager.Instance.movement.IsGrounded() && _canStart)
         {
             _canStart = false;
@@ -30,6 +31,5 @@ public class DictatorStartDialogue : MonoBehaviour
 
         Destroy(this);
         Destroy(_dialogueHolder);
-        
     }
 }

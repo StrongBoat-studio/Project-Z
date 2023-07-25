@@ -20,6 +20,7 @@ TagManager:
   - ChasePoints
   - GroundCheck
   - RoomLoader
+  - CamConfiner
   layers:
   - Default
   - TransparentFX

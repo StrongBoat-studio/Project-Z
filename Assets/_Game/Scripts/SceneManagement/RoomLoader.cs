@@ -72,6 +72,7 @@ public class RoomLoader : MonoBehaviour, IInteractable
     public Vector3 GetSpawnPosition()
     {
         return _spawnPoint.position;
+        //return new Vector3(transform.position.x - _spawnPoint.localPosition.x, transform.position.y + _spawnPoint.localPosition.y, _spawnPoint.position.z);
     }
 
     public void SetTargetScene(SceneRegister.Scenes scene)

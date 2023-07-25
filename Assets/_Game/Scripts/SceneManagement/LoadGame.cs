@@ -71,6 +71,13 @@ public class LoadGame : MonoBehaviour
         Debug.LogWarning("Reset game state");
         GameStateManager.Instance.ResetGameStateStack();
         GameStateManager.Instance.SetState(GameStateManager.GameState.Gameplay);
+
+        if (GameObject.FindGameObjectWithTag("CamConfiner") != null)
+        {
+            GameManager.Instance.player.GetComponent<Player>().SetVCamConfiner(
+                GameObject.FindGameObjectWithTag("CamConfiner")
+            );
+        }
         yield return null;
     }
 }

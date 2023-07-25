@@ -4450,7 +4450,7 @@ MonoBehaviour:
   _nameText: {fileID: 582282977}
   _messageText: {fileID: 127382851}
   _typeSpeed: 100
-  _typeSpeedSkip: 200
+  _typeSpeedSkip: 200000
   _currentTextAsset: {fileID: 0}
 --- !u!4 &2146267354
 Transform:
