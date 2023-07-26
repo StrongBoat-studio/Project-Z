@@ -121,8 +121,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _walkerStateManager: {fileID: 1595312744772529114}
   _deadWalker: {fileID: 6872797364292304265, guid: a0dd1fdc3a9ca5a4191416b04377c69f, type: 3}
-  _trash: {fileID: 345965739051681043}
-  trashPosition: {x: 0, y: 0}
 --- !u!114 &8104608183837862432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,6 +134,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _trash: {fileID: 4821413465001953392}
+  _trashPrefab: {fileID: 26595726556315394, guid: cfcbf6ccdc76e774591012dc99cf8576, type: 3}
+  _throwForce: 1000
+  trashPosition: {x: 0.21, y: -0.18}
 --- !u!1 &1595312744772529113
 GameObject:
   m_ObjectHideFlags: 0
@@ -730,7 +731,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4821413465001953392}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.21, y: -0.18, z: 0}
+  m_LocalPosition: {x: -0.93, y: 0.83, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

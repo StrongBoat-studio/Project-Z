@@ -21,6 +21,8 @@ TagManager:
   - GroundCheck
   - RoomLoader
   - LeaderRoomLoader
+  - GroundCheckTrash
+  - Trashes
   layers:
   - Default
   - TransparentFX
