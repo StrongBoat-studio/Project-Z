@@ -10,7 +10,7 @@ public class WalkerAttackState : WalkerBaseState
 
     public override void EnterState(WalkerStateManager walker)
     {
-        Debug.Log("Attack State");
+
     }
 
     public override void UpdateState(WalkerStateManager walker)

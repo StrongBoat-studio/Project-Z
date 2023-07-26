@@ -6,8 +6,6 @@ public class WalkerPatrollingState : WalkerBaseState
 {
     public override void EnterState(WalkerStateManager walker)
     {
-        Debug.Log("Patrolling State");
-
         Context.Zone1 = false;
         Context.Zone2 = false;
         Context.Zone3 = false;

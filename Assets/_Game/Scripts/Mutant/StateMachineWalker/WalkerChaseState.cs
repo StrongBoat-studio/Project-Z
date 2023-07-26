@@ -7,7 +7,7 @@ public class WalkerChaseState : WalkerBaseState
 
     public override void EnterState(WalkerStateManager walker)
     {
-        Debug.Log("Chase State");
+
     }
 
     public override void UpdateState(WalkerStateManager walker)

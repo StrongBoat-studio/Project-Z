@@ -5,8 +5,6 @@ public class WalkerBeforeChaseState : WalkerBaseState
 {
     public override void EnterState(WalkerStateManager walker)
     {
-        Debug.Log("Before Chase State");
-
         Context.Alert.SetActive(true);
     }
 

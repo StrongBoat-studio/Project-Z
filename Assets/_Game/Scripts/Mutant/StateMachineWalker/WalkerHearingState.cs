@@ -4,7 +4,6 @@ public class WalkerHearingState : WalkerBaseState
 {
     public override void EnterState(WalkerStateManager walker)
     {
-        Debug.Log("Hearing State");
         Context.Alert.SetActive(true);
     }
 
