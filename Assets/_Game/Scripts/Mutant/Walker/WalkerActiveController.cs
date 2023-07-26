@@ -35,6 +35,8 @@ public class WalkerActiveController : MonoBehaviour
 
     private void SetActive(bool isActive)
     {
+        if (GetComponent<WalkerStateManager>().isPickUp) return;
+
         _walkerStateManager.enabled = isActive;
         _walkerPatrolling.enabled = isActive;
         _walkerChaseWithAI.enabled = isActive;

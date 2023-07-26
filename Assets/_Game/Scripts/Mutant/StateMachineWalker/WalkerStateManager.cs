@@ -84,6 +84,7 @@ public class WalkerStateManager : MonoBehaviour, IMutantInit
     //Animations
     [SerializeField] private GameObject _alert;
     private Animator _animator;
+    public bool isPickUp = false;
 
     void Awake()
     {
@@ -219,6 +220,8 @@ public class WalkerStateManager : MonoBehaviour, IMutantInit
     {
         //SaveSystem Code
 
+        GetComponent<WalkerPatrolling>().enabled = true;
+        GetComponent<WalkerChaseWithAI>().enabled = true;
         Destroy(this.gameObject);
     }
 

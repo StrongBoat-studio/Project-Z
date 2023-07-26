@@ -16,9 +16,9 @@ public class TrashWorld : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.GetComponent<WalkerStateManager>()!=null)
+        if(collision.gameObject.GetComponentInChildren<ThrowController>()!=null)
         {
-            Debug.Log("Walker in trash");
+            collision.gameObject.GetComponentInChildren<ThrowController>().GetTrash(_trashType, this.gameObject);
         }
     }
 }
