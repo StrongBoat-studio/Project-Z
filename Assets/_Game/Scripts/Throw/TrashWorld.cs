@@ -25,7 +25,6 @@ public class TrashWorld : MonoBehaviour
     private void FixedUpdate()
     {
         isGrounded = Physics2D.OverlapCapsule(_groundCheck.transform.position, new Vector2(0.3f, 0.05f), CapsuleDirection2D.Horizontal, 0, _groundlayer);
-        Debug.Log(isGrounded);
 
         if (isGrounded)
         {
@@ -49,6 +48,11 @@ public class TrashWorld : MonoBehaviour
         if(collision.gameObject.tag=="Ground")
         {
             _rigidbody2D.constraints = RigidbodyConstraints2D.FreezePosition;
+        }
+
+        if(collision.gameObject.tag=="Player" && !isGrounded)
+        {
+            GameManager.Instance.Player.TakeDamage(5);
         }
     }
 

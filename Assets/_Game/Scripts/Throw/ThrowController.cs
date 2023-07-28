@@ -25,17 +25,27 @@ public class ThrowController : MonoBehaviour
             trashPosition = new Vector2(0.21f, -0.18f);
         }
         _trash.transform.localPosition = trashPosition;
+
+        if(GetComponentInParent<Animator>().GetBool("IsPickUp")==true)
+        {
+            GetComponent<Animator>().SetBool("IsAttack1", false);
+            GetComponent<Animator>().SetBool("InAttack2", false);
+            GetComponent<Animator>().SetBool("IsStanding", false);
+        }
     }
 
     public void GetTrash(Trash.TrashType trashTypeCollision, GameObject objectToDestroy)
     {
-        GetComponentInParent<WalkerStateManager>().isPickUp = true;
-        GetComponentInParent<WalkerPatrolling>().enabled = false;
-        GetComponentInParent<WalkerChaseWithAI>().enabled = false;
-        GetComponentInParent<Animator>().SetBool("IsPickUp", true);
+        if (GetComponentInParent<WalkerStateManager>().GetWalkerState() == GetComponentInParent<WalkerStateManager>().ChaseState)
+        {
+            GetComponentInParent<WalkerStateManager>().isPickUp = true;
+            GetComponentInParent<WalkerPatrolling>().enabled = false;
+            GetComponentInParent<WalkerChaseWithAI>().enabled = false;
+            GetComponentInParent<Animator>().SetBool("IsPickUp", true);
 
-        _trashType = trashTypeCollision;
-        _objectToDestroy = objectToDestroy;
+            _trashType = trashTypeCollision;
+            _objectToDestroy = objectToDestroy;
+        }
     }
 
     public void SetTrash()

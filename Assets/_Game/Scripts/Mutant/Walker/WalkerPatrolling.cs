@@ -109,7 +109,15 @@ public class WalkerPatrolling : MonoBehaviour
         if (!_chectNextPosition)
         {
             _chectNextPosition = true;
-            _nextPosition = _random.Next((int)_mutantTransform.position.x + 1, _maxRightX);
+
+            if((int)_mutantTransform.position.x + 1> _maxRightX)
+            {
+                _nextPosition = _random.Next(_maxLeftX, (int)_mutantTransform.position.x + 1);
+            }
+            else
+            {
+                _nextPosition = _random.Next((int)_mutantTransform.position.x + 1, _maxRightX);
+            }
 
             return _nextPosition;
         }
