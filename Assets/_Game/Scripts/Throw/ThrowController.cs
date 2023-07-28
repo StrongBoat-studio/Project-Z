@@ -5,10 +5,12 @@ using UnityEngine;
 public class ThrowController : MonoBehaviour
 {
     [SerializeField] private GameObject _trash;
+    [SerializeField] private Transform _walker;
     [SerializeField] private GameObject _trashPrefab;
     [SerializeField] private int _throwForce;
     private Trash.TrashType _trashType;
     private GameObject _objectToDestroy;
+    private GameObject _newTrash;
 
     public Vector2 trashPosition = new Vector2(0.21f, -0.18f);
 
@@ -53,9 +55,9 @@ public class ThrowController : MonoBehaviour
     {
         _trash.SetActive(false);
         _trashPrefab.GetComponent<TrashWorld>().SetTrashType(_trashType);
-        _trashPrefab.GetComponent<TrashWorld>().isGrounded = false;
-        Instantiate(_trashPrefab, _trash.transform.position, Quaternion.identity, GameObject.FindGameObjectWithTag("Trashes").transform);
 
+        _newTrash = Instantiate(_trashPrefab, _trash.transform.position, Quaternion.identity, GameObject.FindGameObjectWithTag("Trashes").transform);
+        _newTrash.GetComponent<TrashWorld>().Throw(_walker.localScale.x);
     }
 
     public void StopThrow()

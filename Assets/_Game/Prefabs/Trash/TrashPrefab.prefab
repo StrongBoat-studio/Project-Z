@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1440921813}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: GroundCheckTrash
   m_TagString: GroundCheckTrash
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 6398985157943119802}
   - component: {fileID: 7977122633696534013}
   - component: {fileID: 7682445560183427538}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TrashPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,14 +132,14 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 18.6
-  m_AngularDrag: 18.6
-  m_GravityScale: 0
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 2
   m_SleepingMode: 0
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &7977122633696534013
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -183,5 +183,5 @@ MonoBehaviour:
   _groundlayer:
     serializedVersion: 2
     m_Bits: 128
-  _throwForce: 100
+  _throwForce: 5
   isGrounded: 0
