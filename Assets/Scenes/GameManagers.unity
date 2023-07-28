@@ -3232,6 +3232,182 @@ MonoBehaviour:
     collectDialogue: {fileID: 4900000, guid: 836094dd9eb5d52499d720c02a86dc79, type: 3}
     itemDecription: {fileID: 4900000, guid: aeb0ae4317369864ea82cf66006494ef, type: 3}
     itemName: Gun
+  - itemType: 3
+    amount: 0
+    sprite: {fileID: 21300000, guid: 7412bd99a3cd9a5469102da046da6aa8, type: 3}
+    stackable: 1
+    Use:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1421069938}
+          m_TargetAssemblyTypeName: ItemUse, Assembly-CSharp
+          m_MethodName: ConsumeItem
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    collectDialogue: {fileID: 4900000, guid: 836094dd9eb5d52499d720c02a86dc79, type: 3}
+    itemDecription: {fileID: 4900000, guid: aeb0ae4317369864ea82cf66006494ef, type: 3}
+    itemName: Ammo
+  - itemType: 4
+    amount: 0
+    sprite: {fileID: 21300000, guid: 061a4deb80e58004daa35fa3c657acbc, type: 3}
+    stackable: 1
+    Use:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1421069938}
+          m_TargetAssemblyTypeName: ItemUse, Assembly-CSharp
+          m_MethodName: ConsumeItem
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    collectDialogue: {fileID: 4900000, guid: 836094dd9eb5d52499d720c02a86dc79, type: 3}
+    itemDecription: {fileID: 4900000, guid: aeb0ae4317369864ea82cf66006494ef, type: 3}
+    itemName: Drool1
+  - itemType: 5
+    amount: 0
+    sprite: {fileID: 21300000, guid: c906394f8c885154381c1ccb8488a598, type: 3}
+    stackable: 1
+    Use:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1421069938}
+          m_TargetAssemblyTypeName: ItemUse, Assembly-CSharp
+          m_MethodName: ConsumeItem
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    collectDialogue: {fileID: 4900000, guid: 836094dd9eb5d52499d720c02a86dc79, type: 3}
+    itemDecription: {fileID: 4900000, guid: aeb0ae4317369864ea82cf66006494ef, type: 3}
+    itemName: Drool2
+  - itemType: 6
+    amount: 0
+    sprite: {fileID: 21300000, guid: 057ef904a8bf87c4eaf44773740db899, type: 3}
+    stackable: 1
+    Use:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1421069938}
+          m_TargetAssemblyTypeName: ItemUse, Assembly-CSharp
+          m_MethodName: ConsumeItem
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    collectDialogue: {fileID: 4900000, guid: 836094dd9eb5d52499d720c02a86dc79, type: 3}
+    itemDecription: {fileID: 4900000, guid: aeb0ae4317369864ea82cf66006494ef, type: 3}
+    itemName: GumPowder
+  - itemType: 7
+    amount: 0
+    sprite: {fileID: 21300000, guid: 026f7f7593591ad49ac18d739d20a3b4, type: 3}
+    stackable: 1
+    Use:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1421069938}
+          m_TargetAssemblyTypeName: ItemUse, Assembly-CSharp
+          m_MethodName: ConsumeItem
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    collectDialogue: {fileID: 4900000, guid: 836094dd9eb5d52499d720c02a86dc79, type: 3}
+    itemDecription: {fileID: 4900000, guid: aeb0ae4317369864ea82cf66006494ef, type: 3}
+    itemName: Herb
+  - itemType: 8
+    amount: 0
+    sprite: {fileID: 21300000, guid: 46528a6621626c94b959589c7750df95, type: 3}
+    stackable: 1
+    Use:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1421069938}
+          m_TargetAssemblyTypeName: ItemUse, Assembly-CSharp
+          m_MethodName: ConsumeItem
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    collectDialogue: {fileID: 4900000, guid: 836094dd9eb5d52499d720c02a86dc79, type: 3}
+    itemDecription: {fileID: 4900000, guid: aeb0ae4317369864ea82cf66006494ef, type: 3}
+    itemName: Note
+  - itemType: 9
+    amount: 0
+    sprite: {fileID: 21300000, guid: ae5caf61299b8514b90d854aecadfbc8, type: 3}
+    stackable: 1
+    Use:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1421069938}
+          m_TargetAssemblyTypeName: ItemUse, Assembly-CSharp
+          m_MethodName: ConsumeItem
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    collectDialogue: {fileID: 4900000, guid: 836094dd9eb5d52499d720c02a86dc79, type: 3}
+    itemDecription: {fileID: 4900000, guid: aeb0ae4317369864ea82cf66006494ef, type: 3}
+    itemName: Vile1
+  - itemType: 10
+    amount: 0
+    sprite: {fileID: 21300000, guid: a23854102975e7e4891c2db2c13d23f1, type: 3}
+    stackable: 1
+    Use:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1421069938}
+          m_TargetAssemblyTypeName: ItemUse, Assembly-CSharp
+          m_MethodName: ConsumeItem
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    collectDialogue: {fileID: 4900000, guid: 836094dd9eb5d52499d720c02a86dc79, type: 3}
+    itemDecription: {fileID: 4900000, guid: aeb0ae4317369864ea82cf66006494ef, type: 3}
+    itemName: Vile2
 --- !u!4 &1421069937
 Transform:
   m_ObjectHideFlags: 0
