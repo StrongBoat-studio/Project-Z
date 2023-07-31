@@ -13,6 +13,8 @@ public class ShimuraController : MonoBehaviour
     private void Awake()
     {
         GameManager.Instance.shimura = this.gameObject;
+
+        this.gameObject.SetActive(GameManager.Instance.ShowShimura());
     }
 
     void Update()
@@ -27,6 +29,11 @@ public class ShimuraController : MonoBehaviour
         {
             _dialogueHolder.SetQuestDialogueController(_dialogueControllers[1]);
             SetQuestObjective(4, 0);
+        }
+
+        if (QuestLineManager.Instance.Quests[0].Tasks[0].Title == "Find the source of the gunshot sound")
+        {
+            GameManager.Instance.showShimura = false;
         }
     }
 

@@ -12,7 +12,7 @@ public class DictatorStartDialogue : MonoBehaviour
 
     private void Update()
     {
-        if(GameManager.Instance.movement.IsGrounded() && _canStart)
+        if(GameManager.Instance.movement.IsGrounded() && _canStart && GameStateManager.Instance.GetCurrentState()==GameStateManager.GameState.Gameplay)
         {
             _canStart = false;
             StartDialogue();

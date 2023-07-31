@@ -6,6 +6,7 @@ public class BorisController : MonoBehaviour
 {
     [SerializeField] private List<DialogueController> _dialogueControllers;
     [SerializeField] private Item item;
+    [SerializeField] private LeaderController _leaderController;
     private DialogueHolder _dialogueHolder;
     private QuestObjective _questObjective;
     private Animator _animator;
@@ -56,8 +57,14 @@ public class BorisController : MonoBehaviour
             return;
         }
 
+        if (QuestLineManager.Instance.Quests[0].Tasks[0].Title == "Communicate with Boris")
+        {
+            _leaderController.enabled = false;
+        }
+
         if (QuestLineManager.Instance.Quests[0].Tasks[0].Title == "Approach the Greenhouse")
         {
+
             GiveKnife();
 
             if(GameStateManager.Instance.GetCurrentState()==GameStateManager.GameState.Gameplay)
@@ -129,6 +136,7 @@ public class BorisController : MonoBehaviour
         if (transform.position.x == -8.8f)
         {
             this.gameObject.SetActive(false);
+            _leaderController.enabled = true;
         }
     }
 

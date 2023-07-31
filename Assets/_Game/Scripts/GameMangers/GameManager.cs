@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     public bool showBoris = true;
+    public bool showShimura = true;
 
     private void Awake()
     {
@@ -20,16 +21,6 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
         }
-    }
-
-    private void Update()
-    {
-        if (boris == null) return;
-        if(boris.activeSelf==false)
-        {
-            showBoris = false;
-        }
-
     }
 
     public Transform player;
@@ -46,6 +37,14 @@ public class GameManager : MonoBehaviour
     public bool ShowBoris()
     {
         if (showBoris)
+            return true;
+        else
+            return false;
+    }
+
+    public bool ShowShimura()
+    {
+        if (showShimura)
             return true;
         else
             return false;

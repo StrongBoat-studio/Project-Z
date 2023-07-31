@@ -27,21 +27,28 @@ public class BorisInGreenhouse : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.Instance.movement.IsGrounded() && _canStart)
+        if (GameManager.Instance.movement.IsGrounded() && _canStart && GameStateManager.Instance.GetCurrentState() == GameStateManager.GameState.Gameplay)
         {
             _canStart = false;
             StartDialogue();
+        }
+
+        if (QuestLineManager.Instance.Quests[0].Tasks[0].Title == "Talk to Boris")
+        {
+            this.gameObject.SetActive(true);
+            _animator.SetBool("IsWalk", false);
+        }
+
+        if (GameStateManager.Instance.GetCurrentState() == GameStateManager.GameState.Gameplay && QuestLineManager.Instance.Quests[0].Tasks[0].Title == "Find the source of the gunshot sound")
+        {
+            Destroy(this.gameObject);
         }
     }
 
     void StartDialogue()
     {
-        //if (QuestLineManager.Instance.Quests[0].Tasks[0].Title == "Talk to Boris")
-        //{
-            _dialogueHolder.PlayDialogueQuest();
-            QuestLineManager.Instance.Quests[0].Tasks[0].Complete();
-            QuestLineManager.Instance.CheckQuest(GetComponentInChildren<QuestObjective>());
-        //}
-
+        _dialogueHolder.PlayDialogueQuest();
+        QuestLineManager.Instance.Quests[0].Tasks[0].Complete();
+        QuestLineManager.Instance.CheckQuest(GetComponentInChildren<QuestObjective>());
     }
 }

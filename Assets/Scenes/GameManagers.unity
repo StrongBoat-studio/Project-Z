@@ -2128,10 +2128,10 @@ MonoBehaviour:
       <DisplayCompletionHint>k__BackingField: 0
       <CompletionHint>k__BackingField: 
       <IsCompleted>k__BackingField: 0
-      <TaskType>k__BackingField: 0
+      <TaskType>k__BackingField: 3
       <ItemToCollect>k__BackingField:
-        itemType: 0
-        amount: 0
+        itemType: 2
+        amount: 1
       <JournalAppToOpen>k__BackingField: 0
     - <ID>k__BackingField: 3
       <Title>k__BackingField: Argue with Boris
@@ -3059,6 +3059,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   showBoris: 1
+  showShimura: 1
   player: {fileID: 0}
   Player: {fileID: 0}
   movement: {fileID: 0}
