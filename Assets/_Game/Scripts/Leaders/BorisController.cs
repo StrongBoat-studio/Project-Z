@@ -21,8 +21,6 @@ public class BorisController : MonoBehaviour
     private int count = 0;
     private void Awake()
     {
-        GameManager.Instance.boris = this.gameObject;
-
         if(!GameManager.Instance.ShowBoris())
         {
             this.gameObject.SetActive(false);

@@ -419,8 +419,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 289911064}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.0937, y: -0.67185, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -1.4688, y: -0.67185, z: 0}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1878502244}
@@ -683,9 +683,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 638271688}
+  - component: {fileID: 638271689}
+  - component: {fileID: 638271690}
   m_Layer: 0
   m_Name: Leaders
-  m_TagString: Untagged
+  m_TagString: Leaders
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -707,6 +709,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &638271689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 638271687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ef4f4d1449d69f4abcead84c1e1510c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _questsNameWhenShowBoris:
+  - Listen to the speech
+  - Board the Great Spaceship
+  _questsNameWhenShowShimura:
+  - Listen to the speech
+  - Board the Great Spaceship
+  _boris: {fileID: 289911064}
+  _shimura: {fileID: 1328454990}
+--- !u!114 &638271690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 638271687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb33dc9d989f7e94187ed0dd6898cb21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canAnimStart: 1
 --- !u!1 &743629591
 GameObject:
   m_ObjectHideFlags: 0
@@ -1340,8 +1375,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1328454990}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.03126, y: -0.67188, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -1.4064, y: -0.67188, z: 0}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 861929115}
@@ -1783,8 +1818,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1947401939
   m_SortingLayer: 3
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: dc8a95a770957eb419927d376c4cdde3, type: 3}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300000, guid: 75b3c4befedc716498734cafcd1eb4cc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

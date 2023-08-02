@@ -23,6 +23,7 @@ TagManager:
   - LeaderRoomLoader
   - GroundCheckTrash
   - Trashes
+  - Leaders
   layers:
   - Default
   - TransparentFX

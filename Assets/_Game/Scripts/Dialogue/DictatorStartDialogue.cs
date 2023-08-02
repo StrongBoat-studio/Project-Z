@@ -7,7 +7,6 @@ public class DictatorStartDialogue : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] private DialogueHolder _dialogueHolder;
     [SerializeField] private SpriteRenderer _spriteRenderer;
-    [SerializeField] private Material _material;
     private bool _canStart = true;
 
     private void Update()
@@ -28,8 +27,7 @@ public class DictatorStartDialogue : MonoBehaviour
             QuestLineManager.Instance.CheckQuest(GetComponent<QuestObjective>());
         }
 
-        Destroy(this);
         Destroy(_dialogueHolder);
-        
+        Destroy(this);
     }
 }

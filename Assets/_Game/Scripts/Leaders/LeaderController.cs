@@ -10,11 +10,22 @@ public class LeaderController : MonoBehaviour
     [SerializeField] GameObject _boris;
     [SerializeField] GameObject _shimura;
 
-    // Update is called once per frame
+    private void Awake()
+    {
+        GameManager.Instance.boris = _boris;
+        GameManager.Instance.shimura = _shimura;
+    }
     void Update()
     {
-        Show(_questsNameWhenShowBoris, _boris);
-        Show(_questsNameWhenShowShimura, _shimura);
+        if(_boris!=null)
+        {
+            Show(_questsNameWhenShowBoris, _boris);
+        }
+        
+        if(_shimura!=null)
+        {
+            Show(_questsNameWhenShowShimura, _shimura);
+        }
     }
 
     private void Show(List<string> _questsName, GameObject objectToShow)

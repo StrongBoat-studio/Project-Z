@@ -17,7 +17,7 @@ public class GameStateManager : MonoBehaviour
 
     public static GameStateManager Instance { get; private set; }
 
-    private GameState _currentGameState = GameState.MainMenu;
+    public GameState _currentGameState = GameState.MainMenu;
     private Stack<GameState> _stateHistory = new Stack<GameState>();
 
     #region Debug
