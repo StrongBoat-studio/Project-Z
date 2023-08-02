@@ -2144,6 +2144,70 @@ MonoBehaviour:
         amount: 0
       <JournalAppToOpen>k__BackingField: 0
     <IsCompleted>k__BackingField: 0
+  - <ID>k__BackingField: 6
+    <Title>k__BackingField: "\u201CAlchemy of Survival\u201D"
+    <Tasks>k__BackingField:
+    - <ID>k__BackingField: 0
+      <Title>k__BackingField: 'Find: The gunpowder '
+      <DisplayCompletionHint>k__BackingField: 0
+      <CompletionHint>k__BackingField: 
+      <IsCompleted>k__BackingField: 0
+      <TaskType>k__BackingField: 3
+      <ItemToCollect>k__BackingField:
+        itemType: 6
+        amount: 1
+      <JournalAppToOpen>k__BackingField: 0
+    - <ID>k__BackingField: 1
+      <Title>k__BackingField: 'Find: The Test Vial'
+      <DisplayCompletionHint>k__BackingField: 0
+      <CompletionHint>k__BackingField: 
+      <IsCompleted>k__BackingField: 0
+      <TaskType>k__BackingField: 3
+      <ItemToCollect>k__BackingField:
+        itemType: 9
+        amount: 1
+      <JournalAppToOpen>k__BackingField: 0
+    - <ID>k__BackingField: 2
+      <Title>k__BackingField: 'Find: The Chernobyl herb'
+      <DisplayCompletionHint>k__BackingField: 0
+      <CompletionHint>k__BackingField: 
+      <IsCompleted>k__BackingField: 0
+      <TaskType>k__BackingField: 3
+      <ItemToCollect>k__BackingField:
+        itemType: 7
+        amount: 1
+      <JournalAppToOpen>k__BackingField: 0
+    - <ID>k__BackingField: 3
+      <Title>k__BackingField: "Find: The Isolated Saliva of Subject \u201C0\u201D"
+      <DisplayCompletionHint>k__BackingField: 0
+      <CompletionHint>k__BackingField: 
+      <IsCompleted>k__BackingField: 0
+      <TaskType>k__BackingField: 3
+      <ItemToCollect>k__BackingField:
+        itemType: 4
+        amount: 1
+      <JournalAppToOpen>k__BackingField: 0
+    - <ID>k__BackingField: 4
+      <Title>k__BackingField: Return to the Lab
+      <DisplayCompletionHint>k__BackingField: 0
+      <CompletionHint>k__BackingField: 
+      <IsCompleted>k__BackingField: 0
+      <TaskType>k__BackingField: 1
+      <ItemToCollect>k__BackingField:
+        itemType: 0
+        amount: 0
+      <JournalAppToOpen>k__BackingField: 0
+    - <ID>k__BackingField: 5
+      <Title>k__BackingField: Create the Antidote
+      <DisplayCompletionHint>k__BackingField: 0
+      <CompletionHint>k__BackingField: 
+      <IsCompleted>k__BackingField: 0
+      <TaskType>k__BackingField: 1
+      <ItemToCollect>k__BackingField:
+        itemType: 0
+        amount: 0
+      <JournalAppToOpen>k__BackingField: 0
+    <IsCompleted>k__BackingField: 0
 --- !u!4 &927334019
 Transform:
   m_ObjectHideFlags: 0
@@ -3045,6 +3109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f7994be25e765c4a897f5fb96683eda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _currentGameState: 4
   _stateHistoryDisplay: 
 --- !u!114 &1419090741
 MonoBehaviour:
