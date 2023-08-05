@@ -14,6 +14,9 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _nameText;
     [SerializeField] private TextMeshProUGUI _messageText;
 
+    public delegate void DialogueEndHandler();
+    public event DialogueEndHandler OnDialogueEnd;
+
     private void Awake()
     {
         // If there is an instance, and it's not me, delete myself.
@@ -111,7 +114,7 @@ public class DialogueManager : MonoBehaviour
         }
         else
         {
-            EndStory();
+            EndStory();      
         }
     }
 
@@ -130,6 +133,7 @@ public class DialogueManager : MonoBehaviour
         else
         {
             ExitDialogueMode();
+            OnDialogueEnd?.Invoke();
         }
     }
 

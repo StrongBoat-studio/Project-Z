@@ -19,6 +19,8 @@ public class BorisController : MonoBehaviour
     private float _target;
     private float _current;
     private int count = 0;
+    public bool _canFight = false;
+
     private void Awake()
     {
         if(!GameManager.Instance.ShowBoris())
@@ -31,6 +33,18 @@ public class BorisController : MonoBehaviour
         _animator = GetComponentInChildren<Animator>();
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         _boxCollider2D = GetComponentInChildren<BoxCollider2D>();
+
+        if (DialogueManager.Instance != null)
+            DialogueManager.Instance.OnDialogueEnd += OnDialogueEnd;
+    }
+
+    private void OnDialogueEnd()
+    {
+        if (_canFight == true && QuestLineManager.Instance.Quests[0].Tasks[0].Title == "Find: The gunpowder")
+        {
+            _animator.SetBool("IsSitting", false);
+            _animator.SetBool("IsStand", true);
+        }
     }
 
     // Update is called once per frame
@@ -47,6 +61,8 @@ public class BorisController : MonoBehaviour
         CheckQuestAndSetComponents("Talk to the Crew", true, new Vector2(-1.5f, -0.7f), 0, 3, 2);
 
         CheckQuestAndSetComponents("Communicate with Boris", false, transform.position, 1, 4, 1);
+
+        CheckQuestAndSetComponents("Argue with Boris", false, transform.position, 1, 5, 3);
 
         if (QuestLineManager.Instance.Quests[0].Tasks[0].Title == "Take care of Shimura")
         {
@@ -78,6 +94,14 @@ public class BorisController : MonoBehaviour
                 Hide();
             }
         }
+
+        if (QuestLineManager.Instance.Quests[0].Tasks[0].Title == "Search the body")
+        {
+            _boxCollider2D.offset = new Vector2(0.85f, _boxCollider2D.offset.y);
+            _animator.SetBool("IsSitting", true);
+            _canFight = true;
+        }
+
     }
 
     private void CheckQuestAndSetComponents(string questName, bool isChangingPosition, Vector2 targetPosition, int dialogueHolderId, int questID, int taskID)

@@ -907,6 +907,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1740543256}
     m_Modifications:
+    - target: {fileID: 4505882918976808806, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ecc19631c10c9034cb445cee74fb9235, type: 3}
+    - target: {fileID: 4505882918976808806, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4505882918976808806, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4505882918976808806, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4505882918976808807, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
       propertyPath: _canInteractColor.b
       value: 0.20850754
@@ -937,11 +953,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4505882919154333373, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.4
+      value: -0.436
       objectReference: {fileID: 0}
     - target: {fileID: 4505882919154333373, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.7
+      value: -0.744
       objectReference: {fileID: 0}
     - target: {fileID: 4505882919154333373, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2857,10 +2873,22 @@ MonoBehaviour:
   - Find the source of the gunshot sound
   - Search the body
   - Argue with Boris
+  - 'Find: The gunpowder'
+  - 'Find: The Test Vial'
+  - 'Find: The Chernobyl herb'
+  - "Find: The Isolated Saliva of Subject \u201C0\u201D"
+  - Return to the Lab
+  - Create the Antidote
   _questsNameWhenShowShimura:
   - Find the source of the gunshot sound
   - Search the body
   - Argue with Boris
+  - 'Find: The gunpowder'
+  - 'Find: The Test Vial'
+  - 'Find: The Chernobyl herb'
+  - "Find: The Isolated Saliva of Subject \u201C0\u201D"
+  - Return to the Lab
+  - Create the Antidote
   _boris: {fileID: 652453457}
   _shimura: {fileID: 1192435258}
 --- !u!4 &1740543256
@@ -3147,7 +3175,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1894597120
 Transform:
   m_ObjectHideFlags: 0
