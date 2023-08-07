@@ -1542,9 +1542,56 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogueControllers:
-  - _dialogueTextAsset: {fileID: 4900000, guid: 8c20fd94f79e03b4fb40e9b1ed0de09c, type: 3}
-  - _dialogueTextAsset: {fileID: 4900000, guid: 693405e17045afe499b8baba0f7c3022, type: 3}
-  - _dialogueTextAsset: {fileID: 4900000, guid: 9d2dca5f7a7b5d8489d33952c528b56b, type: 3}
+  - questName: Have a conversation with Boris
+    questDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: 37ba8edfb94923444b491fcdb81c44b6, type: 3}
+    idleDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: 37ba8edfb94923444b491fcdb81c44b6, type: 3}
+  - questName: Talk to Shimura
+    questDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: 08a61bf2fc4b75f47910167d5f05b765, type: 3}
+    idleDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: 08a61bf2fc4b75f47910167d5f05b765, type: 3}
+  - questName: Open the Mission Log
+    questDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: b3ffe506535fb674fb7a39d55ee62e64, type: 3}
+    idleDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: b3ffe506535fb674fb7a39d55ee62e64, type: 3}
+  - questName: Talk to Boris
+    questDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: c9773aadf90a58f4fa1e7da5dbf390af, type: 3}
+    idleDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: c9773aadf90a58f4fa1e7da5dbf390af, type: 3}
+  - questName: Press the Button
+    questDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: bfd067197f4ff164f914794db87a4b5c, type: 3}
+    idleDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: bfd067197f4ff164f914794db87a4b5c, type: 3}
+  - questName: Return to Boris
+    questDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: ec4c01f98b13d654689a4bebfd42fc1c, type: 3}
+    idleDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: ec4c01f98b13d654689a4bebfd42fc1c, type: 3}
+  - questName: Re-enter the Cryochamber
+    questDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: 16ec304f72be969459c939a0f66329d9, type: 3}
+    idleDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: 16ec304f72be969459c939a0f66329d9, type: 3}
+  - questName: Monitor the Mutation Process
+    questDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: f0c63206e905aaf479613db4d009fae0, type: 3}
+    idleDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: f0c63206e905aaf479613db4d009fae0, type: 3}
+  - questName: Take care of Shimura
+    questDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: 6a53d9a2e409d164bbe397ef6683f7d5, type: 3}
+    idleDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: 6a53d9a2e409d164bbe397ef6683f7d5, type: 3}
+  - questName: Communicate with Boris
+    questDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: 62a82ffb7bafabe4bacff318f5894703, type: 3}
+    idleDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: 62a82ffb7bafabe4bacff318f5894703, type: 3}
   _dialogueHolder: {fileID: 306542328}
   _questObjective: {fileID: 306542327}
 --- !u!1001 &4505882919448927682

@@ -189,6 +189,6 @@ public class BorisController : MonoBehaviour
 
     private void OnDestroy()
     {
-        
+        DialogueManager.Instance.OnDialogueEnd -= OnDialogueEnd;
     }
 }
