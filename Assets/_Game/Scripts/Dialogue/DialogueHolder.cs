@@ -115,6 +115,11 @@ public class DialogueHolder : MonoBehaviour, IInteractable
         _dialogueQuest = dialogue;
     }
 
+    public void SetIdleDialogueController(DialogueController dialogue)
+    {
+        _dialogueIdle = dialogue;
+    }
+
     private void PlayDialogAnimation()
     {
         if (_animator == null) return;

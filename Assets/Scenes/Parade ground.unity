@@ -741,7 +741,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb33dc9d989f7e94187ed0dd6898cb21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canAnimStart: 1
 --- !u!1 &743629591
 GameObject:
   m_ObjectHideFlags: 0
@@ -1075,9 +1074,9 @@ MonoBehaviour:
   _cannotInteractColor: {r: 0, g: 0, b: 0, a: 0}
   npcSceneID: 0
   _dialogueIdle:
-    _dialogueTextAsset: {fileID: 4900000, guid: ce5a41ec6c988414f9470739db7e535c, type: 3}
+    _dialogueTextAsset: {fileID: 4900000, guid: 76e663e2fc51e6a4ebb7b6306864fc60, type: 3}
   _dialogueQuest:
-    _dialogueTextAsset: {fileID: 4900000, guid: 099c5208fded1ff4e8dd97fa72e4c85b, type: 3}
+    _dialogueTextAsset: {fileID: 4900000, guid: 2f1372dc15e56b14cb577c3bfefd49b2, type: 3}
 --- !u!61 &1044653419
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1217,7 +1216,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dialogueHolder: {fileID: 1044653418}
   _spriteRenderer: {fileID: 1044653420}
-  _material: {fileID: 0}
 --- !u!1 &1284821092
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BorisController : MonoBehaviour
 {
-    [SerializeField] private List<DialogueController> _dialogueControllers;
+    [SerializeField] private List<LeaderDialogue> _dialogueControllers;
     [SerializeField] private Item item;
     [SerializeField] private LeaderController _leaderController;
     private DialogueHolder _dialogueHolder;
@@ -52,17 +52,23 @@ public class BorisController : MonoBehaviour
     {
         if (QuestLineManager.Instance.Quests.Count < 1) return;
 
-        CheckQuestAndSetComponents("Have a conversation with Boris", true, new Vector2(2.4f, -0.7f), 0, 1, 0);
+        CheckQuestAndSetComponents("Have a conversation with Boris", true, new Vector2(2.4f, -0.7f), 1, 0);
+        CheckQuestAndSetComponents("Talk to Shimura", false, transform.position, 1, 0);
+        CheckQuestAndSetComponents("Open the Mission Log", false, transform.position, 1, 0);
+        CheckQuestAndSetComponents("Talk to Boris", false, transform.position, 2, 0);
+        CheckQuestAndSetComponents("Press the Button", false, transform.position, 2, 0);
+        CheckQuestAndSetComponents("Return to Boris", false, transform.position, 2, 2);
+        CheckQuestAndSetComponents("Re-enter the Cryochamber", false, transform.position, 2, 2);
+        CheckQuestAndSetComponents("Monitor the Mutation Process", false, transform.position, 2, 2);
+        CheckQuestAndSetComponents("Talk to the Crew", true, new Vector2(-1.5f, -0.7f), 3, 2);
+        CheckQuestAndSetComponents("Turn off the Alarm", false, transform.position, 3, 2);
+        CheckQuestAndSetComponents("Wait in the Cryochamber", false, transform.position, 3, 2);
+        CheckQuestAndSetComponents("Take care of Shimura", false, transform.position, 3, 2);
+        CheckQuestAndSetComponents("Communicate with Boris", false, transform.position, 4, 1);
+        CheckQuestAndSetComponents("Approach the Greenhouse", false, transform.position, 4, 2);
 
-        CheckQuestAndSetComponents("Talk to Boris", false, transform.position, 1, 2, 0);
 
-        CheckQuestAndSetComponents("Return to Boris", false, transform.position, 2, 2, 2);
-
-        CheckQuestAndSetComponents("Talk to the Crew", true, new Vector2(-1.5f, -0.7f), 0, 3, 2);
-
-        CheckQuestAndSetComponents("Communicate with Boris", false, transform.position, 1, 4, 1);
-
-        CheckQuestAndSetComponents("Argue with Boris", false, transform.position, 1, 5, 3);
+        CheckQuestAndSetComponents("Argue with Boris", false, transform.position, 5, 3);
 
         if (QuestLineManager.Instance.Quests[0].Tasks[0].Title == "Take care of Shimura")
         {
@@ -104,17 +110,26 @@ public class BorisController : MonoBehaviour
 
     }
 
-    private void CheckQuestAndSetComponents(string questName, bool isChangingPosition, Vector2 targetPosition, int dialogueHolderId, int questID, int taskID)
+    private void CheckQuestAndSetComponents(string questName, bool isChangingPosition, Vector2 targetPosition, int questID, int taskID)
     {
-        if (QuestLineManager.Instance.Quests[0].Tasks[0].Title == questName)
+        if (QuestLineManager.Instance.Quests[0].Tasks[0].Title != questName) return;
+
+        foreach(LeaderDialogue leaderDialogue in _dialogueControllers)
         {
-            if(isChangingPosition)
+            if(leaderDialogue.questName.Equals(QuestLineManager.Instance.Quests[0].Tasks[0].Title))
             {
-                ChangePosition(targetPosition);
+                SetQuestObjective(questID, taskID);
+
+                if (isChangingPosition)
+                {
+                    ChangePosition(targetPosition);
+                }
+
+                _dialogueHolder.SetQuestDialogueController(leaderDialogue.questDialogue);
+                _dialogueHolder.SetIdleDialogueController(leaderDialogue.idleDialogue);
+
+                return;
             }
-            
-            _dialogueHolder.SetQuestDialogueController(_dialogueControllers[dialogueHolderId]);
-            SetQuestObjective(questID, taskID);
         }
     }
 

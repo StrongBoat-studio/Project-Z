@@ -75,7 +75,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1947401939
-  m_SortingLayer: 5
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ab1958e17f6566e48b66413e410c799d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -146,6 +146,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5ca78f5cae3b1d4d9c9ac015b4058c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _canInteractColor: {r: 0, g: 0, b: 0, a: 0}
+  _cannotInteractColor: {r: 0, g: 0, b: 0, a: 0}
   npcSceneID: 2
   _dialogueIdle:
     _dialogueTextAsset: {fileID: 4900000, guid: 76e663e2fc51e6a4ebb7b6306864fc60, type: 3}
@@ -211,6 +213,86 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogueControllers:
-  - _dialogueTextAsset: {fileID: 4900000, guid: 8c20fd94f79e03b4fb40e9b1ed0de09c, type: 3}
-  - _dialogueTextAsset: {fileID: 4900000, guid: 693405e17045afe499b8baba0f7c3022, type: 3}
-  - _dialogueTextAsset: {fileID: 4900000, guid: 9d2dca5f7a7b5d8489d33952c528b56b, type: 3}
+  - questName: Have a conversation with Boris
+    questDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: e539938b697e39545bb6984b4d8ea26c, type: 3}
+    idleDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: e539938b697e39545bb6984b4d8ea26c, type: 3}
+  - questName: Talk to Shimura
+    questDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: 38de68f42ebc1244c990bb0da5807d67, type: 3}
+    idleDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: 38de68f42ebc1244c990bb0da5807d67, type: 3}
+  - questName: Open the Mission Log
+    questDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: 95455530a8bd7364f87a552c3e8aa493, type: 3}
+    idleDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: 95455530a8bd7364f87a552c3e8aa493, type: 3}
+  - questName: Talk to Boris
+    questDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: 6a178333866ab4f4282db10fff9a5568, type: 3}
+    idleDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: 6a178333866ab4f4282db10fff9a5568, type: 3}
+  - questName: Press the Button
+    questDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: 9b0a27244f77e4b4cb2ad3bca0e30be6, type: 3}
+    idleDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: 9b0a27244f77e4b4cb2ad3bca0e30be6, type: 3}
+  - questName: Return to Boris
+    questDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: b7a0b2d9a93664e44b7456b0249bcc0b, type: 3}
+    idleDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: b7a0b2d9a93664e44b7456b0249bcc0b, type: 3}
+  - questName: Re-enter the Cryochamber
+    questDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: 5765fd25d1121ba4795f1e8e92e4a08e, type: 3}
+    idleDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: 5765fd25d1121ba4795f1e8e92e4a08e, type: 3}
+  - questName: Monitor the Mutation Process
+    questDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: e1bda79ad2ce8de45914b5695c22e643, type: 3}
+    idleDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: e1bda79ad2ce8de45914b5695c22e643, type: 3}
+  - questName: Talk to the Crew
+    questDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: f5ed93c711084b847ad55da84f60000f, type: 3}
+    idleDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: f5ed93c711084b847ad55da84f60000f, type: 3}
+  - questName: Turn off the Alarm
+    questDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: 903bae739b36af449a5e410d5af87984, type: 3}
+    idleDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: 903bae739b36af449a5e410d5af87984, type: 3}
+  - questName: Wait in the Cryochamber
+    questDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: 6f253cab6253ef74f8d34785d124e3b0, type: 3}
+    idleDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: 6f253cab6253ef74f8d34785d124e3b0, type: 3}
+  - questName: Take care of Shimura
+    questDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: 35b8e5c53ea459043a6e53e872e9d8da, type: 3}
+    idleDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: 35b8e5c53ea459043a6e53e872e9d8da, type: 3}
+  - questName: Communicate with Boris
+    questDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: 9a76e125965b8ab48903fac7954cbbda, type: 3}
+    idleDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: 9a76e125965b8ab48903fac7954cbbda, type: 3}
+  - questName: Approach the Greenhouse
+    questDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: c46abe175e81a4045bfa0d9a6fd6954b, type: 3}
+    idleDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: c46abe175e81a4045bfa0d9a6fd6954b, type: 3}
+  item:
+    itemType: 0
+    amount: 1
+    sprite: {fileID: 0}
+    stackable: 0
+    Use:
+      m_PersistentCalls:
+        m_Calls: []
+    collectDialogue: {fileID: 0}
+    itemDecription: {fileID: 0}
+    itemName: 
+  _leaderController: {fileID: 0}
+  _canFight: 0

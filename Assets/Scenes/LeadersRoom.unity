@@ -1667,6 +1667,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4505882919448927684, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
+      propertyPath: _dialogueControllers.Array.data[0]._questName
+      value: Have a conversation with Boris
+      objectReference: {fileID: 0}
+    - target: {fileID: 4505882919448927684, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
       propertyPath: item.Use.m_PersistentCalls.m_Calls.Array.size
       value: 0
       objectReference: {fileID: 0}
@@ -1678,6 +1682,14 @@ PrefabInstance:
       propertyPath: item.Use.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4505882919448927684, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
+      propertyPath: _dialogueControllers.Array.data[0]._idleDialogue._dialogueTextAsset
+      value: 
+      objectReference: {fileID: 4900000, guid: 76e663e2fc51e6a4ebb7b6306864fc60, type: 3}
+    - target: {fileID: 4505882919448927684, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
+      propertyPath: _dialogueControllers.Array.data[0]._questDialogue._dialogueTextAsset
+      value: 
+      objectReference: {fileID: 4900000, guid: e539938b697e39545bb6984b4d8ea26c, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
 --- !u!1 &4505882919448927683 stripped
