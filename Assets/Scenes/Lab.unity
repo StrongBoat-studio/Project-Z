@@ -1045,7 +1045,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _parent: {fileID: 652453458}
-  _targetPlayer: {fileID: 0}
+  _fight: {fileID: 1894597119}
   canGo: 0
 --- !u!1 &657678472
 GameObject:

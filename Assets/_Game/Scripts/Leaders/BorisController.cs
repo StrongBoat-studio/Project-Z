@@ -25,7 +25,7 @@ public class BorisController : MonoBehaviour
     private Transform _targetPlayer;
 
     //DotPro
-    [SerializeField] private float _dotPro;
+    public float dotPro;
     private Vector2 _directionDot;
     private Vector2 _checkVector;
 
@@ -204,15 +204,15 @@ public class BorisController : MonoBehaviour
     {
         if (_targetPlayer == null) return;
 
-        _directionDot = transform.position - _targetPlayer.position;
+        _directionDot = _targetPlayer.position - transform.position;
         _directionDot.Normalize();
 
-        _dotPro = Vector2.Dot(_directionDot, CalculateCheckVector());
+        dotPro = Vector2.Dot(_directionDot, CalculateCheckVector());
     }
 
     private Vector2 CalculateCheckVector()
     {
-        return _checkVector = new Vector2(_targetPlayer.localScale.x, .0f);
+        return _checkVector = new Vector2(transform.localScale.x, .0f);
     }
 
     private void OnDestroy()
