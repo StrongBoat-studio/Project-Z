@@ -999,6 +999,22 @@ PrefabInstance:
       propertyPath: _leaderController
       value: 
       objectReference: {fileID: 1740543255}
+    - target: {fileID: 4505882919448927684, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
+      propertyPath: _dialogueControllers.Array.size
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4505882919448927684, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
+      propertyPath: _dialogueControllers.Array.data[14].questName
+      value: Argue with Boris
+      objectReference: {fileID: 0}
+    - target: {fileID: 4505882919448927684, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
+      propertyPath: _dialogueControllers.Array.data[14].idleDialogue._dialogueTextAsset
+      value: 
+      objectReference: {fileID: 4900000, guid: 34512efe522e04d45b4cb83c5eb06e14, type: 3}
+    - target: {fileID: 4505882919448927684, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
+      propertyPath: _dialogueControllers.Array.data[14].questDialogue._dialogueTextAsset
+      value: 
+      objectReference: {fileID: 4900000, guid: 34512efe522e04d45b4cb83c5eb06e14, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
 --- !u!1 &652453457 stripped
@@ -1011,6 +1027,26 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4505882919154333373, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
   m_PrefabInstance: {fileID: 652453456}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &652453459 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4505882918976808803, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
+  m_PrefabInstance: {fileID: 652453456}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &652453460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 652453459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35f28e331e5e43442aa37dba64e36003, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parent: {fileID: 652453458}
+  _targetPlayer: {fileID: 0}
+  canGo: 0
 --- !u!1 &657678472
 GameObject:
   m_ObjectHideFlags: 0

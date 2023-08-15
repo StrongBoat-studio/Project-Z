@@ -21,8 +21,18 @@ public class BorisController : MonoBehaviour
     private int count = 0;
     public bool _canFight = false;
 
+    //Variables for fight
+    private Transform _targetPlayer;
+
+    //DotPro
+    [SerializeField] private float _dotPro;
+    private Vector2 _directionDot;
+    private Vector2 _checkVector;
+
     private void Awake()
     {
+        _targetPlayer = GameManager.Instance.player;
+
         if(!GameManager.Instance.ShowBoris())
         {
             this.gameObject.SetActive(false);
@@ -66,8 +76,6 @@ public class BorisController : MonoBehaviour
         CheckQuestAndSetComponents("Take care of Shimura", false, transform.position, 3, 2);
         CheckQuestAndSetComponents("Communicate with Boris", false, transform.position, 4, 1);
         CheckQuestAndSetComponents("Approach the Greenhouse", false, transform.position, 4, 2);
-
-
         CheckQuestAndSetComponents("Argue with Boris", false, transform.position, 5, 3);
 
         if (QuestLineManager.Instance.Quests[0].Tasks[0].Title == "Take care of Shimura")
@@ -108,6 +116,11 @@ public class BorisController : MonoBehaviour
             _canFight = true;
         }
 
+        if (QuestLineManager.Instance.Quests[0].Tasks[0].Title == "Argue with Boris" || QuestLineManager.Instance.Quests[0].Tasks[0].Title == "Find: The gunpowder")
+        {
+            CalculateDotPro();
+        }
+            
     }
 
     private void CheckQuestAndSetComponents(string questName, bool isChangingPosition, Vector2 targetPosition, int questID, int taskID)
@@ -185,6 +198,21 @@ public class BorisController : MonoBehaviour
             _player.AddItem(item);
             giveItem = true;
         }
+    }
+
+    private void CalculateDotPro()
+    {
+        if (_targetPlayer == null) return;
+
+        _directionDot = transform.position - _targetPlayer.position;
+        _directionDot.Normalize();
+
+        _dotPro = Vector2.Dot(_directionDot, CalculateCheckVector());
+    }
+
+    private Vector2 CalculateCheckVector()
+    {
+        return _checkVector = new Vector2(_targetPlayer.localScale.x, .0f);
     }
 
     private void OnDestroy()
