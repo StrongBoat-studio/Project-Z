@@ -13,6 +13,7 @@ public class LockerController : MonoBehaviour, IInteractable
     private GameObject _playerSprite;
     private GameObject _playerWeaponHolder;
     private Movement _movement;
+    private bool _isPlayerInThisLocker = false;
 
     private void Awake()
     {
@@ -29,12 +30,14 @@ public class LockerController : MonoBehaviour, IInteractable
             _movement.CanMove(false);
             _playerSprite.SetActive(false);
             _playerWeaponHolder.SetActive(false);
+            _isPlayerInThisLocker = true;
         }
-        else
+        else if(_isPlayerInThisLocker)
         {
             _playerSprite.SetActive(true);
             _playerWeaponHolder.SetActive(true);
             _movement.CanMove(true);
+            _isPlayerInThisLocker = false;
         }
     }
 

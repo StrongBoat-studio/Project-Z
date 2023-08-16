@@ -17,6 +17,9 @@ public class DialogueManager : MonoBehaviour
     public delegate void DialogueEndHandler();
     public event DialogueEndHandler OnDialogueEnd;
 
+    public delegate void DialogueStartHandler();
+    public event DialogueStartHandler OnDialogueStart;
+
     private void Awake()
     {
         // If there is an instance, and it's not me, delete myself.
@@ -84,6 +87,7 @@ public class DialogueManager : MonoBehaviour
             EnterDialogueMode();
             _currentStory = new Story(storyTextAsset.text);
             _currentTextAsset = storyTextAsset;
+            OnDialogueStart?.Invoke();
             ContinueStory();
         }
         else

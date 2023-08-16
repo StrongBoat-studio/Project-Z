@@ -46,17 +46,18 @@ public class CraftingSlot : MonoBehaviour, IPointerClickHandler
         _canvasGroup = GetComponentInChildren<CanvasGroup>();
 
         SetItem(_itemType);
+
+        if (QTEManager.Instance != null)
+        {
+            QTEManager.Instance.OnWinQTE += OnWinQTE;
+            QTEManager.Instance.OnFailQTE += OnFailQTE;
+        }
     }
 
-    void Update()
+    public void OnWinQTE(QTEManager.Caller caller)
     {
-        if (_craftActive == false) return;
-        _qteCaller = QTEManager.Instance.QTEAction(QTEManager.Caller.Crafting, 1);
-
-        if (_qteCaller == QTEManager.Caller.Crafting && QTEManager.Instance._isSuccess == 1)
+        if(caller== QTEManager.Caller.Crafting)
         {
-            //Success
-            QTEManager.Instance._isSuccess = 0;
             Deselect();
             _craftActive = false;
 
@@ -64,15 +65,23 @@ public class CraftingSlot : MonoBehaviour, IPointerClickHandler
             _canvasGroup.DOFade(.5f, .4f).SetDelay(_slideUpTime);
             _interactable = false;
         }
+    }
 
-        if (_qteCaller == QTEManager.Caller.Crafting && QTEManager.Instance._isSuccess == -1)
+    public void OnFailQTE(QTEManager.Caller caller)
+    {
+        if (caller == QTEManager.Caller.Crafting)
         {
-            //Fail
-            QTEManager.Instance._isSuccess = 0;
             Deselect();
             _craftActive = false;
             _interactable = true;
         }
+    }
+
+    void Update()
+    {
+        if (_craftActive == false) return;
+        _qteCaller = QTEManager.Instance.QTEAction(QTEManager.Caller.Crafting, 1);
+
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -142,5 +151,11 @@ public class CraftingSlot : MonoBehaviour, IPointerClickHandler
         transform.DOLocalMoveY(transform.localPosition.y - _slideUp, _slideUpTime);
         _selected = false;
 
+    }
+
+    private void OnDestroy()
+    {
+        QTEManager.Instance.OnWinQTE -= OnWinQTE;
+        QTEManager.Instance.OnFailQTE -= OnFailQTE;
     }
 }

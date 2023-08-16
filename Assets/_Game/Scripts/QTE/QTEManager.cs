@@ -27,9 +27,12 @@ public class QTEManager : MonoBehaviour
     //Enum
     public enum Caller
     {
+        Empty=0,
         Crafting=1,
+        FaightController=2,
     }
 
+    private Caller _owner = Caller.Empty;
 
     //QTE Variables
     private float _fillAmount = 0;
@@ -40,7 +43,7 @@ public class QTEManager : MonoBehaviour
     public System.Random generator = new System.Random();
     [SerializeField] private int _howManyLettersV = 0;
     [SerializeField] private float _timeForQTECompleted;
-    public int _isSuccess=0;
+    //public int _isSuccess=0;
 
     //Action
     private Action _action = null;
@@ -49,6 +52,13 @@ public class QTEManager : MonoBehaviour
     public event Action<int> _qte;
     public event Action<Caller> _qteResult = null;
     public event Action<float> _countingDown = null;
+
+    public delegate void WinQTE(Caller owner);
+    public event WinQTE OnWinQTE;
+
+    public delegate void FailQTE(Caller owner);
+    public event FailQTE OnFailQTE;
+
 
     private void Awake()
     {
@@ -112,6 +122,8 @@ public class QTEManager : MonoBehaviour
 
         _timeForQTECompleted = timeForQTECompleted;
         _countingDown += CountingDown;
+
+        _owner = caller;
     }
 
     //Stops QTE
@@ -120,7 +132,7 @@ public class QTEManager : MonoBehaviour
         _qte -= QteManager;
         _qteResult -= null;
         _countingDown -= CountingDown;
-        _isSuccess = 0;
+        //_isSuccess = 0;
 
         _array[_lottery].SetActive(false);
         button.SetActive(false);
@@ -270,11 +282,13 @@ public class QTEManager : MonoBehaviour
         _qte -= QteManager;
         _qteResult -= QTEFail;
         _countingDown -= CountingDown;
-        _isSuccess = -1;
+        //_isSuccess = -1;
 
         _array[_lottery].SetActive(false);
         button.SetActive(false);
         //Debug.Log("fail");
+
+        OnFailQTE?.Invoke(_owner);
     }
 
     private void QTESuccess(Caller caller)
@@ -282,11 +296,13 @@ public class QTEManager : MonoBehaviour
         _qte -= QteManager;
         _qteResult -= QTESuccess;
         _countingDown -= CountingDown;
-        _isSuccess = 1;
+        //_isSuccess = 1;
 
         _array[_lottery].SetActive(false);
         button.SetActive(false);
         //Debug.Log("win");
+
+        OnWinQTE?.Invoke(_owner);
     }
 
 

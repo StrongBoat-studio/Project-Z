@@ -45,15 +45,27 @@ public class BorisController : MonoBehaviour
         _boxCollider2D = GetComponentInChildren<BoxCollider2D>();
 
         if (DialogueManager.Instance != null)
+        {
             DialogueManager.Instance.OnDialogueEnd += OnDialogueEnd;
+            DialogueManager.Instance.OnDialogueStart += OnDialogueStart;
+        }
+            
     }
 
     private void OnDialogueEnd()
     {
-        if (_canFight == true && QuestLineManager.Instance.Quests[0].Tasks[0].Title == "Find: The gunpowder")
+        if (_canFight == true && QuestLineManager.Instance.Quests[0].Tasks[0].Title == "Argue with Boris")
         {
             _animator.SetBool("IsSitting", false);
             _animator.SetBool("IsStand", true);
+        }
+    }
+
+    private void OnDialogueStart()
+    {
+        if(QuestLineManager.Instance.Quests[0].Tasks[0].Title == "Argue with Boris")
+        {
+            _canFight = true;
         }
     }
 
@@ -76,7 +88,7 @@ public class BorisController : MonoBehaviour
         CheckQuestAndSetComponents("Take care of Shimura", false, transform.position, 3, 2);
         CheckQuestAndSetComponents("Communicate with Boris", false, transform.position, 4, 1);
         CheckQuestAndSetComponents("Approach the Greenhouse", false, transform.position, 4, 2);
-        CheckQuestAndSetComponents("Argue with Boris", false, transform.position, 5, 3);
+        CheckQuestAndSetComponents("Argue with Boris", false, transform.position, 0, 0);
 
         if (QuestLineManager.Instance.Quests[0].Tasks[0].Title == "Take care of Shimura")
         {
@@ -113,7 +125,6 @@ public class BorisController : MonoBehaviour
         {
             _boxCollider2D.offset = new Vector2(0.85f, _boxCollider2D.offset.y);
             _animator.SetBool("IsSitting", true);
-            _canFight = true;
         }
 
         if (QuestLineManager.Instance.Quests[0].Tasks[0].Title == "Argue with Boris" || QuestLineManager.Instance.Quests[0].Tasks[0].Title == "Find: The gunpowder")
@@ -218,5 +229,6 @@ public class BorisController : MonoBehaviour
     private void OnDestroy()
     {
         DialogueManager.Instance.OnDialogueEnd -= OnDialogueEnd;
+        DialogueManager.Instance.OnDialogueStart -= OnDialogueStart;
     }
 }

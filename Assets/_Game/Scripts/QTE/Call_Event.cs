@@ -44,17 +44,17 @@ public class Call_Event : MonoBehaviour
 
     private void Result()
     {
-        if (_caller == QTEManager.Caller.Crafting && QTEManager.Instance._isSuccess == 1)
-        {
-            QTEManager.Instance._isSuccess = 0;
-            Debug.Log("win");
-        }
+        //if (_caller == QTEManager.Caller.Crafting && QTEManager.Instance._isSuccess == 1)
+        //{
+        //    QTEManager.Instance._isSuccess = 0;
+        //    Debug.Log("win");
+        //}
 
-        if (_caller == QTEManager.Caller.Crafting && QTEManager.Instance._isSuccess == -1)
-        {
-            QTEManager.Instance._isSuccess = 0;
-            Debug.Log("fail");
-        }
+        //if (_caller == QTEManager.Caller.Crafting && QTEManager.Instance._isSuccess == -1)
+        //{
+        //    QTEManager.Instance._isSuccess = 0;
+        //    Debug.Log("fail");
+        //}
     }
 
 
