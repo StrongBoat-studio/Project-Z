@@ -26,17 +26,15 @@ public class LockerController : MonoBehaviour, IInteractable
 
         if (_playerSprite.activeSelf==true)
         {
+            _movement.CanMove(false);
             _playerSprite.SetActive(false);
             _playerWeaponHolder.SetActive(false);
-            _movement.InLocker(true);
-            _movement.enabled = false;
         }
         else
         {
             _playerSprite.SetActive(true);
             _playerWeaponHolder.SetActive(true);
-            _movement.enabled = true;
-            _movement.InLocker(false);
+            _movement.CanMove(true);
         }
     }
 

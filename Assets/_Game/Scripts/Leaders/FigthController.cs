@@ -13,6 +13,10 @@ public class FigthController : MonoBehaviour
     private float _movingSideCallculation;
     private float _searchedPositionX;
 
+    private GameObject _playerSprite;
+    private GameObject _playerWeaponHolder;
+    private Movement _movement;
+
     private void Awake()
     {
         _targetPlayer = GameManager.Instance.player.GetChild(3).GetChild(0);
@@ -23,6 +27,11 @@ public class FigthController : MonoBehaviour
         if(canGo)
         {
             _parent.position = Vector3.MoveTowards(_parent.position, new Vector2(_targetPlayer.position.x, -1.15f), Time.deltaTime);
+
+            if (GetComponentInParent<BorisController>().dotPro > 0)
+            {
+                _parent.localScale = new Vector2(-_parent.localScale.x, 1);
+            }
         }
 
         if(_parent.position.x == _targetPlayer.position.x)
@@ -33,6 +42,8 @@ public class FigthController : MonoBehaviour
 
             MovingSideCallculation();
 
+            _movement = GameManager.Instance.movement;
+            _movement.CanMove(false);
             StartCoroutine(StartFight());
         }
     }
@@ -60,19 +71,26 @@ public class FigthController : MonoBehaviour
     {
         canGo = true;
         GetComponent<Animator>().SetBool("IsWalk", true);
-
-        if (GetComponentInParent<BorisController>().dotPro > 0)
-        {
-            _parent.localScale = new Vector2(-_parent.localScale.x, 1);
-        }
     }
 
     private IEnumerator StartFight()
     {
-        yield return new WaitForSeconds(1.0f);
+        _playerSprite = GameObject.FindGameObjectWithTag("Player").transform.GetChild(1).gameObject;
+        _playerWeaponHolder = GameObject.FindGameObjectWithTag("Player").transform.GetChild(2).gameObject;
+
+        yield return new WaitForSeconds(0.5f);
         _fight.transform.localScale = _parent.transform.localScale;
         _fight.transform.position = CallculationFightPosition();
         _fight.SetActive(true);
+
+        EnabledOdDisabledComponents(false);
+
         Destroy(this.gameObject);
+    }
+
+    private void EnabledOdDisabledComponents(bool enabled)
+    {
+        _playerSprite.SetActive(enabled);
+        _playerWeaponHolder.SetActive(enabled);
     }
 }

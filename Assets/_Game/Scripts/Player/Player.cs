@@ -55,7 +55,7 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(int dmg)
     {
-        if (!GameManager.Instance.movement.isInLocker)
+        if (GameManager.Instance.movement.canMove)
         {
             _currentHelath -= dmg;
 

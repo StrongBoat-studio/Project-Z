@@ -55,7 +55,7 @@ public class Movement : MonoBehaviour
     private float _crouchTimer = 0f;
 
     public bool IsDoorAnimationPlay = false;
-    public bool isInLocker = false;
+    public bool canMove = true;
     private Vector2 _positionDuringDoorAnimation;
     #endregion
 
@@ -124,7 +124,7 @@ public class Movement : MonoBehaviour
 
         CalculateMovementSpeed();
 
-        if(IsDoorAnimationPlay==false)
+        if(IsDoorAnimationPlay==false || canMove==true)
         {
             _rigidbody.velocity = new Vector2(_movementSpeedCalculated, _rigidbody.velocity.y);
         }
@@ -135,21 +135,15 @@ public class Movement : MonoBehaviour
         List<MovementState> states = GetMovementStates();
 
         // Walking
-        if(
-            states.Contains(MovementState.Walking) == false && 
+        if (
+            states.Contains(MovementState.Walking) == false &&
             _isWalking == true &&
-            IsGrounded() == true
+            IsGrounded() == true &&
+            IsDoorAnimationPlay == false &&
+            canMove == true
         ) 
         {
-            if(IsDoorAnimationPlay==false)
-            {
-                AlterMovementState(MovementState.Walking, 0);
-            }
-            else
-            {
-                AlterMovementState(0, MovementState.Walking);
-            }
-            
+            AlterMovementState(MovementState.Walking, 0);
         }
         else if (
             _isWalking == false ||
@@ -254,6 +248,15 @@ public class Movement : MonoBehaviour
         //Modify movement speed only when player is on the ground
         if (!IsGrounded()) return;
 
+        if(canMove==false)
+        {
+            _movementSpeedCalculated = 0;
+            AlterMovementState(0, MovementState.Crouching);
+            AlterMovementState(0, MovementState.Running);
+            AlterMovementState(0, MovementState.Walking);
+            return;
+        }
+
         //Left - Right
         float moveRaw = _playerInput.InGame.Walk.ReadValue<float>() * _movementSpeed;
 
@@ -311,6 +314,7 @@ public class Movement : MonoBehaviour
     {
         //Only regenerate stamina if player is grounded
         if(!IsGrounded()) return;
+        if (!canMove) return;
 
         List<MovementState> states = GetMovementStates();
 
@@ -341,7 +345,7 @@ public class Movement : MonoBehaviour
     private void OnJump(InputAction.CallbackContext context)
     {
         if (!IsGrounded()) return;
-        if (isInLocker) return;
+        if (!canMove) return;
         if (_staminaCurrent < _staminaDrainJump) return;
 
         if(!_playerEarthController.IsEarth())
@@ -457,9 +461,14 @@ public class Movement : MonoBehaviour
         _staminaCurrent = stamina;
     }
 
-    public void InLocker(bool isInLocker)
+    public void CanMove(bool canMove)
     {
-        this.isInLocker = isInLocker;
+        this.canMove = canMove;
     }
 
+    private void OnDisable()
+    {
+        _isWalking = false;
+        AlterMovementState(0, MovementState.Walking);
+    }
 }
