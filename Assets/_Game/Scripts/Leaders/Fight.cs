@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class Fight : MonoBehaviour
 {
+    [SerializeField] private GameObject _deadBorisPrefab;
+
     private bool _isQTEStarted = false;
+
+    private GameObject _playerSprite;
+    private GameObject _playerWeaponHolder;
+    private Movement _movement;
 
     private void Awake()
     {
@@ -45,6 +51,37 @@ public class Fight : MonoBehaviour
         {
             GetComponent<Animator>().SetBool("BorisWin", true);
         }
+    }
+
+    public void DeadBoris()
+    {
+        Instantiate(_deadBorisPrefab, transform.position, Quaternion.identity, GameObject.FindGameObjectWithTag("Leaders").GetComponent<Transform>());
+
+        _playerSprite = GameObject.FindGameObjectWithTag("Player").transform.GetChild(1).gameObject;
+        _playerWeaponHolder = GameObject.FindGameObjectWithTag("Player").transform.GetChild(2).gameObject;
+
+        _playerSprite.SetActive(true);
+        _playerWeaponHolder.SetActive(true);
+
+        _movement = GameManager.Instance.movement;
+        _movement.CanMove(true);
+
+        QuestLineManager.Instance.CheckQuest(GetComponentInParent<QuestObjective>());
+       
+        Destroy(this.gameObject);
+    }
+
+    public void DeadJurij()
+    {
+        _movement = GameManager.Instance.movement;
+        _movement.CanMove(true);
+        GameManager.Instance.Player.TakeDamage(1000);
+
+        _playerSprite = GameObject.FindGameObjectWithTag("Player").transform.GetChild(1).gameObject;
+        _playerWeaponHolder = GameObject.FindGameObjectWithTag("Player").transform.GetChild(2).gameObject;
+
+        _playerSprite.SetActive(true);
+        _playerWeaponHolder.SetActive(true);
     }
 
     private void OnDestroy()
