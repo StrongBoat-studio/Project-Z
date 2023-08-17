@@ -121,17 +121,19 @@ public class BorisController : MonoBehaviour
             }
         }
 
-        if (QuestLineManager.Instance.Quests[0].Tasks[0].Title == "Search the body")
-        {
-            _boxCollider2D.offset = new Vector2(0.85f, _boxCollider2D.offset.y);
-            _animator.SetBool("IsSitting", true);
-        }
-
         if (QuestLineManager.Instance.Quests[0].Tasks[0].Title == "Argue with Boris" || QuestLineManager.Instance.Quests[0].Tasks[0].Title == "Find: The gunpowder")
         {
             CalculateDotPro();
         }
-            
+
+        if (QuestLineManager.Instance.Quests[0].Tasks[0].Title == "Search the body" || QuestLineManager.Instance.Quests[0].Tasks[0].Title == "Argue with Boris")
+        {
+            if (_canFight == false)
+            {
+                _boxCollider2D.offset = new Vector2(0.85f, _boxCollider2D.offset.y);
+                _animator.SetBool("IsSitting", true);
+            }
+        }
     }
 
     private void CheckQuestAndSetComponents(string questName, bool isChangingPosition, Vector2 targetPosition, int questID, int taskID)

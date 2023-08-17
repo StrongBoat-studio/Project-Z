@@ -29,6 +29,8 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        GameManager.Instance.player = transform;
+
         Debug.Log("Player Start");
         _inventory = new Inventory();
 

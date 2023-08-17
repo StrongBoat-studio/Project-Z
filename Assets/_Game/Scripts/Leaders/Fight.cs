@@ -5,12 +5,15 @@ using UnityEngine;
 public class Fight : MonoBehaviour
 {
     [SerializeField] private GameObject _deadBorisPrefab;
+    [SerializeField] private GameObject _fight;
 
     private bool _isQTEStarted = false;
 
     private GameObject _playerSprite;
     private GameObject _playerWeaponHolder;
     private Movement _movement;
+
+    private GameObject _deadBoris;
 
     private void Awake()
     {
@@ -55,7 +58,8 @@ public class Fight : MonoBehaviour
 
     public void DeadBoris()
     {
-        Instantiate(_deadBorisPrefab, transform.position, Quaternion.identity, GameObject.FindGameObjectWithTag("Leaders").GetComponent<Transform>());
+        _deadBoris = Instantiate(_deadBorisPrefab, transform.position, Quaternion.identity, GameObject.FindGameObjectWithTag("Leaders").GetComponent<Transform>());
+        _deadBoris.GetComponent<Transform>().localScale = _fight.GetComponent<Transform>().localScale;
 
         _playerSprite = GameObject.FindGameObjectWithTag("Player").transform.GetChild(1).gameObject;
         _playerWeaponHolder = GameObject.FindGameObjectWithTag("Player").transform.GetChild(2).gameObject;

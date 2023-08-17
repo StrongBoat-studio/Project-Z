@@ -326,6 +326,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _deadBorisPrefab: {fileID: 7823464197339355495, guid: 9e9796a1447a75149b714d6356c91a90, type: 3}
+  _fight: {fileID: 1894597119}
+  x: 0
 --- !u!1 &109734516
 GameObject:
   m_ObjectHideFlags: 0

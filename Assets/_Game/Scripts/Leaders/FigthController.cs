@@ -17,14 +17,11 @@ public class FigthController : MonoBehaviour
     private GameObject _playerWeaponHolder;
     private Movement _movement;
 
-    private void Awake()
-    {
-        _targetPlayer = GameManager.Instance.player.GetChild(3).GetChild(0);
-    }
-
     private void Update()
     {
-        if(canGo)
+        _targetPlayer = GameManager.Instance.player.GetChild(3).GetChild(0);
+
+        if (canGo)
         {
             _parent.position = Vector3.MoveTowards(_parent.position, new Vector2(_targetPlayer.position.x, -1.15f), Time.deltaTime);
 
