@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 [RequireComponent(typeof(SpriteRenderer), typeof(BoxCollider2D))]
 public class ItemWorld : MonoBehaviour, IInteractable
 {
+    [SerializeField] private string _questName;
     [SerializeField] private Item.ItemType _itemType;
     [SerializeField] private int _amount;
     private LocalKeyword _OUTLINE_ON;
@@ -19,6 +20,19 @@ public class ItemWorld : MonoBehaviour, IInteractable
 
         if (_itemType != Item.ItemType.None)
             GetComponent<SpriteRenderer>().sprite = ItemRegister.Instance.items.Find(x => x.itemType == _itemType).sprite;
+
+        if(QuestLineManager.Instance.Quests[0].Tasks[0].Title == _questName)
+        {
+            GetComponent<SpriteRenderer>().enabled = true;
+            GetComponent<BoxCollider2D>().enabled = true;
+            GetComponent<CursorObject>().enabled = true;
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().enabled = false;
+            GetComponent<BoxCollider2D>().enabled = false;
+            GetComponent<CursorObject>().enabled = false;
+        }
     }
 
     ///<summary>
