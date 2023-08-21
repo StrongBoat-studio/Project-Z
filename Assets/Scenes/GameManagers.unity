@@ -3338,7 +3338,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-    collectDialogue: {fileID: 4900000, guid: 836094dd9eb5d52499d720c02a86dc79, type: 3}
+    collectDialogue: {fileID: 4900000, guid: 3a941a02e3623374cb003f55fb52898c, type: 3}
     itemDecription: {fileID: 4900000, guid: aeb0ae4317369864ea82cf66006494ef, type: 3}
     itemName: Drool1
   - itemType: 5
@@ -3360,7 +3360,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-    collectDialogue: {fileID: 4900000, guid: 836094dd9eb5d52499d720c02a86dc79, type: 3}
+    collectDialogue: {fileID: 4900000, guid: 3a941a02e3623374cb003f55fb52898c, type: 3}
     itemDecription: {fileID: 4900000, guid: aeb0ae4317369864ea82cf66006494ef, type: 3}
     itemName: Drool2
   - itemType: 6
@@ -3382,7 +3382,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-    collectDialogue: {fileID: 4900000, guid: 836094dd9eb5d52499d720c02a86dc79, type: 3}
+    collectDialogue: {fileID: 4900000, guid: 61ab0b3449ef1a742b9d69b5bd754d87, type: 3}
     itemDecription: {fileID: 4900000, guid: aeb0ae4317369864ea82cf66006494ef, type: 3}
     itemName: GumPowder
   - itemType: 7
@@ -3404,7 +3404,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-    collectDialogue: {fileID: 4900000, guid: 836094dd9eb5d52499d720c02a86dc79, type: 3}
+    collectDialogue: {fileID: 4900000, guid: b686dc6e3ebaa9c4d89e341fc37fb427, type: 3}
     itemDecription: {fileID: 4900000, guid: aeb0ae4317369864ea82cf66006494ef, type: 3}
     itemName: Herb
   - itemType: 8
@@ -3448,7 +3448,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-    collectDialogue: {fileID: 4900000, guid: 836094dd9eb5d52499d720c02a86dc79, type: 3}
+    collectDialogue: {fileID: 4900000, guid: e6778c7e8610dd7459c5879967ec2817, type: 3}
     itemDecription: {fileID: 4900000, guid: aeb0ae4317369864ea82cf66006494ef, type: 3}
     itemName: Vile1
   - itemType: 10
@@ -3470,7 +3470,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-    collectDialogue: {fileID: 4900000, guid: 836094dd9eb5d52499d720c02a86dc79, type: 3}
+    collectDialogue: {fileID: 4900000, guid: e6778c7e8610dd7459c5879967ec2817, type: 3}
     itemDecription: {fileID: 4900000, guid: aeb0ae4317369864ea82cf66006494ef, type: 3}
     itemName: Vile2
 --- !u!4 &1421069937

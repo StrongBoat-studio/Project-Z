@@ -88,6 +88,7 @@ public class BorisController : MonoBehaviour
         CheckQuestAndSetComponents("Take care of Shimura", false, transform.position, 3, 2);
         CheckQuestAndSetComponents("Communicate with Boris", false, transform.position, 4, 1);
         CheckQuestAndSetComponents("Approach the Greenhouse", false, transform.position, 4, 2);
+        CheckQuestAndSetComponents("Search the body", false, transform.position, 0, 0);
         CheckQuestAndSetComponents("Argue with Boris", false, transform.position, 0, 0);
 
         if (QuestLineManager.Instance.Quests[0].Tasks[0].Title == "Take care of Shimura")

@@ -327,7 +327,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _deadBorisPrefab: {fileID: 7823464197339355495, guid: 9e9796a1447a75149b714d6356c91a90, type: 3}
   _fight: {fileID: 1894597119}
-  x: 0
 --- !u!1 &109734516
 GameObject:
   m_ObjectHideFlags: 0
@@ -1017,20 +1016,32 @@ PrefabInstance:
       objectReference: {fileID: 1740543255}
     - target: {fileID: 4505882919448927684, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
       propertyPath: _dialogueControllers.Array.size
-      value: 15
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 4505882919448927684, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
       propertyPath: _dialogueControllers.Array.data[14].questName
+      value: Search the body
+      objectReference: {fileID: 0}
+    - target: {fileID: 4505882919448927684, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
+      propertyPath: _dialogueControllers.Array.data[15].questName
       value: Argue with Boris
       objectReference: {fileID: 0}
     - target: {fileID: 4505882919448927684, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
       propertyPath: _dialogueControllers.Array.data[14].idleDialogue._dialogueTextAsset
       value: 
-      objectReference: {fileID: 4900000, guid: 34512efe522e04d45b4cb83c5eb06e14, type: 3}
+      objectReference: {fileID: 4900000, guid: 614ac23841fb40a4ba232ae581bcd98f, type: 3}
+    - target: {fileID: 4505882919448927684, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
+      propertyPath: _dialogueControllers.Array.data[15].idleDialogue._dialogueTextAsset
+      value: 
+      objectReference: {fileID: 4900000, guid: 8e9b80adf8c668c4daf6129bc68618db, type: 3}
     - target: {fileID: 4505882919448927684, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
       propertyPath: _dialogueControllers.Array.data[14].questDialogue._dialogueTextAsset
       value: 
-      objectReference: {fileID: 4900000, guid: 34512efe522e04d45b4cb83c5eb06e14, type: 3}
+      objectReference: {fileID: 4900000, guid: 614ac23841fb40a4ba232ae581bcd98f, type: 3}
+    - target: {fileID: 4505882919448927684, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
+      propertyPath: _dialogueControllers.Array.data[15].questDialogue._dialogueTextAsset
+      value: 
+      objectReference: {fileID: 4900000, guid: 8e9b80adf8c668c4daf6129bc68618db, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
 --- !u!1 &652453457 stripped
