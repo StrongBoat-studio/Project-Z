@@ -18,12 +18,11 @@ public class DeadShimura : MonoBehaviour, IInteractable
     private void Awake()
     {
         _OUTLINE_ON = new LocalKeyword(GetComponent<SpriteRenderer>().material.shader, "_OUTLINE_ON");
+    }
 
-        if(QuestLineManager.Instance.Quests[0].Tasks[0].Title == "Search the body")
-        {
-            this.enabled=true;
-        }
-        else
+    private void Update()
+    {
+        if(QuestLineManager.Instance.Quests[0].Tasks[0].Title == "Argue with Boris")
         {
             Destroy(this);
         }
