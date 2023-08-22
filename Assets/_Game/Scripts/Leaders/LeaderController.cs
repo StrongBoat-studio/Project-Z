@@ -10,6 +10,9 @@ public class LeaderController : MonoBehaviour
     [SerializeField] GameObject _boris;
     [SerializeField] GameObject _shimura;
 
+    public bool canShowBoris = false;
+    public bool canShowShimura = false;
+
     private void Awake()
     {
         GameManager.Instance.boris = _boris;
@@ -20,11 +23,15 @@ public class LeaderController : MonoBehaviour
         if(_boris!=null)
         {
             Show(_questsNameWhenShowBoris, _boris);
+
+            canShowBoris = _boris.activeSelf;
         }
         
         if(_shimura!=null)
         {
             Show(_questsNameWhenShowShimura, _shimura);
+
+            canShowShimura = _shimura.activeSelf;
         }
     }
 

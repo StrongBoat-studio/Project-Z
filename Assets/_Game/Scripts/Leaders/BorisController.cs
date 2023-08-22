@@ -72,6 +72,8 @@ public class BorisController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GetComponentInParent<LeaderController>().canShowBoris == false) return;
+        
         if (QuestLineManager.Instance.Quests.Count < 1) return;
 
         CheckQuestAndSetComponents("Have a conversation with Boris", true, new Vector2(2.4f, -0.7f), 1, 0);

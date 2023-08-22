@@ -82,11 +82,11 @@ public class LevelManager : MonoBehaviour
         {
             if (iws.load == false) continue;
             if (itemWorldContainer != null)
-                ItemRegister.Instance.CreateWorldItem(iws.itemType, iws.amount, iws.position, itemWorldContainer);
+                ItemRegister.Instance.CreateWorldItem(iws.itemType, iws.amount, iws.position, iws.questName, itemWorldContainer);
             else
             {
                 Debug.LogWarning("Can't find game object with itemContainer tag, create one on level's scene.");
-                ItemRegister.Instance.CreateWorldItem(iws.itemType, iws.amount, iws.position);
+                ItemRegister.Instance.CreateWorldItem(iws.itemType, iws.amount, iws.position, iws.questName);
             }
         }
     }
@@ -165,7 +165,8 @@ public class LevelManager : MonoBehaviour
                 iw.GetItem().itemType,
                 iw.GetItem().amount,
                 iw.transform.position,
-                true
+                true,
+                iw.questName
             ));
         }
     }

@@ -15,17 +15,19 @@ public class LevelManagerData
     [System.Serializable]
     public struct ItemWorldState
     {
-        public ItemWorldState(Item.ItemType itemType, int amount, Vector3 position, bool load)
+        public ItemWorldState(Item.ItemType itemType, int amount, Vector3 position, bool load, string questName)
         {
             this.itemType = itemType;
             this.amount = amount;
             this.position = position;
-            this.load = load; 
+            this.load = load;
+            this.questName = questName;
         }
 
         public Item.ItemType itemType;
         public int amount;
         public Vector3 position;
+        public string questName;
         public bool load;
     }
 

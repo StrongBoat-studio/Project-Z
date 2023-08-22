@@ -2164,7 +2164,7 @@ MonoBehaviour:
       <IsCompleted>k__BackingField: 0
       <TaskType>k__BackingField: 3
       <ItemToCollect>k__BackingField:
-        itemType: 9
+        itemType: 10
         amount: 1
       <JournalAppToOpen>k__BackingField: 0
     - <ID>k__BackingField: 2
