@@ -37,16 +37,6 @@ public class AudioManager : MonoBehaviour
         _sfxBus = RuntimeManager.GetBus("bus:/SFX");
     }
 
-    // [Header("Volume")]
-    // [Range(0, 1)]
-    // public float masterVolume = 1;
-    // [Range(0, 1)]
-    // public float musicVolume = 1;
-    // [Range(0, 1)]
-    // public float ambienceVolume = 1;
-    // [Range(0, 1)]
-    // public float sfxVolume = 1;
-
     private Bus _masterBus;
     private Bus _musicBus;
     private Bus _ambienceBus;
@@ -55,9 +45,30 @@ public class AudioManager : MonoBehaviour
     private List<EventInstance> eventInstances;
     private EventInstance _mainThemeEventInstance;
 
+    public enum FootstepType
+    {
+        Normal,
+        Carpet,
+        Steel
+    }
+
+    [System.Serializable]
+    public struct SceneFootstepData
+    {
+        public FootstepType type;
+        public SceneRegister.Scenes scene;
+    }
+
+    [SerializeField]
+    private List<SceneFootstepData> _sceneFootstep = new();
+    public List<SceneFootstepData> SceneFootstep
+    {
+        get => _sceneFootstep;
+    }
+
     public void UpdateVolume(VolumeBus bus, float value)
     {
-        switch(bus)
+        switch (bus)
         {
             case VolumeBus.Master:
                 _masterBus.setVolume(value);
@@ -77,6 +88,11 @@ public class AudioManager : MonoBehaviour
     public void PlayOneShot(EventReference eventRef, Vector3 position)
     {
         RuntimeManager.PlayOneShot(eventRef, position);
+    }
+
+    public void PlayOneShotFromPath(string path, Vector3 position)
+    {
+        RuntimeManager.PlayOneShot(path, position);
     }
 
     public void InitializeMainTheme(EventReference eventReference)

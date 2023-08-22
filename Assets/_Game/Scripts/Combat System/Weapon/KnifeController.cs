@@ -64,6 +64,10 @@ public class KnifeController : MonoBehaviour
         if(hits.Any(x => x.collider.GetComponent<IInteractable>() != null) == false && _canStab == true && _weapon.GetWeapon() == 2)
         {
             KnifeAnim();
+            if(FMODEvents.Instance != null)
+            {
+                AudioManager.Instance?.PlayOneShot(FMODEvents.Instance.KnifeHit, transform.position);
+            }
         }
 
         //Chack all conditions

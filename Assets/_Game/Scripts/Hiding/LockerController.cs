@@ -24,6 +24,12 @@ public class LockerController : MonoBehaviour, IInteractable
         _playerWeaponHolder = GameObject.FindGameObjectWithTag("Player").transform.GetChild(2).gameObject;
         _movement = GameManager.Instance.movement;
 
+        //Locker enter/exit audio
+        if(FMODEvents.Instance != null)
+        {
+            AudioManager.Instance?.PlayOneShot(FMODEvents.Instance.LockerHide, transform.position);
+        }
+
         if (_playerSprite.activeSelf==true)
         {
             _playerSprite.SetActive(false);
