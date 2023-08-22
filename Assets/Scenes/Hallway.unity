@@ -708,7 +708,6 @@ GameObject:
   - component: {fileID: 261931965}
   - component: {fileID: 261931964}
   - component: {fileID: 261931963}
-  - component: {fileID: 261931962}
   m_Layer: 0
   m_Name: Comms
   m_TagString: Untagged
@@ -732,20 +731,6 @@ Transform:
   m_Father: {fileID: 984034877}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &261931962
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 261931960}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d7399e17f434bf4e894773a2c15f41d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  QuestID: 3
-  QuestTaskID: 1
 --- !u!114 &261931963
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -28,7 +28,9 @@ public class Journal : MonoBehaviour
 
     private void OnJournalOpen(InputAction.CallbackContext context)
     {
-        if(_isOpen == true) GameStateManager.Instance.ResetLastState();
+        if (GameObject.FindGameObjectWithTag("Camera").GetComponent<Transform>().GetChild(0).gameObject.activeSelf == true) return;
+       
+        if (_isOpen == true) GameStateManager.Instance.ResetLastState();
         else GameStateManager.Instance.SetState(GameStateManager.GameState.Journal);
     }
 

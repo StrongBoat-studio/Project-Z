@@ -24,6 +24,7 @@ TagManager:
   - GroundCheckTrash
   - Trashes
   - Leaders
+  - Camera
   layers:
   - Default
   - TransparentFX
