@@ -7939,7 +7939,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _lightGroups:
   - lights:
-    - {fileID: 0}
+    - {fileID: 2091662342}
     preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
     lastSum: 0
     currentFrequency: 0
@@ -7949,7 +7949,7 @@ MonoBehaviour:
     failed: 0
     workWait: 0
   - lights:
-    - {fileID: 0}
+    - {fileID: 1390438431}
     preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
     lastSum: 0
     currentFrequency: 0
@@ -7959,7 +7959,7 @@ MonoBehaviour:
     failed: 0
     workWait: 0
   - lights:
-    - {fileID: 0}
+    - {fileID: 661051651}
     preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
     lastSum: 0
     currentFrequency: 0
@@ -7969,7 +7969,7 @@ MonoBehaviour:
     failed: 0
     workWait: 0
   - lights:
-    - {fileID: 0}
+    - {fileID: 1532881141}
     preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
     lastSum: 0
     currentFrequency: 0
@@ -7979,7 +7979,7 @@ MonoBehaviour:
     failed: 0
     workWait: 0
   - lights:
-    - {fileID: 0}
+    - {fileID: 29746411}
     preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
     lastSum: 0
     currentFrequency: 0
@@ -7989,7 +7989,7 @@ MonoBehaviour:
     failed: 0
     workWait: 0
   - lights:
-    - {fileID: 0}
+    - {fileID: 1724020280}
     preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
     lastSum: 0
     currentFrequency: 0
@@ -7999,7 +7999,7 @@ MonoBehaviour:
     failed: 0
     workWait: 0
   - lights:
-    - {fileID: 0}
+    - {fileID: 514608502}
     preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
     lastSum: 0
     currentFrequency: 0
@@ -8009,7 +8009,7 @@ MonoBehaviour:
     failed: 0
     workWait: 0
   - lights:
-    - {fileID: 0}
+    - {fileID: 1932869374}
     preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
     lastSum: 0
     currentFrequency: 0
@@ -8019,7 +8019,7 @@ MonoBehaviour:
     failed: 0
     workWait: 0
   - lights:
-    - {fileID: 0}
+    - {fileID: 1515693803}
     preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
     lastSum: 0
     currentFrequency: 0
@@ -8029,7 +8029,7 @@ MonoBehaviour:
     failed: 0
     workWait: 0
   - lights:
-    - {fileID: 0}
+    - {fileID: 1671657131}
     preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
     lastSum: 0
     currentFrequency: 0
@@ -8039,7 +8039,7 @@ MonoBehaviour:
     failed: 0
     workWait: 0
   - lights:
-    - {fileID: 0}
+    - {fileID: 352264569}
     preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
     lastSum: 0
     currentFrequency: 0
@@ -8049,7 +8049,7 @@ MonoBehaviour:
     failed: 0
     workWait: 0
   - lights:
-    - {fileID: 0}
+    - {fileID: 1389326489}
     preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
     lastSum: 0
     currentFrequency: 0
@@ -8059,7 +8059,7 @@ MonoBehaviour:
     failed: 0
     workWait: 0
   - lights:
-    - {fileID: 0}
+    - {fileID: 1015069095}
     preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
     lastSum: 0
     currentFrequency: 0
@@ -8069,7 +8069,7 @@ MonoBehaviour:
     failed: 0
     workWait: 0
   - lights:
-    - {fileID: 0}
+    - {fileID: 52336305}
     preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
     lastSum: 0
     currentFrequency: 0
@@ -8079,7 +8079,7 @@ MonoBehaviour:
     failed: 0
     workWait: 0
   - lights:
-    - {fileID: 0}
+    - {fileID: 916327702}
     preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
     lastSum: 0
     currentFrequency: 0
@@ -8089,7 +8089,7 @@ MonoBehaviour:
     failed: 0
     workWait: 0
   - lights:
-    - {fileID: 0}
+    - {fileID: 304060383}
     preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
     lastSum: 0
     currentFrequency: 0
@@ -8099,7 +8099,7 @@ MonoBehaviour:
     failed: 0
     workWait: 0
   - lights:
-    - {fileID: 0}
+    - {fileID: 781334121}
     preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
     lastSum: 0
     currentFrequency: 0
@@ -8109,7 +8109,7 @@ MonoBehaviour:
     failed: 0
     workWait: 0
   - lights:
-    - {fileID: 0}
+    - {fileID: 217524290}
     preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
     lastSum: 0
     currentFrequency: 0
@@ -8119,7 +8119,7 @@ MonoBehaviour:
     failed: 0
     workWait: 0
   - lights:
-    - {fileID: 0}
+    - {fileID: 1619559865}
     preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
     lastSum: 0
     currentFrequency: 0
@@ -8129,7 +8129,7 @@ MonoBehaviour:
     failed: 0
     workWait: 0
   - lights:
-    - {fileID: 0}
+    - {fileID: 1801125247}
     preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
     lastSum: 0
     currentFrequency: 0
@@ -8139,7 +8139,7 @@ MonoBehaviour:
     failed: 0
     workWait: 0
   - lights:
-    - {fileID: 0}
+    - {fileID: 12861555}
     preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
     lastSum: 0
     currentFrequency: 0
@@ -8149,7 +8149,7 @@ MonoBehaviour:
     failed: 0
     workWait: 0
   - lights:
-    - {fileID: 0}
+    - {fileID: 1074107094}
     preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
     lastSum: 0
     currentFrequency: 0
@@ -8159,7 +8159,7 @@ MonoBehaviour:
     failed: 0
     workWait: 0
   - lights:
-    - {fileID: 0}
+    - {fileID: 1711133855}
     preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
     lastSum: 0
     currentFrequency: 0
@@ -8169,7 +8169,7 @@ MonoBehaviour:
     failed: 0
     workWait: 0
   - lights:
-    - {fileID: 0}
+    - {fileID: 1379350606}
     preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
     lastSum: 0
     currentFrequency: 0
@@ -8179,9 +8179,9 @@ MonoBehaviour:
     failed: 0
     workWait: 0
   - lights:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
+    - {fileID: 828259312}
+    - {fileID: 899817443}
+    - {fileID: 472214302}
     preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
     lastSum: 0
     currentFrequency: 0

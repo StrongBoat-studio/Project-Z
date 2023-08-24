@@ -147,7 +147,6 @@ public class SceneRegister : MonoBehaviour
                 GameSaveManager.Instance.currentSave.spawnPosition = spawnPos;
 
                 //Set camera confiner
-
                 if(GameObject.FindGameObjectWithTag("CamConfiner") != null)
                 {
                     GameManager.Instance.player.GetComponent<Player>().SetVCamConfiner(
