@@ -11,15 +11,24 @@ public class ItemWorld : MonoBehaviour, IInteractable
     [SerializeField] private Item.ItemType _itemType;
     [SerializeField] private int _amount;
     private LocalKeyword _OUTLINE_ON;
-    [SerializeField] private Color _canInteractColor;
-    [SerializeField] private Color _cannotInteractColor;
+
+    [SerializeField]
+    private Color _canInteractColor;
+
+    [SerializeField]
+    private Color _cannotInteractColor;
 
     private void Awake()
     {
-        _OUTLINE_ON = new LocalKeyword(GetComponent<SpriteRenderer>().material.shader, "_OUTLINE_ON");
+        _OUTLINE_ON = new LocalKeyword(
+            GetComponent<SpriteRenderer>().material.shader,
+            "_OUTLINE_ON"
+        );
 
         if (_itemType != Item.ItemType.None)
-            GetComponent<SpriteRenderer>().sprite = ItemRegister.Instance.items.Find(x => x.itemType == _itemType).sprite;
+            GetComponent<SpriteRenderer>().sprite = ItemRegister.Instance.items
+                .Find(x => x.itemType == _itemType)
+                .sprite;
     }
 
     private void Update()
@@ -48,7 +57,9 @@ public class ItemWorld : MonoBehaviour, IInteractable
     {
         _itemType = itemType;
         _amount = amount;
-        GetComponent<SpriteRenderer>().sprite = ItemRegister.Instance.items.Find(x => x.itemType == _itemType).sprite;
+        GetComponent<SpriteRenderer>().sprite = ItemRegister.Instance.items
+            .Find(x => x.itemType == _itemType)
+            .sprite;
     }
 
     ///<summary>
@@ -65,7 +76,9 @@ public class ItemWorld : MonoBehaviour, IInteractable
     {
         if (GameManager.Instance.player != null)
         {
-            if (GameManager.Instance.player.GetComponent<Player>().GetInventory().AddItem(GetItem()))
+            if (
+                GameManager.Instance.player.GetComponent<Player>().GetInventory().AddItem(GetItem())
+            )
             {
                 //Find item in game save to update its load state
                 LevelManagerData.ItemWorldState cmp = new LevelManagerData.ItemWorldState(
@@ -74,12 +87,23 @@ public class ItemWorld : MonoBehaviour, IInteractable
 
                 if (GameSaveManager.Instance != null)
                 {
-                    bool isRemoved = FindObjectOfType<LevelManager>().GetLevelData().items.Remove(cmp);
+                    bool isRemoved = FindObjectOfType<LevelManager>()
+                        .GetLevelData()
+                        .items.Remove(cmp);
 
+                    //Item is added to inventory
                     if (isRemoved == true)
                     {
                         cmp.load = false;
                         FindObjectOfType<LevelManager>().GetLevelData().items.Add(cmp);
+
+                        if (FMODEvents.Instance != null)
+                        {
+                            AudioManager.Instance?.PlayOneShot(
+                                FMODEvents.Instance.ItemPickup,
+                                transform.position
+                            );
+                        }
                     }
                 }
 
@@ -95,7 +119,10 @@ public class ItemWorld : MonoBehaviour, IInteractable
     public void CursorEnter(bool canInteract)
     {
         GetComponent<SpriteRenderer>().material.SetKeyword(_OUTLINE_ON, true);
-        GetComponent<SpriteRenderer>().material.SetColor("_Color", canInteract ? _canInteractColor : _cannotInteractColor);
+        GetComponent<SpriteRenderer>().material.SetColor(
+            "_Color",
+            canInteract ? _canInteractColor : _cannotInteractColor
+        );
     }
 
     public void CursorExit()

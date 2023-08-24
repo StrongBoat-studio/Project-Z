@@ -733,14 +733,14 @@ MonoBehaviour:
       Data2: 1127391579
       Data3: 265856191
       Data4: -1856130047
-    Path: event:/SFX/UIButtonClick
+    Path: event:/SFX/UI/UIButtonClick
   <UIButtonHover>k__BackingField:
     Guid:
       Data1: -2029230892
       Data2: 1123834183
       Data3: 173228729
       Data4: 511729677
-    Path: event:/SFX/UIButtonHover
+    Path: event:/SFX/UI/UIButtonHover
   <MainTheme>k__BackingField:
     Guid:
       Data1: 2128066426
@@ -748,6 +748,118 @@ MonoBehaviour:
       Data3: -777995089
       Data4: -982532816
     Path: event:/Music/Theme
+  <Walk>k__BackingField:
+    Guid:
+      Data1: 6979956
+      Data2: 1202592047
+      Data3: 649845927
+      Data4: 1777766400
+    Path: event:/SFX/Player/Walk
+  <WalkCarpet>k__BackingField:
+    Guid:
+      Data1: -1978401465
+      Data2: 1250504101
+      Data3: 1668673715
+      Data4: -766744542
+    Path: event:/SFX/Player/WalkCarpet
+  <WalkSteel>k__BackingField:
+    Guid:
+      Data1: 134254660
+      Data2: 1258071991
+      Data3: 189098159
+      Data4: 1426839824
+    Path: event:/SFX/Player/WalkSteel
+  <NoStaminaGasp>k__BackingField:
+    Guid:
+      Data1: 577831650
+      Data2: 1154604186
+      Data3: -1066353221
+      Data4: -516113303
+    Path: event:/SFX/Combat/NoStaminaGasp
+  <Jump>k__BackingField:
+    Guid:
+      Data1: -1298451082
+      Data2: 1220180976
+      Data3: -694906954
+      Data4: 1919300799
+    Path: event:/SFX/Player/Jump
+  <JumpLanding>k__BackingField:
+    Guid:
+      Data1: 262035913
+      Data2: 1181838400
+      Data3: 252661378
+      Data4: -610008999
+    Path: event:/SFX/Player/JumpLanding
+  <FlashlightOn>k__BackingField:
+    Guid:
+      Data1: 2116284705
+      Data2: 1288541002
+      Data3: 1984041887
+      Data4: -65438320
+    Path: event:/SFX/Player/FlashlightOn
+  <FlashlightOff>k__BackingField:
+    Guid:
+      Data1: -1009820394
+      Data2: 1233688172
+      Data3: 198805678
+      Data4: -2142626808
+    Path: event:/SFX/Player/FlashlightOff
+  <LockerHide>k__BackingField:
+    Guid:
+      Data1: -1862916673
+      Data2: 1184811216
+      Data3: -2045102913
+      Data4: -949597442
+    Path: event:/SFX/Interactions/Locker
+  <Shot>k__BackingField:
+    Guid:
+      Data1: 1550381856
+      Data2: 1259515284
+      Data3: 1790077628
+      Data4: 1222427570
+    Path: event:/SFX/Combat/Gunshot
+  <NoAmmo>k__BackingField:
+    Guid:
+      Data1: -632334203
+      Data2: 1324442459
+      Data3: 1665118873
+      Data4: 280114068
+    Path: event:/SFX/Combat/NoAmmo
+  <GunReaload>k__BackingField:
+    Guid:
+      Data1: 169465793
+      Data2: 1316663184
+      Data3: -405031511
+      Data4: -212877743
+    Path: event:/SFX/Combat/Reload
+  <KnifeHit>k__BackingField:
+    Guid:
+      Data1: -366981033
+      Data2: 1147056380
+      Data3: -601347199
+      Data4: -616553831
+    Path: event:/SFX/Combat/Knife
+  <ItemPickup>k__BackingField:
+    Guid:
+      Data1: 1830784224
+      Data2: 1306471260
+      Data3: -1945100658
+      Data4: -1379091144
+    Path: event:/SFX/Interactions/ItemPickup
+  <MutantGrowl>k__BackingField:
+    Guid:
+      Data1: 171532705
+      Data2: 1186860701
+      Data3: 1122340746
+      Data4: 790985868
+    Path: event:/SFX/Mutant/Growl
+  <MutantIdle>k__BackingField:
+    Guid:
+      Data1: -1282861247
+      Data2: 1184608097
+      Data3: 1913348487
+      Data4: 1710567220
+    Path: event:/SFX/Mutant/Idle
 --- !u!114 &222278593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -760,6 +872,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f83875cc6e2de048b1022467e74cbee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sceneFootstep:
+  - type: 0
+    scene: 6
+  - type: 0
+    scene: 7
+  - type: 0
+    scene: 8
+  - type: 0
+    scene: 9
+  - type: 0
+    scene: 11
+  - type: 0
+    scene: 12
+  - type: 0
+    scene: 13
+  - type: 0
+    scene: 14
+  - type: 0
+    scene: 15
+  - type: 0
+    scene: 18
+  - type: 0
+    scene: 20
 --- !u!4 &222278594
 Transform:
   m_ObjectHideFlags: 0
@@ -4803,7 +4938,7 @@ MonoBehaviour:
   _nameText: {fileID: 582282977}
   _messageText: {fileID: 127382851}
   _typeSpeed: 100
-  _typeSpeedSkip: 200
+  _typeSpeedSkip: 200000
   _currentTextAsset: {fileID: 0}
 --- !u!4 &2146267354
 Transform:

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="EncodableAsset" id="{65b59de1-0f73-431a-995e-26028f52c1b3}">
+		<property name="assetPath">
+			<value>Interakcje/Latarka/</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{aad68ef3-a657-4c67-aa43-2a1b2cf54acb}</destination>
+		</relationship>
+	</object>
+</objects>

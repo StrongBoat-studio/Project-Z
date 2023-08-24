@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{e34d6ec6-1bfa-44a3-a85a-de9cdc41ae4e}">
+		<property name="assetPath">
+			<value>Walka/Uderzenie w kant biurka/Uderzenie_w_biurko.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.27791666666666665</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{aad68ef3-a657-4c67-aa43-2a1b2cf54acb}</destination>
+		</relationship>
+	</object>
+</objects>

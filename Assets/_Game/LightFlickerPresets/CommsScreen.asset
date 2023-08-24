@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97a442d42cef1964f9d85b33070622cc, type: 3}
   m_Name: CommsScreen
   m_EditorClassIdentifier: 
-  minIntensity: 0
-  maxIntensity: 2
+  minIntensity: 1
+  maxIntensity: 1.5
   smoothing: 30
   frequency: 2
   frequencyRandomenss: 1
-  failChance: 0.025
-  failDuration: 0.5
-  failDurationRandomess: 0.1
+  failChance: 0
+  failDuration: 0
+  failDurationRandomess: 0
   minWorkTime: 10
   workTimeRandomness: 2

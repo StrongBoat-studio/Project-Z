@@ -24,35 +24,72 @@ public class Movement : MonoBehaviour
     private Transform _transform;
     private PlayerEarthController _playerEarthController;
 
-    private int _movementState = (int)MovementState.Standing; //State of the player, represented as bits 
+    private int _movementState = (int)MovementState.Standing; //State of the player, represented as bits
     private float _movementSpeedCalculated = 0f;
 
     #region Movement variables
     [Header("Movement")]
-    [SerializeField] private LayerMask _groundLayer;
-    [Range(0f, 10f)][SerializeField] private float _movementSpeed;
-    [Range(0f, 10f)][SerializeField] private float _crouchMultipier;
-    [Range(0f, 10f)][SerializeField] private float _runMultiplier;
-    [Range(0f, 10f)][SerializeField] private float _creepMultipier;
-    [Range(0f, 10f)][SerializeField] private float _jumpForce;
+    [SerializeField]
+    private LayerMask _groundLayer;
+
+    [Range(0f, 10f)]
+    [SerializeField]
+    private float _movementSpeed;
+
+    [Range(0f, 10f)]
+    [SerializeField]
+    private float _crouchMultipier;
+
+    [Range(0f, 10f)]
+    [SerializeField]
+    private float _runMultiplier;
+
+    [Range(0f, 10f)]
+    [SerializeField]
+    private float _creepMultipier;
+
+    [Range(0f, 10f)]
+    [SerializeField]
+    private float _jumpForce;
     private const float JUMPFORCE_SCALE = 10000f;
-    [SerializeField] private Image _uiStaminaBar;
-    [Range(0f, 10f)][SerializeField] private float _staminaMax;
-    [Range(0f, 10f)][SerializeField] private float _staminaDrainSpeed;
-    [Range(0f, 10f)][SerializeField] private float _staminaRecoveryDelay;
-    [Range(0f, 10f)][SerializeField] private float _staminaRecoverySpeed;
-    [Range(0f, 10f)][SerializeField] private float _staminaDrainJump;
-    [Range(0f, 10f)][SerializeField] private float _crouchTimeout;
+
+    [SerializeField]
+    private Image _uiStaminaBar;
+
+    [Range(0f, 10f)]
+    [SerializeField]
+    private float _staminaMax;
+
+    [Range(0f, 10f)]
+    [SerializeField]
+    private float _staminaDrainSpeed;
+
+    [Range(0f, 10f)]
+    [SerializeField]
+    private float _staminaRecoveryDelay;
+
+    [Range(0f, 10f)]
+    [SerializeField]
+    private float _staminaRecoverySpeed;
+
+    [Range(0f, 10f)]
+    [SerializeField]
+    private float _staminaDrainJump;
+
+    [Range(0f, 10f)]
+    [SerializeField]
+    private float _crouchTimeout;
 
     private bool _isWalking = false;
     private bool _isRunning = false;
     private bool _isCrouching = false;
     private bool _isCreeping = false;
-    private bool _isJumping = false;
+    private bool _isAirborn = false;
 
     private float _staminaCurrent;
     private float _staminaRecoveryCurrentTime;
     private float _crouchTimer = 0f;
+    private bool _staminaGaspPlayed = false;
 
     public bool IsDoorAnimationPlay = false;
     public bool canMove = true;
@@ -89,7 +126,7 @@ public class Movement : MonoBehaviour
         _playerInput.InGame.Crouch.canceled += _ => _isCrouching = false;
 
         GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
-    } 
+    }
 
     private void OnDestroy()
     {
@@ -99,7 +136,8 @@ public class Movement : MonoBehaviour
 
     private void Update()
     {
-        if(_crouchTimer > 0f) _crouchTimer -= Time.deltaTime;
+        if (_crouchTimer > 0f)
+            _crouchTimer -= Time.deltaTime;
 
         CalculateState();
 
@@ -108,7 +146,6 @@ public class Movement : MonoBehaviour
         ChangeSide();
 
         PositionDuringDoorAnimation();
-            
     }
 
     private void FixedUpdate()
@@ -116,10 +153,26 @@ public class Movement : MonoBehaviour
         List<MovementState> currentStates = GetMovementStates();
         ms = currentStates.ToArray();
 
-        //Check Jump
-        if (currentStates.Contains(MovementState.Jumping))
+        //Check JLanding
+        if (IsGrounded() == false && _isAirborn == false)
         {
-            if (IsGrounded() == true) AlterMovementState(0, MovementState.Jumping);
+            _isAirborn = true;
+        }
+        else if(IsGrounded() == true && _isAirborn == true)
+        {
+            _isAirborn = false;
+
+            //Remove jumping state if it was set
+            if(currentStates.Contains(MovementState.Jumping))
+            {
+                AlterMovementState(0, MovementState.Jumping);
+            }
+
+            //Play landing sound
+            if(FMODEvents.Instance != null)
+            {
+                AudioManager.Instance?.PlayOneShot(FMODEvents.Instance.JumpLanding, transform.position);
+            }
         }
 
         CalculateMovementSpeed();
@@ -145,99 +198,88 @@ public class Movement : MonoBehaviour
         {
             AlterMovementState(MovementState.Walking, 0);
         }
-        else if (
-            _isWalking == false ||
-            IsGrounded() == false
-        )
+        else if (_isWalking == false || IsGrounded() == false)
         {
             // If player is not walking, he can't run or creep
-            AlterMovementState(0, MovementState.Walking); 
-            AlterMovementState(0, MovementState.Running); 
+            AlterMovementState(0, MovementState.Walking);
+            AlterMovementState(0, MovementState.Running);
             AlterMovementState(0, MovementState.Creeping);
         }
 
-
         // Running
-        if(
-            states.Contains(MovementState.Walking) == true &&
-            states.Contains(MovementState.Running) == false &&
-            _isRunning == true && 
-            IsGrounded() == true
-        ) 
+        if (
+            states.Contains(MovementState.Walking) == true
+            && states.Contains(MovementState.Running) == false
+            && _isRunning == true
+            && IsGrounded() == true
+        )
         {
-            if(states.Contains(MovementState.Crouching) == true && _crouchTimer <= 0f) _crouchTimer = _crouchTimeout; 
-            if(!_playerEarthController.IsEarth())
+            if (states.Contains(MovementState.Crouching) == true && _crouchTimer <= 0f)
+                _crouchTimer = _crouchTimeout;
+            if (!_playerEarthController.IsEarth())
             {
                 AlterMovementState(MovementState.Running, 0f);
-
             }
             AlterMovementState(0f, MovementState.Creeping);
             AlterMovementState(0f, MovementState.Crouching);
 
-            _playerInput.InGame.Creep.Reset(); 
-            _playerInput.InGame.Crouch.Reset(); 
+            _playerInput.InGame.Creep.Reset();
+            _playerInput.InGame.Crouch.Reset();
         }
-        else if (
-            _isRunning == false || 
-            IsGrounded() == false
-        )
+        else if (_isRunning == false || IsGrounded() == false)
         {
             AlterMovementState(0, MovementState.Running);
         }
 
         // Crouching
-        if(
-            states.Contains(MovementState.Crouching) == false &&
-            _isCrouching == true && 
-            IsGrounded() == true &&
-            _crouchTimer <= 0f
+        if (
+            states.Contains(MovementState.Crouching) == false
+            && _isCrouching == true
+            && IsGrounded() == true
+            && _crouchTimer <= 0f
         )
         {
             if (!_playerEarthController.IsEarth())
-                AlterMovementState(MovementState.Crouching, 0f); 
+                AlterMovementState(MovementState.Crouching, 0f);
             AlterMovementState(0f, MovementState.Creeping);
             AlterMovementState(0f, MovementState.Running);
 
-            _playerInput.InGame.Creep.Reset(); 
-            _playerInput.InGame.Run.Reset(); 
+            _playerInput.InGame.Creep.Reset();
+            _playerInput.InGame.Run.Reset();
         }
         else if (
-            states.Contains(MovementState.Crouching) == true &&
-            _isCrouching == true &&
-            IsGrounded() == false
+            states.Contains(MovementState.Crouching) == true
+            && _isCrouching == true
+            && IsGrounded() == false
         )
         {
             // Player is falling to crouch, do nothing
         }
-        else if (
-            _isCrouching == false ||
-            IsGrounded() == false
-        )
+        else if (_isCrouching == false || IsGrounded() == false)
         {
-            if(states.Contains(MovementState.Crouching) == true && _crouchTimer <= 0f) _crouchTimer = _crouchTimeout; 
+            if (states.Contains(MovementState.Crouching) == true && _crouchTimer <= 0f)
+                _crouchTimer = _crouchTimeout;
             AlterMovementState(0, MovementState.Crouching);
         }
 
         // Creeping
-        if(
-            states.Contains(MovementState.Walking) == true &&
-            states.Contains(MovementState.Creeping) == false && 
-            _isCreeping == true && 
-            IsGrounded() == true
+        if (
+            states.Contains(MovementState.Walking) == true
+            && states.Contains(MovementState.Creeping) == false
+            && _isCreeping == true
+            && IsGrounded() == true
         )
         {
-            if(states.Contains(MovementState.Crouching) == true && _crouchTimer <= 0f) _crouchTimer = _crouchTimeout; 
+            if (states.Contains(MovementState.Crouching) == true && _crouchTimer <= 0f)
+                _crouchTimer = _crouchTimeout;
             AlterMovementState(MovementState.Creeping, 0f);
             AlterMovementState(0f, MovementState.Crouching);
             AlterMovementState(0f, MovementState.Running);
 
-            _playerInput.InGame.Crouch.Reset(); 
-            _playerInput.InGame.Run.Reset(); 
-        } 
-        else if (
-            _isCreeping == false ||
-            IsGrounded() == false
-        )
+            _playerInput.InGame.Crouch.Reset();
+            _playerInput.InGame.Run.Reset();
+        }
+        else if (_isCreeping == false || IsGrounded() == false)
         {
             AlterMovementState(0, MovementState.Creeping);
         }
@@ -246,7 +288,8 @@ public class Movement : MonoBehaviour
     private void CalculateMovementSpeed()
     {
         //Modify movement speed only when player is on the ground
-        if (!IsGrounded()) return;
+        if (!IsGrounded())
+            return;
 
         if(canMove==false)
         {
@@ -267,10 +310,10 @@ public class Movement : MonoBehaviour
             if (_staminaCurrent > 0f)
             {
                 //Force relese keys, reset states
-                if(states.Contains(MovementState.Crouching))
+                if (states.Contains(MovementState.Crouching))
                     _playerInput.InGame.Crouch.Reset();
-                
-                if(states.Contains(MovementState.Creeping))
+
+                if (states.Contains(MovementState.Creeping))
                     _playerInput.InGame.Creep.Reset();
 
                 moveRaw *= _runMultiplier;
@@ -289,9 +332,9 @@ public class Movement : MonoBehaviour
         else if (states.Contains(MovementState.Creeping))
         {
             //Force relese keys, reset states
-            if(states.Contains(MovementState.Running))
+            if (states.Contains(MovementState.Running))
                 _playerInput.InGame.Run.Reset();
-            if(states.Contains(MovementState.Crouching))
+            if (states.Contains(MovementState.Crouching))
                 _playerInput.InGame.Crouch.Reset();
 
             moveRaw *= _creepMultipier;
@@ -299,9 +342,9 @@ public class Movement : MonoBehaviour
         else if (states.Contains(MovementState.Crouching))
         {
             //Force relese keys, reset states
-            if(states.Contains(MovementState.Creeping))
+            if (states.Contains(MovementState.Creeping))
                 _playerInput.InGame.Creep.Reset();
-            if(states.Contains(MovementState.Running))
+            if (states.Contains(MovementState.Running))
                 _playerInput.InGame.Run.Reset();
             moveRaw *= _crouchMultipier;
         }
@@ -322,16 +365,29 @@ public class Movement : MonoBehaviour
         {
             _staminaRecoveryCurrentTime += Time.deltaTime;
             _staminaCurrent = 0f;
+
+            if(_staminaGaspPlayed == false && FMODEvents.Instance != null)
+            {
+                AudioManager.Instance?.PlayOneShot(FMODEvents.Instance.NoStaminaGasp, transform.position);
+                _staminaGaspPlayed = true;
+            }
         }
         else if (
-            _staminaRecoveryCurrentTime >= _staminaRecoveryDelay &&
-            !states.Contains(MovementState.Jumping) &&
-            (!states.Contains(MovementState.Walking) || !states.Contains(MovementState.Running))
+            _staminaRecoveryCurrentTime >= _staminaRecoveryDelay
+            && !states.Contains(MovementState.Jumping)
+            && (!states.Contains(MovementState.Walking) || !states.Contains(MovementState.Running))
         )
         {
+            if(_staminaGaspPlayed == true)
+            {
+                _staminaGaspPlayed = false;
+            }
+
             _staminaCurrent += Time.deltaTime * _staminaRecoverySpeed;
             if (_staminaCurrent >= _staminaMax)
+            {
                 _staminaCurrent = _staminaMax;
+            }
         }
 
         _uiStaminaBar.fillAmount = Mathf.Clamp(_staminaCurrent / _staminaMax, 0f, 1f);
@@ -339,7 +395,14 @@ public class Movement : MonoBehaviour
 
     public bool IsGrounded()
     {
-        return Physics2D.BoxCast(_boxCollider.bounds.center, _boxCollider.bounds.size, 0f, Vector2.down, 1 / 32f, _groundLayer);
+        return Physics2D.BoxCast(
+            _boxCollider.bounds.center,
+            _boxCollider.bounds.size,
+            0f,
+            Vector2.down,
+            1 / 32f,
+            _groundLayer
+        );
     }
 
     private void OnJump(InputAction.CallbackContext context)
@@ -348,11 +411,19 @@ public class Movement : MonoBehaviour
         if (!canMove) return;
         if (_staminaCurrent < _staminaDrainJump) return;
 
-        if(!_playerEarthController.IsEarth())
+        if (!_playerEarthController.IsEarth())
         {
             AlterMovementState(MovementState.Jumping, 0);
             _staminaCurrent -= _staminaDrainJump;
-            _rigidbody.AddForce(Vector2.up * _jumpForce * Time.fixedDeltaTime * JUMPFORCE_SCALE, ForceMode2D.Impulse);
+            _rigidbody.AddForce(
+                Vector2.up * _jumpForce * Time.fixedDeltaTime * JUMPFORCE_SCALE,
+                ForceMode2D.Impulse
+            );
+
+            if(FMODEvents.Instance != null)
+            {
+                AudioManager.Instance?.PlayOneShot(FMODEvents.Instance.Jump, transform.position);
+            }
         }
 
         _playerInput.InGame.Crouch.Reset();
@@ -381,7 +452,8 @@ public class Movement : MonoBehaviour
         for (int i = 1; i < (int)Mathf.Pow(2, Enum.GetNames(typeof(MovementState)).Length); i <<= 1)
         {
             //If MovementState flag is set, add it to list
-            if ((_movementState & i) == i) states.Add((MovementState)i);
+            if ((_movementState & i) == i)
+                states.Add((MovementState)i);
         }
 
         return states;
@@ -389,45 +461,62 @@ public class Movement : MonoBehaviour
 
     private void OnGameStateChanged(GameStateManager.GameState newGameState)
     {
-        if(
-            newGameState == GameStateManager.GameState.Paused ||
-            newGameState == GameStateManager.GameState.Dialogue ||
-            newGameState == GameStateManager.GameState.Loading
-        ) _playerInput.InGame.Disable();
-        else if(newGameState == GameStateManager.GameState.Gameplay) _playerInput.InGame.Enable();
+        if (
+            newGameState == GameStateManager.GameState.Paused
+            || newGameState == GameStateManager.GameState.Dialogue
+            || newGameState == GameStateManager.GameState.Loading
+        )
+            _playerInput.InGame.Disable();
+        else if (newGameState == GameStateManager.GameState.Gameplay)
+            _playerInput.InGame.Enable();
     }
 
     private void ChangeSide()
     {
-
-        if(IsDoorAnimationPlay)
+        if (IsDoorAnimationPlay)
         {
             return;
         }
 
-        if(
-            Camera.main.ScreenToWorldPoint(_playerInput.InGame.MousePosition.ReadValue<Vector2>()).x >= transform.position.x &&
-            transform.localScale.x != -1 && !IsDoorAnimationPlay
+        if (
+            Camera.main.ScreenToWorldPoint(_playerInput.InGame.MousePosition.ReadValue<Vector2>()).x
+                >= transform.position.x
+            && transform.localScale.x != -1
+            && !IsDoorAnimationPlay
         )
         {
-            _transform.localScale = new Vector3(-1f, _transform.localScale.y, transform.localScale.z);
+            _transform.localScale = new Vector3(
+                -1f,
+                _transform.localScale.y,
+                transform.localScale.z
+            );
         }
-        else if(
-            Camera.main.ScreenToWorldPoint(_playerInput.InGame.MousePosition.ReadValue<Vector2>()).x < transform.position.x &&
-            transform.localScale.x != 1 && !IsDoorAnimationPlay
+        else if (
+            Camera.main.ScreenToWorldPoint(_playerInput.InGame.MousePosition.ReadValue<Vector2>()).x
+                < transform.position.x
+            && transform.localScale.x != 1
+            && !IsDoorAnimationPlay
         )
         {
-            _transform.localScale = new Vector3(1f, _transform.localScale.y, transform.localScale.z);
+            _transform.localScale = new Vector3(
+                1f,
+                _transform.localScale.y,
+                transform.localScale.z
+            );
         }
 
         //Exit running state if player's movement direction is opposite to player's looking direction
-        if(
-            (GetMovementStates().Contains(MovementState.Running) && 
-            _playerInput.InGame.Walk.ReadValue<float>() == 1f &&
-            transform.localScale.x == 1f) ||
-            (GetMovementStates().Contains(MovementState.Running) && 
-            _playerInput.InGame.Walk.ReadValue<float>() == -1f &&
-            transform.localScale.x == -1f)
+        if (
+            (
+                GetMovementStates().Contains(MovementState.Running)
+                && _playerInput.InGame.Walk.ReadValue<float>() == 1f
+                && transform.localScale.x == 1f
+            )
+            || (
+                GetMovementStates().Contains(MovementState.Running)
+                && _playerInput.InGame.Walk.ReadValue<float>() == -1f
+                && transform.localScale.x == -1f
+            )
         )
         {
             AlterMovementState(0, MovementState.Running);

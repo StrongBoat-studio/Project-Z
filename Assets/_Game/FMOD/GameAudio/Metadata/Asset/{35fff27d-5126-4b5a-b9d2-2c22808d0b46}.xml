@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="EncodableAsset" id="{35fff27d-5126-4b5a-b9d2-2c22808d0b46}">
+		<property name="assetPath">
+			<value>Poruszanie Się/Chodzenie/</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{aad68ef3-a657-4c67-aa43-2a1b2cf54acb}</destination>
+		</relationship>
+	</object>
+</objects>

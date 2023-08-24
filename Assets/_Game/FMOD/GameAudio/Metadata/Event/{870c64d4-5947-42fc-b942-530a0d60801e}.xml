@@ -5,10 +5,10 @@
 			<value>UIButtonHover</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>0</value>
 		</property>
 		<relationship name="folder">
-			<destination>{a448a094-5045-4845-8e33-866c7cc842cd}</destination>
+			<destination>{fd1f29b3-0bce-423a-a548-6303dbbc5f04}</destination>
 		</relationship>
 		<relationship name="mixer">
 			<destination>{10881275-44a1-4e7b-9222-998344afcd1b}</destination>
@@ -90,11 +90,7 @@
 			<destination>{10881275-44a1-4e7b-9222-998344afcd1b}</destination>
 		</relationship>
 	</object>
-	<object class="MultiSound" id="{2fca91a9-7704-48f5-b92c-14794a1db485}">
-		<relationship name="sounds">
-			<destination>{53478118-c16a-40d3-a9c1-e9b6507d7a34}</destination>
-		</relationship>
-	</object>
+	<object class="MultiSound" id="{2fca91a9-7704-48f5-b92c-14794a1db485}" />
 	<object class="MixerBusEffectChain" id="{af142f27-b8f7-425c-a66f-d5de6fde7f22}">
 		<relationship name="effects">
 			<destination>{3c51e18f-b7b1-47c0-8b4c-f8c6fd68d342}</destination>
@@ -121,11 +117,6 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{9d7cef66-306d-4a83-8639-9dc21408996c}" />
-	<object class="SingleSound" id="{53478118-c16a-40d3-a9c1-e9b6507d7a34}">
-		<relationship name="audioFile">
-			<destination>{ba406959-87af-4532-bee4-151dda10cdcf}</destination>
-		</relationship>
-	</object>
 	<object class="MixerBusFader" id="{3c51e18f-b7b1-47c0-8b4c-f8c6fd68d342}" />
 	<object class="MixerBusEffectChain" id="{dbb9e8bb-8eca-47b7-8e68-b88ef13f6e1b}">
 		<relationship name="effects">

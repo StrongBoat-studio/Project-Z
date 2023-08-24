@@ -2236,7 +2236,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'SFX volume
+  m_text: 'Ambience volume
 
 '
   m_isRightToLeft: 0

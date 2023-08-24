@@ -82,7 +82,6 @@ public class InteractionManager : MonoBehaviour
                 if(distance < _maxInteractionDistance)
                 {
                     canInteract = true;
-                    Debug.Log("Can interact");
                 }
             }
 

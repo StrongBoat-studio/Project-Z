@@ -68,12 +68,18 @@ public class Shooting : MonoBehaviour
         if (hits.Any(x => x.collider.GetComponent<IInteractable>() != null) == false && _canShoot==true && _weapon.GetWeapon()==1 && !_movement.GetMovementStates().Contains(Movement.MovementState.Crouching) && !_movement.GetMovementStates().Contains(Movement.MovementState.Running)) 
         {
             Instantiate(_bulletPrefab, _firePoint.position, _firePoint.rotation);
+            
+            //Gunshot audio
+            if(FMODEvents.Instance != null)
+            {
+                AudioManager.Instance?.PlayOneShot(FMODEvents.Instance.Shot, transform.position);
+            }
         }
     }
 
     private void WhichArm()
     {
-;       if(mousePos.y<80)
+        if(mousePos.y<80)
         {
             _whichArm = 9;
         }

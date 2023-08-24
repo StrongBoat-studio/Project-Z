@@ -16,6 +16,7 @@ public class DialogueHolder : MonoBehaviour, IInteractable
     [SerializeField] private DialogueController _dialogueQuest;
     private Animator _animator;
     private bool _isDialogue;
+
     void Awake()
     {
         _OUTLINE_ON = new LocalKeyword(GetComponent<SpriteRenderer>().material.shader, "_OUTLINE_ON");

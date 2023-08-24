@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using Cinemachine;
 
 public class Player : MonoBehaviour
 {
@@ -11,11 +12,13 @@ public class Player : MonoBehaviour
     public int _helathMax = 100;
     public int _currentHelath = 100;
     [SerializeField] private Image _playerHealthBar;
-
+    
     private Inventory _inventory;
     [SerializeField] private RectTransform _uiInventory;
 
-    [SerializeField] DialogueController _lowHP;
+    [SerializeField] private DialogueController _lowHP;
+
+    [SerializeField] private CinemachineVirtualCamera _virtualCamera;
 
     private void Awake()
     {
@@ -95,5 +98,10 @@ public class Player : MonoBehaviour
     public void AddItem(Item item)
     {
         _inventory.AddItem(item);
+    }
+
+    public void SetVCamConfiner(GameObject colliderObject)
+    {
+        _virtualCamera.GetComponent<CinemachineConfiner>().m_BoundingShape2D = colliderObject.GetComponent<PolygonCollider2D>();
     }
 }

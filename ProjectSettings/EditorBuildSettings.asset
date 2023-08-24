@@ -27,31 +27,31 @@ EditorBuildSettings:
     path: Assets/Scenes/Player.unity
     guid: 1f095d431659dc6468850373d2f3f34c
   - enabled: 1
-    path: Assets/Scenes/Comms.unity
+    path: Assets/Scenes/Levels/Comms.unity
     guid: ed93f81ba8d6d9848adb7a7c1d723d93
   - enabled: 1
-    path: Assets/Scenes/Parade ground.unity
+    path: Assets/Scenes/Levels/Parade ground.unity
     guid: c61bb01f86c51394cacf8717d5d95441
   - enabled: 1
-    path: Assets/Scenes/Greenhouse.unity
+    path: Assets/Scenes/Levels/Greenhouse.unity
     guid: 20a49d7c8cb614447b01786225be92e5
   - enabled: 1
     path: Assets/Scenes/ControlsMenu.unity
     guid: d443d7ff439f6e34ab713d18531b4cf9
   - enabled: 1
-    path: Assets/Scenes/Bridge.unity
+    path: Assets/Scenes/Levels/Bridge.unity
     guid: a46de36e3b7e2a848a84bc1b036eec3d
   - enabled: 1
-    path: Assets/Scenes/Entrance.unity
+    path: Assets/Scenes/Levels/Entrance.unity
     guid: 4755d26f22f0b6340958a2398aad3a3a
   - enabled: 1
-    path: Assets/Scenes/Lab.unity
+    path: Assets/Scenes/Levels/Lab.unity
     guid: 6b0d69236591eba418e8c169e16defa5
   - enabled: 1
-    path: Assets/Scenes/LeadersRoom.unity
+    path: Assets/Scenes/Levels/LeadersRoom.unity
     guid: 96dbcf759164dc6469a29575475c1333
   - enabled: 1
-    path: Assets/Scenes/EarthLeadersRoom 1.unity
+    path: Assets/Scenes/Levels/EarthLeadersRoom 1.unity
     guid: 32dc0d2dc2867464987afa775a8a1b12
   - enabled: 1
     path: Assets/Scenes/Cutscenka.unity
@@ -60,12 +60,12 @@ EditorBuildSettings:
     path: Assets/Scenes/BlackScreen1.unity
     guid: 4bf114909c600b1468e47fe8f15d347b
   - enabled: 1
-    path: Assets/Scenes/Hallway.unity
+    path: Assets/Scenes/Levels/Hallway.unity
     guid: b2c8d9b35807f0741916759b489cf796
   - enabled: 1
     path: Assets/Scenes/BlackScreen2.unity
     guid: 6244d29d87edae7459433e9603333962
   - enabled: 1
-    path: Assets/Scenes/Lobby.unity
+    path: Assets/Scenes/Levels/Lobby.unity
     guid: ef5eb8692fe17bb40b451d4f95400156
   m_configObjects: {}
