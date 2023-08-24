@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97a442d42cef1964f9d85b33070622cc, type: 3}
-  m_Name: CommsScreen
+  m_Name: EarthLeadersRoomControls
   m_EditorClassIdentifier: 
-  minIntensity: 1
-  maxIntensity: 1.5
-  smoothing: 30
-  frequency: 2
-  frequencyRandomenss: 1
-  failChance: 0
-  failDuration: 0
-  failDurationRandomess: 0
-  minWorkTime: 10
-  workTimeRandomness: 2
+  minIntensity: 0
+  maxIntensity: 2
+  smoothing: 5
+  frequency: 10
+  frequencyRandomenss: 15
+  failChance: 0.528
+  failDuration: 0.15
+  failDurationRandomess: 0.1
+  minWorkTime: 0.05
+  workTimeRandomness: 1
