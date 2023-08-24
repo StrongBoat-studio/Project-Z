@@ -11,8 +11,22 @@ public class WalkerActiveController : MonoBehaviour
     private GameObject _chaseAlert;
     private GameObject _lifeBar;
 
+    private List<string> _questsSetActiveTrue = new List<string>();
+
     private void Awake()
     {
+        _questsSetActiveTrue.Add("Approach the Greenhouse");
+        _questsSetActiveTrue.Add("Talk to Boris");
+        _questsSetActiveTrue.Add("Find the source of the gunshot sound");
+        _questsSetActiveTrue.Add("Search the body");
+        _questsSetActiveTrue.Add("Argue with Boris");
+        _questsSetActiveTrue.Add("Find: The gunpowder");
+        _questsSetActiveTrue.Add("Find: The Test Vial");
+        _questsSetActiveTrue.Add("Find: The Chernobyl herb");
+        _questsSetActiveTrue.Add("Find: The Isolated Saliva of Subject “0”");
+        _questsSetActiveTrue.Add("Return to the Lab");
+        _questsSetActiveTrue.Add("Create the Antidote");
+
         _walkerStateManager = this.gameObject.GetComponent<WalkerStateManager>();
         _walkerPatrolling = this.gameObject.GetComponent<WalkerPatrolling>();
         _walkerChaseWithAI = this.gameObject.GetComponent<WalkerChaseWithAI>();
@@ -23,7 +37,7 @@ public class WalkerActiveController : MonoBehaviour
 
     private void Update()
     {
-        if (QuestLineManager.Instance.Quests[0].Tasks[0].Title == "Approach the Greenhouse")
+        if (_questsSetActiveTrue.Contains(QuestLineManager.Instance.Quests[0].Tasks[0].Title))
         {
             SetActive(true);
         }

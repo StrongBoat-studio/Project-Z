@@ -3022,11 +3022,6 @@ MonoBehaviour:
   - Search the body
   - Argue with Boris
   - 'Find: The gunpowder'
-  - 'Find: The Test Vial'
-  - 'Find: The Chernobyl herb'
-  - "Find: The Isolated Saliva of Subject \u201C0\u201D"
-  - Return to the Lab
-  - Create the Antidote
   _boris: {fileID: 652453457}
   _shimura: {fileID: 1192435258}
   canShowBoris: 0
