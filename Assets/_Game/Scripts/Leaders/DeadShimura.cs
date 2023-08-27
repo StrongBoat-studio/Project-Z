@@ -13,6 +13,8 @@ public class DeadShimura : MonoBehaviour, IInteractable
     [SerializeField] private Item _gun;
     [SerializeField] private Item _note;
 
+    [SerializeField] private DialogueController _searchTheBody;
+
     private Player _player;
     private bool _giveItem;
     private void Awake()
@@ -33,6 +35,7 @@ public class DeadShimura : MonoBehaviour, IInteractable
         _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         if(_player!=null)
         {
+            _searchTheBody.Play();
             _player.AddItem(_gun);
             _player.AddItem(_note);
         }

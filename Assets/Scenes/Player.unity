@@ -398,10 +398,10 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.28958336
-    y: 0.054629628
-    width: 0.16666667
-    height: 0.16666666
+    x: 0
+    y: 0
+    width: 1
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 37
@@ -1280,6 +1280,8 @@ MonoBehaviour:
   _uiInventory: {fileID: 553107138}
   _lowHP:
     _dialogueTextAsset: {fileID: 4900000, guid: f04859bb80020c14a9ef5e9c919803c0, type: 3}
+  _argueWithBoris:
+    _dialogueTextAsset: {fileID: 4900000, guid: 2813eacd1c2340244aac10dc87f5664a, type: 3}
   _virtualCamera: {fileID: 662940396}
 --- !u!50 &1913262204
 Rigidbody2D:

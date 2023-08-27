@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     [SerializeField] private RectTransform _uiInventory;
 
     [SerializeField] private DialogueController _lowHP;
+    [SerializeField] private DialogueController _argueWithBoris;
 
     [SerializeField] private CinemachineVirtualCamera _virtualCamera;
 
@@ -103,5 +104,10 @@ public class Player : MonoBehaviour
     public void SetVCamConfiner(GameObject colliderObject)
     {
         _virtualCamera.GetComponent<CinemachineConfiner>().m_BoundingShape2D = colliderObject.GetComponent<PolygonCollider2D>();
+    }
+
+    public void StartArgueWithBorisDialogue()
+    {
+        _argueWithBoris.Play();
     }
 }

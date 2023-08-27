@@ -71,7 +71,9 @@ public class Fight : MonoBehaviour
         _movement.CanMove(true);
 
         QuestLineManager.Instance.CheckQuest(GetComponentInParent<QuestObjective>());
-       
+
+        GameManager.Instance.Player.StartArgueWithBorisDialogue();
+
         Destroy(this.gameObject);
     }
 
