@@ -2085,6 +2085,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2051023896}
     m_Modifications:
+    - target: {fileID: 2985604163713046546, guid: 2554d2acf8d717949a055979150dcb9d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 14.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2985604164491904702, guid: 2554d2acf8d717949a055979150dcb9d, type: 3}
       propertyPath: m_Name
       value: Colliders
@@ -2132,6 +2136,10 @@ PrefabInstance:
     - target: {fileID: 2985604164491904703, guid: 2554d2acf8d717949a055979150dcb9d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2985604165281153995, guid: 2554d2acf8d717949a055979150dcb9d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -14.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2554d2acf8d717949a055979150dcb9d, type: 3}

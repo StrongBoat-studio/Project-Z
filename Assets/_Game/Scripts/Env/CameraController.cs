@@ -11,6 +11,10 @@ public class CameraController : MonoBehaviour, IInteractable
     [SerializeField] private Color _canInteractColor;
     [SerializeField] private Color _cannotInteractColor;
 
+    private GameObject _playerSprite;
+    private GameObject _playerWeaponHolder;
+    private Movement _movement;
+
     private GameObject _camera;
 
     private void Awake()
@@ -24,6 +28,14 @@ public class CameraController : MonoBehaviour, IInteractable
         {
             _camera = GameObject.FindGameObjectWithTag("Camera").GetComponent<Transform>().GetChild(0).gameObject;
             _camera.SetActive(false);
+
+            _playerSprite = GameObject.FindGameObjectWithTag("Player").transform.GetChild(1).gameObject;
+            _playerWeaponHolder = GameObject.FindGameObjectWithTag("Player").transform.GetChild(2).gameObject;
+            _movement = GameManager.Instance.movement;
+
+            _playerSprite.SetActive(true);
+            _playerWeaponHolder.SetActive(true);
+            _movement.CanMove(true);
         }
     }
 
@@ -31,6 +43,14 @@ public class CameraController : MonoBehaviour, IInteractable
     {
         _camera = GameObject.FindGameObjectWithTag("Camera").GetComponent<Transform>().GetChild(0).gameObject;
         _camera.SetActive(true);
+
+        _playerSprite = GameObject.FindGameObjectWithTag("Player").transform.GetChild(1).gameObject;
+        _playerWeaponHolder = GameObject.FindGameObjectWithTag("Player").transform.GetChild(2).gameObject;
+        _movement = GameManager.Instance.movement;
+
+        _movement.CanMove(false);
+        _playerSprite.SetActive(false);
+        _playerWeaponHolder.SetActive(false);
 
         if (QuestLineManager.Instance.Quests[0].Tasks[0].Title == "Check the Camera Recordings")
         {
