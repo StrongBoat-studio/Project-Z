@@ -194,6 +194,30 @@ PrefabInstance:
       propertyPath: _questName
       value: 'Find: The gunpowder'
       objectReference: {fileID: 0}
+    - target: {fileID: 6008527306713472095, guid: db497f29ee1a1254c987d9ed1d8bd933, type: 3}
+      propertyPath: _canInteractColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6008527306713472095, guid: db497f29ee1a1254c987d9ed1d8bd933, type: 3}
+      propertyPath: _canInteractColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6008527306713472095, guid: db497f29ee1a1254c987d9ed1d8bd933, type: 3}
+      propertyPath: _canInteractColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6008527306713472095, guid: db497f29ee1a1254c987d9ed1d8bd933, type: 3}
+      propertyPath: _cannotInteractColor.b
+      value: 0.43529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 6008527306713472095, guid: db497f29ee1a1254c987d9ed1d8bd933, type: 3}
+      propertyPath: _cannotInteractColor.g
+      value: 0.43529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 6008527306713472095, guid: db497f29ee1a1254c987d9ed1d8bd933, type: 3}
+      propertyPath: _cannotInteractColor.r
+      value: 0.43529412
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db497f29ee1a1254c987d9ed1d8bd933, type: 3}
 --- !u!1 &306542323
@@ -330,8 +354,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5ca78f5cae3b1d4d9c9ac015b4058c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _canInteractColor: {r: 0, g: 1, b: 0.11066723, a: 0}
-  _cannotInteractColor: {r: 1, g: 0, b: 0, a: 0}
+  _canInteractColor: {r: 1, g: 1, b: 1, a: 0}
+  _cannotInteractColor: {r: 0.43529412, g: 0.43529412, b: 0.43529412, a: 1}
   npcSceneID: 2
   _dialogueIdle:
     _dialogueTextAsset: {fileID: 4900000, guid: 76e663e2fc51e6a4ebb7b6306864fc60, type: 3}
@@ -591,6 +615,30 @@ PrefabInstance:
       propertyPath: _targetDoorId
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5570671202888327691, guid: 49e7e3c970c6ce4418997a7a7fb7caad, type: 3}
+      propertyPath: _canInteractColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570671202888327691, guid: 49e7e3c970c6ce4418997a7a7fb7caad, type: 3}
+      propertyPath: _canInteractColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570671202888327691, guid: 49e7e3c970c6ce4418997a7a7fb7caad, type: 3}
+      propertyPath: _canInteractColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570671202888327691, guid: 49e7e3c970c6ce4418997a7a7fb7caad, type: 3}
+      propertyPath: _cannotInteractColor.b
+      value: 0.43529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570671202888327691, guid: 49e7e3c970c6ce4418997a7a7fb7caad, type: 3}
+      propertyPath: _cannotInteractColor.g
+      value: 0.43529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570671202888327691, guid: 49e7e3c970c6ce4418997a7a7fb7caad, type: 3}
+      propertyPath: _cannotInteractColor.r
+      value: 0.43529412
+      objectReference: {fileID: 0}
     - target: {fileID: 5570671202888327700, guid: 49e7e3c970c6ce4418997a7a7fb7caad, type: 3}
       propertyPath: m_Name
       value: LeaderRoom
@@ -833,6 +881,30 @@ PrefabInstance:
     - target: {fileID: 5570671202888327691, guid: 49e7e3c970c6ce4418997a7a7fb7caad, type: 3}
       propertyPath: _targetDoorId
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570671202888327691, guid: 49e7e3c970c6ce4418997a7a7fb7caad, type: 3}
+      propertyPath: _canInteractColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570671202888327691, guid: 49e7e3c970c6ce4418997a7a7fb7caad, type: 3}
+      propertyPath: _canInteractColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570671202888327691, guid: 49e7e3c970c6ce4418997a7a7fb7caad, type: 3}
+      propertyPath: _canInteractColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570671202888327691, guid: 49e7e3c970c6ce4418997a7a7fb7caad, type: 3}
+      propertyPath: _cannotInteractColor.b
+      value: 0.43529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570671202888327691, guid: 49e7e3c970c6ce4418997a7a7fb7caad, type: 3}
+      propertyPath: _cannotInteractColor.g
+      value: 0.43529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570671202888327691, guid: 49e7e3c970c6ce4418997a7a7fb7caad, type: 3}
+      propertyPath: _cannotInteractColor.r
+      value: 0.43529412
       objectReference: {fileID: 0}
     - target: {fileID: 5570671202888327700, guid: 49e7e3c970c6ce4418997a7a7fb7caad, type: 3}
       propertyPath: m_Name
@@ -1113,6 +1185,30 @@ PrefabInstance:
       propertyPath: _targetDoorId
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5570671202888327691, guid: 49e7e3c970c6ce4418997a7a7fb7caad, type: 3}
+      propertyPath: _canInteractColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570671202888327691, guid: 49e7e3c970c6ce4418997a7a7fb7caad, type: 3}
+      propertyPath: _canInteractColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570671202888327691, guid: 49e7e3c970c6ce4418997a7a7fb7caad, type: 3}
+      propertyPath: _canInteractColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570671202888327691, guid: 49e7e3c970c6ce4418997a7a7fb7caad, type: 3}
+      propertyPath: _cannotInteractColor.b
+      value: 0.43529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570671202888327691, guid: 49e7e3c970c6ce4418997a7a7fb7caad, type: 3}
+      propertyPath: _cannotInteractColor.g
+      value: 0.43529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570671202888327691, guid: 49e7e3c970c6ce4418997a7a7fb7caad, type: 3}
+      propertyPath: _cannotInteractColor.r
+      value: 0.43529412
+      objectReference: {fileID: 0}
     - target: {fileID: 5570671202888327700, guid: 49e7e3c970c6ce4418997a7a7fb7caad, type: 3}
       propertyPath: m_Name
       value: Hallway
@@ -1249,8 +1345,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5ca78f5cae3b1d4d9c9ac015b4058c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _canInteractColor: {r: 0.006026864, g: 1, b: 0, a: 0}
-  _cannotInteractColor: {r: 1, g: 0, b: 0, a: 0}
+  _canInteractColor: {r: 1, g: 1, b: 1, a: 0}
+  _cannotInteractColor: {r: 0.43529412, g: 0.43529412, b: 0.43529412, a: 1}
   npcSceneID: 0
   _dialogueIdle:
     _dialogueTextAsset: {fileID: 4900000, guid: 76e663e2fc51e6a4ebb7b6306864fc60, type: 3}
@@ -1463,6 +1559,30 @@ PrefabInstance:
     - target: {fileID: 5570671202888327691, guid: 49e7e3c970c6ce4418997a7a7fb7caad, type: 3}
       propertyPath: _targetDoorId
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570671202888327691, guid: 49e7e3c970c6ce4418997a7a7fb7caad, type: 3}
+      propertyPath: _canInteractColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570671202888327691, guid: 49e7e3c970c6ce4418997a7a7fb7caad, type: 3}
+      propertyPath: _canInteractColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570671202888327691, guid: 49e7e3c970c6ce4418997a7a7fb7caad, type: 3}
+      propertyPath: _canInteractColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570671202888327691, guid: 49e7e3c970c6ce4418997a7a7fb7caad, type: 3}
+      propertyPath: _cannotInteractColor.b
+      value: 0.43529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570671202888327691, guid: 49e7e3c970c6ce4418997a7a7fb7caad, type: 3}
+      propertyPath: _cannotInteractColor.g
+      value: 0.43529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570671202888327691, guid: 49e7e3c970c6ce4418997a7a7fb7caad, type: 3}
+      propertyPath: _cannotInteractColor.r
+      value: 0.43529412
       objectReference: {fileID: 0}
     - target: {fileID: 5570671202888327700, guid: 49e7e3c970c6ce4418997a7a7fb7caad, type: 3}
       propertyPath: m_Name
@@ -1748,7 +1868,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4505882918976808807, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
       propertyPath: _canInteractColor.b
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4505882918976808807, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
       propertyPath: _canInteractColor.g
@@ -1756,19 +1876,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4505882918976808807, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
       propertyPath: _canInteractColor.r
-      value: 0.15972686
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4505882918976808807, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
+      propertyPath: _cannotInteractColor.a
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4505882918976808807, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
       propertyPath: _cannotInteractColor.b
-      value: 0
+      value: 0.43529412
       objectReference: {fileID: 0}
     - target: {fileID: 4505882918976808807, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
       propertyPath: _cannotInteractColor.g
-      value: 0
+      value: 0.43529412
       objectReference: {fileID: 0}
     - target: {fileID: 4505882918976808807, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
       propertyPath: _cannotInteractColor.r
-      value: 1
+      value: 0.43529412
       objectReference: {fileID: 0}
     - target: {fileID: 4505882919154333373, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
       propertyPath: m_RootOrder

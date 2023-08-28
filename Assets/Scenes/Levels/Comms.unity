@@ -1328,8 +1328,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59e071da74de46a4686f3306c3a0a225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _canInteractColor: {r: 0.048704147, g: 1, b: 0, a: 0}
-  _cannotInteractColor: {r: 1, g: 0, b: 0, a: 0}
+  _canInteractColor: {r: 1, g: 1, b: 1, a: 0}
+  _cannotInteractColor: {r: 0.43529412, g: 0.43529412, b: 0.43529412, a: 1}
 --- !u!1 &1691210092
 GameObject:
   m_ObjectHideFlags: 0
@@ -1683,6 +1683,30 @@ PrefabInstance:
     - target: {fileID: 5570671202888327691, guid: 49e7e3c970c6ce4418997a7a7fb7caad, type: 3}
       propertyPath: _targetDoorId
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570671202888327691, guid: 49e7e3c970c6ce4418997a7a7fb7caad, type: 3}
+      propertyPath: _canInteractColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570671202888327691, guid: 49e7e3c970c6ce4418997a7a7fb7caad, type: 3}
+      propertyPath: _canInteractColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570671202888327691, guid: 49e7e3c970c6ce4418997a7a7fb7caad, type: 3}
+      propertyPath: _canInteractColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570671202888327691, guid: 49e7e3c970c6ce4418997a7a7fb7caad, type: 3}
+      propertyPath: _cannotInteractColor.b
+      value: 0.4339623
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570671202888327691, guid: 49e7e3c970c6ce4418997a7a7fb7caad, type: 3}
+      propertyPath: _cannotInteractColor.g
+      value: 0.4339623
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570671202888327691, guid: 49e7e3c970c6ce4418997a7a7fb7caad, type: 3}
+      propertyPath: _cannotInteractColor.r
+      value: 0.4339623
       objectReference: {fileID: 0}
     - target: {fileID: 5570671202888327700, guid: 49e7e3c970c6ce4418997a7a7fb7caad, type: 3}
       propertyPath: m_Name

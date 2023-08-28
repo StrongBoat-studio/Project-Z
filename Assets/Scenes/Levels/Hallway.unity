@@ -222,8 +222,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4aeb69d8993f284ba77ff1b16224f49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _canInteractColor: {r: 0.100138426, g: 1, b: 0, a: 0}
-  _cannotInteractColor: {r: 1, g: 0, b: 0, a: 0}
+  _canInteractColor: {r: 1, g: 1, b: 1, a: 0}
+  _cannotInteractColor: {r: 0.43529412, g: 0.43529412, b: 0.43529412, a: 1}
 --- !u!61 &2171388
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -393,8 +393,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4aeb69d8993f284ba77ff1b16224f49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _canInteractColor: {r: 0, g: 1, b: 0.020730019, a: 0}
-  _cannotInteractColor: {r: 1, g: 0, b: 0, a: 0}
+  _canInteractColor: {r: 1, g: 1, b: 1, a: 0}
+  _cannotInteractColor: {r: 0.43529412, g: 0.43529412, b: 0.43529412, a: 1}
 --- !u!61 &29600598
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -668,8 +668,8 @@ MonoBehaviour:
   _spawnPoint: {fileID: 23490857}
   _targetScene: 14
   _targetDoorId: 4
-  _canInteractColor: {r: 0.15860271, g: 1, b: 0, a: 0}
-  _cannotInteractColor: {r: 1, g: 0, b: 0, a: 0}
+  _canInteractColor: {r: 1, g: 1, b: 1, a: 0}
+  _cannotInteractColor: {r: 0.43529412, g: 0.43529412, b: 0.43529412, a: 1}
 --- !u!61 &196028425
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -748,8 +748,8 @@ MonoBehaviour:
   _spawnPoint: {fileID: 1043162076}
   _targetScene: 7
   _targetDoorId: 1
-  _canInteractColor: {r: 0.15860271, g: 1, b: 0, a: 0}
-  _cannotInteractColor: {r: 1, g: 0, b: 0, a: 0}
+  _canInteractColor: {r: 1, g: 1, b: 1, a: 1}
+  _cannotInteractColor: {r: 0.43529412, g: 0.43529412, b: 0.43529412, a: 1}
 --- !u!61 &261931964
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -958,8 +958,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4aeb69d8993f284ba77ff1b16224f49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _canInteractColor: {r: 0, g: 1, b: 0.049153566, a: 0}
-  _cannotInteractColor: {r: 1, g: 0, b: 0, a: 0}
+  _canInteractColor: {r: 1, g: 1, b: 1, a: 0}
+  _cannotInteractColor: {r: 0.43529412, g: 0.43529412, b: 0.43529412, a: 1}
 --- !u!61 &606956521
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1160,8 +1160,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4aeb69d8993f284ba77ff1b16224f49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _canInteractColor: {r: 0, g: 1, b: 0.10835743, a: 0}
-  _cannotInteractColor: {r: 1, g: 0, b: 0, a: 0}
+  _canInteractColor: {r: 1, g: 1, b: 1, a: 0}
+  _cannotInteractColor: {r: 0.43529412, g: 0.43529412, b: 0.43529412, a: 1}
 --- !u!61 &713623896
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1372,8 +1372,8 @@ MonoBehaviour:
   _spawnPoint: {fileID: 1602476676}
   _targetScene: 20
   _targetDoorId: 1
-  _canInteractColor: {r: 0.15860271, g: 1, b: 0, a: 0}
-  _cannotInteractColor: {r: 1, g: 0, b: 0, a: 0}
+  _canInteractColor: {r: 1, g: 1, b: 1, a: 0}
+  _cannotInteractColor: {r: 0.43529412, g: 0.43529412, b: 0.43529412, a: 1}
 --- !u!61 &880845635
 BoxCollider2D:
   m_ObjectHideFlags: 0
