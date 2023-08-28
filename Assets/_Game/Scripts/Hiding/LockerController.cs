@@ -37,6 +37,19 @@ public class LockerController : MonoBehaviour, IInteractable
             _playerSprite.SetActive(false);
             _playerWeaponHolder.SetActive(false);
             _isPlayerInThisLocker = true;
+
+            foreach (GameObject mutant in GameObject.FindGameObjectsWithTag("Enemy"))
+            {
+                if(mutant.GetComponent<WalkerStateManager>() != null)
+                {
+                    mutant.GetComponent<WalkerStateManager>().canAttack = false;
+                }
+
+                if (mutant.GetComponent<JumperStateManager>() != null)
+                {
+                    mutant.GetComponent<JumperStateManager>().canAttack = false;
+                }
+            }
         }
         else if(_isPlayerInThisLocker)
         {
@@ -44,6 +57,19 @@ public class LockerController : MonoBehaviour, IInteractable
             _playerWeaponHolder.SetActive(true);
             _movement.CanMove(true);
             _isPlayerInThisLocker = false;
+
+            foreach (GameObject mutant in GameObject.FindGameObjectsWithTag("Enemy"))
+            {
+                if (mutant.GetComponent<WalkerStateManager>() != null)
+                {
+                    mutant.GetComponent<WalkerStateManager>().canAttack = true;
+                }
+
+                if (mutant.GetComponent<JumperStateManager>() != null)
+                {
+                    mutant.GetComponent<JumperStateManager>().canAttack = true;
+                }
+            }
         }
     }
 

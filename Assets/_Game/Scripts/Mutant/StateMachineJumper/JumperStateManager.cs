@@ -84,6 +84,9 @@ public class JumperStateManager : MonoBehaviour, IMutantInit
     [SerializeField] private GameObject _alert;
     private Animator _animator;
 
+    public bool canAttack = true;
+
+    [SerializeField] string _stateDebug;
 
     private void Awake()
     {
@@ -115,7 +118,10 @@ public class JumperStateManager : MonoBehaviour, IMutantInit
     {
         currentState.UpdateState(this);
 
-        DebugState();
+        if(transform.position.y>2.2f)
+        {
+            transform.position = new Vector2(transform.position.x, -0.273f);
+        }
 
         if (_player != null)
         {
@@ -129,6 +135,12 @@ public class JumperStateManager : MonoBehaviour, IMutantInit
 
         _checkVector = _jumperPatrolling.GetCheckVector();
         _mutant = transform;
+
+        if (currentState == PatrollingState) _stateDebug = "Patrollling";
+        if (currentState == HearingState) _stateDebug = "Hearing";
+        if (currentState == ChaseState) _stateDebug = "Chase";
+        if (currentState == BeforeChaseState) _stateDebug = "BeforeChase";
+        if (currentState == AttackState) _stateDebug = "Attack";
     }
 
     public void SwitchState(JumperBaseState state)
@@ -230,16 +242,6 @@ public class JumperStateManager : MonoBehaviour, IMutantInit
 
         if (_player.transform.localScale.x == -1)
             _mutant.transform.position = new Vector3(_mutant.transform.position.x + .2f, _mutant.transform.position.y, _mutant.transform.position.z);
-    }
-
-    private void DebugState()
-    {
-        if (currentState == PatrollingState) _jumperCurrentState = "PatrollingState";
-        if (currentState == AttackState) _jumperCurrentState = "AttackState";
-        if (currentState == BeforeChaseState) _jumperCurrentState = "BeforeChaseState";
-        if (currentState == ChaseState) _jumperCurrentState = "ChaseState";
-        if (currentState == DeathState) _jumperCurrentState = "DeathState";
-        if (currentState == HearingState) _jumperCurrentState = "HearingState";
     }
 
     public void DestroyJumper()

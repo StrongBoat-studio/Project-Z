@@ -29,6 +29,10 @@ public class JumperHearingState : JumperBaseState
             jumper.SwitchState(jumper.BeforeChaseState);
         }
 
+        if (Context.Distace <= Context.DistanceAttack)
+        {
+            jumper.SwitchState(jumper.AttackState);
+        }
 
     }
 

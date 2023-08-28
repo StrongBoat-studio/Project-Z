@@ -24,5 +24,15 @@ public class JumperDeath : MonoBehaviour
     public void AttackPlayer()
     {
         GameManager.Instance.Player.TakeDamage(10);
+
+        if(GetComponent<Animator>().GetBool("IsAttack2")==true)
+        {
+            GetComponent<Animator>().SetBool("IsAttack2", false);
+        }
+
+        if (GetComponent<Animator>().GetBool("IsAttack1") == true)
+        {
+            GetComponent<Animator>().SetBool("IsAttack1", false);
+        }
     }
 }

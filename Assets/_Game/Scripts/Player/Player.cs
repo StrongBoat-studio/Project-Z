@@ -69,7 +69,7 @@ public class Player : MonoBehaviour
 
             if (_currentHelath <= 20 && _currentHelath > 0)
             {
-                _lowHP.Play();
+                //_lowHP.Play();
             }
             else if (_currentHelath <= 0)
             {

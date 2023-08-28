@@ -39,7 +39,9 @@ public class PauseMenu : MonoBehaviour
 
     private void OnPauseMenuToggle(InputAction.CallbackContext context)
     {
-        if(_pauseMenu.gameObject.activeSelf) GameStateManager.Instance.ResetLastState();
+        if (GameObject.FindGameObjectWithTag("Camera").GetComponent<Transform>().GetChild(0).gameObject.activeSelf == true) return;
+
+        if (_pauseMenu.gameObject.activeSelf) GameStateManager.Instance.ResetLastState();
         else GameStateManager.Instance.SetState(GameStateManager.GameState.Paused);
     }
 

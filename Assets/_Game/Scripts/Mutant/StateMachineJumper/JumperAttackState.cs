@@ -22,6 +22,17 @@ public class JumperAttackState : JumperBaseState
             jumper.SwitchState(jumper.PatrollingState);
             Context.Animator.SetBool("IsStanding", true);
         }
+
+        if (Context.Distace > Context.DistanceAttack)
+        {
+            jumper.SwitchState(jumper.ChaseState);
+            Context.Animator.SetBool("IsStanding", false);
+        }
+
+        if (Context.canAttack==false)
+        {
+            jumper.SwitchState(jumper.PatrollingState);
+        }
     }
 
     private void AttackM()
@@ -37,7 +48,8 @@ public class JumperAttackState : JumperBaseState
 
                 Context.Animator.SetBool("IsAttack2", false);
             }
-            else
+
+            if (_anim > .5f)
             {
                 Context.Animator.SetBool("IsAttack1", false);
                 Context.Animator.SetBool("IsStanding", false);
@@ -46,6 +58,7 @@ public class JumperAttackState : JumperBaseState
                 Context.Jump();
 
             }
+
             _time = 1f;
         }
     }

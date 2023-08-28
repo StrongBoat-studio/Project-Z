@@ -102,7 +102,7 @@ public class QuestLineManager : MonoBehaviour
 
             if (items.FindIndex(x => x.itemType == _quests[0].Tasks[i].ItemToCollect.itemType) == -1)
             {
-                completionHint += $" (0/{_quests[0].Tasks[i].ItemToCollect.amount})";
+                //completionHint += $" (0/{_quests[0].Tasks[i].ItemToCollect.amount})";
             }
             else
             {

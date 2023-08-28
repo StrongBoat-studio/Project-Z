@@ -24,6 +24,11 @@ public class WalkerAttackState : WalkerBaseState
             Context.Animator.SetBool("IsAttack1", false);
             Context.Animator.SetBool("InAttack2", false);
         }
+
+        if(Context.canAttack==false)
+        {
+            walker.SwitchState(walker.PatrollingState);
+        }
     }
 
     private void AttackM()

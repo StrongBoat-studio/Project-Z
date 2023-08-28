@@ -86,6 +86,8 @@ public class WalkerStateManager : MonoBehaviour, IMutantInit
     private Animator _animator;
     public bool isPickUp = false;
 
+    public bool canAttack = true;
+
     void Awake()
     {
         _player = GameManager.Instance.player;

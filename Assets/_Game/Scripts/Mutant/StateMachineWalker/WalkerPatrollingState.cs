@@ -19,6 +19,8 @@ public class WalkerPatrollingState : WalkerBaseState
         SecondsElapsedAndDistanceChase();
         CrounchingCheck();
 
+        if (Context.canAttack == false) return;
+
         if(Context.Distance <= Context.DistanceLineOfHearing)
         {
            walker.SwitchState(walker.HearingState);

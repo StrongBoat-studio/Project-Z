@@ -16,9 +16,16 @@ public class JumperPatrollingState : JumperBaseState
     {
         PositionCheck();
 
+        if (Context.canAttack == false) return;
+
         if (Context.Distace<=Context.DistanceHearing)
         {
             jumper.SwitchState(jumper.HearingState);
+        }
+
+        if (Context.Distace <= Context.DistanceAttack)
+        {
+            jumper.SwitchState(jumper.AttackState);
         }
     }
 

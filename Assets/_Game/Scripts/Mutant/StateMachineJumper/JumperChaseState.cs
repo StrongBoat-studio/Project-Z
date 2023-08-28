@@ -5,7 +5,10 @@ public class JumperChaseState : JumperBaseState
     private Vector3 _target;
     public override void EnterState(JumperStateManager jumper)
     {
-
+        if(Context.Mutant.position.y<= -0.273f)
+        {
+            Context.Animator.SetBool("IsStanding", true);
+        }
     }
 
     public override void UpdateState(JumperStateManager jumper)

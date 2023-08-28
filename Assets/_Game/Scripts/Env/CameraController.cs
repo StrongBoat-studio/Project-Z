@@ -24,7 +24,7 @@ public class CameraController : MonoBehaviour, IInteractable
 
     private void Update()
     {
-        if(Input.GetKey(KeyCode.Q))
+        if(Input.GetKey(KeyCode.Escape))
         {
             _camera = GameObject.FindGameObjectWithTag("Camera").GetComponent<Transform>().GetChild(0).gameObject;
             _camera.SetActive(false);
