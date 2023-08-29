@@ -4,10 +4,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Linq;
 using UnityEngine.UI;
+using Unity.VisualScripting;
+using System.IO;
 
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] private Transform _btnStart;
+    [SerializeField] private Transform _btnNewGame;
     [SerializeField] private Transform _btnOptions;
     [SerializeField] private Transform _btnControls;
     [SerializeField] private Transform _btnCredits;
@@ -35,7 +38,17 @@ public class MainMenu : MonoBehaviour
 
     public void BtnStart()
     {
-        StartCoroutine("StartGame");
+        StartCoroutine(StartGame());
+    }
+
+    public void BtnNewGame()
+    {
+        if(File.Exists(Application.persistentDataPath + "/gamedata.json") == true)
+        {
+            File.Delete(Application.persistentDataPath + "/gamedata.json");
+        }
+
+        StartCoroutine(StartGame());
     }
 
     public void BtnOptions()
