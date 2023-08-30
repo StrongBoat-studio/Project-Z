@@ -18,10 +18,22 @@ public class Quest
     [field: SerializeField] public List<QuestTask> Tasks { get; private set; }
     [field: SerializeField] public bool IsCompleted { get; private set; } = false;
 
-    public void ValidateTasks()
+    public bool ValidateTasks()
     {
-        while (Tasks.Count > 0 && Tasks[0].IsCompleted == true) Tasks.RemoveAt(0);
-        if (Tasks.Count <= 0) IsCompleted = true;
+        bool updated = false;
+
+        while (Tasks.Count > 0 && Tasks[0].IsCompleted == true) 
+        {
+            Tasks.RemoveAt(0);
+            updated = true;
+        }
+        if (Tasks.Count <= 0) 
+        {
+            IsCompleted = true;
+            updated = true;
+        }
+
+        return updated;
     }
 
     ///<summary>
@@ -40,7 +52,7 @@ public class Quest
             return false;
         }
         Tasks[0].Complete();
-        ValidateTasks();
+        //ValidateTasks();
         return true;
     }
     
