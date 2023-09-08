@@ -31,7 +31,7 @@ public class JumperActiveController : MonoBehaviour
         _jumperPatrolling = this.gameObject.GetComponent<JumperPatrolling>();
         _jumperChaseWithAI = this.gameObject.GetComponent<JumperChaseWithAI>();
         _sprite = this.gameObject.transform.GetChild(0).gameObject;
-        _chaseAlert = this.gameObject.transform.GetChild(0).gameObject;
+        _chaseAlert = this.gameObject.transform.GetChild(1).gameObject;
         _lifeBar = this.gameObject.transform.GetChild(2).gameObject;
     }
 
@@ -46,7 +46,7 @@ public class JumperActiveController : MonoBehaviour
             SetActive(false);
         }
     }
-
+    
     private void SetActive(bool isActive)
     {
         _jumperStateManager.enabled = isActive;

@@ -58,6 +58,7 @@ public class BorisController : MonoBehaviour
         {
             _animator.SetBool("IsSitting", false);
             _animator.SetBool("IsStand", true);
+            this.gameObject.transform.GetChild(1).gameObject.SetActive(false);
         }
     }
 
@@ -97,6 +98,7 @@ public class BorisController : MonoBehaviour
         {
             ChangePosition(new Vector2(-4.8f, -0.7f));
             transform.localScale = new Vector2(-1, 1);
+            this.gameObject.transform.GetChild(1).localScale = new Vector2(-1, 1);
             return;
         }
 
@@ -114,6 +116,7 @@ public class BorisController : MonoBehaviour
             {
                 PlayWalkingAnimation();
                 transform.localScale = new Vector2(1, 1);
+                this.gameObject.transform.GetChild(1).localScale = new Vector2(1, 1);
 
                 TransparencyAnimation();
                 transform.position = Vector3.MoveTowards(transform.position, new Vector3(-8.8f, -0.6f, 0), Time.deltaTime);
@@ -135,6 +138,7 @@ public class BorisController : MonoBehaviour
             {
                 _boxCollider2D.offset = new Vector2(0.85f, _boxCollider2D.offset.y);
                 _animator.SetBool("IsSitting", true);
+                this.gameObject.transform.GetChild(1).localPosition = new Vector2(0.88f, 0);
             }
         }
     }

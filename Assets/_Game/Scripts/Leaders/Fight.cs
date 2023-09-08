@@ -58,7 +58,7 @@ public class Fight : MonoBehaviour
 
     public void DeadBoris()
     {
-        _deadBoris = Instantiate(_deadBorisPrefab, transform.position, Quaternion.identity, GameObject.FindGameObjectWithTag("Leaders").GetComponent<Transform>());
+        _deadBoris = Instantiate(_deadBorisPrefab, new Vector2(transform.position.x, -0.95f), Quaternion.identity, GameObject.FindGameObjectWithTag("Leaders").GetComponent<Transform>());
         _deadBoris.GetComponent<Transform>().localScale = _fight.GetComponent<Transform>().localScale;
 
         _playerSprite = GameObject.FindGameObjectWithTag("Player").transform.GetChild(1).gameObject;

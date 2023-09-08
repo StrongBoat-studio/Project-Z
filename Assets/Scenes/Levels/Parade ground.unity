@@ -510,8 +510,8 @@ MonoBehaviour:
   _spawnPoint: {fileID: 418524284}
   _targetScene: 11
   _targetDoorId: 1
-  _canInteractColor: {r: 0, g: 1, b: 0.050397635, a: 0}
-  _cannotInteractColor: {r: 1, g: 0, b: 0, a: 0}
+  _canInteractColor: {r: 1, g: 1, b: 1, a: 0.39215687}
+  _cannotInteractColor: {r: 0.43529412, g: 0.43529412, b: 0.43529412, a: 1}
 --- !u!61 &441785304
 BoxCollider2D:
   m_ObjectHideFlags: 0
