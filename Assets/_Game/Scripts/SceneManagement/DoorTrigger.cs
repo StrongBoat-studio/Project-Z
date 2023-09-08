@@ -11,8 +11,6 @@ public class DoorTrigger : MonoBehaviour
     {
         if (!GameManager.Instance.movement.IsGrounded() || GameManager.Instance.player.position.x < 6) return;
 
-        _bottomColliderTransform.position = new Vector2(_bottomColliderTransform.position.x, -2.6f);
-
         _animator = collision.GetComponentInChildren<Animator>();
 
         _animator.SetBool("IsTriggerDoor1", true);

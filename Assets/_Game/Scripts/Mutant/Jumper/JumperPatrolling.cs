@@ -193,4 +193,10 @@ public class JumperPatrolling : MonoBehaviour
     {
         return _checkVector;
     }
+
+    public void SetRange(int xLeft, int xRight)
+    {
+        _maxLeftX = xLeft;
+        _maxRightX = xRight;
+    }
 }

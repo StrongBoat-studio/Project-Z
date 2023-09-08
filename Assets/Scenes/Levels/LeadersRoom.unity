@@ -1865,8 +1865,27 @@ MonoBehaviour:
       _dialogueTextAsset: {fileID: 4900000, guid: 62a82ffb7bafabe4bacff318f5894703, type: 3}
     idleDialogue:
       _dialogueTextAsset: {fileID: 4900000, guid: 62a82ffb7bafabe4bacff318f5894703, type: 3}
+  - questName: Talk to the Crew
+    questDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: f5ed93c711084b847ad55da84f60000f, type: 3}
+    idleDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: f5ed93c711084b847ad55da84f60000f, type: 3}
+  - questName: Turn off the Alarm
+    questDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: 903bae739b36af449a5e410d5af87984, type: 3}
+    idleDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: 903bae739b36af449a5e410d5af87984, type: 3}
+  - questName: Wait in the Cryochamber
+    questDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: 6f253cab6253ef74f8d34785d124e3b0, type: 3}
+    idleDialogue:
+      _dialogueTextAsset: {fileID: 4900000, guid: 6f253cab6253ef74f8d34785d124e3b0, type: 3}
   _dialogueHolder: {fileID: 306542328}
   _questObjective: {fileID: 306542327}
+  _crewDialogues:
+  - Talk to the Crew
+  - Turn off the Alarm
+  - Wait in the Cryochamber
 --- !u!60 &1668220545785370954
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -2052,8 +2071,24 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4900000, guid: 836094dd9eb5d52499d720c02a86dc79, type: 3}
     - target: {fileID: 4505882919448927684, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
+      propertyPath: _crewDialogues.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4505882919448927684, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
       propertyPath: _leaderRoomSceneController
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4505882919448927684, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
+      propertyPath: _crewDialogues.Array.data[0]
+      value: Talk to the Crew
+      objectReference: {fileID: 0}
+    - target: {fileID: 4505882919448927684, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
+      propertyPath: _crewDialogues.Array.data[1]
+      value: Turn off the Alarm
+      objectReference: {fileID: 0}
+    - target: {fileID: 4505882919448927684, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
+      propertyPath: _crewDialogues.Array.data[2]
+      value: Wait in the Cryochamber
       objectReference: {fileID: 0}
     - target: {fileID: 4505882919448927684, guid: c33f0efe100c84e4ca615fd3e369599e, type: 3}
       propertyPath: _dialogueControllers.Array.data[0]._questName

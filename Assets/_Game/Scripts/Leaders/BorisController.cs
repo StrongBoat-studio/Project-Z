@@ -21,6 +21,8 @@ public class BorisController : MonoBehaviour
     private int count = 0;
     public bool _canFight = false;
 
+    [SerializeField] private List<string> _crewDialogues;
+
     //Variables for fight
     private Transform _targetPlayer;
 
@@ -49,7 +51,6 @@ public class BorisController : MonoBehaviour
             DialogueManager.Instance.OnDialogueEnd += OnDialogueEnd;
             DialogueManager.Instance.OnDialogueStart += OnDialogueStart;
         }
-            
     }
 
     private void OnDialogueEnd()
@@ -60,6 +61,8 @@ public class BorisController : MonoBehaviour
             _animator.SetBool("IsStand", true);
             this.gameObject.transform.GetChild(1).gameObject.SetActive(false);
         }
+
+        _animator.SetBool("IsTalking", false);
     }
 
     private void OnDialogueStart()
@@ -67,6 +70,11 @@ public class BorisController : MonoBehaviour
         if(QuestLineManager.Instance.Quests[0].Tasks[0].Title == "Argue with Boris")
         {
             _canFight = true;
+        }
+
+        if (_crewDialogues.Contains(QuestLineManager.Instance.Quests[0].Tasks[0].Title))
+        {
+            _animator.SetBool("IsTalking", true);
         }
     }
 
