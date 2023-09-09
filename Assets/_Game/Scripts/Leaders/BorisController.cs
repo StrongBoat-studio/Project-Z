@@ -62,6 +62,7 @@ public class BorisController : MonoBehaviour
             this.gameObject.transform.GetChild(1).gameObject.SetActive(false);
         }
 
+        if(_animator!=null)
         _animator.SetBool("IsTalking", false);
     }
 
