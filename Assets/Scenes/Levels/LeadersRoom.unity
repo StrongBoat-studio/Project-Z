@@ -1631,6 +1631,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1858028300}
+  - component: {fileID: 1858028301}
   m_Layer: 0
   m_Name: Env
   m_TagString: Untagged
@@ -1658,6 +1659,261 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1858028301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1858028299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 272fc75f60e556f4382a0d59b6413a42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _lightGroups:
+  - lights:
+    - {fileID: 8979062352715183331}
+    preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
+    lastSum: 0
+    currentFrequency: 0
+    flickerWait: 0
+    failSecondTimer: 0
+    failWait: 0
+    failed: 0
+    workWait: 0
+  - lights:
+    - {fileID: 8979062352014450938}
+    preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
+    lastSum: 0
+    currentFrequency: 0
+    flickerWait: 0
+    failSecondTimer: 0
+    failWait: 0
+    failed: 0
+    workWait: 0
+  - lights:
+    - {fileID: 8979062351250657766}
+    preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
+    lastSum: 0
+    currentFrequency: 0
+    flickerWait: 0
+    failSecondTimer: 0
+    failWait: 0
+    failed: 0
+    workWait: 0
+  - lights:
+    - {fileID: 8979062352122617872}
+    preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
+    lastSum: 0
+    currentFrequency: 0
+    flickerWait: 0
+    failSecondTimer: 0
+    failWait: 0
+    failed: 0
+    workWait: 0
+  - lights:
+    - {fileID: 8979062350619487246}
+    preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
+    lastSum: 0
+    currentFrequency: 0
+    flickerWait: 0
+    failSecondTimer: 0
+    failWait: 0
+    failed: 0
+    workWait: 0
+  - lights:
+    - {fileID: 8979062352347774685}
+    preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
+    lastSum: 0
+    currentFrequency: 0
+    flickerWait: 0
+    failSecondTimer: 0
+    failWait: 0
+    failed: 0
+    workWait: 0
+  - lights:
+    - {fileID: 8979062351138096531}
+    preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
+    lastSum: 0
+    currentFrequency: 0
+    flickerWait: 0
+    failSecondTimer: 0
+    failWait: 0
+    failed: 0
+    workWait: 0
+  - lights:
+    - {fileID: 8979062352522704411}
+    preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
+    lastSum: 0
+    currentFrequency: 0
+    flickerWait: 0
+    failSecondTimer: 0
+    failWait: 0
+    failed: 0
+    workWait: 0
+  - lights:
+    - {fileID: 8979062352138759694}
+    preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
+    lastSum: 0
+    currentFrequency: 0
+    flickerWait: 0
+    failSecondTimer: 0
+    failWait: 0
+    failed: 0
+    workWait: 0
+  - lights:
+    - {fileID: 8979062352261725774}
+    preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
+    lastSum: 0
+    currentFrequency: 0
+    flickerWait: 0
+    failSecondTimer: 0
+    failWait: 0
+    failed: 0
+    workWait: 0
+  - lights:
+    - {fileID: 8979062350975396252}
+    preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
+    lastSum: 0
+    currentFrequency: 0
+    flickerWait: 0
+    failSecondTimer: 0
+    failWait: 0
+    failed: 0
+    workWait: 0
+  - lights:
+    - {fileID: 8979062352012425340}
+    preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
+    lastSum: 0
+    currentFrequency: 0
+    flickerWait: 0
+    failSecondTimer: 0
+    failWait: 0
+    failed: 0
+    workWait: 0
+  - lights:
+    - {fileID: 8979062351639048514}
+    preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
+    lastSum: 0
+    currentFrequency: 0
+    flickerWait: 0
+    failSecondTimer: 0
+    failWait: 0
+    failed: 0
+    workWait: 0
+  - lights:
+    - {fileID: 8979062350641978964}
+    preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
+    lastSum: 0
+    currentFrequency: 0
+    flickerWait: 0
+    failSecondTimer: 0
+    failWait: 0
+    failed: 0
+    workWait: 0
+  - lights:
+    - {fileID: 8979062351539586547}
+    preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
+    lastSum: 0
+    currentFrequency: 0
+    flickerWait: 0
+    failSecondTimer: 0
+    failWait: 0
+    failed: 0
+    workWait: 0
+  - lights:
+    - {fileID: 8979062350927126330}
+    preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
+    lastSum: 0
+    currentFrequency: 0
+    flickerWait: 0
+    failSecondTimer: 0
+    failWait: 0
+    failed: 0
+    workWait: 0
+  - lights:
+    - {fileID: 8979062351405121164}
+    preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
+    lastSum: 0
+    currentFrequency: 0
+    flickerWait: 0
+    failSecondTimer: 0
+    failWait: 0
+    failed: 0
+    workWait: 0
+  - lights:
+    - {fileID: 8979062350840651943}
+    preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
+    lastSum: 0
+    currentFrequency: 0
+    flickerWait: 0
+    failSecondTimer: 0
+    failWait: 0
+    failed: 0
+    workWait: 0
+  - lights:
+    - {fileID: 8979062352243543388}
+    preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
+    lastSum: 0
+    currentFrequency: 0
+    flickerWait: 0
+    failSecondTimer: 0
+    failWait: 0
+    failed: 0
+    workWait: 0
+  - lights:
+    - {fileID: 8979062352391255450}
+    preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
+    lastSum: 0
+    currentFrequency: 0
+    flickerWait: 0
+    failSecondTimer: 0
+    failWait: 0
+    failed: 0
+    workWait: 0
+  - lights:
+    - {fileID: 8979062350636353686}
+    preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
+    lastSum: 0
+    currentFrequency: 0
+    flickerWait: 0
+    failSecondTimer: 0
+    failWait: 0
+    failed: 0
+    workWait: 0
+  - lights:
+    - {fileID: 8979062351697435187}
+    preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
+    lastSum: 0
+    currentFrequency: 0
+    flickerWait: 0
+    failSecondTimer: 0
+    failWait: 0
+    failed: 0
+    workWait: 0
+  - lights:
+    - {fileID: 8979062352300874874}
+    preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
+    lastSum: 0
+    currentFrequency: 0
+    flickerWait: 0
+    failSecondTimer: 0
+    failWait: 0
+    failed: 0
+    workWait: 0
+  - lights:
+    - {fileID: 8979062351417963285}
+    - {fileID: 8979062351490045702}
+    - {fileID: 8979062351095571451}
+    preset: {fileID: 11400000, guid: 793478313bdc8314f8f8a309b18f3774, type: 2}
+    lastSum: 0
+    currentFrequency: 0
+    flickerWait: 0
+    failSecondTimer: 0
+    failWait: 0
+    failed: 0
+    workWait: 0
 --- !u!1001 &793855587644658170
 PrefabInstance:
   m_ObjectHideFlags: 0
