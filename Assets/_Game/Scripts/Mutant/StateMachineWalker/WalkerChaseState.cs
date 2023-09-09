@@ -7,7 +7,7 @@ public class WalkerChaseState : WalkerBaseState
 
     public override void EnterState(WalkerStateManager walker)
     {
-
+        AudioManager.Instance?.PlayOneShot(FMODEvents.Instance.MutantIdle, Context.Mutant.position);
     }
 
     public override void UpdateState(WalkerStateManager walker)

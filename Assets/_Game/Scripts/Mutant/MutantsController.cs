@@ -26,6 +26,7 @@ public class MutantsController : MonoBehaviour
             {
                 _currentPrefab = Instantiate(_mutantPrefebs[0], new Vector2(patrolingXLeft, _yPositionWalker), Quaternion.identity, this.gameObject.transform);
                 _currentPrefab.GetComponent<WalkerPatrolling>().SetRange(patrolingXLeft, patrolingXRight);
+                AudioManager.Instance?.PlayOneShot(FMODEvents.Instance.MutantIdle, new Vector2(patrolingXLeft, _yPositionWalker));
                 return;
             }
 
@@ -33,6 +34,7 @@ public class MutantsController : MonoBehaviour
             {
                 _currentPrefab = Instantiate(_mutantPrefebs[1], new Vector2(patrolingXRight, _yPositionJumper), Quaternion.identity, this.gameObject.transform);
                 _currentPrefab.GetComponent<JumperPatrolling>().SetRange(patrolingXLeft, patrolingXRight);
+                AudioManager.Instance?.PlayOneShot(FMODEvents.Instance.MutantIdle, new Vector2(patrolingXLeft, _yPositionWalker));
                 return;
             }
         }

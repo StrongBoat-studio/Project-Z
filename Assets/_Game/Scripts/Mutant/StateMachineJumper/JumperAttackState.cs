@@ -9,7 +9,7 @@ public class JumperAttackState : JumperBaseState
 
     public override void EnterState(JumperStateManager jumper)
     {
-
+        AudioManager.Instance?.PlayOneShot(FMODEvents.Instance.MutantGrowl, Context.Mutant.position);
     }
 
     public override void UpdateState(JumperStateManager jumper)

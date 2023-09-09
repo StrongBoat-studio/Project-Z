@@ -9,6 +9,8 @@ public class JumperChaseState : JumperBaseState
         {
             Context.Animator.SetBool("IsStanding", true);
         }
+
+        AudioManager.Instance?.PlayOneShot(FMODEvents.Instance.MutantIdle, Context.Mutant.position);
     }
 
     public override void UpdateState(JumperStateManager jumper)

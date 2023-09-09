@@ -10,7 +10,7 @@ public class WalkerAttackState : WalkerBaseState
 
     public override void EnterState(WalkerStateManager walker)
     {
-
+        AudioManager.Instance?.PlayOneShot(FMODEvents.Instance.MutantGrowl, Context.Mutant.position);
     }
 
     public override void UpdateState(WalkerStateManager walker)

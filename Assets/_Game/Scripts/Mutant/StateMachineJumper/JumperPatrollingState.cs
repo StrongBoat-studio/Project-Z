@@ -10,6 +10,8 @@ public class JumperPatrollingState : JumperBaseState
 
         Context.SecondsElapsedHearing = Context.SecondsHearing;
         Context.Alert.SetActive(false);
+
+        AudioManager.Instance?.PlayOneShot(FMODEvents.Instance.MutantIdle, Context.Mutant.position);
     }
 
     public override void UpdateState(JumperStateManager jumper)
