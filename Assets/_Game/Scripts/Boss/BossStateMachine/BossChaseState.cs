@@ -8,7 +8,6 @@ public class BossChaseState : BossBaseState
         Context.Animator.SetBool("IsWalking", true);
 
         AudioManager.Instance?.PlayOneShot(FMODEvents.Instance.MutantGrowl, Context.Mutant.position);
-        Context.Animator.SetBool("IsAttacking1", true);
     }
 
     public override void UpdateState(BossStateManager boss)
@@ -16,6 +15,11 @@ public class BossChaseState : BossBaseState
         if (Context.DistanceChase < Context.GetDistance())
         {
             boss.SwitchState(boss.WaitingState);
+        }
+
+        if(Context.DistanceAttack >= Context.GetDistance())
+        {
+            boss.SwitchState(boss.AttackState);
         }
     }
 }

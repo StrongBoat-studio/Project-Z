@@ -129,7 +129,6 @@ public class BossChaseWithAI : MonoBehaviour
         if (x != transform.localScale.x)
         {
             AudioManager.Instance?.PlayOneShot(FMODEvents.Instance.MutantGrowl, this.gameObject.transform.position);
-            _bossStateManager.Animator.SetBool("IsAttacking1", true);
         }
     }
 }

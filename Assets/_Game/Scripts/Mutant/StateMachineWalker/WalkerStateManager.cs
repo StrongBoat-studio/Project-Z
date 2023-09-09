@@ -220,8 +220,6 @@ public class WalkerStateManager : MonoBehaviour, IMutantInit
 
     public void DestroyWalker()
     {
-        //SaveSystem Code
-
         GetComponent<WalkerPatrolling>().enabled = true;
         GetComponent<WalkerChaseWithAI>().enabled = true;
         Destroy(this.gameObject);

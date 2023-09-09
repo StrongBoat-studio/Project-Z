@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BossStateManager : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class BossStateManager : MonoBehaviour
     public BossChaseState ChaseState = new BossChaseState();
     public BossAttackState AttackState = new BossAttackState();
     public BossDeathState DeathState = new BossDeathState();
+    public BossQTEState QTEState = new BossQTEState();
 
     //Stealth Settings for Designers
     [Header("Stealth Settings")]
@@ -25,18 +27,26 @@ public class BossStateManager : MonoBehaviour
     //Life 
     [SerializeField] private int _mLife = 100;
 
+    [Header("Health")]
+    [SerializeField] private Slider _slider;
+    [SerializeField] private GameObject _sliderObject;
+    [SerializeField] private GameObject _alert;
+
     //getter and setter
     public float Speed { get { return _speed; } }
     public float DistanceChase { get { return _distanceChase; } }
     public float DistanceAttack { get { return _distanceAttack; } }
     public Animator Animator { get { return _animator; } }
     public Transform Mutant { get { return _mutant; } }
+    public MonoBehaviour MonoBehaviour;
 
     private void Awake()
     {
         _player = GameManager.Instance.player;
         _mutant = this.gameObject.transform;
         _animator = GetComponentInChildren<Animator>();
+
+        MonoBehaviour = GetComponent<MonoBehaviour>();
     }
 
     void Start()
@@ -87,6 +97,15 @@ public class BossStateManager : MonoBehaviour
     public void TakeDamage(int damage, int weapon)
     {
         _mLife -= damage;
+        _slider.value -= damage * 0.01f;
+
+        if (_mLife <= 0)
+        {
+            SwitchState(DeathState);
+            _sliderObject.SetActive(false);
+            //_animator.SetBool("IsDeath", true);
+            //_alert.SetActive(false);
+        }
     }
 
 }

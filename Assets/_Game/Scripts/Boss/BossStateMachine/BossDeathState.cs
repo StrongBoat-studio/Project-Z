@@ -4,7 +4,9 @@ public class BossDeathState : BossBaseState
 {
     public override void EnterState(BossStateManager boss)
     {
-        Debug.Log("death attack state");
+        Debug.Log("boss death state");
+        Context.Animator.SetBool("IsWalking", false);
+        Context.MonoBehaviour.StopAllCoroutines();
     }
 
     public override void UpdateState(BossStateManager boss)

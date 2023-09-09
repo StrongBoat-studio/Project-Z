@@ -29,4 +29,11 @@ public class BossAnimationController : MonoBehaviour
     {
         _animator.SetBool("IsPushing", false);
     }
+
+    public void TakeDamage()
+    {
+        if (GameManager.Instance.Player == null) return;
+
+        GameManager.Instance.Player.TakeDamage(Random.Range(10, 21));
+    }
 }
