@@ -8,6 +8,7 @@ public class BulletController : MonoBehaviour
     private Rigidbody2D _rigidbody2D;
     private WalkerStateManager _walkerStateManager;
     private JumperStateManager _jumperStateManager;
+    private BossStateManager _bossStateManager;
     private Transform _player;
     // Start is called before the first frame update
     void Start()
@@ -28,6 +29,7 @@ public class BulletController : MonoBehaviour
     {
         _walkerStateManager = collision.GetComponent<WalkerStateManager>();
         _jumperStateManager = collision.GetComponent<JumperStateManager>();
+        _bossStateManager = collision.GetComponent<BossStateManager>();
 
         if (_walkerStateManager != null)
         {
@@ -44,6 +46,15 @@ public class BulletController : MonoBehaviour
             {
                 _jumperStateManager.TakeDamage(20, 1);
             } 
+            Destroy(gameObject);
+        }
+
+        if (_bossStateManager != null)
+        {
+            if (_bossStateManager.GetLife() > 0)
+            {
+                _bossStateManager.TakeDamage(20, 1);
+            }
             Destroy(gameObject);
         }
     }

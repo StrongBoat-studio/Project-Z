@@ -16,6 +16,7 @@ public class KnifeController : MonoBehaviour
     private PlayerInput _playerInput;
     private WalkerStateManager _walkerStateManager;
     private JumperStateManager _jumperStateManager;
+    private BossStateManager _bossStateManager;
     private float _time = 0.5f;
     private bool _isTime = false;
 
@@ -75,6 +76,7 @@ public class KnifeController : MonoBehaviour
         {
             _walkerStateManager = _hitEnemie.GetComponent<WalkerStateManager>();
             _jumperStateManager = _hitEnemie.GetComponent<JumperStateManager>();
+            _bossStateManager = _hitEnemie.GetComponent<BossStateManager>();
 
             if (_walkerStateManager != null)
             {
@@ -89,6 +91,14 @@ public class KnifeController : MonoBehaviour
                 if(_jumperStateManager.GetLife()>0)
                 {
                     _jumperStateManager.TakeDamage(_demage, 2);
+                }
+            }
+
+            if (_bossStateManager != null)
+            {
+                if (_bossStateManager.GetLife() > 0)
+                {
+                    _bossStateManager.TakeDamage(_demage, 2);
                 }
             }
         }
