@@ -2280,7 +2280,7 @@ MonoBehaviour:
       <JournalAppToOpen>k__BackingField: 0
     <IsCompleted>k__BackingField: 0
   - <ID>k__BackingField: 6
-    <Title>k__BackingField: "\u201CAlchemy of Survival\u201D"
+    <Title>k__BackingField: '"Alchemy of Survival"'
     <Tasks>k__BackingField:
     - <ID>k__BackingField: 0
       <Title>k__BackingField: 'Find: The gunpowder'
