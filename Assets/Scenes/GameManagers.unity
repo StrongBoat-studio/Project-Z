@@ -3430,7 +3430,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     collectDialogue: {fileID: 4900000, guid: 836094dd9eb5d52499d720c02a86dc79, type: 3}
-    itemDecription: {fileID: 4900000, guid: aeb0ae4317369864ea82cf66006494ef, type: 3}
+    itemDecription: {fileID: 4900000, guid: 0cb0641c2c91c05439c8f56efb05768a, type: 3}
     itemName: Gun
   - itemType: 3
     amount: 0
@@ -3452,7 +3452,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     collectDialogue: {fileID: 4900000, guid: 836094dd9eb5d52499d720c02a86dc79, type: 3}
-    itemDecription: {fileID: 4900000, guid: aeb0ae4317369864ea82cf66006494ef, type: 3}
+    itemDecription: {fileID: 4900000, guid: 2766e8b0497c5184cb3bc60c5e0beb89, type: 3}
     itemName: Ammo
   - itemType: 4
     amount: 0
@@ -3474,7 +3474,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     collectDialogue: {fileID: 4900000, guid: 3a941a02e3623374cb003f55fb52898c, type: 3}
-    itemDecription: {fileID: 4900000, guid: aeb0ae4317369864ea82cf66006494ef, type: 3}
+    itemDecription: {fileID: 4900000, guid: 01a36b68faddce54d8f1756d1bcf924f, type: 3}
     itemName: Drool1
   - itemType: 5
     amount: 0
@@ -3496,7 +3496,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     collectDialogue: {fileID: 4900000, guid: 3a941a02e3623374cb003f55fb52898c, type: 3}
-    itemDecription: {fileID: 4900000, guid: aeb0ae4317369864ea82cf66006494ef, type: 3}
+    itemDecription: {fileID: 4900000, guid: 01a36b68faddce54d8f1756d1bcf924f, type: 3}
     itemName: Drool2
   - itemType: 6
     amount: 0
@@ -3518,7 +3518,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     collectDialogue: {fileID: 4900000, guid: 61ab0b3449ef1a742b9d69b5bd754d87, type: 3}
-    itemDecription: {fileID: 4900000, guid: aeb0ae4317369864ea82cf66006494ef, type: 3}
+    itemDecription: {fileID: 4900000, guid: 2766e8b0497c5184cb3bc60c5e0beb89, type: 3}
     itemName: GumPowder
   - itemType: 7
     amount: 0
@@ -3540,7 +3540,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     collectDialogue: {fileID: 4900000, guid: b686dc6e3ebaa9c4d89e341fc37fb427, type: 3}
-    itemDecription: {fileID: 4900000, guid: aeb0ae4317369864ea82cf66006494ef, type: 3}
+    itemDecription: {fileID: 4900000, guid: a45a95faebb972140a578cf5dae55edb, type: 3}
     itemName: Herb
   - itemType: 8
     amount: 0
@@ -3562,7 +3562,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     collectDialogue: {fileID: 4900000, guid: 836094dd9eb5d52499d720c02a86dc79, type: 3}
-    itemDecription: {fileID: 4900000, guid: aeb0ae4317369864ea82cf66006494ef, type: 3}
+    itemDecription: {fileID: 4900000, guid: 7d36878d08886ee44a2d8ad830144a20, type: 3}
     itemName: Note
   - itemType: 9
     amount: 0
@@ -3584,7 +3584,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     collectDialogue: {fileID: 4900000, guid: e6778c7e8610dd7459c5879967ec2817, type: 3}
-    itemDecription: {fileID: 4900000, guid: aeb0ae4317369864ea82cf66006494ef, type: 3}
+    itemDecription: {fileID: 4900000, guid: 983675edb817d9248809cf57ec944b72, type: 3}
     itemName: Vile1
   - itemType: 10
     amount: 0
@@ -3606,8 +3606,8 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     collectDialogue: {fileID: 4900000, guid: e6778c7e8610dd7459c5879967ec2817, type: 3}
-    itemDecription: {fileID: 4900000, guid: aeb0ae4317369864ea82cf66006494ef, type: 3}
-    itemName: Vile2
+    itemDecription: {fileID: 4900000, guid: 983675edb817d9248809cf57ec944b72, type: 3}
+    itemName: Vile
 --- !u!4 &1421069937
 Transform:
   m_ObjectHideFlags: 0

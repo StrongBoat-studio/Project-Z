@@ -143,6 +143,11 @@ public class BossStateManager : MonoBehaviour
 
     public void Destroy()
     {
+        if(GetComponentInChildren<AttackTrigger>()!=null)
+        {
+            GetComponentInChildren<AttackTrigger>().End();
+        }
+
         QTEManager.Instance.QTEStop();
         Destroy(this.gameObject);
     }

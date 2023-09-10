@@ -49,4 +49,10 @@ public class AttackTrigger : MonoBehaviour
 
         GameManager.Instance.Player.TakeDamage(Random.Range(8, 15));
     }
+
+    public void End()
+    {
+        _bloodPS.SetActive(false);
+        _dustPS.SetActive(false);
+    }
 }

@@ -3218,7 +3218,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     collectDialogue: {fileID: 4900000, guid: 836094dd9eb5d52499d720c02a86dc79, type: 3}
-    itemDecription: {fileID: 4900000, guid: aeb0ae4317369864ea82cf66006494ef, type: 3}
+    itemDecription: {fileID: 4900000, guid: 0cb0641c2c91c05439c8f56efb05768a, type: 3}
     itemName: Gun
   _note:
     itemType: 8
@@ -3229,7 +3229,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     collectDialogue: {fileID: 4900000, guid: 836094dd9eb5d52499d720c02a86dc79, type: 3}
-    itemDecription: {fileID: 4900000, guid: aeb0ae4317369864ea82cf66006494ef, type: 3}
+    itemDecription: {fileID: 4900000, guid: 7d36878d08886ee44a2d8ad830144a20, type: 3}
     itemName: Note
   _searchTheBody:
     _dialogueTextAsset: {fileID: 4900000, guid: a2a8db6e8e14abd4983a53c6ad38418b, type: 3}
