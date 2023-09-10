@@ -10,6 +10,8 @@ public class BulletController : MonoBehaviour
     private JumperStateManager _jumperStateManager;
     private BossStateManager _bossStateManager;
     private Transform _player;
+
+    [SerializeField] private GameObject _this;
     // Start is called before the first frame update
     void Start()
     {
@@ -55,6 +57,7 @@ public class BulletController : MonoBehaviour
             {
                 _bossStateManager.TakeDamage(20, 1);
             }
+
             Destroy(gameObject);
         }
     }

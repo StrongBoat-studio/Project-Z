@@ -36,6 +36,8 @@ public class BossAttackState : BossBaseState
                 {
                     Context.SetChaseSpeed(3f);
                     SetChasePoints(0.5f, -0.5f);
+                    Context.BoxCollider2D.size = new Vector2(Context.BoxCollider2D.size.x, 3.0f);
+                    Context.TriggerAttack.transform.localPosition = new Vector2(0.97f, 0.11f);
 
                     break;
                 }
@@ -43,6 +45,8 @@ public class BossAttackState : BossBaseState
                 {
                     Context.SetChaseSpeed(3f);
                     SetChasePoints(1.1f, -1.1f);
+                    Context.BoxCollider2D.size = new Vector2(Context.BoxCollider2D.size.x, 3.54f);
+                    Context.TriggerAttack.transform.localPosition = new Vector2(1.42f, -0.2f);
 
                     break;
                 }
@@ -50,6 +54,8 @@ public class BossAttackState : BossBaseState
                 {
                     Context.SetChaseSpeed(3.5f);
                     SetChasePoints(1.6f, -1.55f);
+                    Context.BoxCollider2D.size = new Vector2(Context.BoxCollider2D.size.x, 3.54f);
+                    Context.TriggerAttack.transform.localPosition = new Vector2(1.95f, -0.35f);
 
                     break;
                 }
@@ -65,15 +71,6 @@ public class BossAttackState : BossBaseState
                     break;
                 }
         }
-
-        if(Context.nextAttackId==1)
-        {
-            Context.BoxCollider2D.size = new Vector2(Context.BoxCollider2D.size.x, 3.0f);
-        }
-        else
-        {
-            Context.BoxCollider2D.size = new Vector2(Context.BoxCollider2D.size.x, 3.54f);
-        }
     }
 
     private void SetChasePoints(float back, float front)
@@ -86,14 +83,7 @@ public class BossAttackState : BossBaseState
 
     private IEnumerator NextAttack()
     {
-        if (Context.nextAttackId == 3)
-        {
-            yield return new WaitForSeconds(2f);
-        }
-        else
-        {
-            yield return new WaitForSeconds(2f);
-        }
+        yield return new WaitForSeconds(2f);
         
         ChooseAttack();
         Context.Mutant.gameObject.GetComponent<BossChaseWithAI>().canAttack = true;

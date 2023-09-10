@@ -125,6 +125,12 @@ public class BossChaseWithAI : MonoBehaviour
         }
         else
         {
+            if (_bossStateManager.nextAttackId == 1)
+            {
+                _bossStateManager.Animator.SetBool("IsAttacking1", true);
+                return;
+            }
+
             if (_bossStateManager.Mutant.position.x <= GetTarget().x)
             {
                 SelectAnimation();

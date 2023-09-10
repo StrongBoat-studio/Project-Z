@@ -33,8 +33,9 @@ public class BossStateManager : MonoBehaviour
     [SerializeField] private GameObject _sliderObject;
     [SerializeField] private GameObject _alert;
 
-    //Attack
+    [Header("Attack")]
     public int nextAttackId = 1;
+    [SerializeField] private GameObject _triggerAttack;
     private float _addFront = 0;
     private float _addBack = 0;
 
@@ -48,6 +49,7 @@ public class BossStateManager : MonoBehaviour
     public float AddFront { get { return _addFront; } set { _addFront = value; } }
     public float AddBack { get { return _addBack; } set { _addBack = value; } }
     public BoxCollider2D BoxCollider2D { get { return _boxCollider2D; } }
+    public GameObject TriggerAttack { get { return _triggerAttack; } }
 
     private void Awake()
     {
@@ -135,5 +137,4 @@ public class BossStateManager : MonoBehaviour
     {
         GetComponent<BossChaseWithAI>().SetSpeed(speed);
     }
-
 }

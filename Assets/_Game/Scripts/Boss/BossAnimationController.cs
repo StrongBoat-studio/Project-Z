@@ -30,10 +30,13 @@ public class BossAnimationController : MonoBehaviour
         _animator.SetBool("IsPushing", false);
     }
 
-    public void TakeDamage()
+    public void SetTriggerAttack()
     {
-        if (GameManager.Instance.Player == null) return;
+        GetComponentInParent<BossStateManager>().TriggerAttack.transform.GetChild(0).gameObject.SetActive(true);
+    }
 
-        GameManager.Instance.Player.TakeDamage(Random.Range(10, 21));
+    public void EnabledTriggerAttack()
+    {
+        GetComponentInParent<BossStateManager>().TriggerAttack.transform.GetChild(0).gameObject.SetActive(false);
     }
 }
