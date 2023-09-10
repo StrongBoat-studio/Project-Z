@@ -7,6 +7,8 @@ public class BossDeathState : BossBaseState
         Debug.Log("boss death state");
         Context.Animator.SetBool("IsWalking", false);
         Context.MonoBehaviour.StopAllCoroutines();
+        Context.AddItem();
+        Context.Destroy();
     }
 
     public override void UpdateState(BossStateManager boss)

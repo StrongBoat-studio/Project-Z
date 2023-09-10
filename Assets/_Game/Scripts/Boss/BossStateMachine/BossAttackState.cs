@@ -17,6 +17,12 @@ public class BossAttackState : BossBaseState
             boss.SwitchState(boss.ChaseState);
             Context.MonoBehaviour.StopAllCoroutines();
         }
+
+        if(Context.nextAttackId==4)
+        {
+            Context.MonoBehaviour.StopAllCoroutines();
+            boss.SwitchState(boss.QTEState);
+        }
     }
 
     private void StartAttack()
@@ -61,7 +67,6 @@ public class BossAttackState : BossBaseState
                 }
             case 4:
                 {
-                    //tutaj bêdzie qte
                     break;
                 }
             default:

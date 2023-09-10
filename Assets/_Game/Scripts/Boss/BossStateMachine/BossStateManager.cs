@@ -39,6 +39,9 @@ public class BossStateManager : MonoBehaviour
     private float _addFront = 0;
     private float _addBack = 0;
 
+    [Header("Item")]
+    [SerializeField] private Item _item;
+
     //getter and setter
     public float Speed { get { return _speed; } }
     public float DistanceChase { get { return _distanceChase; } }
@@ -136,5 +139,17 @@ public class BossStateManager : MonoBehaviour
     public void SetChaseSpeed(float speed)
     {
         GetComponent<BossChaseWithAI>().SetSpeed(speed);
+    }
+
+    public void Destroy()
+    {
+        QTEManager.Instance.QTEStop();
+        Destroy(this.gameObject);
+    }
+
+    public void AddItem()
+    {
+       Player _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        _player.AddItem(_item);
     }
 }

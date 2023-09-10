@@ -278,6 +278,17 @@ MonoBehaviour:
   _alert: {fileID: 8058433690695681713}
   nextAttackId: 1
   _triggerAttack: {fileID: 631681989}
+  _item:
+    itemType: 4
+    amount: 1
+    sprite: {fileID: 21300000, guid: 061a4deb80e58004daa35fa3c657acbc, type: 3}
+    stackable: 1
+    Use:
+      m_PersistentCalls:
+        m_Calls: []
+    collectDialogue: {fileID: 4900000, guid: 3a941a02e3623374cb003f55fb52898c, type: 3}
+    itemDecription: {fileID: 4900000, guid: aeb0ae4317369864ea82cf66006494ef, type: 3}
+    itemName: Saliva
   MonoBehaviour: {fileID: 481899084}
 --- !u!114 &481899085
 MonoBehaviour:
@@ -5467,7 +5478,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 649551302}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.34, y: -0.46, z: -4.1}
+  m_LocalPosition: {x: -3.82, y: -0.46, z: -4.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
