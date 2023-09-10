@@ -20,13 +20,30 @@ public class BossChaseWithAI : MonoBehaviour
     private List<BossBaseState> _bossBaseStates = new List<BossBaseState>();
 
     //Variables for AI
-    private Transform _target;
+     private Transform _target;
     private float _nextWaypointDistance = 2f;
     private Path _path;
     private int _currentWaypoint = 0;
     private bool _reachedEndOfPath = false;
     private Vector2 _direction;
     private float _distance;
+
+    //Chase points
+    private Transform _front;
+    private Transform _back;
+
+    [SerializeField] private Vector2 _frontV;
+    [SerializeField] private Vector2 _backV;
+
+    //DotPros
+    [SerializeField] private float _dotPro;
+    private Vector2 _directionDot;
+    private Vector2 _checkVector;
+    [SerializeField] private float _dotProForRotation;
+
+    //Attack
+    public bool canAttack = true;
+    private bool _isFront = true; 
 
     private void Awake()
     {
@@ -55,7 +72,7 @@ public class BossChaseWithAI : MonoBehaviour
 
         if (_seeker.IsDone() && this.gameObject.activeSelf == true)
         {
-            _seeker.StartPath(_rigidbody2D.position, _target.position, OnPathComplete);
+            _seeker.StartPath(_rigidbody2D.position, GetTarget(), OnPathComplete);
         }
     }
 
@@ -80,7 +97,69 @@ public class BossChaseWithAI : MonoBehaviour
             Chase();
             DistanceCalculation();
             IsNextWaypoint();
+            CalculateDotProForRotation();
             RotatingMutant();
+            StartAttackAnimationIfCan();
+
+            _frontV = _front.position;
+            _backV = _back.position;
+        }
+    }
+
+    private void StartAttackAnimationIfCan()
+    {
+        if (canAttack == false || _bossStateManager.GetBossState()!=_bossStateManager.AttackState) return;
+        
+        if(_isFront==true)
+        {
+            if (_bossStateManager.nextAttackId == 3)
+            {
+                _bossStateManager.Animator.SetBool("IsAttacking3", true);
+                return;
+            }
+
+            if (_bossStateManager.Mutant.position.x >= GetTarget().x)
+            {
+                SelectAnimation();
+            }
+        }
+        else
+        {
+            if (_bossStateManager.Mutant.position.x <= GetTarget().x)
+            {
+                SelectAnimation();
+            }
+        }
+    }
+
+    private void SelectAnimation()
+    {
+        switch (_bossStateManager.nextAttackId)
+        {
+            case 1:
+                {
+                    _bossStateManager.Animator.SetBool("IsAttacking1", true);
+                    canAttack = false;
+                    break;
+                }
+            case 2:
+                {
+                    _bossStateManager.Animator.SetBool("IsAttacking2", true);
+                    canAttack = false;
+                    break;
+                }
+            case 3:
+                {
+                    _bossStateManager.Animator.SetBool("IsAttacking3", true);
+                    canAttack = false;
+                    break;
+                }
+            default:
+                {
+                    _bossStateManager.Animator.SetBool("IsAttacking1", true);
+                    canAttack = false;
+                    break;
+                }
         }
     }
 
@@ -115,20 +194,81 @@ public class BossChaseWithAI : MonoBehaviour
 
     private void RotatingMutant()
     {
-        float x = transform.localScale.x;
+        if (_bossStateManager.GetBossState() == _bossStateManager.ChaseState)
+        {
+            float x = transform.localScale.x;
 
-        if (_rigidbody2D.velocity.x >= 0.01f)
-        {
-            transform.localScale = new Vector3(1f, 1f, 1f);
-        }
-        else if (_rigidbody2D.velocity.x <= -0.01f)
-        {
-            transform.localScale = new Vector3(-1f, 1f, 1f);
+            if (_rigidbody2D.velocity.x >= 0.01f)
+            {
+                transform.localScale = new Vector3(1f, 1f, 1f);
+            }
+            else if (_rigidbody2D.velocity.x <= -0.01f)
+            {
+                transform.localScale = new Vector3(-1f, 1f, 1f);
+            }
+
+            if (x != transform.localScale.x)
+            {
+                AudioManager.Instance?.PlayOneShot(FMODEvents.Instance.MutantGrowl, this.gameObject.transform.position);
+            }
         }
 
-        if (x != transform.localScale.x)
+        if (_bossStateManager.GetBossState() == _bossStateManager.AttackState)
         {
-            AudioManager.Instance?.PlayOneShot(FMODEvents.Instance.MutantGrowl, this.gameObject.transform.position);
+            if(_dotProForRotation>0)
+            {
+                transform.localScale = new Vector3(-transform.localScale.x, 1f, 1f);
+            }
         }
+    }
+
+    private Vector3 GetTarget()
+    {
+        if (_target == null)
+        {
+            _target = GameManager.Instance.player;
+
+            if (_target == null) return new Vector3(.0f, .0f, .0f);
+        }
+
+        CalculateDotPro();
+        _front = _target.GetChild(3).GetChild(0);
+        _back = _target.GetChild(3).GetChild(1);
+
+        if (_dotPro < 0) _isFront = true;
+        else _isFront = false;
+
+        return (_dotPro < 0) ? _front.position : _back.position;
+    }
+
+    private void CalculateDotPro()
+    {
+        _directionDot = transform.position - _target.position;
+        _directionDot.Normalize();
+
+        _dotPro = Vector2.Dot(_directionDot, CalculateCheckVector());
+    }
+
+    private Vector2 CalculateCheckVector()
+    {
+        return _checkVector = new Vector2(_target.localScale.x, .0f);
+    }
+
+    private void CalculateDotProForRotation()
+    {
+        _directionDot = transform.position - _target.position;
+        _directionDot.Normalize();
+
+        _dotProForRotation = Vector2.Dot(_directionDot, CalculateCheckVectoForRotation());
+    }
+
+    private Vector2 CalculateCheckVectoForRotation()
+    {
+        return _checkVector = new Vector2(_bossStateManager.Mutant.localScale.x, .0f);
+    }
+
+    public void SetSpeed(float speed)
+    {
+        _speed = speed;
     }
 }

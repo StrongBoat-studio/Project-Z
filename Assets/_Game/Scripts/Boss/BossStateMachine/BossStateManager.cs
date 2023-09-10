@@ -23,6 +23,7 @@ public class BossStateManager : MonoBehaviour
     private Transform _player;
     private Transform _mutant;
     private Animator _animator;
+    private BoxCollider2D _boxCollider2D;
 
     //Life 
     [SerializeField] private int _mLife = 100;
@@ -32,6 +33,11 @@ public class BossStateManager : MonoBehaviour
     [SerializeField] private GameObject _sliderObject;
     [SerializeField] private GameObject _alert;
 
+    //Attack
+    public int nextAttackId = 1;
+    private float _addFront = 0;
+    private float _addBack = 0;
+
     //getter and setter
     public float Speed { get { return _speed; } }
     public float DistanceChase { get { return _distanceChase; } }
@@ -39,12 +45,16 @@ public class BossStateManager : MonoBehaviour
     public Animator Animator { get { return _animator; } }
     public Transform Mutant { get { return _mutant; } }
     public MonoBehaviour MonoBehaviour;
+    public float AddFront { get { return _addFront; } set { _addFront = value; } }
+    public float AddBack { get { return _addBack; } set { _addBack = value; } }
+    public BoxCollider2D BoxCollider2D { get { return _boxCollider2D; } }
 
     private void Awake()
     {
         _player = GameManager.Instance.player;
         _mutant = this.gameObject.transform;
         _animator = GetComponentInChildren<Animator>();
+        _boxCollider2D = GetComponent<BoxCollider2D>();
 
         MonoBehaviour = GetComponent<MonoBehaviour>();
     }
@@ -106,6 +116,24 @@ public class BossStateManager : MonoBehaviour
             //_animator.SetBool("IsDeath", true);
             //_alert.SetActive(false);
         }
+    }
+
+    public void SetPlayerChaseAPoints()
+    {
+        //Reset Points
+        _player.GetChild(3).GetChild(0).localPosition = new Vector2(-0.7f, _player.GetChild(3).GetChild(0).localPosition.y);
+        _player.GetChild(3).GetChild(1).localPosition = new Vector2(0.8f, _player.GetChild(3).GetChild(1).localPosition.y);
+
+        //Front
+        _player.GetChild(3).GetChild(0).localPosition = new Vector2(_addFront, _player.GetChild(3).GetChild(0).localPosition.y);
+
+        //Back
+        _player.GetChild(3).GetChild(1).localPosition = new Vector2(_addBack, _player.GetChild(3).GetChild(1).localPosition.y);
+    }
+
+    public void SetChaseSpeed(float speed)
+    {
+        GetComponent<BossChaseWithAI>().SetSpeed(speed);
     }
 
 }
