@@ -17,7 +17,7 @@ public class Room0Door : MonoBehaviour
 
     void Update()
     {
-        if(QuestLineManager.Instance.Quests[0].Tasks[0].Title == "Find: The Isolated Saliva of Subject “0”")
+        if(QuestLineManager.Instance.Quests[0].Tasks[0].Title == "Find: The Isolated Saliva of Subject \"0\"")
         {
             SetActive(true);
         }

@@ -23,7 +23,7 @@ public class JumperActiveController : MonoBehaviour
         _questsSetActiveTrue.Add("Find: The gunpowder");
         _questsSetActiveTrue.Add("Find: The Test Vial");
         _questsSetActiveTrue.Add("Find: The Chernobyl herb");
-        _questsSetActiveTrue.Add("Find: The Isolated Saliva of Subject “0”");
+        _questsSetActiveTrue.Add("Find: The Isolated Saliva of Subject \"0\"");
         _questsSetActiveTrue.Add("Return to the Lab");
         _questsSetActiveTrue.Add("Create the Antidote");
 

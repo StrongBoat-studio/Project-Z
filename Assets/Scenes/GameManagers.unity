@@ -2036,7 +2036,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _quests:
   - <ID>k__BackingField: 0
-    <Title>k__BackingField: "\u201COver and out\u201D"
+    <Title>k__BackingField: '"Over and out"'
     <Tasks>k__BackingField:
     - <ID>k__BackingField: 0
       <Title>k__BackingField: Listen to the speech
@@ -2070,7 +2070,7 @@ MonoBehaviour:
       <JournalAppToOpen>k__BackingField: 0
     <IsCompleted>k__BackingField: 0
   - <ID>k__BackingField: 1
-    <Title>k__BackingField: "\u201CEchoes of\u2026? \u201D"
+    <Title>k__BackingField: "\"Echoes of\u2026?\""
     <Tasks>k__BackingField:
     - <ID>k__BackingField: 0
       <Title>k__BackingField: Have a conversation with Boris
@@ -2104,7 +2104,7 @@ MonoBehaviour:
       <JournalAppToOpen>k__BackingField: 3
     <IsCompleted>k__BackingField: 0
   - <ID>k__BackingField: 2
-    <Title>k__BackingField: "\u201CUnleashing Chaos\u201D"
+    <Title>k__BackingField: '"Unleashing Chaos"'
     <Tasks>k__BackingField:
     - <ID>k__BackingField: 0
       <Title>k__BackingField: Talk to Boris
@@ -2148,7 +2148,7 @@ MonoBehaviour:
       <JournalAppToOpen>k__BackingField: 0
     <IsCompleted>k__BackingField: 0
   - <ID>k__BackingField: 3
-    <Title>k__BackingField: "\u201CEvolving Nightmares\u201D"
+    <Title>k__BackingField: '"Evolving Nightmares"'
     <Tasks>k__BackingField:
     - <ID>k__BackingField: 0
       <Title>k__BackingField: Monitor the Mutation Process
@@ -2202,7 +2202,7 @@ MonoBehaviour:
       <JournalAppToOpen>k__BackingField: 4
     <IsCompleted>k__BackingField: 0
   - <ID>k__BackingField: 4
-    <Title>k__BackingField: "\u201CAccording to the plan\u2026\u201D"
+    <Title>k__BackingField: "\"According to the plan\u2026\""
     <Tasks>k__BackingField:
     - <ID>k__BackingField: 0
       <Title>k__BackingField: Take care of Shimura
@@ -2236,7 +2236,7 @@ MonoBehaviour:
       <JournalAppToOpen>k__BackingField: 0
     <IsCompleted>k__BackingField: 0
   - <ID>k__BackingField: 5
-    <Title>k__BackingField: "\u201CWhen they are all fucked\u201D"
+    <Title>k__BackingField: '"When they are all fucked"'
     <Tasks>k__BackingField:
     - <ID>k__BackingField: 0
       <Title>k__BackingField: Talk to Boris
@@ -2280,7 +2280,7 @@ MonoBehaviour:
       <JournalAppToOpen>k__BackingField: 0
     <IsCompleted>k__BackingField: 0
   - <ID>k__BackingField: 6
-    <Title>k__BackingField: "\u201CAlchemy of Survival\u201D"
+    <Title>k__BackingField: '"Alchemy of Survival"'
     <Tasks>k__BackingField:
     - <ID>k__BackingField: 0
       <Title>k__BackingField: 'Find: The gunpowder'
@@ -2313,7 +2313,7 @@ MonoBehaviour:
         amount: 1
       <JournalAppToOpen>k__BackingField: 0
     - <ID>k__BackingField: 3
-      <Title>k__BackingField: "Find: The Isolated Saliva of Subject \u201C0\u201D"
+      <Title>k__BackingField: 'Find: The Isolated Saliva of Subject "0"'
       <DisplayCompletionHint>k__BackingField: 0
       <CompletionHint>k__BackingField: 
       <IsCompleted>k__BackingField: 0
