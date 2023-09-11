@@ -40,20 +40,31 @@ public class QuestLineManager : MonoBehaviour
     public void ValidateQuests()
     {
         bool check = true;
+        bool updated = false;
 
         while (_quests.Count > 0 && check == true)
         {
-            _quests[0].ValidateTasks();
+            bool q = _quests[0].ValidateTasks();
+            Debug.Log($"Task validation: {q}");
+            if(q == true)
+            {
+                updated = true;
+            }
+
             if (_quests[0].IsCompleted == true)
             {
                 _quests.RemoveAt(0);
                 RefreshQuestItems();
                 if(_quests.Count <= 0) _isFinised = true;
+                updated = true;
             }
             else check = false;
         }
 
-        OnQuestUpdate?.Invoke();
+        if(updated == true) 
+        {
+            OnQuestUpdate?.Invoke();
+        }
     }
 
     private void RefreshQuestItems()
