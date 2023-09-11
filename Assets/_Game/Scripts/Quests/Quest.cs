@@ -56,8 +56,12 @@ public class Quest
         return true;
     }
     
-    public void CompleteQuest()
+    public void CompleteQuest(bool load = false)
     {
         IsCompleted = true;
+        if(FMODEvents.Instance != null && load == false)
+        {
+            AudioManager.Instance?.PlayOneShot(FMODEvents.Instance.QuestFinish, Vector3.zero);
+        }
     }
 }

@@ -741,6 +741,20 @@ MonoBehaviour:
       Data3: 173228729
       Data4: 511729677
     Path: event:/SFX/UI/UIButtonHover
+  <QuestFinish>k__BackingField:
+    Guid:
+      Data1: 1562936233
+      Data2: 1299413513
+      Data3: 1758345135
+      Data4: 2084054342
+    Path: event:/SFX/Quests/QuestFinish
+  <JournalLifeMonitor>k__BackingField:
+    Guid:
+      Data1: -291266885
+      Data2: 1136015625
+      Data3: 1357788584
+      Data4: -1808737012
+    Path: event:/SFX/UI/Journal/LifeMonitor
   <MainTheme>k__BackingField:
     Guid:
       Data1: 2128066426

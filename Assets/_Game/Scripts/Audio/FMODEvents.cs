@@ -28,6 +28,13 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField]
     public EventReference UIButtonHover { get; private set; }
 
+    [field: SerializeField]
+    public EventReference QuestFinish { get; private set; }
+
+    [field: SerializeField]
+    public EventReference JournalLifeMonitor { get; private set; }
+
+
     //Music
     [field: SerializeField]
     public EventReference MainTheme { get; private set; }

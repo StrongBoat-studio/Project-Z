@@ -533,10 +533,10 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.29791668
-    y: 0.06111111
-    width: 0.16666667
-    height: 0.16666666
+    x: 0
+    y: 0
+    width: 1
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 37
@@ -652,6 +652,11 @@ Transform:
 --- !u!224 &553107138 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 422096200260707003, guid: d44d34800a80f5247994a47ca713051c, type: 3}
+  m_PrefabInstance: {fileID: 1336646041}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &624617436 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 422096199405874757, guid: d44d34800a80f5247994a47ca713051c, type: 3}
   m_PrefabInstance: {fileID: 1336646041}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &662940394
@@ -2778,6 +2783,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _journal: {fileID: 1336646044}
+  _lifeMonitor: {fileID: 624617436}
 --- !u!114 &1913262213
 MonoBehaviour:
   m_ObjectHideFlags: 0
