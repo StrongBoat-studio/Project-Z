@@ -140,7 +140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &211006421
 RectTransform:
   m_ObjectHideFlags: 0
@@ -780,6 +780,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _roomLoader: {fileID: 1349807048}
+--- !u!114 &1349807050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1349807047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32747ba42fcde014e8cd7d5976c82cce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1564991838
 GameObject:
   m_ObjectHideFlags: 0
@@ -838,7 +850,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press space to continue...
+  m_text: Press space to skip...
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9124b62bb6fe5ac4d872ff4f924956c7, type: 2}
   m_sharedMaterial: {fileID: -756641603892032651, guid: 9124b62bb6fe5ac4d872ff4f924956c7, type: 2}
