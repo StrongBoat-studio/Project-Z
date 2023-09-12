@@ -32,6 +32,7 @@ public class SceneRegister : MonoBehaviour
         BlackScreen2 = 19,
         Lobby = 20,
         Room0 = 21,
+        HallwayAfterBoss = 22,
     }
 
     public static SceneRegister Instance { get; private set; }

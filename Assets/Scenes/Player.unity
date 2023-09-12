@@ -533,7 +533,7 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.29791668
+    x: 0.28645834
     y: 0.06111111
     width: 0.16666667
     height: 0.16666666
@@ -1784,6 +1784,10 @@ PrefabInstance:
     - target: {fileID: 422096200263337506, guid: d44d34800a80f5247994a47ca713051c, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 422096200263337506, guid: d44d34800a80f5247994a47ca713051c, type: 3}
+      propertyPath: m_TagString
+      value: PlayerCanvas
       objectReference: {fileID: 0}
     - target: {fileID: 422096200263337508, guid: d44d34800a80f5247994a47ca713051c, type: 3}
       propertyPath: m_UiScaleMode

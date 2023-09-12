@@ -29,6 +29,7 @@ TagManager:
   - Boss
   - Blood
   - Bullet
+  - PlayerCanvas
   layers:
   - Default
   - TransparentFX

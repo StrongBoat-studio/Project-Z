@@ -71,4 +71,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/Room0.unity
     guid: bea2cecf3c4db8345ba3e6106d3ec207
+  - enabled: 1
+    path: Assets/Scenes/Levels/HallwayAfterBoss.unity
+    guid: 9136e0bb114616841beec47676077bcd
   m_configObjects: {}
