@@ -63,6 +63,11 @@ public class Shooting : MonoBehaviour
 
     private void Shoot (InputAction.CallbackContext context)
     {
+        if (GameManager.Instance.Player != null)
+        {
+            if (GameManager.Instance.Player._numberOfAmmo <= 0) return;
+        }
+
         RaycastHit2D[] hits = Physics2D.RaycastAll(FindObjectOfType<Camera>().ScreenToWorldPoint(mousePos), Vector2.zero);
 
         if (hits.Any(x => x.collider.GetComponent<IInteractable>() != null) == false && _canShoot==true && _weapon.GetWeapon()==1 && !_movement.GetMovementStates().Contains(Movement.MovementState.Crouching) && !_movement.GetMovementStates().Contains(Movement.MovementState.Running)) 
@@ -73,6 +78,11 @@ public class Shooting : MonoBehaviour
             if(FMODEvents.Instance != null)
             {
                 AudioManager.Instance?.PlayOneShot(FMODEvents.Instance.Shot, transform.position);
+            }
+
+            if(GameManager.Instance.Player!=null)
+            {
+                GameManager.Instance.Player.AmmoDown();
             }
         }
     }

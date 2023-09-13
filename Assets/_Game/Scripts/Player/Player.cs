@@ -11,8 +11,10 @@ public class Player : MonoBehaviour
     private PlayerInput _playerInput;
     public int _helathMax = 100;
     public int _currentHelath = 100;
+    public int _numberOfAmmo = 7;
     [SerializeField] private Image _playerHealthBar;
-    
+    [SerializeField] private Image _playerAmmoBar;
+
     private Inventory _inventory;
     [SerializeField] private RectTransform _uiInventory;
 
@@ -29,6 +31,8 @@ public class Player : MonoBehaviour
 
         _playerInput = new PlayerInput();
         GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+
+        SetFillAmountForAmmo();
     }
 
     private void Start()
@@ -109,5 +113,60 @@ public class Player : MonoBehaviour
     public void StartArgueWithBorisDialogue()
     {
         _argueWithBoris.Play();
+    }
+
+    public void AmmoDown()
+    {
+        _numberOfAmmo -= 1;
+        SetFillAmountForAmmo();
+    }
+
+    private void SetFillAmountForAmmo()
+    {
+        switch (_numberOfAmmo)
+        {
+            case 7:
+                _playerAmmoBar.fillAmount = 1;
+                break;
+
+            case 6:
+                _playerAmmoBar.fillAmount = 0.9f;
+                break;
+
+            case 5:
+                _playerAmmoBar.fillAmount = 0.7f;
+                break;
+
+            case 4:
+                _playerAmmoBar.fillAmount = 0.6f;
+                break;
+
+            case 3:
+                _playerAmmoBar.fillAmount = 0.4f;
+                break;
+
+            case 2:
+                _playerAmmoBar.fillAmount = 0.3f;
+                break;
+
+            case 1:
+                _playerAmmoBar.fillAmount = 0.15f;
+                break;
+
+            case 0:
+                _playerAmmoBar.fillAmount = 0f;
+                break;
+        }
+    }
+
+    public int GetAmmo()
+    {
+        return _numberOfAmmo;
+    }
+
+    public void SetAmmo(int ammo)
+    {
+        _numberOfAmmo = ammo;
+        SetFillAmountForAmmo();
     }
 }

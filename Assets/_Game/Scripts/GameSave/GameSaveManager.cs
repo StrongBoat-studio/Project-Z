@@ -38,6 +38,7 @@ public class GameSaveManager : MonoBehaviour
         //Player data
         GameSaveManager.Instance.currentSave.playerHp = GameManager.Instance.player.GetComponent<Player>().GetHP();
         GameSaveManager.Instance.currentSave.playerStamina = GameManager.Instance.player.GetComponent<Movement>().GetStamina();
+        GameSaveManager.Instance.currentSave.playerAmmo = GameManager.Instance.Player.GetAmmo();
 
         //Notes' ids
         List<int> notes = new List<int>();
@@ -139,6 +140,7 @@ public class GameSaveManager : MonoBehaviour
         {
             GameManager.Instance.player.GetComponent<Player>().SetHP(currentSave.playerHp);
             GameManager.Instance.player.GetComponent<Movement>().SetStamina(currentSave.playerStamina);
+            GameManager.Instance.Player.SetAmmo(currentSave.playerAmmo);
         }
     }
 }

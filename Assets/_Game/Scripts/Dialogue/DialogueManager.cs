@@ -210,6 +210,12 @@ public class DialogueManager : MonoBehaviour
                         }
                     }
                     break;
+                case "gun":
+                    if (FMODEvents.Instance != null)
+                    {
+                        AudioManager.Instance?.PlayOneShot(FMODEvents.Instance.Shot, transform.position);
+                    }
+                    break;
                 default:
                     Debug.Log("Unrecognized event: " + t);
                     break;

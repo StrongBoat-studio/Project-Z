@@ -42,6 +42,7 @@ public class GameData
 
     [Header("Player")]
     public int playerHp;
+    public int playerAmmo;
     public float playerStamina;
     public int locationIndex = 8;
     public Vector3 spawnPosition; 
