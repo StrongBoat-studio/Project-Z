@@ -7,9 +7,10 @@ using DG.Tweening;
 public class Journal : MonoBehaviour
 {
     private PlayerInput _playerInput;
-    private bool _isOpen = false;
+    public bool IsOpen { get; private set; } = false;
 
-    [SerializeField] private RectTransform _journal;   
+    [SerializeField] private RectTransform _journal; 
+    [SerializeField] private RectTransform _lifeMonitor;  
 
     private void Awake()
     {
@@ -28,25 +29,35 @@ public class Journal : MonoBehaviour
 
     private void OnJournalOpen(InputAction.CallbackContext context)
     {
-        if (_isOpen == true) GameStateManager.Instance.ResetLastState();
+        if (IsOpen == true) GameStateManager.Instance.ResetLastState();
         else GameStateManager.Instance.SetState(GameStateManager.GameState.Journal);
     }
 
     private void OnGameStateChanged(GameStateManager.GameState newGameState)
     {
-        if(newGameState == GameStateManager.GameState.Journal && _isOpen == false)
+        if(newGameState == GameStateManager.GameState.Journal && IsOpen == false)
         {
             _journal.DOAnchorPosX(0f, .25f, true);
-            _isOpen = true;
+            IsOpen = true;
+
+            if(_lifeMonitor.GetComponent<UI_LifeMonitor>().gameObject.activeSelf)
+            {
+                _lifeMonitor.GetComponent<UI_LifeMonitor>().StartAudio();
+            }
         }
-        else if(newGameState != GameStateManager.GameState.Journal && _isOpen == true)
+        else if(newGameState != GameStateManager.GameState.Journal && IsOpen == true)
         {
             _journal.DOAnchorPosX(
                 -_journal.rect.width - (_journal.GetComponentInParent<Canvas>().gameObject.GetComponent<RectTransform>().rect.width - _journal.rect.width) / 2, 
                 .25f, 
                 true
             );
-            _isOpen = false;
+            IsOpen = false;
+
+            if(_lifeMonitor.GetComponent<UI_LifeMonitor>().gameObject.activeSelf)
+            {
+                _lifeMonitor.GetComponent<UI_LifeMonitor>().StopAudio();
+            }
         }
         
         if(
@@ -63,6 +74,6 @@ public class Journal : MonoBehaviour
     
     private void OnJournalExculusiveClose(InputAction.CallbackContext context)
     {
-        if(_isOpen == true) GameStateManager.Instance.ResetLastState();
+        if(IsOpen == true) GameStateManager.Instance.ResetLastState();
     }
 }

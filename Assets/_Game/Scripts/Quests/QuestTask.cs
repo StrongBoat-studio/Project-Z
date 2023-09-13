@@ -25,8 +25,12 @@ public class QuestTask
     //Type: Journal
     [field: SerializeField] public UI_Journal.App JournalAppToOpen { get; private set; }
 
-    public void Complete()
+    public void Complete(bool load = false)
     {
         IsCompleted = true;
+        if(FMODEvents.Instance != null && load == false)
+        {
+            AudioManager.Instance?.PlayOneShot(FMODEvents.Instance.QuestFinish, Vector3.zero);
+        }
     }
 }

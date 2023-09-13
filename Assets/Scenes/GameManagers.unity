@@ -741,6 +741,34 @@ MonoBehaviour:
       Data3: 173228729
       Data4: 511729677
     Path: event:/SFX/UI/UIButtonHover
+  <QuestFinish>k__BackingField:
+    Guid:
+      Data1: 1562936233
+      Data2: 1299413513
+      Data3: 1758345135
+      Data4: 2084054342
+    Path: event:/SFX/Quests/QuestFinish
+  <JournalLifeMonitor>k__BackingField:
+    Guid:
+      Data1: -291266885
+      Data2: 1136015625
+      Data3: 1357788584
+      Data4: -1808737012
+    Path: event:/SFX/UI/Journal/LifeMonitor
+  <CCTVNoise>k__BackingField:
+    Guid:
+      Data1: 2020413168
+      Data2: 1253964830
+      Data3: 550464424
+      Data4: -15806250
+    Path: event:/Ambience/CCTV
+  <Alarm>k__BackingField:
+    Guid:
+      Data1: -1715783609
+      Data2: 1168759613
+      Data3: 724722086
+      Data4: -341283135
+    Path: event:/Ambience/Alarm
   <MainTheme>k__BackingField:
     Guid:
       Data1: 2128066426

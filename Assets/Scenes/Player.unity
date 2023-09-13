@@ -654,6 +654,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 422096200260707003, guid: d44d34800a80f5247994a47ca713051c, type: 3}
   m_PrefabInstance: {fileID: 1336646041}
   m_PrefabAsset: {fileID: 0}
+--- !u!224 &624617436 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 422096199405874757, guid: d44d34800a80f5247994a47ca713051c, type: 3}
+  m_PrefabInstance: {fileID: 1336646041}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &662940394
 GameObject:
   m_ObjectHideFlags: 0
@@ -2975,6 +2980,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _journal: {fileID: 1336646044}
+  _lifeMonitor: {fileID: 624617436}
 --- !u!114 &1913262213
 MonoBehaviour:
   m_ObjectHideFlags: 0

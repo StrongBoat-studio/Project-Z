@@ -101,21 +101,21 @@ public class GameSaveManager : MonoBehaviour
         //Load Quests
         if (currentSave.quests.Count > 0)
         {
-            foreach (Quest q in QuestLineManager.Instance.Quests)
+            foreach (Quest quest in QuestLineManager.Instance.Quests)
             {
-                int qIDX = currentSave.quests.FindIndex(x => x.id == q.ID);
-                if (qIDX == -1)
+                int questIndex = currentSave.quests.FindIndex(x => x.id == quest.ID);
+                if (questIndex == -1)
                 {
-                    q.CompleteQuest();
+                    quest.CompleteQuest(load: true);
                 }
                 else
                 {
-                    foreach (QuestTask qt in q.Tasks)
+                    foreach (QuestTask task in quest.Tasks)
                     {
-                        int qtIDX = currentSave.quests[qIDX].tasks.FindIndex(x => x == qt.ID);
-                        if (qtIDX == -1)
+                        int taskIndex = currentSave.quests[questIndex].tasks.FindIndex(x => x == task.ID);
+                        if (taskIndex == -1)
                         {
-                            qt.Complete();
+                            task.Complete(load: true);
                         }
                     }
                 }
