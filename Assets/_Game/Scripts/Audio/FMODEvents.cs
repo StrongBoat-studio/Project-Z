@@ -34,6 +34,12 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField]
     public EventReference JournalLifeMonitor { get; private set; }
 
+    //Ambience
+    [field: SerializeField]
+    public EventReference CCTVNoise { get; private set; }
+
+    [field: SerializeField]
+    public EventReference Alarm { get; private set; }
 
     //Music
     [field: SerializeField]
