@@ -1,7 +1,7 @@
 ->Boris21
 
 ===Boris21
-Finally, our Sleeping Beauty is awake #name:Boris
+Finally, our Sleeping Beauty is awake #name:Boris #addNote:1
 Get off me. I haven’t had time to properly wake up and you already have a problem. It will be while for this project to finish, so we better get along somehow. #name:Yurij
 Calm down, princess. Just joking. It’s time to focus on the project. By the way, we should speed up the research a bit. Long before this project started, there was talk of war. We don’t want to let our countryman down. #name:Boris
 This war has already been going on for several years, but so far, apart from the tactical marches nothing is happening. We don’t have to worry about it. Better tell me how  the ship’s reading are. #name:Yurij

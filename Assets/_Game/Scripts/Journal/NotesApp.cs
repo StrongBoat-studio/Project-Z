@@ -29,16 +29,16 @@ public class NotesApp : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.KeypadPlus))
-        {
-            Notes.Add(notesRegister[Random.Range(0, notesRegister.Count)]);
-            OnNoteAdded?.Invoke();
-        }
-        if(Input.GetKeyDown(KeyCode.KeypadMinus))
-        {
-            Notes.RemoveAt(Notes.Count - 1);
-            OnNoteAdded?.Invoke();
-        }
+        //if(Input.GetKeyDown(KeyCode.KeypadPlus))
+        //{
+        //    Notes.Add(notesRegister[Random.Range(0, notesRegister.Count)]);
+        //    OnNoteAdded?.Invoke();
+        //}
+        //if(Input.GetKeyDown(KeyCode.KeypadMinus))
+        //{
+        //    Notes.RemoveAt(Notes.Count - 1);
+        //    OnNoteAdded?.Invoke();
+        //}
     }
 
     public Note[] GetNotes()

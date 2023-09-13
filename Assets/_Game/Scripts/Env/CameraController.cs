@@ -63,16 +63,16 @@ public class CameraController : MonoBehaviour, IInteractable
         _playerSprite.SetActive(false);
         _playerWeaponHolder.SetActive(false);
 
-        if(_camera.GetComponent<QuestObjective>() != null)
+        if (QuestLineManager.Instance.Quests[0].Tasks[0].Title == "Check the Camera Recordings")
+        {
+            NotesApp noteApp = GameManager.Instance.player.GetComponent<NotesApp>();
+            noteApp.AddNote(noteApp.notesRegister[3]);
+        }
+
+        if (_camera.GetComponent<QuestObjective>() != null)
         {
             QuestLineManager.Instance.CheckQuest(_camera.GetComponent<QuestObjective>());
         }
-
-        // if (QuestLineManager.Instance.Quests[0].Tasks[0].Title == "Check the Camera Recordings")
-        // {
-        //     QuestLineManager.Instance.Quests[0].Tasks[0].Complete();
-        //     QuestLineManager.Instance.CheckQuest(_camera.GetComponent<QuestObjective>());
-        // }
     }
 
     public void CursorEnter(bool canInteract)

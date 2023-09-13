@@ -8,5 +8,8 @@ public class PlayMutantSounds : MonoBehaviour
     {
         AudioManager.Instance?.PlayOneShot(FMODEvents.Instance.MutantIdle, transform.position);
         AudioManager.Instance?.PlayOneShot(FMODEvents.Instance.MutantGrowl, transform.position);
+
+        NotesApp noteApp = GameManager.Instance.player.GetComponent<NotesApp>();
+        noteApp.AddNote(noteApp.notesRegister[4]);
     }
 }

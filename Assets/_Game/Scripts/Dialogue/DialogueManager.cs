@@ -219,6 +219,16 @@ public class DialogueManager : MonoBehaviour
                 case "alarm":
                     //alarm implementation
                     break;
+                case "addNote":
+                    if (GameManager.Instance.player == null)
+                    {
+                        Debug.Log("Player not set in GameManager singleton.");
+                        break;
+                    }
+                    int noteId = int.Parse(t.Split(':')[1]);
+                    NotesApp noteApp = GameManager.Instance.player.GetComponent<NotesApp>();
+                    noteApp.AddNote(noteApp.notesRegister[noteId]);
+                    break;
                 default:
                     Debug.Log("Unrecognized event: " + t);
                     break;

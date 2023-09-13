@@ -33,6 +33,8 @@ public class DialogueTrigger : MonoBehaviour
         {
             _searchTheBody.Play();
             _isDialoguePlay = true;
+            NotesApp noteApp = GameManager.Instance.player.GetComponent<NotesApp>();
+            noteApp.AddNote(noteApp.notesRegister[5]);
         }
         
         Destroy(this.gameObject);
