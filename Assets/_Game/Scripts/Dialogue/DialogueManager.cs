@@ -216,6 +216,9 @@ public class DialogueManager : MonoBehaviour
                         AudioManager.Instance?.PlayOneShot(FMODEvents.Instance.Shot, transform.position);
                     }
                     break;
+                case "alarm":
+                    //alarm implementation
+                    break;
                 default:
                     Debug.Log("Unrecognized event: " + t);
                     break;

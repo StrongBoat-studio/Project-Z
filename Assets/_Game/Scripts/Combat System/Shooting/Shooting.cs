@@ -65,7 +65,14 @@ public class Shooting : MonoBehaviour
     {
         if (GameManager.Instance.Player != null)
         {
-            if (GameManager.Instance.Player._numberOfAmmo <= 0) return;
+            if (GameManager.Instance.Player._numberOfAmmo <= 0)
+            {
+                if (FMODEvents.Instance != null)
+                {
+                    AudioManager.Instance?.PlayOneShot(FMODEvents.Instance.NoAmmo, transform.position);
+                    return;
+                }
+            }
         }
 
         RaycastHit2D[] hits = Physics2D.RaycastAll(FindObjectOfType<Camera>().ScreenToWorldPoint(mousePos), Vector2.zero);
