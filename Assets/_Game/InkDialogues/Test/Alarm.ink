@@ -1,6 +1,6 @@
 ->verticalslice
 
 ===verticalslice
-Alarm disabled #name:Computer
+Alarm disabled #name:Computer #alarmStop
 -> END
 

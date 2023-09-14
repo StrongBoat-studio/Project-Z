@@ -30,6 +30,7 @@ TagManager:
   - Blood
   - Bullet
   - PlayerCanvas
+  - AlarmLights
   layers:
   - Default
   - TransparentFX

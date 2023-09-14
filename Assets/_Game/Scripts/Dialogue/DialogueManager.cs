@@ -4,6 +4,7 @@ using UnityEngine;
 using Ink.Runtime;
 using UnityEngine.InputSystem;
 using TMPro;
+using FMOD.Studio;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class DialogueManager : MonoBehaviour
 
     public delegate void DialogueStartHandler();
     public event DialogueStartHandler OnDialogueStart;
+
+    private EventInstance _alarm;
 
     private void Awake()
     {
@@ -216,8 +219,20 @@ public class DialogueManager : MonoBehaviour
                         AudioManager.Instance?.PlayOneShot(FMODEvents.Instance.Shot, transform.position);
                     }
                     break;
-                case "alarm":
-                    //alarm implementation
+                case "alarmStart":
+                    if (FMODEvents.Instance != null)
+                    {
+                        _alarm = AudioManager.Instance.CreateInstance(FMODEvents.Instance.Alarm);
+                        _alarm.start();
+                    }
+                    GameObject.FindGameObjectWithTag("AlarmLights").GetComponent<AlarmLight>().AlarmStart();
+                    break;
+                case "alarmStop":
+                    if (FMODEvents.Instance != null)
+                    {
+                        _alarm.stop(STOP_MODE.ALLOWFADEOUT);
+                    }
+                    GameObject.FindGameObjectWithTag("AlarmLights").GetComponent<AlarmLight>().AlarmStop();
                     break;
                 case "addNote":
                     if (GameManager.Instance.player == null)

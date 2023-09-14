@@ -1326,7 +1326,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 153.37, y: -226}
+  m_AnchoredPosition: {x: 153.37, y: -200}
   m_SizeDelta: {x: 240, y: 208}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1330641371
@@ -6697,7 +6697,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 245.52002, y: -58}
+  m_AnchoredPosition: {x: 245.52002, y: -52}
   m_SizeDelta: {x: 424.3, y: 84.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1887303374
@@ -6720,7 +6720,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Project Infected \nSpace"
+  m_text: Stellar Outbreak
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9124b62bb6fe5ac4d872ff4f924956c7, type: 2}
   m_sharedMaterial: {fileID: -756641603892032651, guid: 9124b62bb6fe5ac4d872ff4f924956c7, type: 2}
