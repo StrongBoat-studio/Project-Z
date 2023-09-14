@@ -533,8 +533,8 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.28645834
-    y: 0.06111111
+    x: 0.4166667
+    y: 0.019444443
     width: 0.16666667
     height: 0.16666666
   near clip plane: 0.3
@@ -2452,6 +2452,11 @@ MonoBehaviour:
   _selectedWeapon: 0
   _playerEarthController: {fileID: 1913262213}
   _player: {fileID: 0}
+--- !u!224 &1361418685 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7068372640176406519, guid: d44d34800a80f5247994a47ca713051c, type: 3}
+  m_PrefabInstance: {fileID: 1336646041}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1412441459
 GameObject:
   m_ObjectHideFlags: 0
@@ -2557,6 +2562,11 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!224 &1504264550 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5150427147874208275, guid: d44d34800a80f5247994a47ca713051c, type: 3}
+  m_PrefabInstance: {fileID: 1336646041}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1578754915
 GameObject:
   m_ObjectHideFlags: 0
@@ -2987,6 +2997,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _journal: {fileID: 1336646044}
   _lifeMonitor: {fileID: 624617436}
+  _minimapScreen: {fileID: 1361418685}
+  _minimapText: {fileID: 1504264550}
 --- !u!114 &1913262213
 MonoBehaviour:
   m_ObjectHideFlags: 0

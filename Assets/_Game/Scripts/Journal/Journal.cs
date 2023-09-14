@@ -9,8 +9,19 @@ public class Journal : MonoBehaviour
     private PlayerInput _playerInput;
     public bool IsOpen { get; private set; } = false;
 
-    [SerializeField] private RectTransform _journal; 
-    [SerializeField] private RectTransform _lifeMonitor;  
+    [SerializeField]
+    private RectTransform _journal;
+
+    [SerializeField]
+    private RectTransform _lifeMonitor;
+
+    [SerializeField]
+    private RectTransform _minimapScreen;
+
+    [SerializeField]
+    private RectTransform _minimapText;
+    private float _minimapTextStartX;
+    private float _minimapTextEndX;
 
     private void Awake()
     {
@@ -19,6 +30,9 @@ public class Journal : MonoBehaviour
         _playerInput.Journal.Open.performed += OnJournalOpen;
         _playerInput.Journal.ExclusiveClose.performed += OnJournalExculusiveClose;
         GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+
+        _minimapTextStartX = _minimapText.anchoredPosition.x;
+        _minimapTextEndX = -_minimapText.anchoredPosition.x;
     }
 
     private void OnDestroy()
@@ -29,51 +43,81 @@ public class Journal : MonoBehaviour
 
     private void OnJournalOpen(InputAction.CallbackContext context)
     {
-        if (IsOpen == true) GameStateManager.Instance.ResetLastState();
-        else GameStateManager.Instance.SetState(GameStateManager.GameState.Journal);
+        if (IsOpen == true)
+            GameStateManager.Instance.ResetLastState();
+        else
+            GameStateManager.Instance.SetState(GameStateManager.GameState.Journal);
     }
 
     private void OnGameStateChanged(GameStateManager.GameState newGameState)
     {
-        if(newGameState == GameStateManager.GameState.Journal && IsOpen == false)
+        if (newGameState == GameStateManager.GameState.Journal && IsOpen == false)
         {
-            _journal.DOAnchorPosX(0f, .25f, true);
+            _journal
+                .DOAnchorPosX(0f, .25f, true)
+                .OnComplete(() =>
+                {
+                    _minimapText
+                        .DOAnchorPosX(_minimapTextEndX, .25f, true)
+                        .SetEase(Ease.InOutSine)
+                        .OnComplete(() =>
+                        {
+                            _minimapText
+                                .DOAnchorPosX(_minimapTextStartX, .25f, true)
+                                .SetDelay(1f)
+                                .SetEase(Ease.InOutSine);
+                        });
+                });
+
             IsOpen = true;
 
-            if(_lifeMonitor.GetComponent<UI_LifeMonitor>().gameObject.activeSelf)
+            if (_lifeMonitor.GetComponent<UI_LifeMonitor>().gameObject.activeSelf)
             {
                 _lifeMonitor.GetComponent<UI_LifeMonitor>().StartAudio();
             }
+
+            //Update minimap marker
+            _minimapScreen.GetComponent<UI_Minimap>().UpdateMarker();
         }
-        else if(newGameState != GameStateManager.GameState.Journal && IsOpen == true)
+        else if (newGameState != GameStateManager.GameState.Journal && IsOpen == true)
         {
             _journal.DOAnchorPosX(
-                -_journal.rect.width - (_journal.GetComponentInParent<Canvas>().gameObject.GetComponent<RectTransform>().rect.width - _journal.rect.width) / 2, 
-                .25f, 
+                -_journal.rect.width
+                    - (
+                        _journal
+                            .GetComponentInParent<Canvas>()
+                            .gameObject.GetComponent<RectTransform>()
+                            .rect.width - _journal.rect.width
+                    ) / 2,
+                .25f,
                 true
-            );
+            ).OnComplete(() => {
+                _minimapText.DOComplete();
+            });
             IsOpen = false;
 
-            if(_lifeMonitor.GetComponent<UI_LifeMonitor>().gameObject.activeSelf)
+            if (_lifeMonitor.GetComponent<UI_LifeMonitor>().gameObject.activeSelf)
             {
                 _lifeMonitor.GetComponent<UI_LifeMonitor>().StopAudio();
             }
         }
-        
-        if(
-            newGameState == GameStateManager.GameState.Paused ||
-            newGameState == GameStateManager.GameState.Crafting ||
-            newGameState == GameStateManager.GameState.Dialogue ||
-            newGameState == GameStateManager.GameState.Loading
+
+        if (
+            newGameState == GameStateManager.GameState.Paused
+            || newGameState == GameStateManager.GameState.Crafting
+            || newGameState == GameStateManager.GameState.Dialogue
+            || newGameState == GameStateManager.GameState.Loading
         )
         {
             _playerInput.Journal.Disable();
         }
-        else _playerInput.Journal.Enable();
+        else
+            _playerInput.Journal.Enable();
     }
-    
+
     private void OnJournalExculusiveClose(InputAction.CallbackContext context)
     {
-        if(IsOpen == true) GameStateManager.Instance.ResetLastState();
+        if (IsOpen == true)
+            GameStateManager.Instance.ResetLastState();
     }
 }

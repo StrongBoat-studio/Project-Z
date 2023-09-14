@@ -11,7 +11,8 @@ public class UI_Journal : MonoBehaviour
         Inventory = 1,
         Notes = 2,
         Quests = 3,
-        Monitor = 4
+        Monitor = 4,
+        Minimap = 5,
     }
 
     [SerializeField] private RectTransform _backButton;
@@ -20,6 +21,7 @@ public class UI_Journal : MonoBehaviour
     [SerializeField] private RectTransform _notesScreen;
     [SerializeField] private RectTransform _questsScreen;
     [SerializeField] private RectTransform _lifeMonitor;
+    [SerializeField] private RectTransform _minimapScreen;
 
     private Stack<Action> _backButtonHistory = new Stack<Action>();
 
@@ -32,6 +34,7 @@ public class UI_Journal : MonoBehaviour
             _notesScreen.gameObject.SetActive(false);
             _questsScreen.gameObject.SetActive(false);
             _lifeMonitor.gameObject.SetActive(false);
+            _minimapScreen.gameObject.SetActive(false);
         });
 
         if (GetComponents<QuestObjective>().Length <= 0) return;
