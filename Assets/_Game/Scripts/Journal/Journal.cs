@@ -29,6 +29,7 @@ public class Journal : MonoBehaviour
         _playerInput.Journal.Enable();
         _playerInput.Journal.Open.performed += OnJournalOpen;
         _playerInput.Journal.ExclusiveClose.performed += OnJournalExculusiveClose;
+        _playerInput.Journal.OpenMinimap.performed += OnMinimapOpen;
         GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
 
         _minimapTextStartX = _minimapText.anchoredPosition.x;
@@ -47,6 +48,28 @@ public class Journal : MonoBehaviour
             GameStateManager.Instance.ResetLastState();
         else
             GameStateManager.Instance.SetState(GameStateManager.GameState.Journal);
+    }
+
+    private void OnMinimapOpen(InputAction.CallbackContext context)
+    {
+        UI_Journal uij = _journal.GetComponent<UI_Journal>();
+
+        if(IsOpen == true && uij.CurrentApp == (int)UI_Journal.App.Minimap)
+        {
+            uij.BackButtonAction();
+            GameStateManager.Instance.ResetLastState();
+        }
+        else if(IsOpen == true && uij.CurrentApp != (int)UI_Journal.App.Minimap)
+        {
+            uij.JournalTabOpened((int)UI_Journal.App.Minimap);
+            uij.OpenMinimapShortcut();
+        }
+        else
+        {
+            GameStateManager.Instance.SetState(GameStateManager.GameState.Journal);
+            uij.JournalTabOpened((int)UI_Journal.App.Minimap);
+            uij.OpenMinimapShortcut();
+        }
     }
 
     private void OnGameStateChanged(GameStateManager.GameState newGameState)

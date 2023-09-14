@@ -501,6 +501,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OpenMinimap"",
+                    ""type"": ""Button"",
+                    ""id"": ""4fa5e914-14e6-4ec5-8f11-84f6913dac6b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -523,6 +532,17 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""ExclusiveClose"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""98482ca1-3281-4464-803d-b760be6005b4"",
+                    ""path"": ""<Keyboard>/m"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenMinimap"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -569,6 +589,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_Journal = asset.FindActionMap("Journal", throwIfNotFound: true);
         m_Journal_Open = m_Journal.FindAction("Open", throwIfNotFound: true);
         m_Journal_ExclusiveClose = m_Journal.FindAction("ExclusiveClose", throwIfNotFound: true);
+        m_Journal_OpenMinimap = m_Journal.FindAction("OpenMinimap", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -974,12 +995,14 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private IJournalActions m_JournalActionsCallbackInterface;
     private readonly InputAction m_Journal_Open;
     private readonly InputAction m_Journal_ExclusiveClose;
+    private readonly InputAction m_Journal_OpenMinimap;
     public struct JournalActions
     {
         private @PlayerInput m_Wrapper;
         public JournalActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Open => m_Wrapper.m_Journal_Open;
         public InputAction @ExclusiveClose => m_Wrapper.m_Journal_ExclusiveClose;
+        public InputAction @OpenMinimap => m_Wrapper.m_Journal_OpenMinimap;
         public InputActionMap Get() { return m_Wrapper.m_Journal; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -995,6 +1018,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @ExclusiveClose.started -= m_Wrapper.m_JournalActionsCallbackInterface.OnExclusiveClose;
                 @ExclusiveClose.performed -= m_Wrapper.m_JournalActionsCallbackInterface.OnExclusiveClose;
                 @ExclusiveClose.canceled -= m_Wrapper.m_JournalActionsCallbackInterface.OnExclusiveClose;
+                @OpenMinimap.started -= m_Wrapper.m_JournalActionsCallbackInterface.OnOpenMinimap;
+                @OpenMinimap.performed -= m_Wrapper.m_JournalActionsCallbackInterface.OnOpenMinimap;
+                @OpenMinimap.canceled -= m_Wrapper.m_JournalActionsCallbackInterface.OnOpenMinimap;
             }
             m_Wrapper.m_JournalActionsCallbackInterface = instance;
             if (instance != null)
@@ -1005,6 +1031,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @ExclusiveClose.started += instance.OnExclusiveClose;
                 @ExclusiveClose.performed += instance.OnExclusiveClose;
                 @ExclusiveClose.canceled += instance.OnExclusiveClose;
+                @OpenMinimap.started += instance.OnOpenMinimap;
+                @OpenMinimap.performed += instance.OnOpenMinimap;
+                @OpenMinimap.canceled += instance.OnOpenMinimap;
             }
         }
     }
@@ -1055,5 +1084,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     {
         void OnOpen(InputAction.CallbackContext context);
         void OnExclusiveClose(InputAction.CallbackContext context);
+        void OnOpenMinimap(InputAction.CallbackContext context);
     }
 }

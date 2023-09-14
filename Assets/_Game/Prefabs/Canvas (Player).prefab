@@ -6726,8 +6726,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 47, y: 0}
-  m_SizeDelta: {x: 50, y: 24}
+  m_AnchoredPosition: {x: 80, y: 0}
+  m_SizeDelta: {x: 116, y: 24}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5891342025638530443
 MonoBehaviour:
@@ -7995,8 +7995,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -26, y: -10}
-  m_SizeDelta: {x: 50, y: 20}
+  m_AnchoredPosition: {x: -60, y: -10}
+  m_SizeDelta: {x: 116, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8238637063787587379
 CanvasRenderer:
@@ -8026,7 +8026,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Open map
+  m_text: '[ M / Click ] Open map'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9124b62bb6fe5ac4d872ff4f924956c7, type: 2}
   m_sharedMaterial: {fileID: -756641603892032651, guid: 9124b62bb6fe5ac4d872ff4f924956c7, type: 2}

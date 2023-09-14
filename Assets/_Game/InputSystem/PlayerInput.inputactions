@@ -479,6 +479,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "OpenMinimap",
+                    "type": "Button",
+                    "id": "4fa5e914-14e6-4ec5-8f11-84f6913dac6b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -501,6 +510,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "ExclusiveClose",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "98482ca1-3281-4464-803d-b760be6005b4",
+                    "path": "<Keyboard>/m",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenMinimap",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
