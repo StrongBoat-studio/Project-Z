@@ -19,6 +19,9 @@ public class Journal : MonoBehaviour
     private RectTransform _minimapScreen;
 
     [SerializeField]
+    private RectTransform _dictatorScreen;
+
+    [SerializeField]
     private RectTransform _minimapText;
     private float _minimapTextStartX;
     private float _minimapTextEndX;
@@ -48,6 +51,15 @@ public class Journal : MonoBehaviour
             GameStateManager.Instance.ResetLastState();
         else
             GameStateManager.Instance.SetState(GameStateManager.GameState.Journal);
+
+        if ((QuestLineManager.Instance.Quests[0].Tasks[0].Title == "Open the Mission Log"))
+        {
+            _dictatorScreen.gameObject.SetActive(true);
+        }
+        else
+        {
+            _dictatorScreen.gameObject.SetActive(false);
+        }
     }
 
     private void OnMinimapOpen(InputAction.CallbackContext context)

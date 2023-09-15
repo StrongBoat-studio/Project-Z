@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     public GameObject boris;
     public GameObject shimura;
 
+    public bool dictatorCutscenePlay = false;
     public void Reset()
     {
         player = null;
