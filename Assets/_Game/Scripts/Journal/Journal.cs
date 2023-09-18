@@ -48,13 +48,16 @@ public class Journal : MonoBehaviour
     private void OnJournalOpen(InputAction.CallbackContext context)
     {
         if (IsOpen == true)
+        {
             GameStateManager.Instance.ResetLastState();
+        } 
         else
             GameStateManager.Instance.SetState(GameStateManager.GameState.Journal);
 
         if ((QuestLineManager.Instance.Quests[0].Tasks[0].Title == "Open the Mission Log"))
         {
             _dictatorScreen.gameObject.SetActive(true);
+            _dictatorScreen.gameObject.GetComponent<UI_Dictator>().StartVideo();
         }
         else
         {
@@ -127,6 +130,7 @@ public class Journal : MonoBehaviour
                 .25f,
                 true
             ).OnComplete(() => {
+                _dictatorScreen.gameObject.GetComponent<UI_Dictator>().End();
                 _minimapText.DOComplete();
             });
             IsOpen = false;
@@ -153,6 +157,9 @@ public class Journal : MonoBehaviour
     private void OnJournalExculusiveClose(InputAction.CallbackContext context)
     {
         if (IsOpen == true)
+        {
             GameStateManager.Instance.ResetLastState();
+        }
+            
     }
 }

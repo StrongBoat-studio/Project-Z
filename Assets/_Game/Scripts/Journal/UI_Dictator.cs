@@ -10,17 +10,7 @@ public class UI_Dictator : MonoBehaviour
     [SerializeField] private float _typeSpeed;
     [SerializeField] private TextAsset storyTextAsset;
     [SerializeField] private TextMeshProUGUI _text;
-
-    private void Awake()
-    {
-        if (GameManager.Instance.dictatorCutscenePlay == true)
-        {
-            this.gameObject.SetActive(false);
-        }
-
-        _story = new Story(storyTextAsset.text);
-        ContinueStory();
-    }
+    [SerializeField] private GameObject _dictator;
 
     private void ContinueStory()
     {
@@ -49,8 +39,20 @@ public class UI_Dictator : MonoBehaviour
 
     private IEnumerator EndStory()
     {
-        GameManager.Instance.dictatorCutscenePlay = true;
         yield return new WaitForSeconds(1f);
         this.gameObject.SetActive(false);
+    }
+
+    public void End()
+    {
+        _story = new Story(storyTextAsset.text);
+        Debug.Log("close");
+        _dictator.SetActive(false);
+    }
+
+    public void StartVideo()
+    {
+        _story = new Story(storyTextAsset.text);
+        ContinueStory();
     }
 }
